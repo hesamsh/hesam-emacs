@@ -1,0 +1,8 @@
+* Informs Presentation
+  DEADLINE: <2016-11-07 Mon>
+* Test Tabu on Tailored Benchmarks
+- [ ] Change the existing code to simple Tabu algorithm
+- [ ] Identify the parameters
+  - Known parameters by now are as follows
+    - Max tenure
+    - Min tenure
