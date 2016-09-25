@@ -1,0 +1,1 @@
+(define-package "flyspell-correct-popup" "20160730.201" "correcting words with flyspell via popup interface" '((flyspell-correct "0.1.0") (popup "0.5.3")) :url "https://github.com/d12frosted/flyspell-correct")
