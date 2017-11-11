@@ -1,0 +1,50 @@
+% Created 2017-04-28 Fri 13:41
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\date{}
+\title{Chris Muir - Honor Project [100/100]}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Mechanics and Presentation [10/10]}
+\label{sec-1}
+\section{Language and Style [10/10]}
+\label{sec-2}
+\section{Organization and Technical Content [60/60]}
+\label{sec-3}
+\section{Overall Conclusions [10/10]}
+\label{sec-4}
+\section{Overall Quality [10/10]}
+\label{sec-5}
+The article is well written. The author uses good tools and plots to convey
+the project in a scientific approach. He also avoids overstatements
+and uses a clear language to explain what are presented in the paper.
+The paper is also well organized and apply the correct methods to
+analyze data. The author concludes the provided plots and statistics
+test into a clear and correct final summary. The overall study satisfies
+all project goals.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

@@ -1,0 +1,278 @@
+% Created 2017-04-20 Thu 15:06
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Hesam}
+\date{\today}
+\title{Homework 07 Solutions - IE310 \\ Operation Research in Industrial Engineering II \\ Probabilistic Model \\ UTK - Spring 2017}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+
+\section{Exercise 1 - Chapter 5 - Ross (10th Edition)}
+\label{sec-1}
+Since mean equals to $\frac{1}{2}$ ($E[x]=\frac{1}{2}$),
+$\lambda=\frac{1}{E[x]}=\frac{1}{\frac{1}{2}}=2$. The PDF of an exponential
+distribution is as follows:
+\begin{align*}
+f(x;\lambda)=
+\begin{cases}
+\lambda e^{-\lambda x} & x \geq 0 \\
+0 & x < 0
+\end{cases}
+\end{align*}
+where $\lambda$=2.
+
+\subsection{a)}
+\label{sec-1-1}
+The probability that a repair time exceeds $\frac{1}{2}$ hour.
+\begin{align*}
+P\{x \geq \frac{1}{2} \} & \\
+& = 1 - P\{x \leq \frac{1}{2} \} \\
+& = 1 - (1 - e^{-\lambda x}) \\
+& = 1 - (1 - e^{-(2)(\frac{1}{2})}) \\
+& = 1 - 1 + e^{-1} \\
+& = e^{-1} \approx 0.3679 \\
+\end{align*}
+
+\subsection{b)}
+\label{sec-1-2}
+The exponential distribution has the memory-less property. So, \$P\{X $\ge$ t$_{\text{1}}$ + t$_{\text{2}}$ | X $\ge$ t$_{\text{2}}$ \} = P\{X $\ge$ t$_{\text{1}}$ \}.
+
+Therefore, the distribution does not remember a repair has taken 12
+hours. We should calculate that the repair takes at least
+$\frac{1}{2}$ hour (we have it already from part a). So, we have the followings:
+\begin{align*}
+P\{x \geq 12\frac{1}{2} | x \geq 12 \} & \\
+& = P\{x \geq \frac{1}{2} \} \\
+& = e^{-1} \approx 0.3679 \\
+\end{align*}
+\section{Exercise 4 - Chapter 5 - Ross (10th Edition)}
+\label{sec-2}
+The problem says "\emph{A} is still in the post office after the
+other two have left" this means $P\{A > B + C \}$.
+\subsection{a)}
+\label{sec-2-1}
+According to this part, $A=B=C=10$ which based on this fact $P\{A >
+B + C \}$ equals to zero.
+
+\begin{align*}
+P\{A=B=C=10\} = 0
+\end{align*}
+\subsection{b)}
+\label{sec-2-2}
+If the service times are $i$ uniform \emph{i.i.d} with probability $\frac{1}{3}$,
+$i=1,2,3$. In this situation, there exist a solution in which  $P\{A >
+B + C \}$. In this case the following values must be set: $A=3$ and
+$B=1$ and $C=1$. So, we have the following:
+
+\begin{align*}
+P\{A=3\}.P\{B=1\}.P\{C=1\} = \Big(\frac{1}{3}\Big).\Big(\frac{1}{3}\Big).\Big(\frac{1}{3}\Big) = \frac{1}{27}
+\end{align*}
+\subsection{c)}
+\label{sec-2-3}
+The service times are exponential with mean $1/\mu$ ($Exp(\mu)$). So,
+according to memory-less property we have the following.
+
+\begin{align}
+\label{form:1}
+P\{A > B+C \} &= P\{A > B+C | A > B \}.P\{A>B\} \\
+&=P\{A > C \}.P\{A>B\} \nonumber
+\end{align}
+
+where $P\{A > C \}$ and $P\{A>B\}$ are calculated as follows:
+
+\begin{align}
+\label{form:2}
+P\{A > B \} &= \int_0^{\infty} P\{A > B | B = x \} f_B(x).dx \\ \nonumber
+&= \int_0^{\infty} P\{A > x \} \mu.e^{-\mu x}.dx \\ \nonumber
+&= \int_0^{\infty} e^{-\mu x} \mu.e^{-\mu x}.dx \\ \nonumber
+&= \int_0^{\infty} \mu.e^{-2\mu x}.dx \\ \nonumber
+&= \Big[-\frac{1}{2}.e^{-2\mu x}\Big]_0^{\infty} \\ \nonumber
+&= \Big[-\frac{1}{2}.e^{-2\mu \infty} - (-\frac{1}{2}.e^{-2\mu.0}) \Big] \\ \nonumber
+&= \Big[0 - (-\frac{1}{2}) \Big] \\ \nonumber
+&= \frac{1}{2} \nonumber
+\end{align}
+
+\begin{align}
+\label{form:3}
+P\{A > C \} &= \int_0^{\infty} P\{A > C | C = x \} f_C(x).dx \\ \nonumber
+&= \int_0^{\infty} P\{A > x \} \mu.e^{-\mu x}.dx \\ \nonumber
+&= \int_0^{\infty} e^{-\mu x} \mu.e^{-\mu x}.dx \\ \nonumber
+&= \int_0^{\infty} \mu.e^{-2\mu x}.dx \\ \nonumber
+&= \Big[-\frac{1}{2}.e^{-2\mu x}\Big]_0^{\infty} \\ \nonumber
+&= \Big[-\frac{1}{2}.e^{-2\mu \infty} - (-\frac{1}{2}.e^{-2\mu.0}) \Big] \\ \nonumber
+&= \Big[0 - (-\frac{1}{2}) \Big] \\ \nonumber
+&= \frac{1}{2} \nonumber
+\end{align}
+
+So, by replacing from \ref{form:2} and \ref{form:3} into \ref{form:1},
+we have the following:
+
+\begin{align*}
+P\{A > B+C \} &= \\
+&= P\{A > C \}.P\{A>B\} \\
+&= \Big(\frac{1}{2}\Big).\Big(\frac{1}{2}\Big) = \frac{1}{4}
+\end{align*}
+\section{Exercise 37 - Chapter 5 - Ross (10th Edition)}
+\label{sec-3}
+Suppose machine fails at time \emph{s} and repair crew check it at time \emph{t}
+after the failure. So, the machine will be replaced at time $s+t$. We
+have the following:
+
+P[machine replaced at \$s+t$t$ | machine failed at time \$s\$] =
+P[machine will be idle from $s$ to \$s+t\$] =
+P[no event in the period ($s$, $s+t$)] = $e^{-\lambda.t}$
+
+This is because the arriving of repair crew distributed to a Poisson
+process with rate $\lambda$. So, the expectation value of no event in
+that period is calculated as follows:
+
+E[no event in the period] = $\frac{1}{\lambda}$
+
+The expected time between replacements of machines is as follows:
+
+E[time between replacements] = E[time of operation] + E[no event]
+
+where E[time of operation] = $\frac{1}{\mu}$, because the machines
+operating distributed exponentially with rate $\mu$. So, we have:
+
+E[time between replacements] = $\frac{1}{\mu}$ + $\frac{1}{\lambda}$
+\section{Exercise 44 - Chapter 5 - Ross (10th Edition)}
+\label{sec-4}
+\subsection{a)}
+\label{sec-4-1}
+The probability of that no cars pass in next \emph{T} time unit. We know
+that it is distributed on Poisson process. So, we need to calculate
+P[waiting time = 0] = P[no event in \emph{T} ]:
+
+\begin{align*}
+P[w=0] &= \\
+&= e^{-\lambda.T}.\frac{(\lambda.T)^0}{0!} \\
+&= e^{-\lambda.T}
+\end{align*}
+\subsection{b)}
+\label{sec-4-2}
+Let the following two random variables. \emph{w} is a random variable of
+waiting time and \emph{x} is a random variable of time until first car
+pass. So, we need to calculate $E(w)$ as follows:
+
+\begin{align}
+\label{eq:44b1}
+E(w) = E\big(E(w|X=x)\big)
+\end{align}
+
+We know the following according to the problem (If she sees that the
+next car will show up in more than \emph{T} time periods she crosses now and
+her wait time is zero):
+
+\begin{align}
+\label{eq:44b2}
+E\big(E(w|X=x)\big) =
+\begin{cases}
+x + E(w) & x < T \\
+0 & x \geq T
+\end{cases}
+\end{align}
+
+So, from \ref{eq:44b1} we have the following:
+
+\begin{align}
+\label{eq:44b3}
+E(w) = E\big(E(w|X=x)\big) &= \\ \nonumber
+&= \int_0^\infty E(w|X=x).\lambda.e^{-\lambda.x}.dx \\ \nonumber
+&= \int_0^T E(w|X=x).\lambda.e^{-\lambda.x}.dx + \int_T^\infty E(w|X=x).\lambda.e^{-\lambda.x}.dx
+\end{align}
+
+According to \ref{eq:44b2} $\int_T^\infty
+E(w|X=x).\lambda.e^{-\lambda.x}.dx = 0$. On the other hand, from
+\ref{eq:44b2} we also have $\int_0^T
+E(w|X=x).\lambda.e^{-\lambda.x}.dx = \int_0^T
+\big( x + E(w) \big).\lambda.e^{-\lambda.x}.dx$. So, by applying it into
+\ref{eq:44b3}, we have the following:
+
+\begin{align}
+\label{eq:44b4}
+E(w) &= \\ \nonumber
+&= \int_0^T \big( x + E(w) \big).\lambda.e^{-\lambda.x}.dx + 0 \\ \nonumber
+&= \int_0^T \Big( x \lambda.e^{-\lambda.x} + E(w) \lambda.e^{-\lambda.x} \Big).dx \\ \nonumber
+&= \Big[-\frac{(\lambda x + 1)e^{-\lambda x}}{\lambda} - E(w).e^{-\lambda.x} \Big]_0^T \\ \nonumber
+&= \Big[-\frac{(\lambda T + 1)e^{-\lambda T}}{\lambda} - E(w).e^{-\lambda.T} \Big] - \Big[-\frac{1}{\lambda} - E(w) \Big] \\ \nonumber
+&= \frac{1}{\lambda} + E(w) - Te^{-\lambda T} - \frac{e^{-\lambda T}}{\lambda} - E(w).e^{-\lambda.T} \\ \nonumber
+&= \frac{1 - e^{-\lambda T}}{\lambda} - Te^{-\lambda T} - E(w).e^{-\lambda.T} + E(w) \\ \nonumber
+\end{align}
+
+So, we have the following:
+
+\begin{align}
+\label{eq:44b5}
+E(w) = \frac{1 - e^{-\lambda T}}{\lambda} - Te^{-\lambda T} - E(w).e^{-\lambda.T} + E(w)
+\end{align}
+
+By simplifying the \ref{eq:44b5}, we have the following:
+
+\begin{align*}
+E(w) &= \\
+&= \frac{e^{\lambda T} - 1}{\lambda} - T \\
+&= \frac{1}{\lambda} (e^{\lambda T} - 1 - \lambda T)
+\end{align*}
+
+\section{Exercise 57 - Chapter 5 - Ross (10th Edition)}
+\label{sec-5}
+\subsection{a)}
+\label{sec-5-1}
+\begin{align*}
+P(X=0) = \frac{e^{-\lambda}(2)^0}{0!} = e^{-2}
+\end{align*}
+\subsection{b)}
+\label{sec-5-2}
+$\lambda = 2$ which means the average time for an event is
+$\frac{1}{2}$ hour. So, the fourth event takes 2 hours. Therefore,
+from noon it will be 2 P.M..
+\subsection{c)}
+\label{sec-5-3}
+\begin{align}
+\label{eq:57c1}
+P(X \geq 2 | t = 2) & = \\
+& = 1 - P(X \leq 1 | t=2) \\ \nonumber
+& = 1 - P(X = 1 | t=2) - P(X = 0 | t=2) \nonumber
+\end{align}
+
+on the other hand, we have the followings:
+
+\begin{align*}
+P(X = 1 | t=2) &=  \frac{e^{-2(2)}(4)^1}{1!} = 4e^{-4} \\
+P(X = 0 | t=2) &=  \frac{e^{-2(2)}(4)^0}{0!} = e^{-4}
+\end{align*}
+
+by replacing these values into \ref{eq:57c1}, we have the following:
+
+\begin{align*}
+P(X $\ge$ 2 | t = 2) \& = \\
+\& = 1 - 4e$^{\text{-4}}$ - e$^{\text{-4}}$ \\
+\& = 1 - 5e$^{\text{-4}}$
+\end{align}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

@@ -1,0 +1,93 @@
+#+TITLE: Phase II Final Solutions - IE310 \\
+#+TITLE: Operation Research in Industrial Engineering II \\
+#+TITLE: Probabilistic Model \\
+#+TITLE: UTK - Spring 2017
+
+
+
+* Part A
+
+\begin{align*}
+\pi = \big[ 0.222845 0.14779 0.178159 0.181227 0.150444 0.090785 0.028754 \big]
+\end{align*}
+
+* Part B
+
+\begin{align*}
+P(\text{Long Run Shortage}) = \sum_{i=0}^s\pi_i(r_7) + \sum_{j=s+1}^S\pi_j(r_{j+1})
+\end{align*}
+
+\begin{align*}
+r_7=1-\sum_{i=0}^6\frac{e^{-3}3^i}{i!}=0.0335085
+\end{align*}
+
+\begin{align*}
+P(\text{Long Run Shortage}, \{s=2,S=6\}) &= (0.0335085 \times 0.222845) + (0.0335085 \times 0.14779) \\
+&+ (0.0335085 \times 0.178159)+ (0.352768 \times 0.181227) \\
+&+ (0.184737 \times 0.150444) + (0.0839179 \times 0.090785) \\
+&+ (0.0335085 \times 0.028754) = 0.118695
+\end{align*}
+
+* Part C
+
+\begin{align*}
+p_k =
+\begin{cases}
+\frac{e^{-\lambda}\lambda^k}{k!} & k \leq s \\
+\Big(1-\sum_{i=s+1}^{k}\pi_i\Big)p_k + \pi_kr_k & s < k < S \\
+r_S\Big(\pi_6+\sum_{i=0}^s\pi_i\Big) & k=S
+\end{cases}
+\end{align*}
+
+where $s=2$ and $S=6$. So we have the followings:
+
+
+|-------+----------|
+| $p_0$ | 0.049787 |
+| $p_1$ | 0.149361 |
+| $p_2$ | 0.224042 |
+| $p_3$ | 0.287973 |
+| $p_4$ | 0.165372 |
+| $p_5$ | 0.074999 |
+| $p_6$ | 0.048467 |
+|-------+----------|
+
+* Part D
+\begin{align*}
+\Big(\sum_{i=0}^{6}5ip_i\Big) - \Big(\sum_{i=0}^{6}3i\pi_i\Big) - P(\text{shortage})_{10}
+\end{align*}
+
+*Profits*
+|-------------+-------------+-------------|
+|   item sold | probability |      profit |
+|-------------+-------------+-------------|
+|           0 |    0.049787 |           0 |
+|           1 |    0.149361 |    0.746805 |
+|           2 |    0.224042 |     2.24042 |
+|           3 |    0.287973 |    4.319595 |
+|           4 |    0.165372 |     3.30744 |
+|           5 |    0.074999 |    1.874975 |
+|           6 |    0.048467 |     1.45401 |
+|-------------+-------------+-------------|
+| TOTAL SALES |             | *13.943245* |
+|-------------+-------------+-------------|
+
+*Inventory Cost*
+|-------------+-------------+------------|
+|   item sold | probability |       cost |
+|-------------+-------------+------------|
+|           0 |    0.222845 |          0 |
+|           1 |     0.14779 |    0.44337 |
+|           2 |    0.178159 |   1.068954 |
+|           3 |    0.181227 |   1.631043 |
+|           4 |    0.150444 |   1.805328 |
+|           5 |    0.090785 |   1.361775 |
+|           6 |    0.028754 |   0.517572 |
+|-------------+-------------+------------|
+| TOTAL SALES |             | *6.828042* |
+|-------------+-------------+------------|
+
+*Shortage Cost*
+P(\text{shortage})_{10} = 0.118695 \times 10 = 1.18695
+
+*Long Run Average per Week* = 13.943245-6.828042-1.18695 = *5.928253*

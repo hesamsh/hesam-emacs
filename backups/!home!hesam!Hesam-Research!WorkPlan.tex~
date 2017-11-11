@@ -1,0 +1,57 @@
+% Created 2016-09-26 Mon 13:27
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Hesam}
+\date{\today}
+\title{Hesam Work Plan}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{{\bfseries\sffamily TODO} Test Tabu on Tailored Benchmarks [0/3] [0\%]}
+\label{sec-1}
+\begin{itemize}
+\item $\square$ Change the existing code to simple Tabu algorithm
+\item $\square$ Identify the parameters
+\begin{itemize}
+\item Known parameters by now are as follows
+\begin{itemize}
+\item Max tenure
+\item Min tenure
+\end{itemize}
+\end{itemize}
+\item $\square$ Run the modified code on different parameters
+\item $\square$ Identify the comparison way (Diagrams or tables must be specified clearly
+\end{itemize}
+\section{{\bfseries\sffamily TODO} Test Extended Tabu on Tailored Benchmarks [/] [\%]}
+\label{sec-2}
+\begin{itemize}
+\item $\square$ Identify parameters and values
+\item $\square$ Implement the algorithm on Newton HPC
+\item $\square$ Write results chapter
+\end{itemize}
+\section{{\bfseries\sffamily TODO} Informs Presentation}
+\label{sec-3}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

@@ -1,0 +1,13 @@
+* Title: Enhancing optimization algorithm via machine learning
+** Abstract
+We explore an application of classification techniques to binary
+optimization. Given a set of solutions and the corresponding objective
+values, the goal is to classify each solution component either as zero
+or one. We implement statistical models based on random forests,
+convolutional neural networks and logistic regression and compare
+their performance on a set of scheduling problems. A learning module
+based on an efficient logistic regression model is embedded into the
+tabu search method. The comparison with standard tabu implementations
+reveals significant gains in efficiency.
+
+/Keywords/: Discrete Optimization; Machine Learning; Algorithm Design and Analysis; Tabu Search Algorithm.

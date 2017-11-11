@@ -1,0 +1,23 @@
+#+TITLE: Graph Presentation
+
+* TODO Our Info
+* TODO VRP [/]
+- [ ] Description of the problem
+- [ ] Importance of VRP
+- [ ] Complexity of the problem
+* TODO Methods [/]
+- [ ] Heuristics
+- [ ] Simulating Annealing
+* TODO TABU [/]
+- [ ] Description of the Method
+- [ ] Convergence of the algorithm
+- [ ] Applications of Graph problems
+- [ ] Application of VRP 
+* TODO GTA [/]
+- [ ] Description of GTA
+- [ ] Advantages of GTA
+* TODO Comparison [/]
+- [ ] Description of plot
+- [ ] Show some plots
+* TODO Other Applications [/]
+- [ ] Applications

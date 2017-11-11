@@ -1,0 +1,165 @@
+//Standard headers 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+
+using namespace std;
+
+int no_ver, n;
+int *visited;
+int *graph;
+int *graph_copy;
+int index_list=0;
+
+void DFS(int *graph_loc, long starting_node)
+{
+  if(index_list <= no_ver)
+  {
+    index_list++;
+    visited[starting_node] = 1;
+    for(int i=0; i < 2*n; i++)
+    {
+      if(graph_loc[i] == starting_node)
+      { 
+        if((i%2 == 0) && (visited[graph_loc[i+1]]==0))
+          DFS(graph_loc,graph_loc[i+1]);
+        if((i%2 == 1) && (visited[graph_loc[i-1]]==0))
+          DFS(graph_loc,graph_loc[i-1]);
+      }
+    }
+  }
+}
+
+void remove_v(int v)
+{
+  for (int i = 0; i < 2*n; i++)
+  {
+    if(graph[i] == v)
+    {
+      if((i%2 == 0))
+        graph_copy[i] = graph[i+1];
+      if((i%2 == 1))
+        graph_copy[i] = graph_copy[i-1];
+    }
+    if(graph[i] != v)
+      graph_copy[i] = graph[i];
+  }
+}
+
+void return_v()
+{
+  for (int i = 0; i < 2*n; i++)
+  {
+    graph_copy[i] = graph[i];
+  }  
+}
+
+void remove_e(int s, int t)
+{
+  for (int i = 0; i < n; i++)
+  {
+    if ((graph[2*i]==s) && (graph[2*i+1]==t))
+    {
+      graph_copy[2*i] = graph[2*i];
+      graph_copy[2*i+1] = graph[2*i];
+    }
+    else
+    {
+      graph_copy[2*i] = graph[2*i];
+      graph_copy[2*i+1] = graph[2*i+1];
+    }
+  }
+}
+
+int ConComp(int *graph_loc)
+{
+  int no_comp = 0;
+  index_list=0;
+  for(int i = 0; i < no_ver; i++)
+  {
+    if(visited[i] == 0)
+    {
+      DFS(graph_loc, i);
+      no_comp++;
+    }
+  }
+  return no_comp;
+}
+
+int main(int argc, char **argv)
+{
+  cout<<"========================================================="<<endl<<endl;
+  cout<<"Hesam Shams, hshams@vols.utk.edu, University of Tennessee"<<endl;
+  cout<<endl<<"========================================================="<<endl;
+
+  //Process command line argument
+  char *file_name=NULL;//The file path for the adjancy matrix graph
+  
+  file_name = new char[strlen(argv[1])+1];
+  strcpy(file_name,argv[1]);
+
+  // Load problem
+  ::ifstream inpfile;
+  inpfile.open(file_name);
+
+  inpfile >> no_ver;
+  inpfile >> n;
+  graph = new int[2*n];
+  graph_copy = new int[2*n];  
+  int i=0;
+  int componnents_no;
+  while(inpfile >> graph[i])
+  {
+    i++;
+  }
+
+  for (int i = 0; i < 2*n; i++)
+  {
+    graph_copy[i] = graph[i];
+  }
+
+  //Mark all unexplored
+  visited = new int[no_ver];
+
+  int init_comp;
+  init_comp = ConComp(graph);
+
+  //Printing Cut Vertices
+  cout << "Cut vertices: ";
+  for (int v = 0; v < no_ver; v++)
+  {    
+    for (int i = 0; i < no_ver; i++)
+    {
+      visited[i] = 0;
+    }
+    remove_v(v);
+    componnents_no = ConComp(graph_copy)-1;
+
+    if (componnents_no != init_comp)
+      cout <<  v << "  ";
+    return_v();
+  }
+  cout << endl;
+
+  //Printing Bridges
+  cout << "Bridges: ";
+  for (int e = 0; e < n; e++)
+  {
+    for (int i = 0; i < no_ver; i++)
+    {
+      visited[i] = 0;
+    }
+    remove_e(graph[2*e], graph[2*e+1]);
+    componnents_no = ConComp(graph_copy);
+    if (componnents_no != init_comp)
+      cout << "(" << graph[2*e] << "," << graph[2*e+1] << ")  ";
+    return_v();
+  }
+  cout << endl;
+}

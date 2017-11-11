@@ -1,0 +1,85 @@
+;; Object HW05/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "HW05/"
+  :tables
+  (list
+    (semanticdb-table "findcutsandbridges.cc"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("iostream" include (:system-flag t) nil [21 40])
+            ("fstream" include (:system-flag t) nil [41 59])
+            ("sstream" include (:system-flag t) nil [60 78])
+            ("stdlib.h" include (:system-flag t) nil [79 98])
+            ("math.h" include (:system-flag t) nil [99 116])
+            ("time.h" include (:system-flag t) nil [117 134])
+            ("string.h" include (:system-flag t) nil [135 154])
+            ("stdio.h" include (:system-flag t) nil [155 173])
+            ("unistd.h" include (:system-flag t) nil [174 193])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [195 215])
+            ("no_ver" variable (:type "int") nil [217 231])
+            ("n" variable (:type "int") nil [217 231])
+            ("visited" variable
+               (:pointer 1
+                :type "int")
+                nil [232 245])
+            ("graph" variable
+               (:pointer 1
+                :type "int")
+                nil [246 257])
+            ("graph_copy" variable
+               (:pointer 1
+                :type "int")
+                nil [258 274])
+            ("index_list" variable
+               (:default-value "0"
+                :type "int")
+                nil [275 292])
+            ("DFS" function
+               (:arguments 
+                  ( ("graph_loc" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [377 392])
+                    ("starting_node" variable (:type "long") (reparse-symbol arg-sub-list) [393 412]))                  
+                :type "void")
+                nil [368 793])
+            ("remove_v" function
+               (:arguments 
+                  ( ("v" variable (:type "int") (reparse-symbol arg-sub-list) [903 909]))                  
+                :type "void")
+                nil [889 1160])
+            ("return_v" function (:type "void") nil [1208 1299])
+            ("remove_e" function
+               (:arguments 
+                  ( ("s" variable (:type "int") (reparse-symbol arg-sub-list) [1388 1394])
+                    ("t" variable (:type "int") (reparse-symbol arg-sub-list) [1395 1401]))                  
+                :type "void")
+                nil [1374 1672])
+            ("ConComp" function
+               (:arguments 
+                  ( ("graph_loc" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [1778 1793]))                  
+                :type "int")
+                nil [1766 1970])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [1981 1990])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1991 2003]))                  
+                :type "int")
+                nil [1972 4345]))          
+      :file "findcutsandbridges.cc"
+      :pointmax 4346
+      :fsize 4345
+      :lastmodtime '(22709 39700 662419 12000)
+      :unmatched-syntax nil))
+  :file "!home!hesam!CS594!HW05!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

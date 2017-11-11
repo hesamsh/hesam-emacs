@@ -1,0 +1,26 @@
+#+TITLE: Experience ID explanation
+
+
+\begin{table}[]
+\centering
+\caption{Experience ID classifications}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{No. of Iterations} & \textbf{min Tenure} & \textbf{max Tenure} & \textbf{Exp ID} \\ \hline
+\multirow{100,000}   & \multirow{4}  & 8                   & 2016C01         \\ \cline{3-4} 
+                           &                     & 12                  & 2016C02         \\ \cline{2-4} 
+                           & \multirow{7}  & 8                   & 2016C03         \\ \cline{3-4} 
+                           &                     & 12                  & 2016C04         \\ \hline
+\multirow{1,000,000} & \multirow{4}  & 8                   & 2016C05         \\ \cline{3-4} 
+                           &                     & 12                  & 2016C06         \\ \cline{2-4} 
+                           & \multirow{7}  & 8                   & 2016C07         \\ \cline{3-4} 
+                           &                     & 12                  & 2016C08         \\ \hline
+\multirow{3,000,000} & \multirow{4}  & 8                   & 2016C09         \\ \cline{3-4} 
+                           &                     & 12                  & 2016C10         \\ \cline{2-4} 
+                           & \multirow{7}  & 8                   & 2016C11         \\ \cline{3-4} 
+                           &                     & 12                  & 2016C12         \\ \hline
+\multicolumn{3}{|l|}{Simple Tabu}                                      & 2016T01         \\ \hline
+\end{tabular}
+\end{table}
+

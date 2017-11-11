@@ -1,0 +1,240 @@
+% Created 2017-03-01 Wed 19:10
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Hesam Shams}
+\date{\today}
+\title{Problem 1 - Homework 7}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{a)}
+\label{sec-1}
+We have six possible dates as follows:
+
+\begin{center}
+\begin{tabular}{ll}
+Symbol & Date\\
+\hline
+A & March 22\\
+B & March 29\\
+C & April 5\\
+D & April 12\\
+E & April 19\\
+F & April 26\\
+\end{tabular}
+\end{center}
+
+Since, two groups should be assigned to each date, we can show each
+date in two sessions. For example for date $A$ we can denote $A1$ and
+$A2$ for sessions. So, we have 12 spaces to assign 12 groups for
+presentation.
+
+
+According to information, we have the following matrix with related
+weights.
+
+\begin{center}
+\begin{tabular}{rrrrrrrrrrrrr}
+ & $A1$ & $A2$ & $B1$ & $B2$ & $C1$ & $C2$ & $D1$ & $D2$ & $E1$ & $E2$ & $F1$ & $F2$\\
+\hline
+1 & 0 & 0 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0 & 0 & 0\\
+2 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+3 & 0 & 0 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0 & 0 & 0\\
+4 & 0 & 0 & 2 & 2 & 3 & 3 & 1 & 1 & 0 & 0 & 0 & 0\\
+5 & 0 & 0 & 0 & 0 & 1 & 1 & 2 & 2 & 3 & 3 & 0 & 0\\
+6 & 0 & 0 & 0 & 0 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0\\
+7 & 1 & 1 & 3 & 3 & 2 & 2 & 0 & 0 & 0 & 0 & 0 & 0\\
+8 & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 2 & 3 & 3 & 1 & 1\\
+9 & 0 & 0 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0 & 0 & 0\\
+10 & 0 & 0 & 0 & 0 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0\\
+11 & 0 & 0 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0 & 0 & 0\\
+12 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 2 & 2 & 3 & 3\\
+\end{tabular}
+\end{center}
+
+The graph is as shown in the following figure.
+
+\includegraphics[width=1.2cm]{./graphb.png}
+
+Only two groups choose date $F$ and only two groups choose date
+$A$. So, we assign these four groups to date $A$ and $F$ and remove
+them from the problem. Assign 12 and 8 to $F$, and 2 and 7 to $A$. We
+have:
+
+\begin{center}
+\begin{tabular}{rrrrrrrrr}
+ & $B1$ & $B2$ & $C1$ & $C2$ & $D1$ & $D2$ & $E1$ & $E2$\\
+\hline
+1 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0\\
+3 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0\\
+4 & 2 & 2 & 3 & 3 & 1 & 1 & 0 & 0\\
+5 & 0 & 0 & 1 & 1 & 2 & 2 & 3 & 3\\
+6 & 0 & 0 & 3 & 3 & 2 & 2 & 1 & 1\\
+9 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0\\
+10 & 0 & 0 & 3 & 3 & 2 & 2 & 1 & 1\\
+11 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0\\
+\end{tabular}
+\end{center}
+
+The graph converted to the following figure.
+
+\includegraphics[width=1.8cm]{./graphc.png}
+
+By using an algorithm inspired by Hungarian we have the following:
+
+\begin{center}
+\begin{tabular}{rrrrrrrrr}
+ & $B1$ & $B2$ & $C1$ & $C2$ & $D1$ & $D2$ & $E1$ & $E2$\\
+\hline
+1 & 0 & 0 & -1 & -1 & -2 & -2 & -3 & -3\\
+3 & 0 & 0 & -1 & -1 & -2 & -2 & -3 & -3\\
+4 & -1 & -1 & 0 & 0 & -2 & -2 & -3 & -3\\
+5 & -3 & -3 & -2 & -2 & -1 & -1 & 0 & 0\\
+6 & -3 & -3 & 0 & 0 & -1 & -1 & -2 & -2\\
+9 & 0 & 0 & -1 & -1 & -2 & -2 & -3 & -3\\
+10 & -3 & -3 & 0 & 0 & -1 & -1 & -2 & -2\\
+11 & 0 & 0 & -1 & -1 & -2 & -2 & -1 & -1\\
+\end{tabular}
+\end{center}
+
+
+So, the following assignment is obtained with maximum 26.
+
+\begin{center}
+\begin{tabular}{lrrr}
+Date & Session 1 & Session 2 & Cost\\
+\hline
+A & 2 & 7 & 4\\
+B & 1 & 3 & 6\\
+C & 4 & 10 & 6\\
+D & 9 & 11 & 2\\
+E & 5 & 6 & 4\\
+F & 12 & 8 & 4\\
+\end{tabular}
+\end{center}
+
+The matching graph is as follows
+
+\includegraphics[width=2cm]{./graphd.png}
+
+
+\section{b)}
+\label{sec-2}
+Similar to part (a).
+
+Since, two groups should be assigned to each date, we can show each
+date in two sessions. For example for date $A$ we can denote $A1$ and
+$A2$ for sessions. So, we have 12 spaces to assign 12 groups for
+presentation.
+
+
+According to information, we have the following matrix with related
+weights.
+
+\begin{center}
+\begin{tabular}{rrrrrrrrrrrrr}
+ & $A1$ & $A2$ & $B1$ & $B2$ & $C1$ & $C2$ & $D1$ & $D2$ & $E1$ & $E2$ & $F1$ & $F2$\\
+\hline
+1 & 0 & 0 & 1000 & 1000 & 2 & 2 & 1 & 1 & 0 & 0 & 0 & 0\\
+2 & 1000 & 1000 & 2 & 2 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+3 & 0 & 0 & 1000 & 1000 & 2 & 2 & 1 & 1 & 0 & 0 & 0 & 0\\
+4 & 0 & 0 & 2 & 2 & 1000 & 1000 & 1 & 1 & 0 & 0 & 0 & 0\\
+5 & 0 & 0 & 0 & 0 & 1 & 1 & 2 & 2 & 1000 & 1000 & 0 & 0\\
+6 & 0 & 0 & 0 & 0 & 1000 & 1000 & 2 & 2 & 1 & 1 & 0 & 0\\
+7 & 1 & 1 & 1000 & 1000 & 2 & 2 & 0 & 0 & 0 & 0 & 0 & 0\\
+8 & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 2 & 1000 & 1000 & 1 & 1\\
+9 & 0 & 0 & 1000 & 1000 & 2 & 2 & 1 & 1 & 0 & 0 & 0 & 0\\
+10 & 0 & 0 & 0 & 0 & 1000 & 1000 & 2 & 2 & 1 & 1 & 0 & 0\\
+11 & 0 & 0 & 1000 & 1000 & 2 & 2 & 1 & 1 & 0 & 0 & 0 & 0\\
+12 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 2 & 2 & 1000 & 1000\\
+\end{tabular}
+\end{center}
+
+If we only consider the first choices, we have the following graph.
+
+\includegraphics[width=2cm]{./graphe.png}
+
+Only two groups choose date $F$ and only two groups choose date
+$A$. So, we assign these four groups to date $A$ and $F$ and remove
+them from the problem. Assign 12 and 8 to $F$, and 2 and 7 to $A$. We
+have:
+
+\begin{center}
+\begin{tabular}{rrrrrrrrr}
+ & $B1$ & $B2$ & $C1$ & $C2$ & $D1$ & $D2$ & $E1$ & $E2$\\
+\hline
+1 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0\\
+3 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0\\
+4 & 2 & 2 & 3 & 3 & 1 & 1 & 0 & 0\\
+5 & 0 & 0 & 1 & 1 & 2 & 2 & 3 & 3\\
+6 & 0 & 0 & 3 & 3 & 2 & 2 & 1 & 1\\
+9 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0\\
+10 & 0 & 0 & 3 & 3 & 2 & 2 & 1 & 1\\
+11 & 3 & 3 & 2 & 2 & 1 & 1 & 0 & 0\\
+\end{tabular}
+\end{center}
+
+The graph converted to the following figure.
+
+\includegraphics[width=1.8cm]{./graphc.png}
+
+By using an algorithm inspired by Hungarian we have the following:
+
+\begin{center}
+\begin{tabular}{rrrrrrrrr}
+ & $B1$ & $B2$ & $C1$ & $C2$ & $D1$ & $D2$ & $E1$ & $E2$\\
+\hline
+1 & 0 & 0 & -1 & -1 & -2 & -2 & -3 & -3\\
+3 & 0 & 0 & -1 & -1 & -2 & -2 & -3 & -3\\
+4 & -1 & -1 & 0 & 0 & -2 & -2 & -3 & -3\\
+5 & -3 & -3 & -2 & -2 & -1 & -1 & 0 & 0\\
+6 & -3 & -3 & 0 & 0 & -1 & -1 & -2 & -2\\
+9 & 0 & 0 & -1 & -1 & -2 & -2 & -3 & -3\\
+10 & -3 & -3 & 0 & 0 & -1 & -1 & -2 & -2\\
+11 & 0 & 0 & -1 & -1 & -2 & -2 & -1 & -1\\
+\end{tabular}
+\end{center}
+
+
+So, the following assignment is obtained with maximum 26.
+
+\begin{center}
+\begin{tabular}{lrrr}
+Date & Session 1 & Session 2 & Cost\\
+\hline
+A & 2 & 7 & 4\\
+B & 1 & 3 & 6\\
+C & 4 & 10 & 6\\
+D & 9 & 11 & 2\\
+E & 5 & 6 & 4\\
+F & 12 & 8 & 4\\
+\end{tabular}
+\end{center}
+
+The matching graph is as follows
+
+\includegraphics[width=2cm]{./graphd.png}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

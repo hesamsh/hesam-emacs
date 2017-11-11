@@ -1,0 +1,23 @@
+;; Object src/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "src/"
+  :tables
+  (list
+    (semanticdb-table "Makefile"
+      :major-mode 'makefile-gmake-mode
+      :tags 
+        '( ("CC" variable (:default-value ("gcc")) nil [1 10])
+            ("CFLAGS" variable (:default-value ("-Wall" "-O3" "-g")) nil [10 32])
+            ("all" function (:arguments ("findcutsandbridges")) nil [33 57])
+            ("findcutsandbridges" function (:arguments ("findcutsandbridges.o" "adjarray.o" "redblack.o")) nil [58 217])
+            ("adjarray.o" function (:arguments ("adjarray/adjarray.h" "adjarray/adjarray.c")) nil [218 310])
+            ("redblack.o" function (:arguments ("redblack/redblack.h" "redblack/redblack.c")) nil [311 403])
+            ("clean" function nil nil [404 479]))          
+      :file "Makefile"
+      :pointmax 479
+      :fsize 478
+      :lastmodtime '(22720 18705 948245 301000)
+      :unmatched-syntax '((shell-command 413 . 478) (bol 412 . 412))))
+  :file "!home!hesam!CS594!HW08!Codes!Olson!src!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

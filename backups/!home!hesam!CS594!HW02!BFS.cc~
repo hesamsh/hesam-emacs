@@ -1,0 +1,106 @@
+//Standard headers 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <list>
+
+using namespace std;
+
+
+int *visited;
+int no_ver, n;
+
+void BFS(int *graph, long starting_node)
+{
+  list<int> Q;
+  int h;
+  visited[starting_node] = 1;
+  Q.push_back(starting_node);
+  while(!Q.empty())
+  {
+    h = Q.front();
+    Q.pop_front();
+    cout << h << "  ";
+    for(int i = 0; i < n; i++)
+    {
+      if(graph[i] == h)
+      {
+        if((i%2 == 0) && (visited[graph[i+1]]==0))
+        {
+          visited[graph[i+1]] = 1;
+          Q.push_back(graph[i+1]);
+        }
+        if((i%2 == 1) && (visited[graph[i-1]]==0))
+        {
+          visited[graph[i-1]] = 1;
+          Q.push_back(graph[i-1]);
+        }
+      }
+    }
+  }
+  Q.clear();
+}
+int main(int argc, char **argv)
+{
+  cout<<"========================================================="<<endl<<endl;
+  cout<<"Hesam Shams, hshams@vols.utk.edu, University of Tennessee"<<endl;
+  cout<<endl<<"========================================================="<<endl;
+
+  //Process command line argument
+  char *file_name=NULL;//The file path for the adjancy matrix graph
+  char *temp=NULL;
+  int *graph;
+  long starting_node;
+  file_name = new char[strlen(argv[1])+1];
+  temp = new char[strlen(argv[2])+1];
+  strcpy(file_name,argv[1]);
+  strcpy(temp,argv[2]);
+  starting_node = atoi(temp);
+
+  // Load problem
+  ::ifstream inpfile;
+  inpfile.open(file_name);
+  int v;
+  n = 0;
+  while(inpfile>>v)
+    n++;
+  inpfile.close();
+  inpfile.open(file_name);
+  graph = new int[n];
+  int i=0;
+  while(inpfile >> graph[i])
+  {
+    i++;
+  }
+
+  int max_arr;
+  max_arr = graph[0];
+  for (int i=0; i < n; i++)
+  {
+    if(max_arr < graph[i])
+      max_arr = graph[i];
+  }
+
+  no_ver = max_arr+1;
+
+  //Mark all unexplored
+  visited = new int[no_ver];
+
+  for (int i = 0; i < no_ver; i++)
+  {
+    visited[i] = 0;
+  }
+
+  BFS(graph, starting_node);
+  cout << endl;
+  delete[] file_name;
+  delete[] temp;
+  delete[] graph;
+  delete[] visited;
+}

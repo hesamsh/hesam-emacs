@@ -1,0 +1,236 @@
+% Created 2017-05-04 Thu 12:02
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\author{Hesam}
+\date{\today}
+\title{Homework 07 Solutions - IE310 \\ Operation Research in Industrial Engineering II \\ Probabilistic Model \\ UTK - Spring 2017}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Exercise 3 - Chapter 8 - Ross (10th Edition)}
+\label{sec-1}
+\subsection{a)}
+\label{sec-1-1}
+Let $C_M$ be Mary's average cost per hour and $C_A$ be Alice's cost
+per hour. So, we have the followings:
+
+\begin{cases}
+C_M = 3\$ + 1\$ : \text{cost per hour where Mary works} \\
+C_A = C\$ + 1\$ : \text{cost per hour where Alice works}
+\end{cases}
+
+The arrival stream has parameter $\lambda=10$, and there are two
+service parameters (one for Mary and one for Alice):
+\begin{align*}
+\mu_M = 20 \\
+\mu_A = 30
+\end{align*}
+
+Set average number of costumers as follows: 
+
+\begin{cases}
+L_M  : \text{average number of customers per hour in queue where Mary works} \\
+L_A  : \text{average number of customers per hour in queue where Alice works}
+\end{cases}
+
+where
+
+\begin{cases}
+L_M = \frac{10}{20-10}=1  \\
+L_A = \frac{10}{30-10}=\frac{1}{2}
+\end{cases}
+
+So,
+
+\begin{cases}
+C_M = 3 + 1 \times L_M = 3 + 1 \times 1 = 4\$ \text{ per hour} \\
+C_A = C + 1 \times L_A = C + 1 \times \frac{1}{2} = (C+\frac{1}{2})\$ \text{ per hour}
+\end{cases}
+
+\subsection{b)}
+\label{sec-1-2}
+If $C_M=C_A$ for $C$ we have the following:
+\begin{align*}
+4 &= (C+\frac{1}{2}) \\
+C &= 3.5\$ \text{ per hour}
+\end{align*}
+
+In the other words, the employer should pay Alice not more than 3.5\$
+per hour. At a higher cost, the average cost would be lower with
+hiring Mary.
+
+\section{Exercise 26 - Chapter 8 - Ross (10th Edition)}
+\label{sec-2}
+\subsection{a)}
+\label{sec-2-1}
+By definition of states as $\{0,1,1',...,(k-1),(k-1)',k,k+1,...\}$ and
+the following descriptions:
+
+\begin{cases}
+0: & \text{system is empty}\\
+n: & n \text{ customers in system and server is working}\\
+n': & n' \text{ customers in system and server is idle}; \forall n=1,2,...,k-1
+\end{cases}
+
+The transition diagram is as follows:
+
+\includegraphics[width=.9\linewidth]{/home/hesam/IE310/Fig9-2.png}
+
+\begin{align*}
+\lambda p_0 &= \mu p_1 \\
+(\lambda + \mu) p_1 &= \mu p_2 \\
+\lambda p_{n'} &= \lambda p_{(n-1)'} \text{ where   } n=1,2,...,(k-1) \\
+(\lambda + \mu) p_k &= \lambda p_{(k-1)'} + \mu p_{(k+1)} + \lambda p_{(k-1)} \\
+(\lambda + \mu) p_n &= \lambda p_{(n-1)} + \mu p_{(n+1)} \text{ where  } n>k
+\end{align*}
+
+\subsection{b)}
+\label{sec-2-2}
+\begin{align*}
+W &= \frac{L}{\lambda} \\
+&= \frac{k-1}{\lambda} p_0 + \sum_{n=1}^{k-1} \Big(\frac{k-1-n}{\lambda} + \frac{n}{\lambda} \Big)p_{n'} + \sum_{n=1}^{\infty} \frac{n}{\mu} p_n
+\end{align*}
+
+\subsection{c)}
+\label{sec-2-3}
+The condition is $\lambda < \mu$. Since the rate is $\lambda$ in
+Poisson, the expected total number of arrivals by time $t$ is $\lambda
+t$. The number of customers serviced is $\mu$ and the expected number
+of customer served by time $t$ is less than or equal to $\mu t$. So,
+the expected time is at least:
+\begin{align*}
+\lambda t - \mu t = (\lambda-\mu)t
+\end{align*}
+
+If $\lambda > \mu$ then the queue increases to infinity. So, the
+condition is $\lambda < \mu$.
+
+\section{Exercise 27 - Chapter 8 - Ross (10th Edition)}
+\label{sec-3}
+\subsection{a)}
+\label{sec-3-1}
+The special customer's arrival rate is $\theta$ because we must take
+into account customer's service time. In fact, the mean time between
+customer's arrivals will be $\frac{1}{\theta} + \frac{1}{\mu_1}$. So,
+The arrival rate is:
+\begin{align*}
+\text{Arrival rate} &= \frac{1}{\frac{1}{\theta}+\frac{1}{\mu_1}} \\
+&= \frac{\theta \mu_1}{\mu_1 + \theta}
+\end{align*}
+
+\subsection{b)}
+\label{sec-3-2}
+Clearly we need to keep track of whether the special customer is in
+service. For $n \geq 1$:
+
+\begin{align*}
+p_n &= P(n \text{ customers in system, regular customer in service})\\
+p_n^S &= P(n \text{ customers in system, special customer in service})\\
+p_0 &= P(0 \text{ customer in system})
+\end{align*}
+
+So, considering that $p_0^S=p_0$ we have the followings:
+
+\begin{align*}
+(\lambda + \theta) p_0 &= \mu p_1 + \mu_1 p_1^S \\
+(\lambda + \theta + \mu) p_n &= \lambda p_{n-1} + \mu p_{n+1} + \mu_1 p_{n+1}^S \\
+(\lambda + \mu) p_n^S &= \theta p_{n-1} + \lambda p_{n-1}^S \text{ where  } n \geq 1
+\end{align*}
+
+\subsection{c)}
+\label{sec-3-3}
+We know that the service is memory-less, once a customer resumes
+service it is as if the service has started a new. Once the customer
+begins a particular service, the service will be completed if and only
+if the next special customer arrives after the completion. The
+probability of this is:
+\begin{align*}
+P(\text{Service < special customer arrival}) = \frac{\mu}{\mu + \theta}
+\end{align*}
+
+This is because the service and special customers arrivals are
+independent exponential random variables. Therefore, we have the
+following:
+\begin{align*}
+P(\text{bumped exactly $n$ times}) & \\
+&= \Big(1 - \frac{\mu}{\mu + \theta} \Big)^n \Big( \frac{\mu}{\mu + \theta} \Big) \\
+&= \Big(\frac{\theta}{\mu + \theta} \Big)^n \Big( \frac{\mu}{\mu + \theta} \Big)
+\end{align*}
+
+In essence, the number of times a customer is bumped in service is a
+geometric random variable with parameter $p=\frac{\mu}{\mu + \theta}$.
+\section{Last Question}
+\label{sec-4}
+Arrivals to a particular on-campus fast food restaurant are Poisson
+with a rate of 100 customers per hour.  Service times are
+exponentially distributed with a mean service time of 4 minutes.
+Assume that the waiting space and the arrival population are
+infinite. 
+
+a) Assume that $s$ servers are available and each has it own queue and
+that customers do not switch lines. If each arriving customer selects
+a line at random with equal probabilities for each line, state an
+expression for the average time each customer spends to purchase
+food. 
+b) How many servers are necessary to make the average time to purchase
+food less than 8 minutes?
+
+\textbf{Answer (a):} Since, $s$ servers have their own queue and customers do not
+ switch lines, we can consider the system as single server with
+ arrivals rate $\lambda = \frac{100}{s}$ per hour. So we have the
+ followings for the system: 
+\begin{align*}
+\text{Arrival rate} &: \text{Poisson } \lambda = \frac{100}{s}  \text{ per hour} \\
+\text{Service time} &: \text{Exponential } \mu = \frac{60}{4} = 15 \text{ per hour}
+\end{align*}
+
+The utilization rate is:
+\begin{align*}
+\rho &= \frac{\lambda}{\mu} \\
+&= \frac{100}{15s}
+\end{align*}
+
+So, the average time a customer spends in the system (in waiting line
+and being served): 
+\begin{align*}
+W &= \frac{1}{\mu(1- \rho)} \\
+&= \frac{1}{15(1-\frac{100}{15s})} \\
+&= \frac{1}{15-\frac{100}{s}}
+\end{align*}
+
+\textbf{Answer (b)} We want the average time be less than 8 minutes which
+ equals to $\frac{2}{15}$ hour. So, 
+\begin{align*}
+W &= \frac{1}{15-\frac{100}{s}} \\
+\frac{2}{15} &= \frac{1}{15s-100}
+\end{align*}
+
+So, $s=13.3$ that means we need 14 servers to have average time be less
+than 8 minutes.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

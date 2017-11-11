@@ -1,0 +1,61 @@
+graph {
+                rankdir="LR";
+                //Group 1
+                1 -- B1[label="3",weight="3"];
+                //Group 3
+                3 -- B1[label="3",weight="3"];
+                3 -- C1[label="2",weight="2"];
+                3 -- D1[label="1",weight="1"];
+                //Group 3
+                3 -- B2[label="3",weight="3"];
+                3 -- C2[label="2",weight="2"];
+                3 -- D2[label="1",weight="1"];
+                //Group 4
+                4 -- C1[label="3",weight="3"];
+                4 -- B1[label="2",weight="2"];
+                4 -- D1[label="1",weight="1"];
+                //Group 4
+                4 -- C2[label="3",weight="3"];
+                4 -- B2[label="2",weight="2"];
+                4 -- D2[label="1",weight="1"];
+                //Group 5
+                5 -- E1[label="3",weight="3"];
+                5 -- D1[label="2",weight="2"];
+                5 -- C1[label="1",weight="1"];
+                //Group 5
+                5 -- E2[label="3",weight="3"];
+                5 -- D2[label="2",weight="2"];
+                5 -- C2[label="1",weight="1"];
+                //Group 6
+                6 -- C1[label="3",weight="3"];
+                6 -- D1[label="2",weight="2"];
+                6 -- E1[label="1",weight="1"];
+                //Group 6
+                6 -- C2[label="3",weight="3"];
+                6 -- D2[label="2",weight="2"];
+                6 -- E2[label="1",weight="1"];
+                //Group 9
+                9 -- B1[label="3",weight="3"];
+                9 -- C1[label="2",weight="2"];
+                9 -- D1[label="1",weight="1"];
+                //Group 9
+                9 -- B2[label="3",weight="3"];
+                9 -- C2[label="2",weight="2"];
+                9 -- D2[label="1",weight="1"];
+                //Group 10
+                10 -- C1[label="3",weight="3"];
+                10 -- D1[label="2",weight="2"];
+                10 -- E1[label="1",weight="1"];
+                //Group 10
+                10 -- C2[label="3",weight="3"];
+                10 -- D2[label="2",weight="2"];
+                10 -- E2[label="1",weight="1"];
+                //Group 11
+                11 -- B1[label="3",weight="3"];
+                11 -- C1[label="2",weight="2"];
+                11 -- D1[label="1",weight="1"];
+                //Group 11
+                11 -- B2[label="3",weight="3"];
+                11 -- C2[label="2",weight="2"];
+                11 -- D2[label="1",weight="1"];
+	}

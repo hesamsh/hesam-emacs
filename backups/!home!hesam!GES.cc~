@@ -1,0 +1,649 @@
+long GlobalEquilibriumSearch(long UB  //Input arg
+                             ,long LB //LB is not mentioned in the function
+                             ,COperation** oper_mach //Input arg
+                             ,COperation *oper //Input arg
+                             ,int &njobs //Input arg
+                             ,int &noper //Input arg
+                             ,int &maxswapsz //Input arg
+                             ,COperation **swapCands //Output arg (Use only in Tabu)
+                             ,COperation** critics //Output arg (Use only in Tabu)
+                             ,int *szs //Output arg (Use only in Tabu)
+                             ,int &maxswapszfull //Input arg
+                             ,COperation** swapCandsFull // Is not mentioned here at all
+                             ,char *pproblem_name //Input arg
+                             ,char*  db_experiment_id //Input arg
+                             ,long  run_id //Input arg
+                             ,char* algorithm_name //Input arg
+                             ,long myseed //Input arg
+                             ,long time_limit  //Input arg
+                             ,long tabu_tenure_min
+                             ,long tabu_tenure_max
+                             ,long niters //Input arg
+                             ,long nTemp
+                             ,double final_temp
+                             ,double max_tenure_multiplier
+                             )
+{
+    // the size of 0-1 vector to look for
+    long vector_size=((njobs*(njobs-1))/2)*noper;
+
+    if(myseed==-1) myseed=time(NULL)-1000*run_id;
+    cout<<"runid="<<run_id<<endl;
+    cout<<myseed<<endl;
+    srand(myseed);///
+
+
+    //general log file
+    char cnumber[32];//32 number max
+    char strRunId[32];
+    itoa_oleg(strRunId,int(run_id),10);
+
+    char *log_file_name=new char[100];
+
+    strcpy(log_file_name,"log_file");
+    strcat(log_file_name,"_");
+    strcat(log_file_name,algorithm_name);
+    strcat(log_file_name,"_");
+    strcat(log_file_name,db_experiment_id);
+    strcat(log_file_name,"_");
+    strcat(log_file_name,strRunId);
+
+    ofstream outfile;
+    outfile.open(log_file_name,::ios::app);
+    outfile<<" started... with seed: "<<myseed<<" UB="<<UB<<" "<<pproblem_name<<endl;    
+    outfile<<" started... with tabu_tenure_min="<<tabu_tenure_min<<" tabu_tenure_max="<<tabu_tenure_max<<" niters="<<niters<<" nTemp="<<nTemp<<" final_temp="<<final_temp<<endl;
+    outfile.close();
+    ///database
+    char *database_namerun=new char[100];//output file for the run results (db)
+    
+    strcpy(database_namerun,"data_log");
+    strcat(database_namerun,"_");
+
+    strcat(database_namerun,db_experiment_id);// algorithm_name can be passed through the command line argument  -alg alg50
+
+
+    strcat(database_namerun,"_");
+    strcat(database_namerun,strRunId);
+    
+
+    char *database_namepar=new char[100];//experiment parameters (db) 
+    strcpy(database_namepar,"para_log");
+    strcat(database_namepar,"_");
+    strcat(database_namepar,db_experiment_id);// algorithm_name can be passed through the command line argument  -alg alg50
+    strcat(database_namepar,"_");
+    strcat(database_namepar,strRunId);
+
+    /// SAVE SOME OF THE PARAMETERS
+    UpdateParameterLong(database_namepar,db_experiment_id,0, algorithm_name,"seed",myseed,run_id);
+    UpdateParameterLong(database_namepar,db_experiment_id,0, algorithm_name,"tabu_tenure_min",tabu_tenure_min,run_id);
+    UpdateParameterDouble(database_namepar,db_experiment_id,0, algorithm_name,"max_tenure_multiplier",max_tenure_multiplier,run_id);
+    UpdateParameterLong(database_namepar,db_experiment_id,0, algorithm_name,"niters",niters,run_id);
+    
+    
+ 
+    // Restart value file
+    char restart_filename[100];
+    strcpy(restart_filename,"restart.txt");
+    long irestart=-1;
+    ifstream inpfile;
+    inpfile.open(restart_filename); 
+    inpfile>>irestart;
+    inpfile.close();
+    
+
+    long CUR_ITERATION=0;// used to speedup local search
+    //long time_limit=50000;//30000;// walltime....
+    
+
+    UpdateParameterLong(database_namepar,db_experiment_id,0, algorithm_name,"time_limit",time_limit,run_id);
+
+    time_t start;
+    time_t finish;
+    time_t start_cycle;
+    long long cumulativeNiters=0;
+
+    long i,j,k;
+    i=j=k=0;
+
+    int* nthrows=new int[nTemp];
+    for(int i=0;i<nTemp;i++) nthrows[i]=100;
+
+
+    // I am adding another line (experimental)
+    UpdateParameterLong(database_namepar,db_experiment_id,0, algorithm_name,"nTemp",nTemp,run_id);
+    UpdateParameterLong(database_namepar,db_experiment_id,0, algorithm_name,"nthrows",100,run_id);
+
+    // create memory for history 
+    // TODO: proper memory removal!
+    cout<<"initiating"<<endl;
+    struct history_node** history_head1=new struct history_node*[vector_size];    
+    struct history_node** history_tail1=new struct history_node*[vector_size];
+    int *history_length1=new int[vector_size];
+
+    struct history_node** history_head0=new struct history_node*[vector_size];
+    struct history_node** history_tail0=new struct history_node*[vector_size];
+    
+    int *history_length0=new int[vector_size];
+    int maxhistorylength=1000;
+    
+    for(int i=0;i<vector_size;i++)
+    {
+	history_length1[i]=0;
+	history_head1[i]=0;
+	history_tail1[i]=0;	  
+	history_length0[i]=0;
+	history_head0[i]=0;
+	history_tail0[i]=0;	  
+    }
+    cout<<"initiating done..."<<endl;
+    // probabilities for generation
+    double *prob=new double[vector_size];
+    double *init_prob=new double[vector_size];
+
+
+
+    // number of total restarts...
+    long n_ex=0;
+
+    
+    // general data...
+    double CMax=-1;
+    double CMaxNew=-1;
+    double CMaxBest=-1;
+    double CMaxRecord=-1;
+    double CMaxTempBest=-1;
+
+    double sum_CMax_generated=0;
+    // solutions to memorize
+    char *sol=new char[vector_size];
+    char *best_sol=new char[vector_size];
+    char *record_sol=new char[vector_size];
+    //char *target_sol=new char[vector_size];
+
+    // local search support
+    COperation** FQueue=new COperation*[njobs*noper];
+    COperation** FQueue2=new COperation*[njobs*noper];
+    COperation** oper_order=new COperation*[njobs*noper];
+    int queue_size=0;
+
+    // to memorize solutions, kind of hash table /////
+    double s=4096.0*1024.0;
+    //aurd=urand()*1000+90853;
+    long* chash=new long[vector_size];// here was a problem!!!
+    for (j=0; j<vector_size;j++)//njobs*noper*njobs; j++)
+    {
+	chash[j]=(long)(urand()*s);
+    }
+    CRBTree rbtree(10000*40);	//to store hash table entries*/
+
+    //////////////////////////////////////////////////
+    // this is not clear...
+    //bool  the_best=false;
+    // for generation
+    COperation** last_scheduled=new COperation*[noper];
+    int *ready_list=new int[njobs];
+
+
+    char *swap_id=new char[maxswapsz];
+    char *swap_id_full=new char[maxswapsz];
+
+
+    ////////////
+    // additional info
+    ////////////
+    CMax=-1;
+    CMaxNew=-1;
+    CMaxBest=-1;
+    CMaxRecord=-1;
+    CMaxTempBest=-1;
+    n_ex=0;
+
+    sum_CMax_generated=0;
+
+
+    for(i=0;i<vector_size;i++)
+    {
+	sol[i]=best_sol[i]=record_sol[i]=-1;
+    }
+
+    time(&start);
+
+
+    ///////////////// ges ...
+
+    double *f0min=new double[vector_size];
+    double *f1min=new double[vector_size];
+  
+  
+
+
+    bool memory_updated=false;
+
+    /// think about temperature!!!
+    double amyu=0;
+    double amyufinal=final_temp;// just a wild guess, will be readjusted by algo itself
+    double amyuinit=0.0004; 
+    double multiplyer=exp( (log(amyufinal)-log(amyuinit))/(nTemp-1.0) );
+
+    UpdateParameterDouble(database_namepar,db_experiment_id,0, algorithm_name,"amyuinit",double(amyuinit),run_id);
+    UpdateParameterDouble(database_namepar,db_experiment_id,0, algorithm_name, "amyufinal",double(amyufinal),run_id);
+
+
+
+
+    for(i=0;i<vector_size;i++)
+    {
+	f0min[i]=f1min[i]=-1;//10000;
+    }
+    for(i=0;i<vector_size;i++)
+    {
+	init_prob[i]=0.5;
+	prob[i]=0.5;
+    }
+
+    char record_file[200];
+    strcpy(record_file,"jsp_problems/ta49.txt_record_binary_1967.txt");
+
+
+    
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ///UpdateDatabase(database_namerun, db_experiment_id, 0,-1, myseed, -1, -1, -1, -1, pproblem_name ,run_id,algorithm_name);
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    int ncycles=2;
+    UpdateParameterLong(database_namepar,db_experiment_id,0, algorithm_name,"ncycles",ncycles,run_id);
+
+    long nlocalcalls=0;
+
+    int *random_permutation=new int[njobs*noper];
+    for(int i=0;i<njobs*noper;i++) random_permutation[i]=i;
+
+    memory_updated=false;
+
+    time_t time_lastcheckrestart;
+    time(&time_lastcheckrestart);
+ 
+    int lrestart[2];
+    lrestart[0]=lrestart[1]=0;
+  
+    //!MAIN CYCLE BEGINS
+
+    long *tabu_moves=new long[vector_size];
+    for(int i=0;i<vector_size;i++) tabu_moves[i]=0;
+
+    CTrajectoryLogger *logger=new CTrajectoryLogger(100,database_namerun,db_experiment_id,pproblem_name,run_id,algorithm_name);
+    
+
+	
+    
+    while(1)
+    {
+        for(int i=0;i<vector_size;i++) tabu_moves[i]=0;// IMPORTANT!! RESET TABU
+	rbtree.nnodes=0;
+	rbtree.root=rbtree.NIL;
+	for(i=0;i<njobs*noper;i++) random_permutation[i]=i;
+	//starting a cycle...
+	// initilize memory according to the choice of target
+	init_set_ges(CMax,CMaxBest,CMaxTempBest,vector_size,
+		     f0min,f1min); //set CMax=CMaxBest=CMaxTempBest=vector_size=f0min=f1min=-1
+	//rbtree.nnodes=0;
+
+	
+
+	bool first=true;
+	double CMaxOld=-1;
+
+
+	// CYCLE BEGINS: RESET THE CLOCK
+
+	time(&start_cycle);
+
+	time_t time_lastdboutput;
+	time(&time_lastdboutput);
+	cumulativeNiters=0;
+
+
+	logger->reset();
+
+	for(int cycle=0;cycle<ncycles;cycle++)
+	{
+	    for(int i=0;i<vector_size;i++) tabu_moves[i]=0;// RESET TABU DATA BEFORE THE NEW CYCLE
+
+	    amyufinal=final_temp;// just a wild guess, will be readjusted by algo itself
+	    amyuinit=0.0004; 
+	    multiplyer=exp( (log(amyufinal)-log(amyuinit))/(nTemp-1.0) );
+	    
+	    for(i=0;i<vector_size;i++) prob[i]=0.5;//initial probability
+	    for(i=0;i<njobs*noper;i++)
+		oper[i].US_FLAG=0;
+	    CUR_ITERATION=0;
+	    CMax=InitialSolutionRandom(oper,oper_mach,njobs,noper,FQueue, queue_size,vector_size,oper_order,ready_list,last_scheduled);
+
+	    CMax=CalculateHeadTailQueue(oper,njobs,noper,FQueue,queue_size,oper_order);
+	    CalculateVectorSolutionINT8(oper,oper_mach,njobs,noper,sol);
+	  
+	    update_record_best_etc(CMax,CMaxBest,CMaxTempBest,CMaxRecord,vector_size,sol,record_sol,best_sol);
+
+	    CMax=floor(CMax);
+	    recalc_ges_params_history(CMax, sol, vector_size,history_head1,history_tail1, history_length1,history_head0,history_tail0,history_length0,f0min, f1min, maxhistorylength);
+	  	    
+	    amyu=amyuinit;
+	    int failing=0;
+
+	    long tabu_tenure=tabu_tenure_min;//(tabu_tenure_min>long(0.3*njobs))?tabu_tenure_min:long(0.3*njobs); // intial tabu tenure
+	    tabu_tenure_max = long(tabu_tenure*max_tenure_multiplier);
+	    
+	    cout<<"initial tenure set to "<<tabu_tenure<<endl;
+	    cout<<"max tenure set to "<<tabu_tenure_max<<endl;
+	    double CMaxTempBest_prev=0;
+	    double CMaxBest_prev=0;
+	    double CMaxRecord_prev=0;
+
+	    for(int cur_temp=0;cur_temp<nTemp;cur_temp++)
+	    {
+		amyu=amyuinit;
+		multiplyer=exp( (log(amyufinal)-log(amyuinit))/(nTemp-1.0) );
+		for(int i=0;i<cur_temp;i++) amyu=amyu*multiplyer;
+
+		CMaxTempBest_prev=CMaxTempBest;
+		CMaxBest_prev=CMaxBest;
+		CMaxRecord_prev=CMaxRecord;
+
+		time(&finish);
+		if(finish-time_lastcheckrestart>7)//every 5 seconds check for a restart
+		{	
+		    time(&time_lastcheckrestart);
+		    ifstream inpfile;
+		    inpfile.open(restart_filename);		 
+		    int irestartold=irestart;
+		    inpfile>>irestart;
+		    inpfile.close();
+		    if(irestart!=irestartold)
+		    {
+			if(irestart<irestartold) lrestart[0]=2;
+			goto THE_END;
+		    }	
+		}
+
+
+		CMaxTempBest=-1;//best in this temperature cycle //H//Need to be removed for tabu only
+		sum_CMax_generated=0;// to sum all CMax after local search!
+		long oldnf=rbtree.nnodes;//number of solutions seen so far
+	  
+		if(lrestart[0]==1) goto THE_END;
+		//messaging...............!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
+
+
+		calculate_ges_probab_history(prob,vector_size,cur_temp,init_prob,amyu,f0min, f1min,best_sol, history_head1, history_tail1, history_length1,history_head0, history_tail0, history_length0);
+
+		double minprob=1;
+		double maxprob=0;
+		double medprob=1;
+		for(int i=0;i<vector_size;i++)
+		{
+		    if(minprob>prob[i]) minprob=prob[i];
+		    if(maxprob<prob[i]) maxprob=prob[i];
+		    if(fabs(prob[i]-0.5)<fabs(medprob-0.5)) medprob=prob[i];
+		}
+		
+		double CMaxOld=CMaxBest;
+
+		
+		long iteration=0;		
+
+
+
+
+
+		
+		CMax=Tabu_v201301(oper,njobs,noper,maxswapsz,swapCands,critics,szs,FQueue,
+				  FQueue2,queue_size,oper_order,swap_id,oper_mach,CUR_ITERATION,
+				  CMax,CMaxBest,CMaxTempBest,CMaxRecord,sol, record_sol,best_sol,tabu_moves,tabu_tenure, tabu_tenure_max, niters,iteration,
+				  history_head1, history_tail1, history_length1,history_head0, history_tail0, history_length0,f0min, f1min, maxhistorylength,prob,logger);
+		
+		if(cur_temp<nTemp-1) 
+		{
+		    for(int i=0;i<vector_size;i++) tabu_moves[i]=0;// RESET TABU DATA BEFORE THE NEW CYCLE
+		}
+		else
+		{
+		    for(int i=0;i<vector_size;i++) tabu_moves[i]=(tabu_moves[i]-iteration<0)?0:tabu_moves[i]-iteration;
+		}
+
+		CalculateVectorSolutionINT8(oper,oper_mach,njobs,noper,sol);
+
+		//     // Non-stop solver
+		    if(CMaxBest<=UB)
+		    {
+			// send restart message!!!
+			cout<<"!SOLVED! by "<<" :"<<CMaxBest<<endl;
+			goto THE_END;
+		    }
+		// }// end of throwing cycle
+
+	
+		time(&finish);
+		if(finish-start>time_limit)
+		{		    
+		    goto THE_END;
+		}
+		
+		logger->logDataPoint(long(CMaxBest));
+		
+
+		cout<<" time(sec):"<<finish-start<<" nmyu="<<cur_temp<<" ef="<<sum_CMax_generated/nthrows[cur_temp]<<" cfmax="<<CMaxTempBest<<" min_makespan="<<CMaxBest<<" R="<<CMaxRecord<<" "<<" nf="<<rbtree.nnodes-oldnf<<endl;
+		cout<<cur_temp<<" "<<":"<<floor(minprob*100)/100<<" "<<floor(maxprob*100)/100<<" "<<floor(medprob*100)/100<<endl;
+		cout<<"amyu="<<amyu<<endl;
+		
+
+
+
+	
+
+		outfile.open(log_file_name,::ios::app);
+		outfile<<" time(sec):"<<finish-start<<" nmyu="<<cur_temp<<" ef="<<sum_CMax_generated/nthrows[cur_temp]<<" cfmax="<<CMaxTempBest<<" min_makespan="<<CMaxBest<<" R="<<CMaxRecord<<" "<<" nf="<<rbtree.nnodes-oldnf<<" "<<endl;
+		outfile.close();
+
+		if(cur_temp==nTemp-1 && CMaxTempBest!=CMaxBest)
+		{
+		    tabu_tenure=tabu_tenure_min;//(tabu_tenure_min>long(0.3*njobs))?tabu_tenure_min:long(0.3*njobs); // intial tabu tenure
+		    tabu_tenure_max = tabu_tenure_max + 2;//long(tabu_tenure*max_tenure_multiplier);
+		    amyufinal=amyufinal*1.1;
+		    cout<<"Nmax is set to "<<tabu_tenure_max<<" Nmin is set to "<<tabu_tenure<<endl;	    
+		    cur_temp--;			    
+		}
+		else if(cur_temp!=nTemp-1  && CMaxTempBest_prev==CMaxTempBest)
+		{
+		    tabu_tenure+=2;
+		    cout<<"Nmin is set to "<<tabu_tenure<<endl;
+		    cur_temp--;	
+		}
+		else 
+		{
+		    tabu_tenure=(tabu_tenure-2>tabu_tenure_min)?tabu_tenure-2:tabu_tenure_min;//(tabu_tenure_min>long(0.3*njobs))?tabu_tenure_min:long(0.3*njobs); // intial tabu tenure
+		    tabu_tenure_max = long(tabu_tenure*max_tenure_multiplier);
+		    cout<<"Nmin is set to "<<tabu_tenure<<endl;
+		}
+
+		if(cur_temp==nTemp-1 && CMaxBest_prev>CMaxBest)// the best solution was improved on the last temperature
+		{
+		    cur_temp=(cur_temp-10>0)?cur_temp-10:1;		    
+		    amyufinal=final_temp;
+		}
+
+		if(CMaxRecord<CMaxRecord_prev)
+		{
+		    CMaxRecord_prev=CMaxRecord;
+		    // save the record
+		    if(1){
+			char *file_best_found01=new char[100];
+			itoa_oleg(cnumber,int(CMaxRecord),10);
+			strcpy(file_best_found01,pproblem_name);
+			strcat(file_best_found01,"_record_binary_");
+			strcat(file_best_found01,cnumber);
+			strcat(file_best_found01,".txt");
+			SaveSolutionToFile(file_best_found01,record_sol,vector_size);
+		    }
+		    if(1){
+			char *file_best_foundPos=new char[100];
+			itoa_oleg(cnumber,int(CMaxRecord),10);
+			strcpy(file_best_foundPos,pproblem_name);
+			strcat(file_best_foundPos,"_record_sequence_");
+			strcat(file_best_foundPos,cnumber);
+			strcat(file_best_foundPos,".txt");
+			SaveSolutionToFileStandard(file_best_foundPos,record_sol,vector_size,njobs,noper);
+		    }
+		}
+
+	    }//end of temperature cycle  	  	 
+	    //goto THE_END;
+	    if(CMaxOld==-1) 
+	      {
+		CMaxOld=CMaxBest;
+	      }
+	    else if(CMaxOld>CMaxBest)
+	      {
+		cycle=0;
+		CMaxOld=CMaxBest;
+	      }
+	      
+	}//end of full cycle
+
+      
+	outfile.open(log_file_name,::ios::app);
+	outfile<<pproblem_name<<" n_ex="<<n_ex++<<" time:"<<finish-start<<" CMaxRecord="<<CMaxRecord<<" CMaxBest="<<CMaxBest<<endl<<"----------------------------------------------------"<<endl;
+	outfile.close();	
+	logger->n_ex=n_ex;
+
+	
+
+	init_set_ges(CMax,CMaxBest,CMaxTempBest,vector_size,
+		     f0min,f1min);
+
+	// remove nodes from the memory
+	cout<<"...trying to delete the history nodes..."<<endl;
+	for(int j=0;j<vector_size;j++)
+	{
+	    //delete 1's 
+	    struct history_node* node=history_head1[j];
+	    history_head1[j]=0;
+	    history_tail1[j]=0;
+	    history_length1[j]=0;
+	    while(node)
+	    {
+		struct history_node* node_to_delete=node;
+		node=node->next;
+		delete node_to_delete;
+	    }
+	    // now delete 0's
+	    node=history_head0[j];
+	    history_head0[j]=0;
+	    history_tail0[j]=0;
+	    history_length0[j]=0;
+	    while(node)
+	    {
+		struct history_node* node_to_delete=node;
+		node=node->next;
+		delete node_to_delete;
+	    }
+	    
+	}
+	cout<<"...sucessfully delete the history nodes..."<<endl;
+	
+
+	
+    }//end of main cycle
+
+
+THE_END:
+    logger->logDataPoint(long(CMaxBest));
+
+    time(&finish);
+    outfile.open(log_file_name,::ios::app);
+    outfile<<"...Done... "<<pproblem_name<<" n_ex="<<n_ex<<" time:"<<finish-start<<" CMaxRecord="<<CMaxRecord<<endl;
+    outfile.close();
+
+
+
+
+
+
+    delete [] f0min;
+    delete [] f1min;
+    
+
+
+
+    //delete [] amyu;
+    delete [] nthrows;
+    delete [] prob;
+    delete [] init_prob;
+    delete [] sol;
+    delete [] best_sol;
+    delete [] record_sol;
+
+    delete [] FQueue;
+    delete [] FQueue2;
+    delete [] oper_order;
+
+    delete [] chash;
+    delete [] ready_list;
+    delete [] last_scheduled;
+
+    delete [] swap_id;
+    delete [] swap_id_full;
+    delete [] random_permutation;
+
+    delete [] log_file_name;
+
+    delete [] database_namerun;
+    delete [] database_namepar;
+
+
+    // remove nodes from the memory
+    cout<<"... trying to delete history nodes..."<<endl;
+    for(int j=0;j<vector_size;j++)
+    {
+	//delete 1's 
+	struct history_node* node=history_head1[j];
+	history_head1[j]=0;
+	history_tail1[j]=0;
+	history_length1[j]=0;
+	//cout<<"...deleting 1..."<<endl;
+	while(node)
+	{
+	    struct history_node* node_to_delete=node;
+	    node=node->next;
+	    //cout<<node_to_delete<<" "<<node<<endl;
+	    delete node_to_delete;
+	}
+	// now delete 0's
+	node=history_head0[j];
+	history_head0[j]=0;
+	history_tail0[j]=0;
+	history_length0[j]=0;
+	//cout<<"...deleting 0..."<<endl;
+	while(node)
+	{
+	    struct history_node* node_to_delete=node;
+	    node=node->next;
+	    //cout<<node_to_delete<<" "<<node<<endl;
+	    delete node_to_delete;
+	}	    
+    }
+    cout<<"...sucessfully deleted history nodes..."<<endl;
+
+
+    delete [] history_head1;
+    delete [] history_tail1;
+    delete [] history_length1;
+
+    delete [] history_head0;
+    delete [] history_tail0;
+    delete [] history_length0;
+
+    delete [] tabu_moves;
+    //MPI_Barrier(MPI_COMM_WORLD );
+    return lrestart[0];
+}

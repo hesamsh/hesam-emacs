@@ -1,0 +1,97 @@
+% Created 2017-09-11 Mon 18:07
+\documentclass[11pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage[margin=1in]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{graphicx}
+\usepackage[tight,hang,nooneline,raggedright,figtopcap]{subfigure}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage[english]{babel}
+\usepackage{multimedia}
+\usepackage[boxed]{algorithm}
+\usepackage{algorithmic}
+\usepackage{natbib}
+\author{\{Hesam Shams\} \{Oleg Shylo\}\thanks{\{hesam@utk.edu\} \{oshylo@utk.edu\}}}
+\date{\today}
+\title{Guided Tabu Algorithm}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+asdf, or whatever I want to write in the abstract \ldots{}
+\end{abstract}
+
+\part{Introduction}
+\label{sec-1}
+This is Introduction \citep{Alidaee:1994}.
+\chapter{Literature Review}
+\label{sec-1-1}
+This is review in the literature.
+\part{Guided Tabu Algorithm}
+\label{sec-2}
+This is method \citep{Battiti:1997}.
+\chapter{Algorithm}
+\label{sec-2-1}
+This algorithm is good.
+\section{Dynamic Tabu}
+\label{sec-2-1-1}
+This is Dynamic Tabu.
+\part{Results}
+\label{sec-3}
+This is results.
+\chapter{Computations}
+\label{sec-3-1}
+This is computation section.
+\section{Performance probability}
+\label{sec-3-1-1}
+It is a good approach.
+\subsection{Confidence interval 1}
+\label{sec-3-1-1-1}
+This is method 1.
+\subsection{Confidence interval 2}
+\label{sec-3-1-1-2}
+This is method 2.
+\section{Risk difference}
+\label{sec-3-1-2}
+\subsection{Method 1}
+\label{sec-3-1-2-1}
+This is method 1.
+\subsection{Method 2}
+\label{sec-3-1-2-2}
+This is method 2.
+
+\part{Conclusions}
+\label{sec-4}
+This is conclusions.
+
+\bibliographystyle{apalike}
+
+\bibliography{overallliterature.bib}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

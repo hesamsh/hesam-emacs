@@ -1,0 +1,118 @@
+% Created 2017-02-27 Mon 20:33
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Hesam}
+\date{\today}
+\title{Homework 05 Solutions - IE310 \\ Operation Research in Industrial Engineering II \\ Probabilistic Model \\ Spring 2017}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Exercise 1 - Chapter 4 - Ross (10th Edition)}
+\label{sec-1}
+The random variable $\{X_n,n \ge 0\}$ denotes the state of the system by the
+following definition. $X_n$ =\{Number of white balls in urn 1 after the
+$n$-th step\}. We only need to know the numbers of white ball in urn 1 in the
+$n$-th step and no furthermore. So we have the following for the probability.
+
+\begin{align*}
+P(X_{n+1}=j|X_n=i,X_{n-1}=i_{n-1},...,X_1=i_1, X_0=i_0)=P(X_{n+1}=j|X_n=i)
+\end{align*}
+
+The state $X_0$ depends on the number of white balls in the beginning
+which has Binomial distribution ($X_0 \sim Bin(3,\frac{1}{3})$). On the
+other hand, the probability of number of white balls increase/decrease
+more than one after one step is zero. So, we have the followings.
+
+\begin{align*}
+P(X_{n+1}=j|X_n=i)=0, \forall j<i-1 \text{ and } j > i+1
+\end{align*}
+
+For all other states ($i=0,1,2,3$), we have the followings.
+
+\begin{align*}
+P(X_{n+1}=j|X_n=i)=
+\begin{cases}
+       (\frac{i}{3})^2 &\quad\text{if } j=i-1 \\
+       2 \times \frac{i}{3} \times \frac{3-i}{3} &\quad\text{if }j=i \\
+       (\frac{3-i}{3})^2 &\quad\text{if } j=i+1  \ 
+\end{cases}
+\end{align*}
+
+So, we have the following probability based on what was mentioned.
+
+\begin{align*}
+P_{0,0}=0, \quad P_{0,1}=1, \quad P_{0,2}=0, \quad P_{0,3}=0 \\
+P_{1,0}=\frac{1}{9}, \quad P_{1,1}=\frac{4}{9}, \quad P_{1,2}=\frac{4}{9}, \quad P_{1,3}=0 \\
+P_{2,0}=0, \quad P_{2,1}=\frac{4}{9}, \quad P_{2,2}=\frac{4}{9}, \quad P_{2,3}=\frac{1}{9}\\
+P_{3,0}=0, \quad P{3,1}=0, \quad P_{3,2}=1, \quad P_{3,3}=0
+\end{align*}
+
+So, we have the following probability matrix.
+
+\begin{align*}
+P =
+\begin{bmatrix}
+0 & 1 & 0 & 0 \\
+\frac{1}{9} & \frac{4}{9} & \frac{4}{9} & 0 \\
+0 & \frac{4}{9} & \frac{4}{9} & \frac{1}{9} \\
+0 & 0 & 1 & 0
+\end{bmatrix}
+\end{align*}
+
+\section{Exercise 2 - Chapter 4 - Ross (10th Edition)}
+\label{sec-2}
+Let $R$ denotes rainy and $D$ denotes dry. We have the following eight
+states:
+
+\begin{align*}
+RRR, RRD, RDR, RDD, DRR, DRD, DDR, DDD
+\end{align*}
+
+where $RD$ represents today is dry, yesterday was dry, and the day
+before yesterday was rain.
+
+\section{Exercise 3 - Chapter 4 - Ross (10th Edition)}
+\label{sec-3}
+The $P$ is as follows.
+
+\includegraphics[width=.9\linewidth]{./a.png}
+
+\section{Exercise 4 - Chapter 4 - Ross (10th Edition)}
+\label{sec-4}
+No, the process does not have the Markov property (it is not time
+homogeneous). The probabilities depend on time step $n$ and it is not
+important $n$ is even or odd. There is no probability depends on state
+and $n$.
+
+In order to transform the process to a Markov process, we can expand
+the state space as follows.
+
+Let the state space $S=\{0, 1, 2, \bar{0}, \bar{1}, \bar{2} \}$ where
+state $i$ denotes that the present value is $i$ and the present day is
+even and $\bar{i}$ denotes that the present value is $\bar{i}$ and the
+present day is odd $\forall i=\{0,1,2\}$. So, we have a unique $X_n$
+for each state and it is Markov chain now.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

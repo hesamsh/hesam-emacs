@@ -1,0 +1,94 @@
+;; Object HW04/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "HW04/"
+  :tables
+  (list
+    (semanticdb-table "color.cc"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("iostream" include (:system-flag t) nil [21 40])
+            ("fstream" include (:system-flag t) nil [41 59])
+            ("sstream" include (:system-flag t) nil [60 78])
+            ("stdlib.h" include (:system-flag t) nil [79 98])
+            ("math.h" include (:system-flag t) nil [99 116])
+            ("time.h" include (:system-flag t) nil [117 134])
+            ("string.h" include (:system-flag t) nil [135 154])
+            ("stdio.h" include (:system-flag t) nil [155 173])
+            ("unistd.h" include (:system-flag t) nil [174 193])
+            ("list" include (:system-flag t) nil [194 209])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [210 230])
+            ("no_ver" variable (:type "int") nil [232 252])
+            ("no_edge" variable (:type "int") nil [232 252])
+            ("list_temp" variable
+               (:pointer 1
+                :type "int")
+                nil [253 268])
+            ("list_hl" variable
+               (:pointer 1
+                :type "int")
+                nil [269 282])
+            ("list_lh" variable
+               (:pointer 1
+                :type "int")
+                nil [283 296])
+            ("list_rn" variable
+               (:pointer 1
+                :type "int")
+                nil [297 310])
+            ("CalcDeg" function
+               (:arguments 
+                  ( ("graph" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [367 378])
+                    ("v" variable (:type "int") (reparse-symbol arg-sub-list) [379 385]))                  
+                :type "int")
+                nil [355 500])
+            ("GenListHL" function
+               (:prototype-flag t
+                :type "void")
+                nil [501 518])
+            ("GenListLH" function
+               (:prototype-flag t
+                :type "void")
+                nil [519 536])
+            ("GenListRN" function
+               (:prototype-flag t
+                :type "void")
+                nil [537 554])
+            ("Coloring" function
+               (:arguments 
+                  ( ("graph" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [569 580])
+                    ("list_gr" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [581 594])
+                    ("start_alg" variable (:type ("clock_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [595 613]))                  
+                :type "void")
+                nil [555 1835])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [1845 1854])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1855 1867]))                  
+                :type "int")
+                nil [1836 3535])
+            ("GenListHL" function (:type "void") nil [3590 3962])
+            ("GenListLH" function (:type "void") nil [3963 4336])
+            ("GenListRN" function (:type "void") nil [4337 4706]))          
+      :file "color.cc"
+      :pointmax 4707
+      :fsize 4706
+      :lastmodtime '(22683 36474 332594 227000)
+      :unmatched-syntax nil))
+  :file "!home!hesam!CS594!HW04!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

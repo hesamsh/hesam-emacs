@@ -110,15 +110,3 @@
 ;(setq python-shell-interpreter "~/anaconda3/bin/python3.5")
 (setq org-babel-python-command "python")
 
-(add-hook 'org-mode-hook #'(lambda ()
-
-                             ;; make the lines in the buffer wrap around the edges of the screen.
-
-                             ;; to press C-c q  or fill-paragraph ever again!
-                             (visual-line-mode)
-                             (org-indent-mode)))
-(setq text-mode-hook
-      '(lambda() (auto-fill-mode 0)))
-
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)

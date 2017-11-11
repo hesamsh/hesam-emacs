@@ -1,0 +1,20 @@
+;; Object Grady/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "Grady/"
+  :tables
+  (list
+    (semanticdb-table "Makefile"
+      :major-mode 'makefile-gmake-mode
+      :tags 
+        '( ("all" function (:arguments ("Graph.o" "cutBridge2.o")) nil [1 73])
+            ("Graph.o" function (:arguments ("Graph.cpp")) nil [74 115])
+            ("cutBridge2.o" function (:arguments ("cutBridge2.cpp")) nil [116 173])
+            ("clean" function nil nil [174 210]))          
+      :file "Makefile"
+      :pointmax 210
+      :fsize 209
+      :lastmodtime '(22720 18705 732241 138000)
+      :unmatched-syntax '((shell-command 182 . 209) (bol 181 . 181))))
+  :file "!home!hesam!CS594!HW08!Codes!Grady!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

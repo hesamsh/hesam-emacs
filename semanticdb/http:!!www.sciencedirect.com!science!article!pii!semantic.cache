@@ -1,0 +1,144 @@
+;; Object pii/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "pii/"
+  :tables
+  (list
+    (semanticdb-table "S0305054814000999"
+      :major-mode 'html-mode
+      :tags 
+        '( ("Parallel machine scheduling problem with preemptive jobs and transportation delay - ScienceDirect" section nil nil [110 1353])
+            ("window.pageTargeting = {\"region\":\"us-west-2\",\"platform\":\"sdtech\",\"entitled\":true};
+        window.arp = {
+          subscriptions: [],
+          subscribe: function(cb) {
+            var self = this;
+            var i = this.subscriptions.push(cb) - 1;
+            return function unsubscribe() {
+              self.subscriptions.splice(i, 1);
+            }
+          },
+        };" section nil nil [1353 1774])
+            ("(function(){
+          if(window.BOOMR && window.BOOMR.version){return;}
+          var dom,doc,where,iframe = document.createElement('iframe'),win = window;
+
+          function boomerangSaveLoadTime(e) {
+            win.BOOMR_onload=(e && e.timeStamp) || new Date().getTime();
+          }
+          if (win.addEventListener) {
+            win.addEventListener(\"load\", boomerangSaveLoadTime, false);
+          } else if (win.attachEvent) {
+            win.attachEvent(\"onload\", boomerangSaveLoadTime);
+          }
+
+          iframe.src = \"javascript:false\";
+          iframe.title = \"\"; iframe.role=\"presentation\";
+          (iframe.frameElement || iframe).style.cssText = \"width:0;height:0;border:0;display:none;\";
+          where = document.getElementsByTagName('script')[0];
+          where.parentNode.insertBefore(iframe, where);
+
+          try {
+            doc = iframe.contentWindow.document;
+          } catch(e) {
+            dom = document.domain;
+            iframe.src=\"javascript:var d=document.open();d.domain='\"+dom+\"';void(0);\";
+            doc = iframe.contentWindow.document;
+          }
+          doc.open()._l = function() {
+            var js = this.createElement(\"script\");
+            if(dom) this.domain = dom;
+            js.id = \"boomr-if-as\";
+            js.src = '//c.go-mpulse.net/boomerang/' +
+              '2FBN2-NKMGU-EJKY8-ZANKZ-SUJZF';
+            BOOMR_lstart=new Date().getTime();
+            this.body.appendChild(js);
+          };
+          doc.write('<body onload=\"document._l();\">');
+          doc.close();
+        })();" section nil nil [1774 1903])
+            ("(function(){
+          if(window.BOOMR && window.BOOMR.version){return;}
+          var dom,doc,where,iframe = document.createElement('iframe'),win = window;
+
+          function boomerangSaveLoadTime(e) {
+            win.BOOMR_onload=(e && e.timeStamp) || new Date().getTime();
+          }
+          if (win.addEventListener) {
+            win.addEventListener(\"load\", boomerangSaveLoadTime, false);
+          } else if (win.attachEvent) {
+            win.attachEvent(\"onload\", boomerangSaveLoadTime);
+          }
+
+          iframe.src = \"javascript:false\";
+          iframe.title = \"\"; iframe.role=\"presentation\";
+          (iframe.frameElement || iframe).style.cssText = \"width:0;height:0;border:0;display:none;\";
+          where = document.getElementsByTagName('script')[0];
+          where.parentNode.insertBefore(iframe, where);
+
+          try {
+            doc = iframe.contentWindow.document;
+          } catch(e) {
+            dom = document.domain;
+            iframe.src=\"javascript:var d=document.open();d.domain='\"+dom+\"';void(0);\";
+            doc = iframe.contentWindow.document;
+          }
+          doc.open()._l = function() {
+            var js = this.createElement(\"script\");
+            if(dom) this.domain = dom;
+            js.id = \"boomr-if-as\";
+            js.src = '//c.go-mpulse.net/boomerang/' +
+              '2FBN2-NKMGU-EJKY8-ZANKZ-SUJZF';
+            BOOMR_lstart=new Date().getTime();
+            this.body.appendChild(js);
+          };
+          doc.write('<body onload=\"document._l();\">');
+          doc.close();
+        })();" section nil nil [1903 3410])
+            ("');
+          doc.close();
+        })();" section nil nil [3410 3550])
+            ("Skip to main content" section nil nil [3550 3720])
+            ("function ie8click() {
+  const node = document.getElementById('ie8Warning');
+  document.cookie = 'ie_warning_state=1';
+  node.parentNode.removeChild(node);
+}" section (:members 
+              ( ("this blog post" anchor nil nil [4016 4019])
+                ("ScienceDirect" anchor nil nil [4558 4561])
+                ("Sign in" anchor nil nil [7553 7556])
+                ("Computers &amp; Operations Research" anchor nil nil [15713 15716])
+                ("Computers &amp; Operations Research" section (:members 
+                  ( ("Parallel machine scheduling problem with preemptive jobs and transportation delay" anchor nil nil [16833 16836]))                  ) nil [16039 17135])
+                ("Parallel machine scheduling problem with preemptive jobs and transportation delay" section (:members 
+                  ( ("Abstract" section nil nil [21596 23380])
+                    ("Keywords" section nil nil [23380 25249])
+                    ("Recommended articles" section nil nil [25249 25566])
+                    ("Citing articles" section nil nil [25566 25828]))                  ) nil [17135 25828]))              ) nil [3720 25828])
+            ("{\"config\":{\"reduxLogging\":false,\"assetsBaseUrl\":\"//sdfestaticassets-us-west-2.sciencedirectassets.com/prod/b43ab3c1e40de4b59473525ab814712865f7a70d\",\"tokens\":{\"optimizely\":204774041,\"usabilla\":\"eb1c14a91932\"},\"mediaBaseUrl\":\"//ars.els-cdn.com/content/image/\",\"SDClassicBaseEndpoint\":\"//www.sciencedirect.com\",\"canonicalUrl\":\"http://www.sciencedirect.com/science/article/pii/S0305054814000999\",\"publicEndpoints\":{\"dis\":\"/sdfe/science/article/download/issue/metadata\",\"pdf\":\"/sdfe/pdf/download\",\"atp\":\"/user/api/export\"},\"googleMapsApiKey\":\"AIzaSyAV0ZB1XWtRlzJ06pJAW74Oan87lQVgBHY\",\"enableTopicAnnotations\":false},\"abstracts\":{\"content\":[{\"#name\":\"abstract\",\"$\":{\"xmlns:ce\":true,\"id\":\"ab0005\",\"class\":\"author\",\"view\":\"all\"},\"$$\":[{\"#name\":\"section-title\",\"$\":{\"id\":\"sect0005\"},\"_\":\"Abstract\"},{\"#name\":\"abstract-sec\",\"$\":{\"id\":\"abs0005\",\"view\":\"all\"},\"$$\":[{\"#name\":\"simple-para\",\"$\":{\"id\":\"sp0075\",\"view\":\"all\"},\"$$\":[{\"#name\":\"__text__\",\"_\":\"In this research the parallel machine scheduling problem with preemption by considering a constant transportation delay for migrated jobs and minimization of makespan as the criterion i.e., \"},{\"#name\":\"italic\",\"_\":\"P\"},{\"#name\":\"inf\",\"$\":{\"loc\":\"post\"},\"$$\":[{\"#name\":\"italic\",\"_\":\"m\"}]},{\"#name\":\"__text__\",\"_\":\"|\"},{\"#name\":\"italic\",\"_\":\"pmtn\"},{\"#name\":\"__text__\",\"_\":\"(\"},{\"#name\":\"italic\",\"_\":\"delay\"},{\"#name\":\"__text__\",\"_\":\")|\"},{\"#name\":\"italic\",\"_\":\"C\"},{\"#name\":\"inf\",\"$\":{\"loc\":\"post\"},\"$$\":[{\"#name\":\"italic\",\"_\":\"max\"}]},{\"#name\":\"__text__\",\"_\":\" is investigated. It is assumed that when a preempted job resumes on another machine, it is required a delay between the processing time of the job on these two machines. This delay is called transportation delay. We criticize an existing mathematical model for the research problem in the literature [Boudhar M, Haned A. Preemptive scheduling in the presence of transportation times. Computers & Operations Research 2009; 36(8):2387–93]. Then, we prove that there exists an optimal schedule with at most (\"},{\"#name\":\"italic\",\"_\":\"m−\"},{\"#name\":\"__text__\",\"_\":\"1) preemptions with transportation among machines for the problem. We also propose a linear programming formulation and an exact algorithm for the research problem in case of equal transportation delay. The experiments show that the proposed exact algorithm performs better than the proposed mathematical model.\"}]}]}]}],\"floats\":[],\"footnotes\":[],\"attachments\":[]},\"biographies\":{},\"combinedContentItems\":{\"content\":[{\"#name\":\"keywords\",\"$$\":[{\"#name\":\"keywords\",\"$\":{\"xmlns:ce\":true,\"xmlns:aep\":true,\"xmlns:xoe\":true,\"xmlns:mml\":true,\"xmlns:xs\":true,\"xmlns:xlink\":true,\"xmlns:xocs\":true,\"xmlns:tb\":true,\"xmlns:xsi\":true,\"xmlns:cals\":true,\"xmlns:sb\":true,\"xmlns:sa\":true,\"xmlns:ja\":true,\"xmlns\":true,\"id\":\"keys0005\",\"class\":\"keyword\",\"view\":\"all\"},\"$$\":[{\"#name\":\"section-title\",\"$\":{\"id\":\"sect0010\"},\"_\":\"Keywords\"},{\"#name\":\"keyword\",\"$\":{\"id\":\"key0005\"},\"$$\":[{\"#name\":\"text\",\"_\":\"Scheduling\"}]},{\"#name\":\"keyword\",\"$\":{\"id\":\"key0010\"},\"$$\":[{\"#name\":\"text\",\"_\":\"Parallel machine scheduling\"}]},{\"#name\":\"keyword\",\"$\":{\"id\":\"key0015\"},\"$$\":[{\"#name\":\"text\",\"_\":\"Transportation delays\"}]},{\"#name\":\"keyword\",\"$\":{\"id\":\"key0020\"},\"$$\":[{\"#name\":\"text\",\"_\":\"Migration delay\"}]},{\"#name\":\"keyword\",\"$\":{\"id\":\"key0025\"},\"$$\":[{\"#name\":\"text\",\"_\":\"Preemption\"}]},{\"#name\":\"keyword\",\"$\":{\"id\":\"key0030\"},\"$$\":[{\"#name\":\"text\",\"_\":\"Minimization of makespan\"}]},{\"#name\":\"keyword\",\"$\":{\"id\":\"key0035\"},\"$$\":[{\"#name\":\"text\",\"_\":\"Mathematical modeling\"}]}]}]}],\"floats\":[],\"footnotes\":[],\"attachments\":[]},\"rawtext\":\"\",\"authors\":{\"content\":[{\"#name\":\"author-group\",\"$\":{\"xmlns:ce\":true,\"id\":\"ag0005\"},\"$$\":[{\"#name\":\"author\",\"$\":{\"id\":\"au0005\",\"orcid\":\"0000-0002-2340-5161\"},\"$$\":[{\"#name\":\"given-name\",\"_\":\"Hesam\"},{\"#name\":\"surname\",\"_\":\"Shams\"},{\"#name\":\"e-address\",\"$\":{\"id\":\"eadd0005\",\"type\":\"email\"},\"_\":\"hshams@alum.sharif.edu\"}]},{\"#name\":\"author\",\"$\":{\"id\":\"au0010\"},\"$$\":[{\"#name\":\"given-name\",\"_\":\"Nasser\"},{\"#name\":\"surname\",\"_\":\"Salmasi\"},{\"#name\":\"cross-ref\",\"$\":{\"id\":\"cr0630\",\"refid\":\"cor1\"},\"$$\":[{\"#name\":\"sup\",\"$\":{\"loc\":\"post\"},\"_\":\"⁎\"}]},{\"#name\":\"e-address\",\"$\":{\"id\":\"eadd0010\",\"type\":\"email\"},\"_\":\"nsalmasi@sharif.edu\"}]},{\"#name\":\"affiliation\",\"$\":{\"id\":\"aff0005\"},\"$$\":[{\"#name\":\"textfn\",\"_\":\"Department of Industrial engineering, Sharif University of Technology, Tehran, Iran\"},{\"#name\":\"affiliation\",\"$\":{\"xmlns:sa\":true},\"$$\":[{\"#name\":\"organization\",\"_\":\"Department of Industrial engineering, Sharif University of Technology\"},{\"#name\":\"city\",\"_\":\"Tehran\"},{\"#name\":\"country\",\"_\":\"Iran\"}]}]},{\"#name\":\"correspondence\",\"$\":{\"id\":\"cor1\"},\"$$\":[{\"#name\":\"label\",\"_\":\"⁎\"},{\"#name\":\"text\",\"_\":\"Corresponding author.\"}]}]}],\"floats\":[],\"footnotes\":[],\"affiliations\":{\"aff0005\":{\"#name\":\"affiliation\",\"$\":{\"id\":\"aff0005\"},\"$$\":[{\"#name\":\"textfn\",\"_\":\"Department of Industrial engineering, Sharif University of Technology, Tehran, Iran\"},{\"#name\":\"affiliation\",\"$\":{\"xmlns:sa\":true},\"$$\":[{\"#name\":\"organization\",\"_\":\"Department of Industrial engineering, Sharif University of Technology\"},{\"#name\":\"city\",\"_\":\"Tehran\"},{\"#name\":\"country\",\"_\":\"Iran\"}]}]}},\"correspondences\":{\"cor1\":{\"#name\":\"correspondence\",\"$\":{\"id\":\"cor1\"},\"$$\":[{\"#name\":\"label\",\"_\":\"⁎\"},{\"#name\":\"text\",\"_\":\"Corresponding author.\"}]}},\"attachments\":[],\"scopusAuthorIds\":{},\"articles\":{}},\"body\":{},\"exam\":{},\"article\":{\"dates\":{\"Revised\":[],\"Publication date\":\"1 October 2014\",\"Available online\":\"18 April 2014\"},\"access\":{},\"footnotes\":[],\"cid\":\"271709\",\"content-family\":\"serial\",\"copyright-line\":\"Copyright © 2014 Elsevier Ltd. All rights reserved.\",\"cover-date-years\":[\"2014\"],\"cover-date-start\":\"2014-10-01\",\"cover-date-text\":\"October 2014\",\"document-subtype\":\"fla\",\"document-type\":\"article\",\"eid\":\"1-s2.0-S0305054814000999\",\"pii\":\"S0305054814000999\",\"first-fp\":\"14\",\"hub-eid\":\"1-s2.0-S0305054814X00067\",\"item-weight\":\"FULL-TEXT\",\"language\":\"en\",\"last-lp\":\"23\",\"last-author\":{\"#name\":\"last-author\",\"$\":{\"xmlns:dm\":true},\"$$\":[{\"#name\":\"author\",\"$\":{\"xmlns:ce\":true,\"id\":\"au0010\"},\"$$\":[{\"#name\":\"given-name\",\"_\":\"Nasser\"},{\"#name\":\"surname\",\"_\":\"Salmasi\"},{\"#name\":\"cross-ref\",\"$\":{\"id\":\"cr0630\",\"refid\":\"cor1\"},\"$$\":[{\"#name\":\"sup\",\"$\":{\"loc\":\"post\"},\"_\":\"⁎\"}]},{\"#name\":\"e-address\",\"$\":{\"id\":\"eadd0010\",\"type\":\"email\"},\"_\":\"nsalmasi@sharif.edu\"}]}]},\"srctitle\":\"Computers & Operations Research\",\"suppl\":\"C\",\"vol-first\":\"50\",\"vol-iss-suppl-text\":\"Volume 50\",\"doi\":\"10.1016/j.cor.2014.04.008\",\"publication-content\":{\"imprintPublisher\":{\"displayName\":\"Pergamon\",\"id\":\"67\"},\"altSmallCover\":\"\",\"isSampleIssue\":false,\"transactionsBlocked\":false,\"publicationOpenAccess\":{\"oaStatus\":\"\",\"oaArticleCount\":46,\"openArchiveStatus\":false,\"openArchiveArticleCount\":0,\"openAccessStartDate\":\"\",\"oaAllowsAuthorPaid\":true},\"titleImageUrl\":\"\",\"issue-cover\":{\"attachment\":[{\"attachment-eid\":\"1-s2.0-S0305054814X00067-cov200h.gif\",\"file-basename\":\"cov200h\",\"extension\":\"gif\",\"filename\":\"cov200h.gif\",\"ucs-locator\":[\"https://s3.amazonaws.com/prod-ucs-content-store-us-east/content/pii:S0305054814X00067/cover/DOWNSAMPLED200/image/gif/86c4e9af47d6379abe905e868eaded0a/cov200h.gif\",\"https://s3-eu-west-1.amazonaws.com/prod-ucs-content-store-eu-west/content/pii:S0305054814X00067/cover/DOWNSAMPLED200/image/gif/86c4e9af47d6379abe905e868eaded0a/cov200h.gif\"],\"attachment-type\":\"IMAGE-COVER-H200\",\"filesize\":\"16299\",\"pixel-height\":\"200\",\"pixel-width\":\"150\"},{\"attachment-eid\":\"1-s2.0-S0305054814X00067-cov150h.gif\",\"file-basename\":\"cov150h\",\"extension\":\"gif\",\"filename\":\"cov150h.gif\",\"ucs-locator\":[\"https://s3.amazonaws.com/prod-ucs-content-store-us-east/content/pii:S0305054814X00067/cover/DOWNSAMPLED/image/gif/fd29a0acce5c5fcf94d226f5f3d9beda/cov150h.gif\",\"https://s3-eu-west-1.amazonaws.com/prod-ucs-content-store-eu-west/content/pii:S0305054814X00067/cover/DOWNSAMPLED/image/gif/fd29a0acce5c5fcf94d226f5f3d9beda/cov150h.gif\"],\"attachment-type\":\"IMAGE-COVER-H150\",\"filesize\":\"10347\",\"pixel-height\":\"150\",\"pixel-width\":\"113\"}]},\"smallCoverUrl\":\"http://ars.els-cdn.com/content/image/S03050548.gif\",\"serialCoverPgUrl\":\"\"},\"userSettings\":{\"forceAbstract\":false},\"pages\":[{\"last-page\":\"23\",\"first-page\":\"14\"}],\"normalized-first-auth-initial\":\"H\",\"normalized-first-auth-surname\":\"SHAMS\",\"entitledToken\":\"264E0F1D2FFC191860477018F76DA87B72F72C1A2DBFED4B41454E029F65ECD5DEF71BD97721D0E5\",\"timestamp\":\"2014-05-28T13:21:26.972255-04:00\",\"contentType\":\"JL\",\"crossmark\":true,\"issn\":\"03050548\",\"issnFormatted\":\"0305-0548\",\"useEnhancedReader\":false,\"crawlerInformation\":{\"canCrawlPDFContent\":false,\"isCrawler\":false},\"imprintPublisher\":{\"displayName\":\"Pergamon\",\"id\":\"67\"},\"pdfDownload\":{\"linkType\":\"DOWNLOAD\",\"linkToPdf\":\"/science/article/pii/S0305054814000999/pdfft?md5=f22e3a33a99e04abd409c8f82eb34d85&pid=1-s2.0-S0305054814000999-main.pdf\",\"isPdfFullText\":false,\"fileName\":\"1-s2.0-S0305054814000999-main.pdf\"},\"indexTag\":true,\"sdBaseUrl\":\"//www.sciencedirect.com\",\"branding\":{\"link\":\"\",\"altSmallCoverLogo\":\"\",\"smallCoverLogo\":\"http://ars.els-cdn.com/content/image/S03050548.gif\",\"serialCoverLogo\":\"\",\"cov150hLogo\":\"//ars.els-cdn.com/content/image/1-s2.0-S0305054814X00067-cov150h.gif\"},\"volRange\":\"50\",\"issRange\":\"\",\"ssoUrls\":[\"//acw.sciencedirect.com/SSOCore/update?acw=85e0c546f1fd518d1805f1-c8fdfba9e774453c%7C%24%7CB5B62F1745384BF23F592377241590B74EEA8B462A44658D5143808ECEA6480DE0321F36C6E6476BD34F6C2ABDFE02F65EDED5C9FC61C16F634F5D557006E18247F17FEEEE5B494626EE6F6143A05727F62C3BC03F170A233EE17563E2E07AD7D74FDB647D9EF37670FDA01ADFB4FA38C491D022110F4A4D428D06BDF91898B5&utt=95e0c546f1fd518d1805f1-c8fdfba9e774453c\",\"//acw.scopus.com/SSOCore/update?acw=85e0c546f1fd518d1805f1-c8fdfba9e774453c%7C%24%7CB5B62F1745384BF23F592377241590B74EEA8B462A44658D5143808ECEA6480DE0321F36C6E6476BD34F6C2ABDFE02F65EDED5C9FC61C16F634F5D557006E18247F17FEEEE5B494626EE6F6143A05727F62C3BC03F170A233EE17563E2E07AD7D74FDB647D9EF37670FDA01ADFB4FA38C491D022110F4A4D428D06BDF91898B5&utt=95e0c546f1fd518d1805f1-c8fdfba9e774453c\",\"//acw.sciverse.com/SSOCore/update?acw=85e0c546f1fd518d1805f1-c8fdfba9e774453c%7C%24%7CB5B62F1745384BF23F592377241590B74EEA8B462A44658D5143808ECEA6480DE0321F36C6E6476BD34F6C2ABDFE02F65EDED5C9FC61C16F634F5D557006E18247F17FEEEE5B494626EE6F6143A05727F62C3BC03F170A233EE17563E2E07AD7D74FDB647D9EF37670FDA01ADFB4FA38C491D022110F4A4D428D06BDF91898B5&utt=95e0c546f1fd518d1805f1-c8fdfba9e774453c\",\"//acw.mendeley.com/SSOCore/update?acw=85e0c546f1fd518d1805f1-c8fdfba9e774453c%7C%24%7CB5B62F1745384BF23F592377241590B74EEA8B462A44658D5143808ECEA6480DE0321F36C6E6476BD34F6C2ABDFE02F65EDED5C9FC61C16F634F5D557006E18247F17FEEEE5B494626EE6F6143A05727F62C3BC03F170A233EE17563E2E07AD7D74FDB647D9EF37670FDA01ADFB4FA38C491D022110F4A4D428D06BDF91898B5&utt=95e0c546f1fd518d1805f1-c8fdfba9e774453c\",\"//acw.evise.com/SSOCore/update?acw=85e0c546f1fd518d1805f1-c8fdfba9e774453c%7C%24%7CB5B62F1745384BF23F592377241590B74EEA8B462A44658D5143808ECEA6480DE0321F36C6E6476BD34F6C2ABDFE02F65EDED5C9FC61C16F634F5D557006E18247F17FEEEE5B494626EE6F6143A05727F62C3BC03F170A233EE17563E2E07AD7D74FDB647D9EF37670FDA01ADFB4FA38C491D022110F4A4D428D06BDF91898B5&utt=95e0c546f1fd518d1805f1-c8fdfba9e774453c\",\"//acw.elsevier.com/SSOCore/update?acw=85e0c546f1fd518d1805f1-c8fdfba9e774453c%7C%24%7CB5B62F1745384BF23F592377241590B74EEA8B462A44658D5143808ECEA6480DE0321F36C6E6476BD34F6C2ABDFE02F65EDED5C9FC61C16F634F5D557006E18247F17FEEEE5B494626EE6F6143A05727F62C3BC03F170A233EE17563E2E07AD7D74FDB647D9EF37670FDA01ADFB4FA38C491D022110F4A4D428D06BDF91898B5&utt=95e0c546f1fd518d1805f1-c8fdfba9e774453c\"],\"userProfile\":{\"accountId\":\"19958\",\"departmentId\":\"31608\"},\"entitlementReason\":\"subscription\",\"articleEntitlement\":{\"entitled\":true},\"title\":\"Parallel machine scheduling problem with preemptive jobs and transportation delay\",\"titlePlain\":\"Parallel machine scheduling problem with preemptive jobs and transportation delay\",\"titleCrawler\":\"Parallel machine scheduling problem with preemptive jobs and transportation delay\",\"isContentVisible\":false,\"isCorpReq\":false,\"ajaxLinks\":{\"citingArticles\":true,\"references\":true,\"referredToBy\":true,\"toc\":true,\"body\":true,\"recommendations\":true},\"userId\":\"422010\"},\"specialIssueArticles\":{},\"recommendations\":{},\"entitledRecommendations\":{\"isOpen\":false,\"articles\":[],\"selected\":[]},\"citingArticles\":{},\"workspace\":{\"isOpen\":false},\"crossMark\":{\"isOpen\":false},\"userIdentity\":{},\"refersTo\":{},\"referredToBy\":{},\"downloadIssue\":{\"isOpen\":false,\"articles\":[],\"selected\":[]},\"references\":{},\"glossary\":{},\"relatedContent\":{\"isModal\":false,\"isOpenSpecialIssueArticles\":false,\"isOpenRecommendations\":true,\"isOpenCitingArticles\":false,\"citingArticles\":[false,false,false],\"recommendations\":[false,false,false],\"specialIssueArticles\":[false,false,false]},\"banner\":{\"expanded\":false},\"transientError\":{\"isOpen\":false},\"pdfDropdown\":{},\"exportCitation\":{\"isOpen\":false},\"tableOfContents\":{\"showEntitledTocLinks\":true},\"enrichedContent\":{\"tableOfContents\":false,\"researchData\":{\"hasResearchData\":false,\"dataProfile\":{},\"openData\":{},\"mendeleyData\":{},\"eComponentInfo\":{}},\"geospatialData\":{\"attachments\":[]}}}" section nil nil [25828 41043])
+            ("window.pageData = {\"content\":[{\"id\":\"sd:article:pii:s0305054814000999\",\"entitlementType\":\"subscription\",\"format\":\"MIME-XHTML\",\"type\":\"SD:ARTICLE:SCOPE-FULL\",\"detail\":\"SD:ARTICLE:subtype:fla\"}],\"page\":{\"businessUnit\":\"ELS:RP:ST\",\"language\":\"en\",\"name\":\"product:journal:article\",\"noTracking\":\"false\",\"productName\":\"SD\",\"type\":\"CP-CA\",\"environment\":\"prod\",\"loadTimestamp\":1503004412643,\"loadTime\":\"\"},\"visitor\":{\"accessType\":\"ae:ANON_IP\",\"accountId\":\"ae:19958\",\"accountName\":\"ae:University of Tennessee\",\"loginStatus\":\"anonymous\",\"userId\":\"ae:422010\",\"ipAddress\":\"160.36.100.198\"}};" section nil nil [41043 41182])
+            ("window.pageData = {\"content\":[{\"id\":\"sd:article:pii:s0305054814000999\",\"entitlementType\":\"subscription\",\"format\":\"MIME-XHTML\",\"type\":\"SD:ARTICLE:SCOPE-FULL\",\"detail\":\"SD:ARTICLE:subtype:fla\"}],\"page\":{\"businessUnit\":\"ELS:RP:ST\",\"language\":\"en\",\"name\":\"product:journal:article\",\"noTracking\":\"false\",\"productName\":\"SD\",\"type\":\"CP-CA\",\"environment\":\"prod\",\"loadTimestamp\":1503004412643,\"loadTime\":\"\"},\"visitor\":{\"accessType\":\"ae:ANON_IP\",\"accountId\":\"ae:19958\",\"accountName\":\"ae:University of Tennessee\",\"loginStatus\":\"anonymous\",\"userId\":\"ae:422010\",\"ipAddress\":\"160.36.100.198\"}};" section nil nil [41182 41332])
+            ("window.pageData = {\"content\":[{\"id\":\"sd:article:pii:s0305054814000999\",\"entitlementType\":\"subscription\",\"format\":\"MIME-XHTML\",\"type\":\"SD:ARTICLE:SCOPE-FULL\",\"detail\":\"SD:ARTICLE:subtype:fla\"}],\"page\":{\"businessUnit\":\"ELS:RP:ST\",\"language\":\"en\",\"name\":\"product:journal:article\",\"noTracking\":\"false\",\"productName\":\"SD\",\"type\":\"CP-CA\",\"environment\":\"prod\",\"loadTimestamp\":1503004412643,\"loadTime\":\"\"},\"visitor\":{\"accessType\":\"ae:ANON_IP\",\"accountId\":\"ae:19958\",\"accountName\":\"ae:University of Tennessee\",\"loginStatus\":\"anonymous\",\"userId\":\"ae:422010\",\"ipAddress\":\"160.36.100.198\"}};" section nil nil [41332 41474])
+            ("window.pageData = {\"content\":[{\"id\":\"sd:article:pii:s0305054814000999\",\"entitlementType\":\"subscription\",\"format\":\"MIME-XHTML\",\"type\":\"SD:ARTICLE:SCOPE-FULL\",\"detail\":\"SD:ARTICLE:subtype:fla\"}],\"page\":{\"businessUnit\":\"ELS:RP:ST\",\"language\":\"en\",\"name\":\"product:journal:article\",\"noTracking\":\"false\",\"productName\":\"SD\",\"type\":\"CP-CA\",\"environment\":\"prod\",\"loadTimestamp\":1503004412643,\"loadTime\":\"\"},\"visitor\":{\"accessType\":\"ae:ANON_IP\",\"accountId\":\"ae:19958\",\"accountName\":\"ae:University of Tennessee\",\"loginStatus\":\"anonymous\",\"userId\":\"ae:422010\",\"ipAddress\":\"160.36.100.198\"}};" section nil nil [41474 42139])
+            ("window.lightningjs||function(c){function g(b,d){d&&(d+=(/\\?/.test(d)?\"&\":\"?\")+\"lv=1\");c[b]||function(){var i=window,h=document,j=b,g=h.location.protocol,l=\"load\",k=0;(function(){function b(){a.P(l);a.w=1;c[j](\"_load\")}c[j]=function(){function m(){m.id=e;return c[j].apply(m,arguments)}var b,e=++k;b=this&&this!=i?this.id||0:0;(a.s=a.s||[]).push([e,b,arguments]);m.then=function(b,c,h){var d=a.fh[e]=a.fh[e]||[],j=a.eh[e]=a.eh[e]||[],f=a.ph[e]=a.ph[e]||[];b&&d.push(b);c&&j.push(c);h&&f.push(h);return m};return m};var a=c[j]._={};a.fh={};a.eh={};a.ph={};a.l=d?d.replace(/^\\/\\//,(g==\"https:\"?g:\"http:\")+\"//\"):d;a.p={0:+new Date};a.P=function(b){a.p[b]=new Date-a.p[0]};a.w&&b();i.addEventListener?i.addEventListener(l,b,!1):i.attachEvent(\"on\"+l,b);var q=function(){function b(){return[\"<head>" section nil nil [42139 44504])
+            ("MathJax.Hub.Config({
+          displayAlign: 'left',
+          \"fast-preview\": {
+            disabled: true
+          },
+          CommonHTML: { linebreaks: { automatic: true } },
+          PreviewHTML: { linebreaks: { automatic: true } },
+          'HTML-CSS': { linebreaks: { automatic: true } },
+          SVG: {
+            scale: 90,
+            linebreaks: { automatic: true }
+          }
+        });" section nil nil [44504 44979])
+            ("" section nil nil [44979 45101])
+            ("" section nil nil [45101 45207]))          
+      :file "S0305054814000999"
+      :pointmax 45207
+      :fsize 20
+      :unmatched-syntax nil))
+  :file "http:!!www.sciencedirect.com!science!article!pii!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

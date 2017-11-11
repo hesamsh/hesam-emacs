@@ -1,0 +1,53 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/hesam/CS594/" . "HW07/")
+ ("/home/hesam/" . "Hesam-Research/")
+ ("/" . "home/")
+ ("/home/hesam/Hesam-Research/" . "G-Code Codes/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/hesam/.emacs.d/"
+ "/home/hesam/IE310/"
+ "/home/hesam/CS594/HW07/"
+ "/home/hesam/Hesam-Research/standardTabu/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "hesam.el"
+ "HW05.org"
+ "Problem1.org"
+ "main.cc"
+ "runParameters.cc"
+ "tabuAlgorithmJSP.h"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/hesam/Hesam-Research/" (22795 18465 230193 114000) "G-Code Codes/" "Coef0.jpg" "./" "#MeetingNotesSept30.org#" "standardTabu/" "Thesis/" "working-papers/" "Geometry/" "WorkPlan.org" ".gitignore" "Temperature/" "papers/" "MeetingNotesSept30.tex" "MeetingNotesOct21.org" "Matlab-Comsol/" "projectTimePrediction/" "MeetingNotesSept30.pdf" "hesam-literature.bib" "MeetingNotesSept30.org" "Handouts/" "meeting-notes.org" "Coef0.0001.jpg" "GradientCurves/" "../" "ABAQUS/" ".git/" "HassanCOMSOL/" "ResearchProposal/" "INFORMS-2016/")
+
+ ("/home/hesam/" (22801 55973 449976 589000) "formulation.pdf" ".remmina/" "Music/" ".config/" "Baba Haji/" ".adobe/" "alum.sharif.edu/" "gtadraft.log" "./" ".cache/" "AndroidStudioProjects/" ".hplip/" ".bash_history" "Videos/" "GES.cc" ".ipython/" "schedulor/" ".gimp-2.8/" ".dmrc" "GTA2016/" ".macromedia/" ".pki/" ".continuum/" ".aspell.en.prepl" "Android/" ".ICEauthority" ".gnome/" ".bash_logout" "Moved/" ".kde/" "GoogleDrive/" ".thunderbird/" "Tabu.cc" "Narges Social.odt" "Public/" "backup/" "Documents/" "anaconda3/" ".sqlite_history" "Results.db" "formulation.out" "kdenlive/" "org-mode-reference-in.org" "IE310/" ".gksu.lock" "gtadraft.aux" "Pictures/" ".thumbnails/" ".ipynb_checkpoints/" "texput.log" ".compiz/" ".python_history" "Move" ".bashrc-anaconda3.bak" ".audacity-data/" ".xsession-errors.old" ".gnupg/" "emacs config" "gtadraft.toc" "CS594/" "formulation.aux" "graph/" ".ssh/" ".aspell.en.pws" "Untitled1.ipynb" ".emulator_console_auth_token" "org-mode-reference-in.pdf" "missfont.log" ".local/" "Downloads/" ".emacs.d/" ".gconf/" "Desktop/" "Comments.org" "../" ".dbus/" ".conda/" "formulation.log" "Random.cc" ".bashrc" "gtadraft.out" "Hesam-Research/" ".mozilla/" ".gphoto/" "Narges Letter.docx" ".sudo_as_admin_successful" ".git/" ".java/" "Untitled.ipynb" "workplan-dec.org" ".profile" ".nano/" ".Xauthority" ".xsession-errors" "projectVRP/" ".jupyter/" ".gitconfig" "examples.desktop" "Templates/" ".gradle/")
+
+ ("/home/hesam/.emacs.d/" (22741 23241 68115 423000) "starter-kit-lisp.org" "starter-kit-perl.org" "starter-kit-defuns.org" "starter-kit-misc.el" "./" "starter-kit-latex.org" "backups/" "gitignore_bk" "hesam.el" "src/" "semanticdb/" "ido.last" "ede-projects.el" "starter-kit-eshell.org" "starter-kit-publish.org" "ac-comphist.dat" "starter-kit-gnus.org" "starter-kit-ruby.org" "starter-kit-org.el" "starter-kit-yasnippet.org" ".gitignore" "#.gitignore#" "starter-kit-defuns.el" "elpa/" "places" "COPYING" "starter-kit-registers.org" "snippets/" "starter-kit-g-client.org" "starter-kit-js.org" "starter-kit-misc.org" "starter-kit.el" "init.el" "auto-save-list/" "starter-kit-haskell.org" "starter-kit-bindings.org" "../" "starter-kit-org.org" "starter-kit-scala.org" "custom.el" "starter-kit-python.org" "starter-kit-bindings.el" "literate-starter-kit-pkg.el" "README" ".git/" "Makefile" "starter-kit-misc-recommended.org" "starter-kit-registers.el" "starter-kit.org")
+
+ ("/home/hesam/IE310/" (22716 22574 45854 738000) "HW04.tex" "./" "IE 310.xlsx" "HW Solution Ch 4.10.pdf" "HW05.org" "HW05.tex" "HW04.pdf" "HW05.pdf" "HW06.org" "introduction-to-probability-model-S.Ross-math-cs.blog.ir.pdf" "a.png" "../" "HW04.org")
+
+ ("/home/hesam/CS594/HW07/" (22712 10820 458959 852000) "./" "grapha.dot" "graphb.png" "makeprufertree" "graphd.dot" "jaccard.cc" "graphb.dot" "graphd.png" "makeprufertree.cc" "pufergraph1.txt" "Problem1.org" "Problem1.pdf" "findprufersequence.cc" "HW7.pdf" "graphe.png" "grapha.ps" "pufergraph2.txt" "graphe.dot" "../" "graphc.png" "Problem1.tex" "command" "graphc.dot" "graphb.ps")
+
+ ("/home/hesam/CS594/" (22709 36913 947228 242000) "HW03/" "./" "HW04/" "HW01/" "HW06/" "HW07/" "HW02/" "../" "HW05/")
+
+ ("/home/hesam/Hesam-Research/standardTabu/" (22562 34227 930560 29000) "generation_procedures.cc" "local_search.h" "./" "multiValueRBTree.h" "standardTabu" "generation_procedures.h" "jspProblemData.h" "local_search.cc" "runParameters.h" "runParameters.cc" "Operation.cc" "doc/" "Operation.h" "RBTree.cc" "urand.cc" "main.cc" "jspProblemData.cc" "localSearchJSP.cc" "objectiveLevel.h" "urand.h" "localSearchJSP.h" "jsp_problems/" "singleValueRBTree.cc" "tabuAlgorithmJSP.h" "misc.cc" "RBTree.h" "multiValueRBTree.cc" "tabuAlgorithmJSP.cc" "../" "singleValueRBTree.h" "Doxyfile" "README" "Makefile" "misc.h")
+
+ ("/home/" (22414 13172 740260 656000) "hesam/" "./" "../")
+
+ ("/home/hesam/Hesam-Research/G-Code Codes/" (22497 55415 798751 211000) "./" "runParameters.h" "main.cpp" "runParameters.cc" "main.cc" "../" "Makefile")
+
+ ("/home/hesam/Hesam-Research/ABAQUS/" (22497 55415 790751 0) "./" "Scripting/" "../")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

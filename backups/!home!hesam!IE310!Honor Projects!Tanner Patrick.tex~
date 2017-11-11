@@ -1,0 +1,51 @@
+% Created 2017-04-28 Fri 14:23
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\date{}
+\title{Tanner Patrick - Honor Project [85/100]}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Mechanics and Presentation [7/10]}
+\label{sec-1}
+\section{Language and Style [8/10]}
+\label{sec-2}
+\section{Organization and Technical Content [58/60]}
+\label{sec-3}
+\section{Overall Conclusions [4/10]}
+\label{sec-4}
+\section{Overall Quality [8/10]}
+\label{sec-5}
+The article is well written and organized. However there are several
+imperfections. The tools and plots which are used in the paper could
+be clear and easy to understand. The comparison plot for expected and
+actual results is a useful tool. The paper structure needs to have
+more clear explanations. There are unnecessary explanations. The
+conclusions should include a summary of all the analysis. The
+overall study satisfies all goals of the project but there are some
+imperfections.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

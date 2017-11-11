@@ -1,0 +1,134 @@
+;; Object hesam/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "hesam/"
+  :tables
+  (list
+    (semanticdb-table "GES.cc"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("GlobalEquilibriumSearch" function
+               (:arguments 
+                  ( ("UB" variable (:type "long") (reparse-symbol arg-sub-list) [30 81])
+                    ("LB" variable (:type "long") (reparse-symbol arg-sub-list) [81 157])
+                    ("oper_mach" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [157 222])
+                    ("oper" variable
+                       (:pointer 1
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [222 281])
+                    ("njobs" variable
+                       (:reference 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [281 334])
+                    ("noper" variable
+                       (:reference 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [334 387])
+                    ("maxswapsz" variable
+                       (:reference 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [387 444])
+                    ("swapCands" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [444 529])
+                    ("critics" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [529 612])
+                    ("szs" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [612 683])
+                    ("maxswapszfull" variable
+                       (:reference 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [683 744])
+                    ("swapCandsFull" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [744 833])
+                    ("pproblem_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [833 895])
+                    ("db_experiment_id" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [895 961])
+                    ("run_id" variable (:type "long") (reparse-symbol arg-sub-list) [961 1016])
+                    ("algorithm_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1016 1079])
+                    ("myseed" variable (:type "long") (reparse-symbol arg-sub-list) [1079 1133])
+                    ("time_limit" variable (:type "long") (reparse-symbol arg-sub-list) [1133 1192])
+                    ("tabu_tenure_min" variable (:type "long") (reparse-symbol arg-sub-list) [1192 1243])
+                    ("tabu_tenure_max" variable (:type "long") (reparse-symbol arg-sub-list) [1243 1294])
+                    ("niters" variable (:type "long") (reparse-symbol arg-sub-list) [1294 1348])
+                    ("nTemp" variable (:type "long") (reparse-symbol arg-sub-list) [1348 1389])
+                    ("final_temp" variable (:type "double") (reparse-symbol arg-sub-list) [1389 1437])
+                    ("max_tenure_multiplier" variable (:type "double") (reparse-symbol arg-sub-list) [1437 1496]))                  
+                :type "long")
+                nil [1 19489]))          
+      :file "GES.cc"
+      :pointmax 19490
+      :fsize 19489
+      :lastmodtime '(22554 8346 232434 466000)
+      :unmatched-syntax nil)
+    (semanticdb-table "Tabu.cc"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("TabuOnly" function
+               (:arguments 
+                  ( ("experiment_id" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [17 54])
+                    ("algorithm_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [54 92])
+                    ("problem_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [92 128])
+                    ("run_id" variable (:type "int") (reparse-symbol arg-sub-list) [128 156])
+                    ("niters" variable (:type "long") (reparse-symbol arg-sub-list) [156 185])
+                    ("time_limit" variable (:type "long") (reparse-symbol arg-sub-list) [185 218])
+                    ("myseed" variable (:type "long") (reparse-symbol arg-sub-list) [218 247])
+                    ("opers" variable
+                       (:pointer 1
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [247 282])
+                    ("oper_mach" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [282 322])
+                    ("njobs" variable (:type "int") (reparse-symbol arg-sub-list) [322 349])
+                    ("noper" variable (:type "int") (reparse-symbol arg-sub-list) [349 376]))                  
+                :type "void")
+                nil [2 1870]))          
+      :file "Tabu.cc"
+      :pointmax 15026
+      :fsize 15025
+      :lastmodtime '(22555 30857 831253 453000)
+      :unmatched-syntax nil)
+    (semanticdb-table "clock.cc"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("graphics.h" include (:system-flag t) nil [1 21])
+            ("conio.h" include (:system-flag t) nil [22 39])
+            ("math.h" include (:system-flag t) nil [40 56])
+            ("dos.h" include (:system-flag t) nil [57 72])
+            ("main" function (:type "void") nil [73 1967]))          
+      :file "clock.cc"
+      :pointmax 1968
+      :fsize 1967
+      :lastmodtime '(22616 14093 844185 288000)
+      :unmatched-syntax nil))
+  :file "!home!hesam!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

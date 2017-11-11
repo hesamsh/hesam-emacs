@@ -1,0 +1,48 @@
+#+TITLE: Confidence Interval for the Experiment
+#+AUTHOR: Hesam Shams
+#+EMAIL: 
+#+DATE: \today
+#+OPTIONS:   H:2 
+
+* Introduction
+A /confidence interval/ is a range of values from a lower bound to an
+upper bound for a specific population. It is defined by $\theta_l \leq
+\theta \leq \theta_u$ where $\theta$ is an unknown parameter with
+confidence $1-\alpha$ and $\theta_0$ is a value which in the null
+hypothesis $H_0: \theta = \theta_0$ have not been rejected in the
+observed sample when a two-sided test with the type I error $\alpha$
+was applied.
+
+* Confidence Interval for Binomial Proportions
+Assume there are $n$ independent Bernoulli trials with success
+probability $\pi$ and the measurement scale of random variable is at
+least nominal. Let $x$ be the number of successes in a random sample
+of size $n$. A success is observed if $X_i$ has a specific
+characteristic (in our problem, a success is observed if GTA obtains a
+better solution than Tabu in a specific time). The proportion of
+success in the sample is denoted by $\bar{\pi} = \frac{x}{n}$ and the
+proportion in the population is denoted by $\pi$.
+
+Generally, there exist two approaches for calculating confidence
+interval in binomial proportions; exact and approximation.
+** The Clopper-Pearson Interval
+This method is the basic method for evaluation of confidence interval
+and it is an *Exact* approach. For different values of $x$, the lower
+and upper bounds of interval ($\pi_l \leq \pi \leq \pi_u$) with a
+confidence coefficient of at least $1-\alpha$ are defined as follows:
+\begin{align*}
+\pi_l &= \frac{x}{x+(n-x+1)F_1} \\
+\pi_u &= \frac{(x+1)F_2}{n-x+(x+1)F_2}
+\end{align*}
+where $F_1 = F_{2x, (1-\frac{\alpha}{2})}^{2n-2x+2}$ and $F_2 =
+F_{2n-2x,, (1-\frac{\alpha}{2})}^{2x+2}$.
+
+Agresti and Coull \ref{} indicate that this interval has coverage
+probability bounded below by the nominal confidence level. In the
+other words, this procedure is conservative.
+
+** The Wald Interval
+
+
+bibliographystyle:apalike
+bibliography:overallliterature.bib

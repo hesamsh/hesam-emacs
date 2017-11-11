@@ -1,0 +1,21 @@
+#+TITLE: Proposal for Research Project CS594
+#+AUTHOR: Hesam - Andrii
+#+DATE: <2017-02-15 Wed>
+* The Problem:
+In this research project, we are studying traveling salesman problem
+(TSP). The TSP is an important optimization problem which is related
+to graph theory.
+
+* The Algorithm:
+Since TSP is np-complete problem, we need to develop an approximation
+algorithm to solve it. There exist a tabu algorithm in the literature
+implemented on TSP. We are going to code the standard tabu for the
+TSP. Moreover, we developed a guided tabu algorithm (GTA) for optimization
+problem which is using long term memory to improve the solution. We
+also are going to code GTA as well.
+
+* The Computational Results
+We are going to implement both standard tabu and GTA on a benchmark
+problems and compare the results and evaluate the efficiency of GTA in
+compared to standard tabu.
+The test problems are taken from http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsplib.html.

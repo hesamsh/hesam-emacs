@@ -1,0 +1,25 @@
+Dear Dr. Shylo
+
+I ran several experiments for the problem ta21 as follows. (10 runs
+for each class)
+
+|------------------+---------------|
+| expid            | Algorithm     |
+|------------------+---------------|
+| CI01 to CI11     | Directed Tabu |
+| NCI01 to NCI11   | Directed Tabu |
+| CIT01 to CIT11   | Standard Tabu |
+| NCIT01 to NCIT11 | Standard Tabu |
+
+I think it's interesting to see the plots I have attached. The
+description of each plots are in the following table.
+
+
+|----------+-----------------------------------------------------------------------------------|
+| 10 Runs  | (CI01 <= CIT01) vs. (NCI01 <= NCIT01)                                             |
+| 20 Runs  | ([CI01,CI02] <= [CIT01,CIT02]) vs. ([NCI01,NCI02] <= [NCIT01,NCIT02])             |
+| ...      | ...                                                                               |
+| 100 Runs | ([CI01 .. CI10] <= [CIT01 .. CIT11]) vs. ([NCI01 .. NCI02] <= [NCIT01 .. NCIT02]) |
+
+These are some updates and findings. I will appreciate if we can meet
+in the coming days. 

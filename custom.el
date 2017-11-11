@@ -13,6 +13,9 @@
  '(nyan-animate-nyancat nil)
  '(nyan-mode t)
  '(nyan-wavy-trail t)
+ '(org-agenda-files
+   (quote
+    ("find: ‘/home/hesam/HesamResearch’: No such file or directory")))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

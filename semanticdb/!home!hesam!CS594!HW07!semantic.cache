@@ -1,0 +1,41 @@
+;; Object HW07/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "HW07/"
+  :tables
+  (list
+    (semanticdb-table "makeprufertree.cc"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("iostream" include (:system-flag t) nil [21 40])
+            ("fstream" include (:system-flag t) nil [41 59])
+            ("sstream" include (:system-flag t) nil [60 78])
+            ("stdlib.h" include (:system-flag t) nil [79 98])
+            ("math.h" include (:system-flag t) nil [99 116])
+            ("time.h" include (:system-flag t) nil [117 134])
+            ("string.h" include (:system-flag t) nil [135 154])
+            ("stdio.h" include (:system-flag t) nil [155 173])
+            ("unistd.h" include (:system-flag t) nil [174 193])
+            ("list" include (:system-flag t) nil [194 209])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [211 231])
+            ("no_ver" variable (:type "int") nil [233 253])
+            ("no_edge" variable (:type "int") nil [233 253])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [297 306])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [307 319]))                  
+                :type "int")
+                nil [288 1507]))          
+      :file "makeprufertree.cc"
+      :pointmax 1508
+      :fsize 1507
+      :lastmodtime '(22711 19631 322436 650000)
+      :unmatched-syntax nil))
+  :file "!home!hesam!CS594!HW07!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

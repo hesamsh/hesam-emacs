@@ -1,0 +1,186 @@
+//Standard headers 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <list>
+
+using namespace std;
+
+int no_ver, no_edge;
+list<int> graph_p;
+list<int> pruf;
+int *visited;
+int index_list=0;
+
+int DegreeCalc(int vertex);
+void FindNgh(int vertex);
+
+void DFS(int *graph_loc, long starting_node)
+{
+  if(index_list <= no_ver)
+  {
+    index_list++;
+    visited[starting_node] = 1;
+    for(int i=0; i < 2*no_edge; i++)
+    {
+      if(graph_loc[i] == starting_node)
+      { 
+        if((i%2 == 0) && (visited[graph_loc[i+1]]==0))
+          DFS(graph_loc,graph_loc[i+1]);
+        if((i%2 == 1) && (visited[graph_loc[i-1]]==0))
+          DFS(graph_loc,graph_loc[i-1]);
+      }
+    }
+  }
+}
+
+int ConComp(int *graph_loc)
+{
+  int no_comp = 0;
+  index_list=0;
+  for(int i = 0; i < no_ver; i++)
+  {
+    if(visited[i] == 0)
+    {
+      DFS(graph_loc, i);
+      no_comp++;
+    }
+  }
+  return no_comp;
+}
+
+int main(int argc, char **argv)
+{
+  cout<<"========================================================="<<endl<<endl;
+  cout<<"Hesam Shams, hshams@vols.utk.edu, University of Tennessee"<<endl;
+  cout<<endl<<"========================================================="<<endl;
+
+  //Process command line argument
+  char *file_name=NULL;//The file path for the adjancy matrix graph
+  
+  file_name = new char[strlen(argv[1])+1];
+  strcpy(file_name,argv[1]);
+ 
+  // Load problem
+  ::ifstream inpfile;
+  inpfile.open(file_name);
+  
+  int *graph;
+
+  inpfile >> no_ver;
+  inpfile >> no_edge;
+  graph = new int[2*no_edge];
+  int i=0;
+  while(inpfile >> graph[i])
+  {
+    i++;
+  }
+
+  visited = new int[no_ver];
+
+  for (int i = 0; i < no_ver; i++)
+  {
+    visited[i] = 0;
+  }
+  
+
+  if ((ConComp(graph) > 1) && (no_edge != (no_ver-1)))
+    cout << "not a tree" << "\n";
+  else
+  {
+  int no_ver_p = no_ver;
+  int not_tree = 0;
+  int select_node, j;
+  int nghbr = 0;
+
+  for (int i = 0; i < 2*no_edge; i++)
+  {
+    graph_p.push_back(graph[i]);
+  }
+
+  while ((no_ver_p > 2) && (not_tree==0))
+  {
+    select_node = 0;
+    j = 1;
+    while ((select_node == 0) && (j <= no_ver))
+    {
+      if (DegreeCalc(j) == 1)
+        select_node = j;
+      else
+        j++;
+    }
+    if (select_node == 0)
+    {
+      not_tree = 1;
+      break;
+    }
+    else
+    {
+      cout << select_node << "\n";
+      FindNgh(select_node);
+      //Removing from graph
+      no_ver_p = no_ver_p - 1;
+    }
+  }
+  if (not_tree == 1)
+    cout << "not a tree";
+  else
+    for (std::list<int>::iterator it=pruf.begin(); it != pruf.end(); ++it)
+    {
+      cout << *it  << "  ";
+    }
+
+  cout <<  "\n";
+  graph_p.clear();
+  }
+  delete[] file_name;
+  delete[] graph;
+}
+
+
+int DegreeCalc(int vertex)
+{
+  int dg = 0;
+  for (std::list<int>::iterator it=graph_p.begin(); it != graph_p.end(); ++it)
+  {
+    if (*it == vertex)
+      dg++;
+  }
+  return dg;
+}
+
+void FindNgh(int vertex)
+{
+  int i = 0;
+  int f = 0;
+  int nghbr=0;
+  std::list<int>::iterator it=graph_p.begin();
+  while (f == 0)
+  {
+    if (*it == vertex)
+    {
+      graph_p.erase(it);
+      f = 1;
+      if (i%2 == 0)
+      {
+        nghbr = *it;
+        graph_p.erase(it);
+      }
+      if (i%2 == 1)
+      {
+        --it;
+        nghbr = *it;
+        graph_p.erase(it);
+      }
+    }
+    i++;
+    ++it;
+  }
+  pruf.push_back(nghbr);
+}

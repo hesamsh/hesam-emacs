@@ -1,0 +1,65 @@
+% Created 2016-09-27 Tue 22:17
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Hesam}
+\date{\today}
+\title{Comments}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Typos}
+\label{sec-1}
+\begin{itemize}
+\item The reference 28 which is mentioned in the context several times,
+the author name has typos.
+\end{itemize}
+\section{The proposition 1 proof}
+\label{sec-2}
+Th proposition 1 proof has lack of information. The authors assume
+that the number of jobs equals to $k$. They also define a variable
+$d_j$ without explanation. The proof is vague.
+\section{Section 5}
+\label{sec-3}
+In the section 5, the authors propose FPTAS for the problem with three
+machine and fixed transportation delay. The proposed algorithm and
+other related developments are those which are described in Haned, A.,
+Soukhal, A., Boudhar, M., \& Tuong, N. H. (2012). Scheduling on
+parallel machines with preemption and transportation delays. Computers
+\& Operations Research, 39(2), 374-381. Since the method does not work
+for the general problem, the new authors revised it for three machine
+problem. I believe this should be published as a note for the previous
+paper.
+\section{Section 6}
+\label{sec-4}
+In the section 6, the authors assert that the proposed method satisfy
+for a general problem in which the transportation delays are
+arbitrary and can be different. There exist a neglecting, because the
+authors use theorems and the conjecture which are proved for the problem with identical
+transportation delays. It is not proved for the general problem with
+arbitrary transportation delays. The method could be correct for the
+problem with identical transportation delays.
+In addition, when a conjecture is proved it is not a conjecture
+anymore, it converts to theorem.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

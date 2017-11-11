@@ -1,0 +1,103 @@
+//Standard headers 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+
+using namespace std;
+
+int no_ver, n;
+
+
+//Function which returns the maximum degree of a graph
+int max_deg(int *graph)
+{
+  int max_d = 0;
+  int deg;
+
+  for(int i = 0; i < no_ver; i++)
+  {
+    deg = 0;
+    for(int j = 0; j < 2*n; j++)
+    {
+      if(graph[j] == i)
+        deg++;
+    }
+    if(deg > max_d)
+      max_d = deg;
+  }
+  return max_d;
+}
+
+//Function which returns the minimum degree of a graph
+int min_deg(int *graph)
+{
+  int min_d = no_ver;
+  int deg;
+
+  for(int i = 0; i < no_ver; i++)
+  {
+    deg = 0;
+    for(int j = 0; j < 2*n; j++)
+    {
+      if(graph[j] == i)
+        deg++;
+    }
+    if(deg < min_d)
+      min_d = deg;
+  }
+  return min_d;
+}
+
+//Function which returns the density of a graph
+double density_g(int *graph)
+{
+  double densit;
+  int edge = n;
+  densit = 2*edge/(double)(no_ver*(no_ver-1));
+  return densit;
+}
+
+int main(int argc, char **argv)
+{
+  cout<<"========================================================="<<endl<<endl;
+  cout<<"Hesam Shams, hshams@vols.utk.edu, University of Tennessee"<<endl;
+  cout<<endl<<"========================================================="<<endl;
+
+  //Process command line argument
+  char *file_name=NULL;//The file path for the adjancy matrix graph
+  file_name = new char[strlen(argv[1])+1];
+  strcpy(file_name,argv[1]);
+
+  // Load problem
+  ::ifstream inpfile;
+  int *graph;
+  int v;
+  inpfile.open(file_name);
+
+  inpfile >> no_ver;
+  inpfile >> n;
+  graph = new int[2*n];
+  int i=0;
+  while(inpfile >> graph[i])
+  {
+    i++;
+  }
+  
+
+  //Calculations
+  int max_d;
+  max_d = max_deg(graph);
+  cout << "Maximum Degree: "<< max_d  << "\n";
+  int min_d;
+  min_d = min_deg(graph);
+  cout << "Minimum Degree: "<< min_d  << "\n";
+  double densit;
+  densit = density_g(graph);
+  cout << "Density of Graph: " << densit  << "\n";
+}

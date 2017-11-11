@@ -1,0 +1,166 @@
+//Standard headers 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <list>
+
+using namespace std;
+
+int no_ver, no_edge;
+
+int DegreeCalc(int* graph, int vertex)
+{
+  int dg = 0;
+  for (int i = 0; i < 2*no_edge; i++)
+  {
+    if (graph[i] == vertex)
+      dg++;
+  }
+  return dg;
+}
+
+int ChkNgh(int* graph, int xst, int new_v)
+{
+  int temp_n;
+  int chk = 0;
+  for (int i = 0; i < 2*no_edge; i++)
+  {
+    if (graph[i] == xst)
+    {
+      if (i%2 == 0)
+      {
+        temp_n = graph[i+1];
+      }
+      if (i%2 == 1)
+      {
+        temp_n = graph[i-1];
+      }
+      if (temp_n == new_v)
+        chk = 1;
+    }
+  }
+  return chk;
+}
+
+int main(int argc, char **argv)
+{
+  cout<<"========================================================="<<endl<<endl;
+  cout<<"Hesam Shams, hshams@vols.utk.edu, University of Tennessee"<<endl;
+  cout<<endl<<"========================================================="<<endl;
+
+  //Process command line argument
+  char *file_name=NULL;//The file path for the adjancy matrix graph
+  int u, v;
+  
+  file_name = new char[strlen(argv[1])+1];
+  strcpy(file_name,argv[1]);
+
+  u = atoi(argv[2]);
+  
+  // Load problem
+  ::ifstream inpfile;
+  inpfile.open(file_name);
+  int *graph;
+
+  inpfile >> no_ver;
+  inpfile >> no_edge;
+  graph = new int[2*no_edge];
+  int i=0;
+  while(inpfile >> graph[i])
+  {
+    i++;
+  }
+
+  //Local calculation
+  list<int> N_u;
+  int temp_n;
+  int No_v = 0;
+  int edge_c = 0;
+  for (int i = 0; i < 2*no_edge; i++)
+  {
+    if (graph[i] == u)
+    {
+      if (i%2 == 0)
+        temp_n = graph[i+1];
+      if (i%2 == 1)
+        temp_n = graph[i-1];
+      for (std::list<int>::iterator it=N_u.begin(); it != N_u.end(); ++it)
+      {
+        edge_c = ChkNgh(graph, temp_n, *it);
+        //cout << "check: " << temp_n << "  " <<*it << " -> " << edge_c << "\n";
+        //to see if they are connected
+        if (edge_c == 1)
+          No_v++;
+      }
+      N_u.push_back(temp_n);
+    }
+  }
+
+  N_u.clear();
+
+  int deg;
+  deg = DegreeCalc(graph, u);
+  cout << "Local: " << 2*No_v/(double)(deg*(deg-1))  << "\n";
+
+  //Global calculation
+  int closed_p3 = 0;
+  int opened_p3 = 0;
+  int temp1, temp2, temp3;
+
+  for (int i = 0; i < no_ver; i++)
+  {
+    for (int j = 0; j < no_ver; j++)
+    {
+      for (int k = 0; k < no_ver; k++)
+      {
+        if ((i!=j) && (i!=k) && (j!=k))
+        {
+          temp1 = ChkNgh(graph, i, j);
+          temp2 = ChkNgh(graph, i, k);
+          temp3 = ChkNgh(graph, j, k);
+          if ((temp1+temp2+temp3) == 3)
+          {
+            closed_p3++;
+            //cout << i << " " << j << " " << k  << "\n";
+          }
+          if ((temp1+temp2+temp3) == 2)
+            opened_p3++;
+        }
+      }
+    }
+  // for (int i = 0; i < 2*no_edge; i++)
+  // {
+  //   for (int j = 0; j < 2*no_edge; j++)
+  //   {
+  //     for (int k = 0; k < 2*no_edge; k++)
+  //     {
+  //       if ((graph[i]!=graph[j]) && (graph[i]!=graph[k]) && (graph[j]!=graph[k]))
+  //       {
+  //         temp1 = ChkNgh(graph, graph[i], graph[j]);
+  //         temp2 = ChkNgh(graph, graph[i], graph[k]);
+  //         temp3 = ChkNgh(graph, graph[j], graph[k]);
+  //         if ((temp1+temp2+temp3) == 3)
+  //         {
+  //           closed_p3++;
+  //           cout << graph[i] << " " << graph[j] << " " << graph[k]  << "\n";
+  //         }
+  //         if ((temp1+temp2+temp3) == 2)
+  //           opened_p3++;
+  //       }
+  //     }
+  //   }
+  }
+  closed_p3 = closed_p3/6;
+  opened_p3 = opened_p3/6;
+  cout << "Closed: " << closed_p3 << "\n";
+  cout << "Opened: " << opened_p3 << "\n";
+  cout << "Global: " << 3*closed_p3/(double)(3*closed_p3+opened_p3)  << "\n";
+  delete[] file_name;
+  delete[] graph;
+}

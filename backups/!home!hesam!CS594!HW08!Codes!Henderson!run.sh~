@@ -1,0 +1,11 @@
+#!/bin/bash
+
+problem_names=(random_100.05.txt random_200.03.txt random_500.01.txt random_1000.005.txt arenas_jazz.txt socfb_Reed98.txt cutgraph1.txt cutgraph2.txt graph6.txt star13.txt);
+
+tLen=${#problem_names[@]};
+
+for((i=0;i<$tLen;i++));
+do
+    echo ${problem_names[$i]}
+    time -p timeout 360 ./findcutsandbridges ~/CS594/HW08/tests/${problem_names[$i]}
+done

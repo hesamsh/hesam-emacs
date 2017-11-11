@@ -1,0 +1,103 @@
+;; Object HW02/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "HW02/"
+  :tables
+  (list
+    (semanticdb-table "BFS.cc"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("iostream" include (:system-flag t) nil [22 41])
+            ("fstream" include (:system-flag t) nil [42 60])
+            ("sstream" include (:system-flag t) nil [61 79])
+            ("stdlib.h" include (:system-flag t) nil [80 99])
+            ("math.h" include (:system-flag t) nil [100 117])
+            ("time.h" include (:system-flag t) nil [118 135])
+            ("string.h" include (:system-flag t) nil [136 155])
+            ("stdio.h" include (:system-flag t) nil [156 174])
+            ("unistd.h" include (:system-flag t) nil [175 194])
+            ("list" include (:system-flag t) nil [195 210])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [212 232])
+            ("visited" variable
+               (:pointer 1
+                :type "int")
+                nil [235 248])
+            ("no_ver" variable (:type "int") nil [249 263])
+            ("n" variable (:type "int") nil [249 263])
+            ("BFS" function
+               (:arguments 
+                  ( ("graph" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [274 285])
+                    ("starting_node" variable (:type "long") (reparse-symbol arg-sub-list) [286 305]))                  
+                :type "void")
+                nil [265 862])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [872 881])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [882 894]))                  
+                :type "int")
+                nil [863 1883]))          
+      :file "BFS.cc"
+      :pointmax 1884
+      :fsize 1882
+      :lastmodtime '(22682 8364 752845 732000)
+      :unmatched-syntax nil)
+    (semanticdb-table "ConnectedComponents.cc"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("iostream" include (:system-flag t) nil [21 40])
+            ("fstream" include (:system-flag t) nil [41 59])
+            ("sstream" include (:system-flag t) nil [60 78])
+            ("stdlib.h" include (:system-flag t) nil [79 98])
+            ("math.h" include (:system-flag t) nil [99 116])
+            ("time.h" include (:system-flag t) nil [117 134])
+            ("string.h" include (:system-flag t) nil [135 154])
+            ("stdio.h" include (:system-flag t) nil [155 173])
+            ("unistd.h" include (:system-flag t) nil [174 193])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [195 215])
+            ("no_ver" variable (:type "int") nil [217 231])
+            ("n" variable (:type "int") nil [217 231])
+            ("visited" variable
+               (:pointer 1
+                :type "int")
+                nil [232 245])
+            ("index_list" variable
+               (:default-value "0"
+                :type "int")
+                nil [246 263])
+            ("DFS" function
+               (:arguments 
+                  ( ("graph" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [274 285])
+                    ("starting_node" variable (:type "long") (reparse-symbol arg-sub-list) [286 305]))                  
+                :type "void")
+                nil [265 693])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [703 712])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [713 725]))                  
+                :type "int")
+                nil [694 1655]))          
+      :file "ConnectedComponents.cc"
+      :pointmax 1656
+      :fsize 1655
+      :lastmodtime '(22692 31743 164221 694000)
+      :unmatched-syntax nil))
+  :file "!home!hesam!CS594!HW02!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

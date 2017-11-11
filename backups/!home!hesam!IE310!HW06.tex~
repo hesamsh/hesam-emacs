@@ -1,0 +1,177 @@
+% Created 2017-03-06 Mon 17:00
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Hesam}
+\date{\today}
+\title{Homework 06 Solutions - IE310 \\ Operation Research in Industrial Engineering II \\ Probabilistic Model \\ UTK - Spring 2017}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Exercise 7 - Chapter 4 - Ross (10th Edition)}
+\label{sec-1}
+As mentioned in the book, we have the following states for the
+problem.
+
+\begin{center}
+\begin{tabular}{rl}
+state & definition\\
+\hline
+0 & if it rained both today and yesterday\\
+1 & if it rained today but not yesterday\\
+2 & if it rained yesterday but not today\\
+3 & if it did not rain either yesterday or today\\
+\end{tabular}
+\end{center}
+
+So, the transition probability matrix for today ($P$) is as follows:
+
+\begin{align*}
+P =
+\begin{Vmatrix}
+p_{0,0} & p_{0,1} & p_{0,2} & p_{0,3} \\
+p_{1,0} & p_{1,1} & p_{1,2} & p_{1,3} \\
+p_{2,0} & p_{2,1} & p_{2,2} & p_{2,3} \\
+p_{3,0} & p_{3,1} & p_{3,2} & p_{3,3}
+\end{Vmatrix}
+=
+\begin{Vmatrix}
+0.7 & 0 & 0.3 & 0 \\
+0.5 & 0 & 0.5 & 0 \\
+0 & 0.4 & 0 & 0.6 \\
+0 & 0.2 & 0 & 0.8
+\end{Vmatrix}
+\end{align*}
+
+the transition probability matrix for tomorrow ($P^2$) is as follows:
+
+
+\begin{align*}
+P^2&  \\
+&=
+\begin{Vmatrix}
+p_{0,0}^2 & p_{0,1}^2 & p_{0,2}^2 & p_{0,3}^2 \\
+p_{1,0}^2 & p_{1,1}^2 & p_{1,2}^2 & p_{1,3}^2 \\
+p_{2,0}^2 & p_{2,1}^2 & p_{2,2}^2 & p_{2,3}^2 \\
+p_{3,0}^2 & p_{3,1}^2 & p_{3,2}^2 & p_{3,3}^2
+\end{Vmatrix} \\
+&=
+\begin{Vmatrix}
+0.7 & 0 & 0.3 & 0 \\
+0.5 & 0 & 0.5 & 0 \\
+0 & 0.4 & 0 & 0.6 \\
+0 & 0.2 & 0 & 0.8
+\end{Vmatrix}
+\times
+\begin{Vmatrix}
+0.7 & 0 & 0.3 & 0 \\
+0.5 & 0 & 0.5 & 0 \\
+0 & 0.4 & 0 & 0.6 \\
+0 & 0.2 & 0 & 0.8
+\end{Vmatrix} \\
+&=
+\begin{Vmatrix}
+0.49 & 0.12 & 0.21 & 0.18 \\
+0.35 & 0.20 & 0.15 & 0.30 \\
+0.20 & 0.12 & 0.20 & 0.48 \\
+0.10 & 0.16 & 0.10 & 0.64
+\end{Vmatrix}
+\end{align*}
+
+\begin{align*}
+P( \text{tomorrow = rain} | \text{yesterday = not rain } and \text{ before yesterday =
+not rain}) = \\
+p_{3,0}^2 + p_{3,1}^2 = 0.10 + 0.16 = 0.26
+\end{align*}
+
+\section{Exercise 10 - Chapter 4 - Ross (10th Edition)}
+\label{sec-2}
+Let $M_n$ denotes Gary's mood on day $n$. We have the following three
+states $S=\{0,1,2\}$:
+
+\begin{center}
+\begin{tabular}{rl}
+state & Mood\\
+\hline
+0 & Cheerful\\
+1 & So-so\\
+2 & Glum\\
+\end{tabular}
+\end{center}
+
+with the following transition probability:
+
+\begin{align*}
+P =
+\begin{Vmatrix}
+p_{0,0} & p_{0,1} & p_{0,2} \\
+p_{1,0} & p_{1,1} & p_{1,2} \\
+p_{2,0} & p_{2,1} & p_{2,2}
+\end{Vmatrix}
+=
+\begin{Vmatrix}
+0.5 & 0.4 & 0.1 \\
+0.3 & 0.4 & 0.3 \\
+0.2 & 0.3 & 0.5
+\end{Vmatrix}
+\end{align*}
+
+The problem is looking for the probability of $P(\bar{2})=P\{M_3 \neq 2, M_2 \neq
+2, M_1 \neq 2 | M_0 = 0\}$. By conditioning on $M_1$ we have the followings:
+
+\begin{align*}
+P(\bar{2}) =& P\{M_3 \neq 2, M_2 \neq 2 | M_1=0, M_0=0\}.P\{M_1=0|M_0=0\} \\
+&+ P\{M_3 \neq 2, M_2 \neq 2 | M_1=1, M_0=0\}.P\{M_1=1|M_0=0\}
+\end{align*}
+
+By using Markov property, we have the following:
+
+\begin{align*}
+P(\bar{2}) =& P\{M_3 \neq 2, M_2 \neq 2 | M_1=0\}.p_{0,0} \\
+&+ P\{M_3 \neq 2, M_2 \neq 2 | M_1=1\}.p_{0,1}
+\end{align*}
+
+\section{Exercise 3 - Chapter 4 - Ross (10th Edition)}
+\label{sec-3}
+The $P$ is as follows.
+
+\includegraphics[width=.9\linewidth]{./a.png}
+
+\section{Exercise 4 - Chapter 4 - Ross (10th Edition)}
+\label{sec-4}
+No, the process does not have the Markov property (it is not time
+homogeneous). The probabilities depend on time step $n$ and it is not
+important $n$ is even or odd. There is no probability depends on state
+and $n$.
+
+In order to transform the process to a Markov process, we can expand
+the state space as follows.
+
+Let the state space $S=\{0, 1, 2, \bar{0}, \bar{1}, \bar{2} \}$ where
+state $i$ denotes that the present value is $i$ and the present day is
+even and $\bar{i}$ denotes that the present value is $\bar{i}$ and the
+present day is odd $\forall i=\{0,1,2\}$. So, we have a unique $X_n$
+for each state and it is Markov chain now.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

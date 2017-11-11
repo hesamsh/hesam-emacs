@@ -1,0 +1,233 @@
+//Standard headers 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <list>
+using namespace std;
+
+int no_ver, no_edge;
+int *list_temp;
+int *list_hl;
+int *list_lh;
+int *list_rn;
+
+//Function that returns degree of vertex v
+int CalcDeg(int *graph, int v)
+{
+  int deg = 0;
+  for (int i = 0; i < 2*no_edge; i++)
+  {
+    if (graph[i] == v)
+      deg++;
+  }
+  return deg;
+}
+void GenListHL();
+void GenListLH();
+void GenListRN();
+void Coloring(int *graph, int *list_gr, clock_t start_alg)
+{
+  int max_color;
+  clock_t finish;
+  list<int> tabu_list;
+  int *color_v = new int[no_ver];
+  for (int i =0; i < no_ver; i++)
+  {
+    color_v[i] = -1;
+  }
+  for (int j = 0; j < no_ver; j++)
+  {
+    int i;
+    i = list_gr[j];
+    if(color_v[i] < 0)
+    {
+      for (int q = 0; q < 2*no_edge; q++)
+      {
+        if(i==graph[q])
+        {
+          if(q%2==0)
+            tabu_list.push_back(color_v[graph[q+1]]);
+          if(q%2==1)
+            tabu_list.push_back(color_v[graph[q-1]]);
+        }
+      }
+      color_v[i] = 0;
+      int exit = 0;
+      while(exit == 0)
+      {
+        int found = 0;
+        for(list<int>::iterator it=tabu_list.begin(); it!=tabu_list.end(); it++)
+        {
+          if(color_v[i] == *it)
+            found = 1;
+        }
+        if(found == 1)
+          color_v[i]++;
+        if(found == 0)
+        {
+          exit = 1;
+          tabu_list.clear();
+        }
+      }
+    }
+  }
+  max_color = color_v[0];
+  for(int i = 0; i < no_ver; i++)
+  {
+    if(max_color < color_v[i])
+      max_color = color_v[i];
+  }
+  //time(&finish);
+  finish = clock();
+  cout << max_color+1 << " colors, " << (double)(finish - start_alg)/1000 << " sec"  << "\n";
+  delete[] color_v;
+  tabu_list.clear();
+}
+int main(int argc, char **argv)
+{
+  srand(time(NULL));
+  cout<<"========================================================="<<endl<<endl;
+  cout<<"Hesam Shams, hshams@vols.utk.edu, University of Tennessee"<<endl;
+  cout<<endl<<"========================================================="<<endl;
+
+  //Process command line argument
+  char *file_name=NULL;//The file path for the adjancy matrix graph
+  file_name = new char[strlen(argv[1])+1];
+  strcpy(file_name,argv[1]);
+
+  // Load problem
+  ::ifstream inpfile;
+  int *graph;
+  inpfile.open(file_name);
+  inpfile >> no_ver;
+  inpfile >> no_edge;
+  graph = new int[2*no_edge];
+  int i=0;
+  while(inpfile >> graph[i])
+  {
+    i++;
+  }
+  
+  //Calculate degree of each vertex
+  int *deg = new int[no_ver];
+  for (int v=0; v < no_ver; v++)
+  {
+    deg[v] = CalcDeg(graph, v);
+  }
+
+  //Generate lists of High to Low, Low to High, and Random
+  list_hl = new int[no_ver];
+  list_lh = new int[no_ver];
+  list_rn = new int[no_ver];
+  list_temp = new int[no_ver];
+  for (int i = 0; i < no_ver; i++)
+  {
+    list_temp[i] = deg[i];
+    list_hl[i] = i;
+    list_lh[i] = i;
+    list_rn[i] = -1;
+  }
+
+  clock_t start_alg;
+  start_alg = clock();
+  //time(&start_alg);
+  GenListHL();
+  cout << "High to low: ";
+  Coloring(graph, list_hl, start_alg);
+  
+  for (int i = 0; i < no_ver; i++)
+    list_temp[i] = deg[i];
+
+  //time(&start_alg);
+  start_alg = clock();
+  GenListLH();
+  cout << "Low to high: ";
+  Coloring(graph, list_lh, start_alg);
+
+  //time(&start_alg);
+  start_alg = clock();
+  GenListRN();
+  cout << "Random: ";
+  Coloring(graph, list_lh, start_alg); 
+
+
+  
+  delete[] graph;
+  delete[] list_temp;
+  delete[] list_hl;
+  delete[] list_lh;
+  delete[] list_rn;
+}
+
+//Function that returns a list of High to Low degree
+void GenListHL()
+{
+  for (int i = 0; i < no_ver; i++)
+  {
+    for (int j = 0; j < (no_ver-i-1); j++)
+    {
+      if (list_temp[j] < list_temp[j+1])
+      {
+        int temp = list_temp[j];
+        list_temp[j] = list_temp[j+1];
+        list_temp[j+1] = temp;
+        temp = list_hl[j];
+        list_hl[j] = list_hl[j+1];
+        list_hl[j+1] = temp;
+      }   
+    }
+  }
+}
+void GenListLH()
+{
+  for (int i = 0; i < no_ver; i++)
+  {
+    for (int j = 0; j < (no_ver-i-1); j++)
+    {
+      if (list_temp[j] > list_temp[j+1])
+      {
+        int temp = list_temp[j];
+        list_temp[j] = list_temp[j+1];
+        list_temp[j+1] = temp;
+        temp = list_lh[j];
+        list_lh[j] = list_lh[j+1];
+        list_lh[j+1] = temp;
+      }    
+    }
+  }
+}
+void GenListRN()
+{
+  int temp;
+  for (int i = 0; i < no_ver; i++)
+  {
+    int new_rn = 0;
+    while(new_rn==0)
+    {
+      temp = rand() % no_ver;
+      new_rn = 1;
+      for(int j = 0; j < no_ver; j++)
+      {
+        if (temp == list_rn[j])
+        {
+          new_rn = 0;
+        }
+      }
+      if(new_rn == 1)
+      {
+        list_rn[i] = temp;
+      }
+    }
+  }
+  //test
+  for (int i = 0; i < no_ver; i++) {
+    cout << list_rn[i] << "\n";
+    
+  }
+}

@@ -1,0 +1,1694 @@
+;; Object standardTabu-DataCollector/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "standardTabu-DataCollector/"
+  :tables
+  (list
+    (semanticdb-table "main.cc"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("iostream" include (:system-flag t) nil [844 863])
+            ("fstream" include (:system-flag t) nil [864 882])
+            ("stdlib.h" include (:system-flag t) nil [883 902])
+            ("math.h" include (:system-flag t) nil [903 920])
+            ("time.h" include (:system-flag t) nil [921 938])
+            ("stdlib.h" include (:system-flag t) nil [939 958])
+            ("string.h" include (:system-flag t) nil [959 978])
+            ("stdio.h" include (:system-flag t) nil [979 997])
+            ("unistd.h" include (:system-flag t) nil [998 1017])
+            ("sstream" include (:system-flag t) nil [1018 1036])
+            ("jspProblemData.h" include nil nil [1039 1066])
+            ("runParameters.h" include nil nil [1067 1093])
+            ("tabuAlgorithmJSP.h" include nil nil [1094 1123])
+            ("misc.h" include nil nil [1124 1141])
+            ("singleValueRBTree.h" include nil nil [1144 1174])
+            ("Operation.h" include nil nil [1177 1199])
+            ("misc.h" include nil nil [1200 1217])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1219 1239])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [1250 1259])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1260 1272]))                  
+                :type "int")
+                nil [1241 5442]))          
+      :file "main.cc"
+      :pointmax 5447
+      :fsize 5446
+      :lastmodtime '(22767 36451 624001 417000)
+      :unmatched-syntax nil)
+    (semanticdb-table "jspProblemData.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CJSPPROBLEMDATA_H" variable (:constant-flag t) nil [905 922])
+            ("iostream" include (:system-flag t) nil [924 943])
+            ("fstream" include (:system-flag t) nil [944 962])
+            ("stdlib.h" include (:system-flag t) nil [963 982])
+            ("math.h" include (:system-flag t) nil [983 1000])
+            ("time.h" include (:system-flag t) nil [1001 1018])
+            ("stdlib.h" include (:system-flag t) nil [1019 1038])
+            ("vector" include (:system-flag t) nil [1039 1056])
+            ("Operation.h" include nil nil [1058 1080])
+            ("misc.h" include nil nil [1081 1098])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1100 1120])
+            ("CJSPProblemData" type
+               (:members 
+                  ( ("public" label nil (reparse-symbol classsubparts) [1217 1224])
+                    ("opers" variable
+                       (:pointer 1
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1230 1248])
+                    ("oper_mach" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1313 1336])
+                    ("njobs" variable (:type "long") (reparse-symbol classsubparts) [1606 1617])
+                    ("noper" variable (:type "long") (reparse-symbol classsubparts) [1645 1656])
+                    ("problem_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [1691 1710])
+                    ("bad_file" variable (:type "bool") (reparse-symbol classsubparts) [1784 1798])
+                    ("LoadProblemData" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("pname" variable
+                               (:pointer 1
+                                :constant-flag t
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [1903 1976]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [1874 1977])
+                    ("CJSPProblemData" function
+                       (:prototype-flag t
+                        :constructor-flag t
+                        :type ("CJSPProblemData" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1986 2004])
+                    ("CJSPProblemData" function
+                       (:prototype-flag t
+                        :destructor-flag t
+                        :type "void")
+                        (reparse-symbol classsubparts) [2029 2048]))                  
+                :type "class")
+                nil [1193 2070]))          
+      :file "jspProblemData.h"
+      :pointmax 2078
+      :fsize 2077
+      :lastmodtime '(22755 48883 76827 51000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CJSPPROBLEMDATA_H")
+          )
+)
+    (semanticdb-table "runParameters.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CRUNPARAMETERS_H" variable (:constant-flag t) nil [863 879])
+            ("iostream" include (:system-flag t) nil [881 900])
+            ("fstream" include (:system-flag t) nil [901 919])
+            ("stdlib.h" include (:system-flag t) nil [920 939])
+            ("math.h" include (:system-flag t) nil [940 957])
+            ("time.h" include (:system-flag t) nil [958 975])
+            ("stdlib.h" include (:system-flag t) nil [976 995])
+            ("vector" include (:system-flag t) nil [996 1013])
+            ("misc.h" include nil nil [1014 1031])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1032 1052])
+            ("CRunParameters" type
+               (:members 
+                  ( ("public" label nil (reparse-symbol classsubparts) [1077 1084])
+                    ("algorithm_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [1090 1111])
+                    ("experiment_id" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [1116 1136])
+                    ("run_id" variable (:type "int") (reparse-symbol classsubparts) [1142 1153])
+                    ("myseed" variable (:type "unsigned long") (reparse-symbol classsubparts) [1158 1179])
+                    ("base_dir" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [1190 1205])
+                    ("problem_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [1210 1229])
+                    ("UB" variable (:type "long") (reparse-symbol classsubparts) [1238 1246])
+                    ("LB" variable (:type "long") (reparse-symbol classsubparts) [1251 1259])
+                    ("tabu_tenure_min" variable (:type "long") (reparse-symbol classsubparts) [1305 1326])
+                    ("tabu_tenure_max" variable (:type "long") (reparse-symbol classsubparts) [1332 1353])
+                    ("tabu_tenure" variable (:type "long") (reparse-symbol classsubparts) [1358 1375])
+                    ("max_tenure_multiplier" variable (:type "double") (reparse-symbol classsubparts) [1384 1413])
+                    ("stopcrit" variable (:type "int") (reparse-symbol classsubparts) [1419 1432])
+                    ("time_limit" variable (:type "long") (reparse-symbol classsubparts) [1437 1453])
+                    ("niters" variable (:type "long") (reparse-symbol classsubparts) [1462 1474])
+                    ("timeRestart" variable (:type "long") (reparse-symbol classsubparts) [1479 1496])
+                    ("timeReset" variable (:type "long") (reparse-symbol classsubparts) [1501 1516])
+                    ("nTemp" variable (:type "long") (reparse-symbol classsubparts) [1522 1533])
+                    ("final_temp" variable (:type "double") (reparse-symbol classsubparts) [1538 1556])
+                    ("CRunParameters" function
+                       (:constructor-flag t
+                        :type ("CRunParameters" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1562 2387])
+                    ("CRunParameters" function
+                       (:destructor-flag t
+                        :type "void")
+                        (reparse-symbol classsubparts) [2392 2548])
+                    ("TranslateCommandLineArguments" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [2588 2597])
+                            ("argv" variable
+                               (:pointer 2
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [2598 2610]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [2553 2611]))                  
+                :type "class")
+                nil [1054 2618]))          
+      :file "runParameters.h"
+      :pointmax 2626
+      :fsize 2625
+      :lastmodtime '(22758 37236 413967 623000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CRUNPARAMETERS_H")
+          )
+)
+    (semanticdb-table "tabuAlgorithmJSP.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CTABUJSP2_H" variable (:constant-flag t) nil [913 924])
+            ("iostream" include (:system-flag t) nil [926 945])
+            ("fstream" include (:system-flag t) nil [946 964])
+            ("stdlib.h" include (:system-flag t) nil [965 984])
+            ("math.h" include (:system-flag t) nil [985 1002])
+            ("time.h" include (:system-flag t) nil [1003 1020])
+            ("stdlib.h" include (:system-flag t) nil [1021 1040])
+            ("vector" include (:system-flag t) nil [1041 1058])
+            ("Operation.h" include nil nil [1060 1082])
+            ("jspProblemData.h" include nil nil [1083 1110])
+            ("runParameters.h" include nil nil [1111 1137])
+            ("localSearchJSP.h" include nil nil [1138 1165])
+            ("singleValueRBTree.h" include nil nil [1166 1196])
+            ("urand.h" include nil nil [1197 1215])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1218 1238])
+            ("history_node" type
+               (:members 
+                  ( ("objective" variable (:type "long") (reparse-symbol classsubparts) [1315 1330])
+                    ("iteration" variable (:type "long") (reparse-symbol classsubparts) [1335 1350])
+                    ("next" variable
+                       (:pointer 1
+                        :type ("history_node" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [1355 1381])
+                    ("prev" variable
+                       (:pointer 1
+                        :type ("history_node" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [1386 1412]))                  
+                :type "struct")
+                nil [1289 1415])
+            ("CTabuAlgorithmJSP" type
+               (:members 
+                  ( ("public" label nil (reparse-symbol classsubparts) [1497 1504])
+                    ("problemData" variable
+                       (:pointer 1
+                        :type ("CJSPProblemData" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1514 1543])
+                    ("runData" variable
+                       (:pointer 1
+                        :type ("CRunParameters" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1566 1590])
+                    ("rgen" variable
+                       (:pointer 1
+                        :type ("CRandomGenerator" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1650 1673])
+                    ("oper" variable
+                       (:pointer 1
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1716 1733])
+                    ("oper_mach" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1896 1919])
+                    ("njobs" variable (:type "int") (reparse-symbol classsubparts) [2193 2203])
+                    ("noper" variable (:type "int") (reparse-symbol classsubparts) [2230 2240])
+                    ("vector_size" variable (:type "long") (reparse-symbol classsubparts) [2275 2292])
+                    ("CUR_ITERATION" variable (:type "long") (reparse-symbol classsubparts) [2379 2398])
+                    ("maxswapsz" variable (:type "int") (reparse-symbol classsubparts) [2491 2505])
+                    ("swapCands" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2580 2603])
+                    ("critics" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2666 2687])
+                    ("szs" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol classsubparts) [2740 2749])
+                    ("swap_id" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [2754 2768])
+                    ("FQueue" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2779 2799])
+                    ("FQueue2" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2868 2889])
+                    ("queue_size" variable (:type "int") (reparse-symbol classsubparts) [2957 2972])
+                    ("oper_order" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3000 3024])
+                    ("UB" variable (:type "long") (reparse-symbol classsubparts) [3231 3239])
+                    ("LB" variable (:type "long") (reparse-symbol classsubparts) [3294 3302])
+                    ("iteration" variable (:type "long") (reparse-symbol classsubparts) [3340 3355])
+                    ("CMax" variable (:type "double") (reparse-symbol classsubparts) [3387 3399])
+                    ("CMaxNew" variable (:type "double") (reparse-symbol classsubparts) [3461 3476])
+                    ("CMaxBest" variable (:type "double") (reparse-symbol classsubparts) [3543 3559])
+                    ("CMaxRecord" variable (:type "double") (reparse-symbol classsubparts) [3621 3639])
+                    ("CMaxTempBest" variable (:type "double") (reparse-symbol classsubparts) [3681 3701])
+                    ("sol" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [3761 3771])
+                    ("best_sol" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [3816 3831])
+                    ("record_sol" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [3887 3904])
+                    ("reference_sol" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [3939 3959])
+                    ("minreferencedistance" variable (:type "unsigned long") (reparse-symbol classsubparts) [4015 4050])
+                    ("sumreferencedistance" variable (:type "unsigned long") (reparse-symbol classsubparts) [4105 4140])
+                    ("nsumreferencedistance" variable (:type "long") (reparse-symbol classsubparts) [4204 4231])
+                    ("tabu_tenure" variable (:type "long") (reparse-symbol classsubparts) [4347 4364])
+                    ("tabu_tenure_min" variable (:type "long") (reparse-symbol classsubparts) [4422 4443])
+                    ("tabu_tenure_max" variable (:type "long") (reparse-symbol classsubparts) [4501 4522])
+                    ("tabu_moves" variable
+                       (:pointer 1
+                        :type "long")
+                        (reparse-symbol classsubparts) [4600 4617])
+                    ("ntimestenurechanged" variable (:type "long") (reparse-symbol classsubparts) [4622 4647])
+                    ("stopCriteria" variable (:type "int") (reparse-symbol classsubparts) [4653 4670])
+                    ("niters" variable (:type "long") (reparse-symbol classsubparts) [4733 4745])
+                    ("timeRestart" variable (:type "long") (reparse-symbol classsubparts) [4831 4848])
+                    ("timeReset" variable (:type "long") (reparse-symbol classsubparts) [4931 4946])
+                    ("time_limit" variable (:type "long") (reparse-symbol classsubparts) [5030 5046])
+                    ("last_scheduled" variable
+                       (:pointer 2
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5132 5160])
+                    ("ready_list" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol classsubparts) [5165 5181])
+                    ("chash" variable
+                       (:pointer 1
+                        :type "unsigned long")
+                        (reparse-symbol classsubparts) [5187 5208])
+                    ("rbtree" variable (:type ("CSingleRBTree" type
+                         (:template-specifier 
+                            ( ("unsigned long" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [5269 5305])
+                    ("orig_start" variable (:type ("time_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5342 5360])
+                    ("reset_start" variable (:type ("time_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5392 5411])
+                    ("algo_start" variable (:type ("time_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5497 5515])
+                    ("tlastoutput" variable (:type ("time_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5557 5576])
+                    ("time_checkpoint1" variable (:type ("time_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5617 5641])
+                    ("time_checkpoint2" variable (:type ("time_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5690 5714])
+                    ("time_checkpoint3" variable (:type ("time_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5763 5787])
+                    ("last_objective_update_checkpoint1" variable (:type "long") (reparse-symbol classsubparts) [5837 5876])
+                    ("last_objective_update_checkpoint2" variable (:type "long") (reparse-symbol classsubparts) [5881 5920])
+                    ("blogrecordused" variable (:type "bool") (reparse-symbol classsubparts) [6075 6095])
+                    ("logrecord_file_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [6177 6203])
+                    ("historyrecord_file_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [6257 6287])
+                    ("maxrecordsequence" variable (:type ("std::vector" type
+                         (:template-specifier 
+                            ( ("double" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [6341 6379])
+                    ("timemaxrecordsequence" variable (:type ("std::vector" type
+                         (:template-specifier 
+                            ( ("unsigned long" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [6463 6512])
+                    ("f0min" variable
+                       (:pointer 1
+                        :type "double")
+                        (reparse-symbol classsubparts) [6619 6633])
+                    ("f1min" variable
+                       (:pointer 1
+                        :type "double")
+                        (reparse-symbol classsubparts) [6740 6754])
+                    ("maxhistorylength" variable (:type "int") (reparse-symbol classsubparts) [6861 6882])
+                    ("history_head1" variable
+                       (:pointer 2
+                        :type ("history_node" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [6928 6964])
+                    ("history_tail1" variable
+                       (:pointer 2
+                        :type ("history_node" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [7102 7138])
+                    ("history_length1" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol classsubparts) [7276 7297])
+                    ("history_head0" variable
+                       (:pointer 2
+                        :type ("history_node" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [7390 7426])
+                    ("history_tail0" variable
+                       (:pointer 2
+                        :type ("history_node" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [7564 7600])
+                    ("history_length0" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol classsubparts) [7738 7759])
+                    ("CTabuAlgorithmJSP" function
+                       (:constructor-flag t
+                        :type ("CTabuAlgorithmJSP" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7890 9378])
+                    ("CTabuAlgorithmJSP" function
+                       (:destructor-flag t
+                        :type "void")
+                        (reparse-symbol classsubparts) [9406 11401])
+                    ("SetupProblemData" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("problemData" variable
+                               (:pointer 1
+                                :type ("CJSPProblemData" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [11428 11457]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [11406 11458])
+                    ("SetupRunParameters" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("problemData" variable
+                               (:pointer 1
+                                :type ("CRunParameters" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [11487 11515]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [11463 11516])
+                    ("SetupRandomGenerator" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("randomGenerator" variable
+                               (:pointer 1
+                                :type ("CRandomGenerator" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [11547 11581]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [11521 11582])
+                    ("IsTabu_Standard" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("random_swap" variable (:type "long") (reparse-symbol arg-sub-list) [11609 11626]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [11589 11627])
+                    ("SetTabu_Standard" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("random_swap" variable (:type "long") (reparse-symbol arg-sub-list) [11654 11671]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [11632 11672])
+                    ("Tabu_Standard" function
+                       (:prototype-flag t
+                        :type "double")
+                        (reparse-symbol classsubparts) [11677 11700])
+                    ("update_record_best_etc" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("f" variable (:type "double") (reparse-symbol arg-sub-list) [11736 11745]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [11708 11746])
+                    ("IncreaseArraySize" function
+                       (:prototype-flag t
+                        :type "void")
+                        (reparse-symbol classsubparts) [11751 11776])
+                    ("IncreaseArraySizeFull" function
+                       (:prototype-flag t
+                        :type "void")
+                        (reparse-symbol classsubparts) [11781 11810])
+                    ("InitialSolutionRandom" function
+                       (:prototype-flag t
+                        :type "double")
+                        (reparse-symbol classsubparts) [11816 11847])
+                    ("IsNewSolution" function
+                       (:prototype-flag t
+                        :type "long")
+                        (reparse-symbol classsubparts) [11852 11873])
+                    ("logNewRecordSolution" function
+                       (:prototype-flag t
+                        :type "void")
+                        (reparse-symbol classsubparts) [11879 11907])
+                    ("dumplogRecordSequence" function
+                       (:prototype-flag t
+                        :type "int")
+                        (reparse-symbol classsubparts) [11953 11981])
+                    ("dumpHistory" function
+                       (:prototype-flag t
+                        :type "int")
+                        (reparse-symbol classsubparts) [12040 12058])
+                    ("logSolutionObjective" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("CMax" variable (:type "double") (reparse-symbol arg-sub-list) [12154 12166])
+                            ("psol" variable
+                               (:pointer 1
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [12167 12178])
+                            ("c_iter" variable (:type "long") (reparse-symbol arg-sub-list) [12179 12191]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [12128 12192])
+                    ("LoadRecordSolutionFromFile" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("record_file" variable
+                               (:pointer 1
+                                :constant-flag t
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [12271 12295])
+                            ("sol" variable
+                               (:pointer 1
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [12295 12305]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [12240 12306])
+                    ("SaveSolutionToFile" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("record_file" variable
+                               (:pointer 1
+                                :constant-flag t
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [12335 12359])
+                            ("sol" variable
+                               (:pointer 1
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [12359 12369]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [12311 12370])
+                    ("LoadRecordSolutionFromFileStandard" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("record_file" variable
+                               (:pointer 1
+                                :constant-flag t
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [12415 12439])
+                            ("sol" variable
+                               (:pointer 1
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [12439 12449]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [12376 12450])
+                    ("SaveSolutionToFileStandard" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("record_file" variable
+                               (:pointer 1
+                                :constant-flag t
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [12881 12905])
+                            ("sol" variable
+                               (:pointer 1
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [12905 12915]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [12849 12916])
+                    ("generate_schedule_from_binary_vector" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("sol" variable
+                               (:pointer 1
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [13333 13343]))                          
+                        :type "double")
+                        (reparse-symbol classsubparts) [13289 13344])
+                    ("CalculateHeadTailQueue" function
+                       (:prototype-flag t
+                        :type "double")
+                        (reparse-symbol classsubparts) [13421 13453]))                  
+                :type "class")
+                nil [1471 13997]))          
+      :file "tabuAlgorithmJSP.h"
+      :pointmax 14005
+      :fsize 14004
+      :lastmodtime '(22767 60281 420986 523000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CTABUJSP2_H")
+          )
+)
+    (semanticdb-table "misc.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("MISC_H" variable (:constant-flag t) nil [844 850])
+            ("RET_OK" variable (:constant-flag t) nil [860 866])
+            ("RET_ERROR" variable (:constant-flag t) nil [882 891])
+            ("STOPCRITERIONITER" variable (:constant-flag t) nil [969 986])
+            ("STOPCRITERIONTIME" variable (:constant-flag t) nil [1061 1078])
+            ("LONG_MAX" variable (:constant-flag t) nil [1092 1100])
+            ("RANDOMRAND" variable (:constant-flag t) nil [1158 1168])
+            ("RANDOMMERSENNE" variable (:constant-flag t) nil [1211 1225])
+            ("ABS" variable (:constant-flag t) nil [1252 1255])
+            ("assert.h" include (:system-flag t) nil [1317 1336])
+            ("error_mes" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("mes" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1370 1381])
+                    ("parm" variable (:type "int") (reparse-symbol arg-sub-list) [1381 1390]))                  
+                :type "void")
+                nil [1355 1391])
+            ("simple_sort" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("nelements" variable (:type "long") (reparse-symbol arg-sub-list) [1409 1424])
+                    ("place_st" variable
+                       (:pointer 1
+                        :type "long")
+                        (reparse-symbol arg-sub-list) [1424 1439])
+                    ("r_s" variable
+                       (:pointer 1
+                        :type "long")
+                        (reparse-symbol arg-sub-list) [1439 1449]))                  
+                :type "void")
+                nil [1392 1450])
+            ("LoadRecordSolutionFromFile" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("record_file" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1484 1502])
+                    ("sol" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1502 1512]))                  
+                :type "void")
+                nil [1452 1513])
+            ("SaveSolutionToFile" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("record_file" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1538 1556])
+                    ("sol" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1556 1566])
+                    ("vector_size" variable (:type "long") (reparse-symbol arg-sub-list) [1566 1583]))                  
+                :type "void")
+                nil [1514 1584])
+            ("itoa_oleg" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("dest" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2152 2162])
+                    ("val" variable (:type "int") (reparse-symbol arg-sub-list) [2163 2171])
+                    ("base" variable (:type "int") (reparse-symbol arg-sub-list) [2172 2181]))                  
+                :type "void")
+                nil [2137 2182])
+            ("CalcHemmingDistance" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("sol1" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2208 2219])
+                    ("sol2" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2220 2231])
+                    ("vector_size" variable (:type "long") (reparse-symbol arg-sub-list) [2231 2248]))                  
+                :type "long")
+                nil [2183 2249])
+            ("QueryGenerator" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("experiment_id" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2271 2291])
+                    ("algorithm_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2292 2313])
+                    ("problem_name" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2314 2333])
+                    ("run_id" variable (:type "int") (reparse-symbol arg-sub-list) [2334 2345])
+                    ("iter_no" variable (:type "int") (reparse-symbol arg-sub-list) [2346 2358])
+                    ("elapsed_time" variable (:type "long") (reparse-symbol arg-sub-list) [2359 2377])
+                    ("min_CMax" variable (:type "double") (reparse-symbol arg-sub-list) [2378 2394])
+                    ("epochID" variable (:type ("time_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2395 2410])
+                    ("state_query" variable (:type "int") (reparse-symbol arg-sub-list) [2411 2427]))                  
+                :type "char")
+                nil [2250 2428])
+            ("get_ind" function
+               (:typemodifiers ("inline")
+                :arguments 
+                  ( ("f" variable (:type "int") (reparse-symbol arg-sub-list) [2450 2456])
+                    ("s" variable (:type "int") (reparse-symbol arg-sub-list) [2456 2462])
+                    ("nmach" variable (:type "int") (reparse-symbol arg-sub-list) [2462 2472])
+                    ("row_size" variable (:type "long") (reparse-symbol arg-sub-list) [2472 2486])
+                    ("njobs" variable (:type "int") (reparse-symbol arg-sub-list) [2486 2496]))                  
+                :type "int")
+                nil [2430 2786]))          
+      :file "misc.h"
+      :pointmax 2794
+      :fsize 2793
+      :lastmodtime '(22755 48883 80827 130000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("MISC_H")
+          ("LONG_MAX" . ((symbol "9223372036854775807LL" 1101 . 1122)))
+          ("RET_ERROR" . ((symbol "2LL" 892 . 895)))
+          ("STOPCRITERIONITER" . ((symbol "0LL" 987 . 990)))
+          ("STOPCRITERIONTIME" . ((symbol "1LL" 1079 . 1082)))
+          ("RANDOMRAND" . ((symbol "0LL" 1169 . 1172)))
+          ("RANDOMMERSENNE" . ((symbol "1LL" 1226 . 1229)))
+          ("ABS" (spp-arg-list ("x") 1255 . 1258) . ((semantic-list "((x) >= 0 ? (x) : -(x))" 1266 . 1289)))
+          ("RET_OK" . ((symbol "1LL" 870 . 873)))
+          )
+)
+    (semanticdb-table "singleValueRBTree.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("SINGLE_VALUE_RBTREE" variable (:constant-flag t) nil [422 441])
+            ("vector" include (:system-flag t) nil [675 692])
+            ("ECOLORSTRUCT" variable (:constant-flag t) nil [723 735])
+            ("ECOLOR" type
+               (:members 
+                  ( ("BLACK" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [762 768])
+                    ("RED" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [773 778]))                  
+                :type "enum")
+                nil [736 789])
+            ("colorType" type
+               (:typedef ("ECOLOR" type (:type "enum") nil nil)
+                :type "typedef")
+                nil [736 789])
+            ("CSingleRBTree" type
+               (:template 
+                  ( ("DATATYPE" type (:type "class") nil nil))                  
+                :type "class"
+                :members 
+                  ( ("public" label nil (reparse-symbol classsubparts) [847 854])
+                    ("FindEl" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("key" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [880 898])
+                            ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [898 914]))                          
+                        :type "unsigned long")
+                        (reparse-symbol classsubparts) [859 915])
+                    ("DelFixTree" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [936 952]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [920 953])
+                    ("delete_rbnode" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("z" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [977 993]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [958 994])
+                    ("TreeSuccessor" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1027 1043]))                          
+                        :type "unsigned long")
+                        (reparse-symbol classsubparts) [999 1044])
+                    ("TreePredecessor" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1079 1095]))                          
+                        :type "unsigned long")
+                        (reparse-symbol classsubparts) [1049 1096])
+                    ("FindMin" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1123 1139]))                          
+                        :type "unsigned long")
+                        (reparse-symbol classsubparts) [1101 1140])
+                    ("FindMax" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1167 1183]))                          
+                        :type "unsigned long")
+                        (reparse-symbol classsubparts) [1145 1184])
+                    ("FindMinData" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1210 1226]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1189 1227])
+                    ("FindMaxData" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1253 1269]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1232 1270])
+                    ("FindSecondMaxData" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1303 1319]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1276 1320])
+                    ("PrintTree" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [1340 1345]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [1325 1346])
+                    ("RightRotate" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1368 1384]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [1351 1385])
+                    ("LeftRotate" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1406 1422]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [1390 1423])
+                    ("FixTree" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("z" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1441 1457]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [1428 1458])
+                    ("insert_rbnode" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("key" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1481 1499])
+                            ("datum" variable (:type ("DATATYPE" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1499 1514]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [1463 1515])
+                    ("CSingleRBTree" function
+                       (:prototype-flag t
+                        :constructor-flag t
+                        :type ("CSingleRBTree" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1666 1682])
+                    ("CSingleRBTree" function
+                       (:prototype-flag t
+                        :constructor-flag t
+                        :arguments 
+                          ( ("max_size" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1701 1724]))                          
+                        :type ("CSingleRBTree" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1687 1725])
+                    ("CSingleRBTree" function
+                       (:prototype-flag t
+                        :destructor-flag t
+                        :typemodifiers ("virtual")
+                        :type "void")
+                        (reparse-symbol classsubparts) [1730 1755])
+                    ("inorder_tree_walk" function
+                       (:prototype-flag t
+                        :type "void")
+                        (reparse-symbol classsubparts) [1972 1997])
+                    ("find_floor" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("key" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2023 2041]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2003 2042])
+                    ("find_floor_duedate" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("key" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2075 2093])
+                            ("marrival" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2093 2116]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2047 2117])
+                    ("find_floor_duedate_lengthlimit" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("key" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2162 2180])
+                            ("marrival" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2180 2203])
+                            ("limit" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2203 2223]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2122 2224])
+                    ("FindMaxDataDueDate" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2257 2273])
+                            ("marival" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2273 2295]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2229 2296])
+                    ("FindMinDataDueDate" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("x" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2329 2345])
+                            ("marrival" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2345 2368]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2301 2369])
+                    ("FindSmallerThan" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("key" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2400 2418])
+                            ("marrival" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2418 2441]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2375 2442])
+                    ("FindSmallerThanNoDelete" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("key" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2480 2498])
+                            ("marrival" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2498 2521]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2447 2522])
+                    ("FindLargerThanNoDelete" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("key" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2559 2577])
+                            ("marrival" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2577 2600]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2527 2601])
+                    ("CheckTree" function
+                       (:prototype-flag t
+                        :type "void")
+                        (reparse-symbol classsubparts) [2606 2623])
+                    ("FindLargerThan" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("key" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2653 2671])
+                            ("marrival" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2671 2694]))                          
+                        :type ("DATATYPE" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2629 2695])
+                    ("transplant" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("u" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2716 2732])
+                            ("v" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2732 2748]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [2700 2749])
+                    ("delete_rbnode2" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("z" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2774 2790]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [2754 2791])
+                    ("ResetTree" function
+                       (:prototype-flag t
+                        :type "void")
+                        (reparse-symbol classsubparts) [2797 2814])
+                    ("find_earliest_arrival" function
+                       (:prototype-flag t
+                        :type "unsigned long")
+                        (reparse-symbol classsubparts) [2819 2857])
+                    ("delete_item" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("key" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [2880 2898])
+                            ("itemtodelte" variable (:type ("DATATYPE" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2898 2919]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [2863 2920])
+                    ("NIL" variable (:type "unsigned long") (reparse-symbol classsubparts) [2935 2953])
+                    ("maxsize" variable (:type "unsigned long") (reparse-symbol classsubparts) [3098 3120])
+                    ("nnodes" variable (:type "unsigned long") (reparse-symbol classsubparts) [3125 3146])
+                    ("nitems" variable (:type "unsigned long") (reparse-symbol classsubparts) [3151 3172])
+                    ("root" variable (:type "unsigned long") (reparse-symbol classsubparts) [3177 3196])
+                    ("keys" variable (:type ("std::vector" type
+                         (:template-specifier 
+                            ( ("unsigned long" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [3201 3233])
+                    ("left" variable (:type ("std::vector" type
+                         (:template-specifier 
+                            ( ("unsigned long" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [3238 3270])
+                    ("right" variable (:type ("std::vector" type
+                         (:template-specifier 
+                            ( ("unsigned long" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [3275 3308])
+                    ("parent" variable (:type ("std::vector" type
+                         (:template-specifier 
+                            ( ("unsigned long" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [3313 3347])
+                    ("pfirst" variable (:type ("std::vector" type
+                         (:template-specifier 
+                            ( ("DATATYPE" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [3407 3436])
+                    ("plast" variable (:type ("std::vector" type
+                         (:template-specifier 
+                            ( ("DATATYPE" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [3441 3469])
+                    ("pcurrent" variable (:type ("std::vector" type
+                         (:template-specifier 
+                            ( ("DATATYPE" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [3474 3505])
+                    ("stack" variable (:type ("std::vector" type
+                         (:template-specifier 
+                            ( ("unsigned long" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [3515 3548])
+                    ("stack_top" variable (:type "unsigned long") (reparse-symbol classsubparts) [3553 3577])
+                    ("color" variable (:type ("std::vector" type
+                         (:template-specifier 
+                            ( ("colorType" type nil nil nil))                            
+                          :type "class")
+                          nil nil)) (reparse-symbol classsubparts) [3618 3647]))                  )
+                nil [798 3657]))          
+      :file "singleValueRBTree.h"
+      :pointmax 3667
+      :fsize 3666
+      :lastmodtime '(22755 48883 80827 130000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("ECOLORSTRUCT")
+          ("SINGLE_VALUE_RBTREE")
+          )
+)
+    (semanticdb-table "Operation.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("COPERATION_H" variable (:constant-flag t) nil [855 867])
+            ("iostream" include (:system-flag t) nil [869 888])
+            ("fstream" include (:system-flag t) nil [889 907])
+            ("stdlib.h" include (:system-flag t) nil [908 927])
+            ("math.h" include (:system-flag t) nil [928 945])
+            ("time.h" include (:system-flag t) nil [946 963])
+            ("stdlib.h" include (:system-flag t) nil [964 983])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [985 1005])
+            ("COperation" type
+               (:members 
+                  ( ("public" label nil (reparse-symbol classsubparts) [1026 1033])
+                    ("US_FLAG" variable (:type "long") (reparse-symbol classsubparts) [1038 1051])
+                    ("CalcHead" function (:type "void") (reparse-symbol classsubparts) [1057 1414])
+                    ("CalcTail" function (:type "void") (reparse-symbol classsubparts) [1423 1697])
+                    ("JS" variable
+                       (:pointer 1
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1707 1722])
+                    ("MS" variable
+                       (:pointer 1
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1727 1742])
+                    ("JP" variable
+                       (:pointer 1
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1747 1762])
+                    ("MP" variable
+                       (:pointer 1
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1767 1782])
+                    ("JStailed" variable (:type "bool") (reparse-symbol classsubparts) [1788 1802])
+                    ("MStailed" variable (:type "bool") (reparse-symbol classsubparts) [1807 1821])
+                    ("JPheaded" variable (:type "bool") (reparse-symbol classsubparts) [1826 1840])
+                    ("MPheaded" variable (:type "bool") (reparse-symbol classsubparts) [1845 1859])
+                    ("bscheduled" variable (:type "bool") (reparse-symbol classsubparts) [1865 1881])
+                    ("canbscheduled" variable (:type "bool") (reparse-symbol classsubparts) [1886 1905])
+                    ("bscheduled2" variable (:type "bool") (reparse-symbol classsubparts) [1910 1927])
+                    ("processing" variable (:type "double") (reparse-symbol classsubparts) [1933 1951])
+                    ("realprocessing" variable (:type "double") (reparse-symbol classsubparts) [1956 1978])
+                    ("start" variable (:type "double") (reparse-symbol classsubparts) [1983 1996])
+                    ("finish" variable (:type "double") (reparse-symbol classsubparts) [2001 2015])
+                    ("old_head" variable (:type "double") (reparse-symbol classsubparts) [2020 2036])
+                    ("old_tail" variable (:type "double") (reparse-symbol classsubparts) [2041 2057])
+                    ("job" variable (:type "int") (reparse-symbol classsubparts) [2064 2072])
+                    ("op" variable (:type "int") (reparse-symbol classsubparts) [2077 2084])
+                    ("position" variable (:type "int") (reparse-symbol classsubparts) [2089 2102])
+                    ("position_in_queue" variable (:type "int") (reparse-symbol classsubparts) [2107 2129])
+                    ("head" variable (:type "double") (reparse-symbol classsubparts) [2135 2147])
+                    ("tail" variable (:type "double") (reparse-symbol classsubparts) [2152 2164])
+                    ("nmach" variable (:type "int") (reparse-symbol classsubparts) [2169 2179])
+                    ("active" variable (:type "bool") (reparse-symbol classsubparts) [2184 2196])
+                    ("estbad" variable (:type "long") (reparse-symbol classsubparts) [2202 2214])
+                    ("lstbad" variable (:type "long") (reparse-symbol classsubparts) [2219 2231])
+                    ("tailbad" variable (:type "long") (reparse-symbol classsubparts) [2236 2249])
+                    ("COperation" function
+                       (:constructor-flag t
+                        :type ("COperation" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2255 2400]))                  
+                :type "class")
+                nil [1007 2403]))          
+      :file "Operation.h"
+      :pointmax 2412
+      :fsize 2411
+      :lastmodtime '(22755 48883 76827 51000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("COPERATION_H")
+          )
+)
+    (semanticdb-table "localSearchJSP.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CLOCALSEARCHJSP_H" variable (:constant-flag t) nil [865 882])
+            ("iostream" include (:system-flag t) nil [884 903])
+            ("fstream" include (:system-flag t) nil [904 922])
+            ("stdlib.h" include (:system-flag t) nil [923 942])
+            ("math.h" include (:system-flag t) nil [943 960])
+            ("time.h" include (:system-flag t) nil [961 978])
+            ("stdlib.h" include (:system-flag t) nil [979 998])
+            ("vector" include (:system-flag t) nil [999 1016])
+            ("Operation.h" include nil nil [1017 1039])
+            ("urand.h" include nil nil [1040 1058])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1060 1080])
+            ("CLocalSearchJSP" type
+               (:members 
+                  ( ("public" label nil (reparse-symbol classsubparts) [1135 1142])
+                    ("DefineGrabowskiMoves2006" function
+                       (:prototype-flag t
+                        :typemodifiers ("static")
+                        :arguments 
+                          ( ("oper" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1195 1212])
+                            ("noper" variable (:type "int") (reparse-symbol arg-sub-list) [1221 1231])
+                            ("ilastcritical" variable
+                               (:reference 1
+                                :type "int")
+                                (reparse-symbol arg-sub-list) [1240 1259])
+                            ("optimum" variable
+                               (:reference 1
+                                :type "bool")
+                                (reparse-symbol arg-sub-list) [1268 1282])
+                            ("nswaps" variable
+                               (:reference 1
+                                :type "int")
+                                (reparse-symbol arg-sub-list) [1291 1303])
+                            ("maxswapsz" variable
+                               (:reference 1
+                                :type "int")
+                                (reparse-symbol arg-sub-list) [1312 1327])
+                            ("swapCands" variable
+                               (:pointer 2
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1336 1359])
+                            ("swap_id" variable
+                               (:pointer 1
+                                :type "char")
+                                (reparse-symbol arg-sub-list) [1368 1382])
+                            ("rgen" variable
+                               (:pointer 1
+                                :type ("CRandomGenerator" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1391 1423]))                          
+                        :type "long")
+                        (reparse-symbol classsubparts) [1149 1424])
+                    ("IsFeasible" function
+                       (:prototype-flag t
+                        :typemodifiers ("static")
+                        :arguments 
+                          ( ("x" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1465 1479])
+                            ("y" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1488 1502])
+                            ("FQueue" variable
+                               (:pointer 2
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1511 1531])
+                            ("x_to_y" variable (:type "bool") (reparse-symbol arg-sub-list) [1540 1552])
+                            ("CUR_ITERATION" variable
+                               (:reference 1
+                                :type "long")
+                                (reparse-symbol arg-sub-list) [1561 1590]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [1434 1591])
+                    ("CalculateMoveEstimationYtoX" function
+                       (:prototype-flag t
+                        :typemodifiers ("static")
+                        :arguments 
+                          ( ("x" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1648 1662])
+                            ("y" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1671 1685])
+                            ("FQueue" variable
+                               (:pointer 2
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1694 1714])
+                            ("swap_id" variable (:type "int") (reparse-symbol arg-sub-list) [1723 1735])
+                            ("CMax" variable (:type "double") (reparse-symbol arg-sub-list) [1744 1765]))                          
+                        :type "double")
+                        (reparse-symbol classsubparts) [1597 1766])
+                    ("CalculateMoveEstimationXtoY" function
+                       (:prototype-flag t
+                        :typemodifiers ("static")
+                        :arguments 
+                          ( ("x" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1823 1837])
+                            ("y" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1846 1860])
+                            ("FQueue" variable
+                               (:pointer 2
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1869 1889])
+                            ("swap_id" variable (:type "int") (reparse-symbol arg-sub-list) [1898 1910])
+                            ("CMax" variable (:type "double") (reparse-symbol arg-sub-list) [1919 1940]))                          
+                        :type "double")
+                        (reparse-symbol classsubparts) [1772 1941])
+                    ("CalcTaillardEst" function
+                       (:prototype-flag t
+                        :typemodifiers ("static")
+                        :arguments 
+                          ( ("x" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [1986 2000])
+                            ("y" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2009 2023])
+                            ("CMax" variable
+                               (:reference 1
+                                :type "double")
+                                (reparse-symbol arg-sub-list) [2032 2045])
+                            ("oper_set" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2047 2068])
+                            ("oper_order" variable
+                               (:pointer 2
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2077 2101])
+                            ("njobs" variable
+                               (:reference 1
+                                :type "int")
+                                (reparse-symbol arg-sub-list) [2110 2121])
+                            ("noper" variable
+                               (:reference 1
+                                :type "int")
+                                (reparse-symbol arg-sub-list) [2130 2141])
+                            ("fjobs" variable
+                               (:pointer 1
+                                :type "long")
+                                (reparse-symbol arg-sub-list) [2150 2162])
+                            ("fmachines" variable
+                               (:pointer 1
+                                :type "long")
+                                (reparse-symbol arg-sub-list) [2171 2187])
+                            ("CUR_ITERATION" variable
+                               (:reference 1
+                                :type "long")
+                                (reparse-symbol arg-sub-list) [2196 2225]))                          
+                        :type "double")
+                        (reparse-symbol classsubparts) [1947 2226])
+                    ("update_queue_grab" function
+                       (:prototype-flag t
+                        :typemodifiers ("static")
+                        :arguments 
+                          ( ("FQueue" variable
+                               (:pointer 2
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2271 2291])
+                            ("FQueue2" variable
+                               (:pointer 2
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2300 2321])
+                            ("queue_size" variable (:type "long") (reparse-symbol arg-sub-list) [2330 2346])
+                            ("x" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2355 2369])
+                            ("y" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2378 2392])
+                            ("njobs" variable (:type "int") (reparse-symbol arg-sub-list) [2401 2411])
+                            ("noper" variable (:type "int") (reparse-symbol arg-sub-list) [2420 2430])
+                            ("x_to_y" variable (:type "bool") (reparse-symbol arg-sub-list) [2439 2451])
+                            ("oper_order" variable
+                               (:pointer 2
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2460 2484])
+                            ("CUR_ITERATION" variable
+                               (:reference 1
+                                :type "long")
+                                (reparse-symbol arg-sub-list) [2493 2522]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [2232 2523])
+                    ("ExploreFeasibility" function
+                       (:prototype-flag t
+                        :typemodifiers ("static")
+                        :arguments 
+                          ( ("op" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2572 2587])
+                            ("upper_ind" variable (:type "int") (reparse-symbol arg-sub-list) [2596 2610])
+                            ("to" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2619 2635])
+                            ("CUR_ITERATION" variable
+                               (:reference 1
+                                :type "long")
+                                (reparse-symbol arg-sub-list) [2644 2673]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [2533 2674])
+                    ("IncreaseArraySize" function
+                       (:prototype-flag t
+                        :typemodifiers ("static")
+                        :type "void")
+                        (reparse-symbol classsubparts) [2680 2712])
+                    ("IncreaseArraySizeFull" function
+                       (:prototype-flag t
+                        :typemodifiers ("static")
+                        :type "void")
+                        (reparse-symbol classsubparts) [2718 2754])
+                    ("SwapMoves" function
+                       (:prototype-flag t
+                        :typemodifiers ("static")
+                        :arguments 
+                          ( ("first" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2791 2809])
+                            ("second" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2818 2837])
+                            ("oper_order" variable
+                               (:pointer 2
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2846 2870])
+                            ("njobs" variable (:type "int") (reparse-symbol arg-sub-list) [2879 2898]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [2760 2899])
+                    ("SwapMoves" function
+                       (:prototype-flag t
+                        :typemodifiers ("static")
+                        :arguments 
+                          ( ("x" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2936 2950])
+                            ("y" variable
+                               (:pointer 1
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2959 2972])
+                            ("x_to_y" variable (:type "bool") (reparse-symbol arg-sub-list) [2981 2993])
+                            ("oper_order" variable
+                               (:pointer 2
+                                :type ("COperation" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [3002 3026])
+                            ("njobs" variable (:type "int") (reparse-symbol arg-sub-list) [3035 3054]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [2905 3055]))                  
+                :type "class")
+                nil [1111 3062]))          
+      :file "localSearchJSP.h"
+      :pointmax 3070
+      :fsize 3069
+      :lastmodtime '(22755 48883 80827 130000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CLOCALSEARCHJSP_H")
+          )
+)
+    (semanticdb-table "urand.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("CURAND_H" variable (:constant-flag t) nil [881 889])
+            ("RANDOMRAND" variable (:constant-flag t) nil [925 935])
+            ("RANDOMMERSENNE" variable (:constant-flag t) nil [978 992])
+            ("random" include (:system-flag t) nil [999 1016])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1018 1038])
+            ("CRandomGenerator" type
+               (:members 
+                  ( ("public" label nil (reparse-symbol classsubparts) [1117 1124])
+                    ("gen" variable
+                       (:pointer 1
+                        :type ("std::mt19937" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1129 1147])
+                    ("seed" variable (:type ("std::random_device::result_type" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1207 1244])
+                    ("type" variable (:type "int") (reparse-symbol classsubparts) [1249 1258])
+                    ("urand" function
+                       (:prototype-flag t
+                        :type "double")
+                        (reparse-symbol classsubparts) [1299 1314])
+                    ("urandInd" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("max_ind" variable (:type "int") (reparse-symbol arg-sub-list) [1374 1386]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [1361 1387])
+                    ("CRandomGenerator" function
+                       (:constructor-flag t
+                        :arguments 
+                          ( ("gentype" variable (:type "int") (reparse-symbol arg-sub-list) [1528 1584]))                          
+                        :type ("CRandomGenerator" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1502 1946])
+                    ("CRandomGenerator" function
+                       (:destructor-flag t
+                        :type "void")
+                        (reparse-symbol classsubparts) [1973 2025])
+                    ("reseed" function
+                       (:arguments 
+                          ( ("initseed" variable (:type "long") (reparse-symbol arg-sub-list) [2114 2157]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [2093 2404])
+                    ("reseed" function (:type "void") (reparse-symbol classsubparts) [2470 2785]))                  
+                :type "class")
+                nil [1091 2788]))          
+      :file "urand.h"
+      :pointmax 2796
+      :fsize 2795
+      :lastmodtime '(22758 37236 413967 623000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("CURAND_H")
+          ("RANDOMRAND" . ((symbol "0LL" 936 . 939)))
+          ("RANDOMMERSENNE" . ((symbol "1LL" 993 . 996)))
+          )
+)
+    (semanticdb-table "tabuAlgorithmJSP.cc"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("tabuAlgorithmJSP.h" include nil nil [886 915])
+            ("iostream" include (:system-flag t) nil [916 935])
+            ("fstream" include (:system-flag t) nil [936 954])
+            ("stdlib.h" include (:system-flag t) nil [955 974])
+            ("math.h" include (:system-flag t) nil [975 992])
+            ("time.h" include (:system-flag t) nil [993 1010])
+            ("stdlib.h" include (:system-flag t) nil [1011 1030])
+            ("stdio.h" include (:system-flag t) nil [1031 1049])
+            ("unistd.h" include (:system-flag t) nil [1050 1069])
+            ("string.h" include (:system-flag t) nil [1070 1089])
+            ("sstream" include (:system-flag t) nil [1090 1108])
+            ("urand.h" include nil nil [1109 1127])
+            ("runParameters.h" include nil nil [1128 1154])
+            ("singleValueRBTree.h" include nil nil [1155 1185])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1188 1208])
+            ("SetupRandomGenerator" function
+               (:parent "CTabuAlgorithmJSP"
+                :arguments 
+                  ( ("randomGenerator" variable
+                       (:pointer 1
+                        :type ("CRandomGenerator" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1299 1333]))                  
+                :type "void")
+                nil [1254 1371])
+            ("SetupProblemData" function
+               (:parent "CTabuAlgorithmJSP"
+                :arguments 
+                  ( ("pData" variable
+                       (:pointer 1
+                        :type ("CJSPProblemData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1491 1514]))                  
+                :type "void")
+                nil [1450 4268])
+            ("SetupRunParameters" function
+               (:parent "CTabuAlgorithmJSP"
+                :arguments 
+                  ( ("pRunParams" variable
+                       (:pointer 1
+                        :type ("CRunParameters" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [4340 4367]))                  
+                :type "void")
+                nil [4297 6597])
+            ("Tabu_Standard" function
+               (:parent "CTabuAlgorithmJSP"
+                :type "double")
+                nil [6600 24860])
+            ("IsNewSolution" function
+               (:parent "CTabuAlgorithmJSP"
+                :type "long")
+                nil [24862 25270])
+            ("IsTabu_Standard" function
+               (:parent "CTabuAlgorithmJSP"
+                :arguments 
+                  ( ("random_swap" variable (:type "long") (reparse-symbol arg-sub-list) [25312 25329]))                  
+                :type "int")
+                nil [25273 26695])
+            ("SetTabu_Standard" function
+               (:parent "CTabuAlgorithmJSP"
+                :arguments 
+                  ( ("random_swap" variable (:type "long") (reparse-symbol arg-sub-list) [26738 26755]))                  
+                :type "void")
+                nil [26697 27791])
+            ("update_record_best_etc" function
+               (:parent "CTabuAlgorithmJSP"
+                :arguments 
+                  ( ("f" variable (:type "double") (reparse-symbol arg-sub-list) [27840 27849]))                  
+                :type "void")
+                nil [27793 30329])
+            ("IncreaseArraySize" function
+               (:parent "CTabuAlgorithmJSP"
+                :type "void")
+                nil [30332 30448])
+            ("IncreaseArraySizeFull" function
+               (:parent "CTabuAlgorithmJSP"
+                :type "void")
+                nil [30450 30574])
+            ("InitialSolutionRandom" function
+               (:parent "CTabuAlgorithmJSP"
+                :type "double")
+                nil [30578 32652])
+            ("dumpHistory" function
+               (:parent "CTabuAlgorithmJSP"
+                :type "int")
+                nil [32660 35581])
+            ("RET_OK" variable (:type "int") nil [35572 35579])
+            ("objective" variable (:type ("std::vector::const_iterator" type (:type "class") nil nil)) nil [35642 35688])
+            ("timestamp" variable (:type ("std::vector::const_iterator" type (:type "class") nil nil)) nil [35693 35746])
+            ("inpfile" variable (:type ("ofstream" type (:type "class") nil nil)) nil [35786 35803])
+            ("open" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("this" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [35821 35826])
+                    ("" variable (:type ("logrecord_file_name" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [35827 35847])
+                    ("" variable (:type ("ios::app" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [35849 35858]))                  
+                :type "int")
+                nil [35816 35859])
+            ("endl" variable (:type "int") nil [36573 36578])
+            ("clear" function
+               (:prototype-flag t
+                :type "int")
+                nil [36605 36613])
+            ("clear" function
+               (:prototype-flag t
+                :type "int")
+                nil [36640 36648])
+            ("close" function
+               (:prototype-flag t
+                :type "int")
+                nil [36671 36679])
+            ("blogrecordused" variable
+               (:default-value "false"
+                :type "int")
+                nil [36685 36706])
+            ("endl" variable (:type "int") nil [36751 36756])
+            ("RET_OK" variable (:type "int") nil [36768 36775])
+            ("time" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("time_checkpoint2" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [36842 36859]))                  
+                :type "int")
+                nil [36836 36860])
+            ("time" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("this" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [36886 36891])
+                    ("" variable (:type ("tlastoutput" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [36892 36904]))                  
+                :type "int")
+                nil [36880 36905])
+            ("elapsed" variable
+               (:default-value "time_checkpoint2-reset_start"
+                :type "unsigned long")
+                nil [36935 36988])
+            ("push_back" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("CMaxRecord" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [37022 37033]))                  
+                :type "int")
+                nil [37012 37034])
+            ("push_back" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("elapsed" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [37072 37080]))                  
+                :type "int")
+                nil [37062 37081])
+            ("endl" variable (:type "int") nil [37378 37383])
+            ("blogrecordused" variable
+               (:default-value "true"
+                :type "int")
+                nil [37388 37408])
+            ("row_size" variable
+               (:default-value "((njobs*(njobs-1))/2)"
+                :type "long")
+                nil [40751 40787])
+            ("mach" variable
+               (:default-value "0"
+                :type "int")
+                nil [40792 40803])
+            ("CMax" variable
+               (:default-value "CalculateHeadTailQueue()"
+                :type "double")
+                nil [42154 42191])
+            ("CMax" variable (:type "int") nil [42203 42208])
+            ("queue_size" variable
+               (:default-value "0"
+                :type "long")
+                nil [42270 42288])
+            ("i" variable (:type "int") nil [42293 42299])
+            ("cur_proc" variable
+               (:default-value "0"
+                :type "int")
+                nil [42706 42721])
+            ("CMax" variable
+               (:default-value "0"
+                :type "double")
+                nil [42726 42740])
+            ("CMax" variable (:type "int") nil [44232 44237])
+            ("inpfile" variable (:type ("ifstream" type (:type "class") nil nil)) nil [44341 44358])
+            ("open" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("record_file" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [44376 44388]))                  
+                :type "int")
+                nil [44371 44389])
+            ("RET_OK" variable (:type "int") nil [45253 45260])
+            ("outfile" variable (:type ("ofstream" type (:type "class") nil nil)) nil [45394 45411])
+            ("open" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("record_file" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [45426 45438]))                  
+                :type "int")
+                nil [45421 45439])
+            ("position" variable
+               (:pointer 1
+                :default-value "new int[njobs*noper]"
+                :type "int")
+                nil [45441 45476])
+            ("position" variable
+               (:dereference 1
+                :default-value "0"
+                :type "int")
+                nil [45509 45523])
+            ("ind" variable
+               (:default-value "0"
+                :type "long")
+                nil [45525 45536])
+            ("close" function
+               (:prototype-flag t
+                :type "int")
+                nil [46072 46080])
+            ("position" variable (:type "int") nil [46092 46101])
+            ("inpfile" variable (:type ("ifstream" type (:type "class") nil nil)) nil [46198 46215])
+            ("open" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("record_file" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [46233 46245]))                  
+                :type "int")
+                nil [46228 46246])
+            ("ind" variable
+               (:default-value "0"
+                :type "long")
+                nil [46375 46386])
+            ("val" variable (:type "int") nil [46391 46399])
+            ("RET_OK" variable (:type "int") nil [46484 46491])
+            ("outfile" variable (:type ("ofstream" type (:type "class") nil nil)) nil [46579 46596])
+            ("open" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("record_file" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [46614 46626]))                  
+                :type "int")
+                nil [46609 46627])
+            ("ind" variable
+               (:default-value "0"
+                :type "long")
+                nil [46632 46643]))          
+      :file "tabuAlgorithmJSP.cc"
+      :pointmax 46746
+      :fsize 46745
+      :lastmodtime '(22768 61165 306664 858000)
+      :unmatched-syntax nil))
+  :file "!home!hesam!schedulor!standardTabu-DataCollector!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

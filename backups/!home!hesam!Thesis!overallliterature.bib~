@@ -1,0 +1,2431 @@
+% This file was created with JabRef 2.7b.
+% Encoding: UTF-8
+
+@BOOK{Aarts:1989,
+  title = {Simulated annealing and Boltzmann machines: a stochastic approach
+	to combinatorial optimization and neural computing},
+  publisher = {John Wiley \& Sons, Inc.},
+  year = {1989},
+  author = {Aarts, Emile and Korst, Jan},
+  address = {New York, NY, USA},
+  isbn = {0-471-92146-7}
+}
+
+@article{resende2016optimization,
+  title={Optimization by GRASP},
+  author={Resende, Mauricio GC and Ribeiro, Celso C},
+  year={2016},
+  publisher={Springer}
+}
+
+@ARTICLE{Aiex:2003,
+  author = {Aiex, R.M. and Binato, S. and Resende,M.G.C.},
+  title = {Parallel GRASP with path-relinking for job shop scheduling},
+  journal = {Parallel Computing},
+  year = {2003},
+  volume = {29},
+  pages = {393--430}
+}
+
+@ARTICLE{Alidaee:1994,
+  author = {Alidaee, Bahram and Kochenberger, Gary A. and Ahmadian, Ahmad},
+  title = {0-1 Quadratic programming approach for optimum solutions of two scheduling
+	problems},
+  journal = {International Journal of Systems Science},
+  year = {1994},
+  volume = {25},
+  pages = {401-408},
+  number = {2}
+}
+
+@ARTICLE{Alkhamis:1998,
+  author = {Talal M. Alkhamis and Merza Hasan and Mohamed A. Ahmed},
+  title = {Simulated annealing for the unconstrained quadratic pseudo-Boolean
+	function},
+  journal = {European Journal of Operational Research},
+  year = {1998},
+  volume = {108},
+  pages = {641 - 652},
+  number = {3},
+  issn = {0377-2217},
+  keywords = {Simulated annealing}
+}
+
+@ARTICLE{Allemand:2001,
+  author = {Allemand, Kim and Fukuda, Komei and Liebling, Thomas M. and Steiner,
+	Erich},
+  title = {A polynomial case of unconstrained zero-one quadratic optimization},
+  journal = {Mathematical Programming},
+  year = {2001},
+  volume = {91},
+  pages = {49-52},
+  issn = {0025-5610},
+  issue = {1},
+  keyword = {Mathematics and Statistics},
+  publisher = {Springer Berlin / Heidelberg}
+}
+
+@INCOLLECTION{Amini:1999,
+  author = {Mohammad M. Amini and Bahram Alidaee and Gary A. Kochenberger},
+  title = {A Scatter Search Approach to Unconstrained Quadratic Binary Programs},
+  booktitle = {New Ideas in Optimization},
+  publisher = {McGraw-Hill},
+  year = {1999},
+  editor = {David Corne and Marco Dorigo and Fred Glover},
+  pages = {317--329},
+  address = {London}
+}
+
+@ARTICLE{Applegate:1991,
+  author = {Applegate, D. and Cook, W.},
+  title = {A computational study of the job-shop scheduling instance},
+  journal = {ORSA Journal on Computing},
+  year = {1991},
+  volume = {3},
+  pages = {149--156}
+}
+
+@ARTICLE{Balas:1998,
+  author = {E. Balas and A. Vazacopoulos},
+  title = {Guided Local Search with Shifting Bottleneck for Job Shop Scheduling},
+  journal = {Management Science},
+  year = {1998},
+  volume = {44},
+  pages = {262--275}
+}
+
+@ARTICLE{Balas:1995,
+  author = {Balas, E. and Vazacopoulos, A.},
+  title = {Guided local search with shifting bottleneck for job shop scheduling},
+  journal = {Management Science},
+  year = {1995},
+  volume = {44},
+  pages = {262--275}
+}
+
+@BOOK{Baptiste:2001,
+  title = {Constraint-based scheduling: Applying constraint programming to scheduling
+	problems},
+  publisher = {Springer},
+  year = {2001},
+  author = {Baptiste, P. and Le Pape, C. and Nuijten, W.},
+  volume = {39}
+}
+
+@ARTICLE{Barahona:1986,
+  author = {F. Barahona},
+  title = {A solvable case of quadratic 0-1 programming},
+  journal = {Discrete Applied Mathematics},
+  year = {1986},
+  volume = {13},
+  pages = {23--26}
+}
+
+@ARTICLE{Barahona:1982,
+  author = {F. Barahona},
+  title = {On the computational complexity of spin glass models},
+  journal = {Journal of Physics A: Mathematical and General},
+  year = {1982},
+  volume = {15},
+  pages = {3241--3253}
+}
+
+@ARTICLE{Barahona:1988,
+  author = {F. Barahona and M. Gr\"{o}tschel and M. J\"{u}ger and G. Reinelt},
+  title = {An application of combinatorial optimization to statistical physics
+	and circuit layout design},
+  journal = {Operations Research},
+  year = {1988},
+  volume = {36},
+  pages = {493--513}
+}
+
+@INCOLLECTION{Battiti:1998,
+  author = {R. Battiti and M. Protasi},
+  title = {Approximate algorithms and heuristics for the MAX-SAT},
+  booktitle = {Handbook of Combinatorial Optimization},
+  publisher = {Kluwer Academic Publishers},
+  year = {1998},
+  editor = {D.-Z. Du and P.M. Pardalos},
+  volume = {1},
+  pages = {77--148}
+}
+
+@ARTICLE{Battiti:1999,
+  author = {Battiti, Roberto and Protasi, Marco},
+  title = {Reactive local search techniques for the maximum k-conjunctive constraint
+	satisfaction problem (MAX-k-CCSP)},
+  journal = {Discrete Appl. Math.},
+  year = {1999},
+  volume = {96-97},
+  pages = {3--27},
+  month = {October},
+  acmid = {334234},
+  address = {Amsterdam, The Netherlands, The Netherlands},
+  issn = {0166-218X},
+  issue = {1},
+  keywords = {constraint satisfaction, heuristic algorithms, history-sensitive heuristics,
+	reactive search, satisfiability},
+  numpages = {25},
+  publisher = {Elsevier Science Publishers B. V.}
+}
+
+@ARTICLE{Battiti:1997,
+  author = {Battiti, Roberto and Protasi, Marco},
+  title = {Reactive search, a history-sensitive heuristic for MAX-SAT},
+  journal = {J. Exp. Algorithmics},
+  year = {1997},
+  volume = {2},
+  month = {January},
+  acmid = {264220},
+  address = {New York, NY, USA},
+  articleno = {2},
+  issn = {1084-6654},
+  issue_date = {1997},
+  publisher = {ACM}
+}
+
+@ARTICLE{Battiti:1995,
+  author = {Battiti, Roberto and Tecchiolli, Giampietro},
+  title = {Local search with memory: benchmarking RTS},
+  journal = {OR Spectrum},
+  year = {1995},
+  volume = {17},
+  pages = {67-86},
+  affiliation = {Dipartimento di Matematica UniversitÃ  di Trento I-38050 Povo (Trento)
+	Italy},
+  issn = {0171-6468},
+  issue = {2},
+  keyword = {Business and Economics},
+  publisher = {Springer Berlin / Heidelberg}
+}
+
+@ARTICLE{Battiti:1994,
+  author = {Battiti, R. and Tecchiolli, G.},
+  title = {The reactive tabu search},
+  journal = {ORSA Journal on Computing},
+  year = {1994},
+  volume = {6},
+  pages = {126--140},
+  number = {2}
+}
+
+@ARTICLE{Beasley:1998,
+  author = {J.E. Beasley},
+  title = {Heuristic Algorithms for the Unconstrained Binary Quadratic Programming
+	Problem},
+  journal = {Working paper, The Management School, Imperial College, London, England},
+  year = {1998}
+}
+
+@MISC{Beasley:,
+  author = {J. E. Beasley},
+  title = { {OR}-Library webpage, \url{http://people.brunel.ac.uk/~mastjjb/jeb/info.html}
+	(last updated on June 2008)}
+}
+
+@ARTICLE{Billionnet:1994,
+  author = {A. Billionnet and A. Sutter},
+  title = {Minimization of a Quadratic Pseudo-Boolean Function},
+  journal = {European Journal of Operational Research},
+  year = {1994},
+  volume = {78},
+  pages = {106--115}
+}
+
+@INCOLLECTION{Binato:2002,
+  author = {S. Binato and W.J. Hery and D. Loewenstern and M.G.C. Resende},
+  title = {A greedy randomized adaptive search procedure for job shop scheduling},
+  booktitle = {Essays and surveys in metaheuristics},
+  publisher = {Kluwer Academic Publishers},
+  year = {2002},
+  editor = {C.C. Ribeiro and P. Hansen},
+  pages = {58--79}
+}
+
+@INBOOK{Binato:2001,
+  pages = {59--79},
+  title = {A GRASP for job shop scheduling, Essays and surveys on metaheuristics},
+  publisher = {Kluwer Academic Publishers},
+  year = {2001},
+  author = {Binato, S. and Hery, W.J. and Loewenstern, D. and Resende, M.G.C.}
+}
+
+@ARTICLE{Bla.zewicz:1996,
+  author = {J. Bla\.{z}ewicz and W. Domschke and E. Pesch},
+  title = {The Job Shop Scheduling Problem: Conventional and New Solution Techniques},
+  journal = {European Journal of Operational Research},
+  year = {1996},
+  volume = {93},
+  pages = {1--33}
+}
+
+@ARTICLE{Blazewicz:1996,
+  author = {J. Blazewicz and W. Domschke and E. Pesch},
+  title = {The Job-Shop Scheduling Problem: Conventional and New Solution Techniques},
+  journal = {European Journal of Operational Research},
+  year = {1996},
+  volume = {93(1)},
+  pages = {1--33}
+}
+
+@INCOLLECTION{Borgulya:2005,
+  author = {Borgulya, Istv?n},
+  title = {An Evolutionary Algorithm for the Unconstrained Binary Quadratic
+	Problems},
+  booktitle = {Computational Intelligence, Theory and Applications},
+  publisher = {Springer Berlin / Heidelberg},
+  year = {2005},
+  editor = {Reusch, Bernd},
+  volume = {33},
+  series = {Advances in Soft Computing},
+  pages = {3-16},
+  affiliation = {University of P?cs Faculty of Business and Economics H-7621 P?cs,
+	R?k?czi ?t 80 Hungary},
+  isbn = {978-3-540-22807-3},
+  keyword = {Engineering}
+}
+
+@ARTICLE{Burer:2002,
+  author = {Burer, Samuel and Monteiro, Renato D. C. and Zhang, Yin},
+  title = {Rank-Two Relaxation Heuristics for MAX-CUT and Other Binary Quadratic
+	Programs},
+  journal = {SIAM J. on Optimization},
+  year = {2002},
+  volume = {12},
+  pages = {503--521},
+  month = {February},
+  acmid = {588952},
+  address = {Philadelphia, PA, USA},
+  issn = {1052-6234},
+  issue = {2},
+  keywords = {MAX-CUT and MAX-BISECTION, binary quadratic programs, continuous optimization
+	heuristics, rank-two relaxation, semidefinite relaxation},
+  numpages = {19},
+  publisher = {Society for Industrial and Applied Mathematics}
+}
+
+@ARTICLE{Bomer:1990,
+  author = {L. B{\"o}mer and M. Antweiler},
+  title = {Periodic complementary binary sequences},
+  journal = {IEEE Trans. Inform. Theory},
+  year = {1990},
+  volume = {36 (6)},
+  pages = {1487--1494}
+}
+
+@ARTICLE{Chabrier:2004,
+  author = { A. Chabrier and E. Danna and C. Le Pape and L. Perron},
+  title = {Solving a Network Design Problem},
+  journal = {Annals of Operations Research},
+  year = {2004},
+  volume = {130},
+  pages = {217--239}
+}
+
+@ARTICLE{Chang:1987,
+  author = {K. C. Chang and David Hung-Chang Du},
+  title = {Efficient Algorithms for Layer Assignment Problem},
+  journal = {IEEE Trans. on CAD of Integrated Circuits and Systems},
+  year = {1987},
+  volume = {6},
+  pages = {67-78},
+  number = {1},
+  issn = {0278-0070}
+}
+
+@ARTICLE{Chang:1988,
+  author = {Chang, K. C. and Du, H. C.},
+  title = {Layer Assignment Problem for Three-Layer Routing},
+  journal = {IEEE Trans. Comput.},
+  year = {1988},
+  volume = {37},
+  pages = {625--632},
+  month = {May},
+  acmid = {45195},
+  address = {Washington, DC, USA},
+  issn = {0018-9340},
+  issue = {5},
+  keywords = {CVM3, NP-complete, VLSI., circuit layout CAD, computational complexity,
+	constrained via minimization, heuristic algorithm, heuristic programming,
+	layer assignment, minimisation, signal nets, three-layer routing},
+  numpages = {8},
+  publisher = {IEEE Computer Society}
+}
+
+@INPROCEEDINGS{Chen:2001,
+  author = {Hubie Chen and Carla P. Gomes and Bart Selman},
+  title = {Formal Models of Heavy-Tailed Behavior in Combinatorial Search},
+  booktitle = {CP '01: Proceedings of the 7th International Conference on Principles
+	and Practice of Constraint Programming},
+  year = {2001},
+  pages = {408--421},
+  address = {London, UK},
+  publisher = {Springer-Verlag},
+  isbn = {3-540-42863-1}
+}
+
+@ARTICLE{Chu:1998,
+  author = {Chu, P.C. and Beasley, J.E.},
+  title = {A Genetic Algorithm for the Multidimensional Knapsack Problem},
+  journal = {Journal of Heuristics},
+  year = {1998},
+  volume = {4},
+  pages = {63-86},
+  issn = {1381-1231},
+  issue = {1},
+  keyword = {Mathematics and Statistics},
+  publisher = {Springer Netherlands}
+}
+
+@BOOK{Colbourn:2006,
+  title = {Handbook of Combinatorial Designs, Second Edition (Discrete Mathematics
+	and Its Applications)},
+  publisher = {Chapman \& Hall/CRC},
+  year = {2006},
+  author = {Charles J. Colbourn and Jeffrey H. Dinitz},
+  isbn = {1584885068}
+}
+
+@MISC{Colorado:,
+  author = {Colorado},
+  title = {Hearin Center for Enterprise Science, Benchmarks for Unconstrained
+	Binary Quadratic Problems, \url{http://hces.bus.olemiss.edu/tools.html}
+	(last accessed on October 2008)}
+}
+
+@BOOK{Cormen:2001,
+  title = {Introduction to Algorithms},
+  publisher = {The MIT Press},
+  year = {2001},
+  author = {Cormen, Thomas H. and Leiserson, Charles E. and Rivest, Ronald L.
+	and Stein, Clifford},
+  edition = {2},
+  added-at = {2012-02-12T20:02:28.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/2225d42638921bee01b4ac8ff991b0a6a/pvortex3},
+  interhash = {dcdeb0ec50a6798abf1724056982b543},
+  intrahash = {225d42638921bee01b4ac8ff991b0a6a}
+}
+
+@INCOLLECTION{Dapuzzo:2006,
+  author = {D'apuzzo, M. Marino and A. Migdalas and Panos M. Pardalos and G.
+	Toraldo},
+  title = {Parallel computing in global optimization},
+  booktitle = {Handbook of Parallel Computing and Statistics},
+  publisher = {Chapman \& Hall/CRC},
+  year = {2006},
+  editor = {E.J. Kontoghiorghes},
+  pages = {225--258}
+}
+
+@ARTICLE{Darwen:2001,
+  author = {Paul J. Darwen},
+  title = { Looking for the Big Valley in the Fitness Landscape of Single Machine
+	Scheduling with Batching, Precedence Constraints, and Sequence- Dependent
+	Setup Times},
+  journal = {5 th Australasia-Japan Joint Workshop University of Otago, Dunedin,
+	New Zealand, November 19 th - 21},
+  year = {2001}
+}
+
+@ARTICLE{Demirkol:1998,
+  author = {Ebru Demirkol and Sanjay Mehta and Reha Uzsoy},
+  title = {Benchmarks for shop scheduling problems},
+  journal = {European Journal of Operational Research},
+  year = {1998},
+  volume = {109},
+  pages = {137 - 141},
+  number = {1},
+  doi = {10.1016/S0377-2217(97)00019-2},
+  issn = {0377-2217},
+  keywords = {Combinatorial optimization},
+  url = {http://www.sciencedirect.com/science/article/pii/S0377221797000192}
+}
+
+@MISC{Dongarra:1993,
+  author = {Dongarra, J.J.},
+  title = {Performance of various computers using standard linear equations
+	software},
+  howpublished = {Report CS-89-85, Computer Science Department, University of Tennessee,
+	Knoxville, TN},
+  year = {1993}
+}
+
+@ARTICLE{Drezner:2005,
+  author = {Drezner, Zvi and Hahn, Peter and Taillard, ?eric},
+  title = {Recent Advances for the Quadratic Assignment Problem with Special
+	Emphasis on Instances that are Difficult for Meta-Heuristic Methods},
+  journal = {Annals of Operations Research},
+  year = {2005},
+  volume = {139},
+  pages = {65-94},
+  affiliation = {California State University-Fullerton USA},
+  issn = {0254-5330},
+  issue = {1},
+  keyword = {Business and Economics},
+  publisher = {Springer Netherlands}
+}
+
+@ARTICLE{Fenimore:1978,
+  author = {E. Fenimore and T. Cannon},
+  title = {Coded aperture imaging with uniformly redundant arrays},
+  journal = {Appl. Optics},
+  year = {1978},
+  volume = {17},
+  pages = {337--347}
+}
+
+@ARTICLE{Ferreira:1993,
+  author = {Ferreira, A.G. and Zerovnik, J.},
+  title = {Bounding the probability of success of stochastic methods for global
+	optimization},
+  journal = {Computers \& Mathematics with Applications},
+  year = {1993},
+  volume = {25},
+  pages = {1--8}
+}
+
+@ARTICLE{Festa:2007,
+  author = {Festa, Paola and Pardalos, Panos M. and Pitsoulis, Leonidas S. and
+	Resende, Mauricio G. C.},
+  title = {GRASP with path relinking for the weighted MAXSAT problem},
+  journal = {J. Exp. Algorithmics},
+  year = {2007},
+  volume = {11},
+  month = {February},
+  acmid = {1216581},
+  address = {New York, NY, USA},
+  articleno = {2.4},
+  issn = {1084-6654},
+  issue_date = {2006},
+  keywords = {Algorithms, GRASP, experimentation, heuristics, path relinking, performance,
+	time-to-target plots},
+  publisher = {ACM}
+}
+
+@ARTICLE{Festa:2006,
+  author = {Paola Festa and Panos M. Pardalos and Leonidas S. Pitsoulis and Mauricio
+	G. C. Resende},
+  title = {GRASP with path relinking for the weighted MAXSAT problem},
+  journal = {J. Exp. Algorithmics},
+  year = {2006},
+  volume = {11},
+  pages = {2.4},
+  address = {New York, NY, USA},
+  issn = {1084-6654},
+  publisher = {ACM}
+}
+
+@ARTICLE{Festa:2002,
+  author = {P. Festa and P. M. Pardalos and M. G. C. Resende and C. C. Ribeiro},
+  title = {Randomized Heuristics for the Max-Cut Problem},
+  journal = {Optimization Methods and Software},
+  year = {2002},
+  volume = {7},
+  pages = {1033--1058}
+}
+
+@BOOK{Finkelstein:1976,
+  title = {Approximate methods and applied discrete programming problems},
+  publisher = {Nauka},
+  year = {1976},
+  author = {Finkelstein, Yu.Yu.},
+  address = {Moscow},
+  language = {Russian}
+}
+
+@ARTICLE{G.Gallo:1980,
+  author = {G.Gallo and P.L. Hammer and B.Simeone},
+  title = {Quadratic knapsack problems},
+  journal = {Mathematical Programming},
+  year = {1980},
+  volume = {12},
+  pages = {132--149}
+}
+
+@BOOK{Garey:1990,
+  title = {Computers and Intractability; A Guide to the Theory of NP-Completeness},
+  publisher = {W. H. Freeman \& Co.},
+  year = {1990},
+  author = {Michael R. Garey and David S. Johnson},
+  address = {New York, NY, USA},
+  isbn = {0716710455}
+}
+
+@BOOK{Garey:1979,
+  title = {Computers and Intractability: A Guide to the Theory of NP-Completeness
+	(Series of Books in the Mathematical Sciences)},
+  publisher = {W. H. Freeman},
+  year = {1979},
+  author = {Garey, M. R. and Johnson, D. S.},
+  edition = {First Edition},
+  added-at = {2011-09-01T15:03:14.000+0200},
+  asin = {0716710455},
+  description = {Amazon.com: Computers and Intractability: A Guide to the Theory of
+	NP-Completeness (Series of Books in the Mathematical Sciences) (9780716710455):
+	M. R. Garey, D. S. Johnson: Books},
+  dewey = {519.4},
+  ean = {9780716710455},
+  interhash = {ff69422a0dd852de42ed1c7d63fb2bf6},
+  intrahash = {fac25cd952418baa739dd35243b3dbdc},
+  isbn = {0716710455},
+  keywords = {complexity computer np science tcs theoretical},
+  timestamp = {2011-09-01T15:03:14.000+0200}
+}
+
+@ARTICLE{Glover:1990a,
+  author = {Glover, Fred},
+  title = {{Tabu Search: A Tutorial}},
+  journal = {Interfaces},
+  year = {1990},
+  volume = {20},
+  pages = {74-94},
+  number = {4},
+  doi = {10.1287/inte.20.4.74},
+  eprint = {http://pubsonline.informs.org/doi/pdf/10.1287/inte.20.4.74},
+  url = {http://pubsonline.informs.org/doi/abs/10.1287/inte.20.4.74}
+}
+
+@ARTICLE{Glover:1989,
+  author = {Glover, Fred},
+  title = {{Tabu Search - Part I}},
+  journal = {ORSA Journal on Computing},
+  year = {1989},
+  volume = {1},
+  pages = {190--206},
+  number = {3}
+}
+
+@ARTICLE{Glover:1998,
+  author = {F. Glover and G.A. Kochenberger and B. Alidaee},
+  title = {Adaptive Memory Tabu Search for Binary Quadratic Programs},
+  journal = {Management Science},
+  year = {1998},
+  volume = {44},
+  pages = { 336--345}
+}
+
+@INCOLLECTION{Glover:1993,
+  author = {F. Glover and M. Laguna},
+  title = {{Tabu search}},
+  booktitle = {Modern Heuristic Techniques for Combinatorial Problems},
+  publisher = {Blackwell, Oxford, UK},
+  year = {1993},
+  editor = {C. Reeves},
+  pages = {70--141}
+}
+
+@INCOLLECTION{Glover:1993b,
+  author = {Glover, Fred and Laguna, Manuel},
+  title = {{Modern Heuristic Techniques for Combinatorial Problems}},
+  publisher = {John Wiley \& Sons, Inc.},
+  year = {1993},
+  editor = {Reeves, Colin R.},
+  chapter = {Tabu Search},
+  pages = {70--150},
+  address = {New York, NY, USA},
+  acmid = {166655},
+  isbn = {0-470-22079-1},
+  numpages = {81},
+  url = {http://dl.acm.org/citation.cfm?id=166648.166655}
+}
+
+@BOOK{Glover:1997,
+  title = {Tabu Search},
+  publisher = {Kluwer Academic Publishers},
+  year = {1997},
+  author = {Glover, Fred and Laguna, Manuel},
+  address = {Norwell, MA, USA},
+  isbn = {079239965X}
+}
+
+@INBOOK{Glover:1993a,
+  pages = {70--150},
+  title = {Tabu search},
+  publisher = {John Wiley \& Sons, Inc.},
+  year = {1993},
+  author = {Glover, Fred and Laguna, Manuel},
+  address = {New York, NY, USA},
+  acmid = {166655},
+  book = {Modern heuristic techniques for combinatorial problems},
+  isbn = {0-470-22079-1},
+  numpages = {81}
+}
+
+@ARTICLE{Glover:1990,
+  author = {F. Glover and M. Laguna},
+  title = {Tabu search},
+  journal = {IEEE Trans. Inform. Theory},
+  year = {1990},
+  volume = {36 (6)},
+  pages = {1487--1494}
+}
+
+@ARTICLE{Glover:2000,
+  author = {Glover, Fred and Laguna, Manuel and Mart?, Rafael},
+  title = {Fundamentals of Scatter Search and Path Relinking},
+  journal = {Control And Cybernetics},
+  year = {2000},
+  volume = {29},
+  pages = {653--684},
+  number = {3},
+  publisher = {Citeseer}
+}
+
+@ARTICLE{Goemans:1995,
+  author = {M. X. Goemans and D.P. Williamson},
+  title = {Improved Approximation Algorithms for Maximum Cut and Satisfiability
+	Problems Using Semidefinite Programming},
+  journal = {Journal of the ACM},
+  year = {1995},
+  volume = {42},
+  pages = {1115--1145},
+  number = {6},
+  publisher = {ACM}
+}
+
+@BOOK{Goldberg:1989,
+  title = {Genetic Algorithms in Search, Optimization and Machine Learning},
+  publisher = {Addison-Wesley Longman Publishing Co., Inc.},
+  year = {1989},
+  author = {Goldberg, David E.},
+  address = {Boston, MA, USA},
+  edition = {1st},
+  isbn = {0201157675}
+}
+
+@ARTICLE{Golomb:1982,
+  author = {S. Golomb and H. Taylor},
+  title = {Two-dimensional synchronization patterns for minimum ambiguity},
+  journal = {IEEE Trans. Inform. Theory},
+  year = {1982},
+  volume = {28},
+  pages = {600--604}
+}
+
+@BOOK{Golomb:2005,
+  title = {Signal design for good correlation. For wireless communication, cryptography,
+	and radar.},
+  publisher = {University Press, Cambridge},
+  year = {2005},
+  author = {S. W. Golomb and G. Gong.},
+  isbn = {0387954872}
+}
+
+@ARTICLE{Gomes:2001,
+  author = {Gomes, Carla P. and Selman, Bart},
+  title = {Algorithm portfolios},
+  journal = {Artif. Intell.},
+  year = {2001},
+  volume = {126},
+  pages = {43--62},
+  number = {1-2},
+  address = {Essex, UK},
+  issn = {0004-3702},
+  publisher = {Elsevier Science Publishers Ltd.}
+}
+
+@INPROCEEDINGS{Gomes:1997,
+  author = {Carla P. Gomes and Bart Selman and Nuno Crato},
+  title = {Heavy-tailed distributions in combinatorial search},
+  booktitle = {Proc. of 3rd Int. Conf. on Principles and Practice of Constraint
+	Programming (CP97},
+  year = {1997},
+  pages = {121--135},
+  publisher = {Springer}
+}
+
+@INPROCEEDINGS{Gomes:1998,
+  author = {Carla P. Gomes and Bart Selman and Henry Kautz},
+  title = {Boosting combinatorial search through randomization},
+  booktitle = {Proceedings of the 15th National Conference on Artificial Intelligence},
+  year = {1998},
+  pages = {431--437},
+  address = {Madison, Wisconsin},
+  publisher = {AAAI Press}
+}
+
+@ARTICLE{Grabowski:1988,
+  author = {Grabowski, J. and Nowicki, E. and Smutnicki, C.},
+  title = {Block algorithm for scheduling of operations in job-shop system,
+	(Polish)},
+  journal = {Przeglad Statystyczny},
+  year = {1988},
+  volume = {35},
+  pages = {67--80}
+}
+
+@ARTICLE{Grabowski:1986,
+  author = {Grabowski, J. and Nowicki, E. and Zdrzalka, S.},
+  title = {A block approach for single-machine scheduling with release dates
+	and due dates},
+  journal = {European Journal of Operational Research},
+  year = {1986},
+  volume = {26},
+  pages = {278-285},
+  number = {2},
+  month = {August}
+}
+
+@INCOLLECTION{Gupta:2010,
+  author = {Gupta, Arjun K. and Zeng, Wei-Bin and Wu, Yanhong and Gupta, Arjun
+	K. and Zeng, Wei-Bin and Wu, Yanhong},
+  title = {Parametric Families of Lifetime Distributions},
+  booktitle = {Probability and Statistical Models},
+  publisher = {BirkhÃ¤user Boston},
+  year = {2010},
+  pages = {71-86},
+  affiliation = {Department of Mathematics and Statistics, Bowling Green State University,
+	Bowling Green, OH 43403, USA},
+  isbn = {978-0-8176-4987-6},
+  keyword = {Mathematics and Statistics}
+}
+
+@ARTICLE{Hadlock:1975,
+  author = {F. Hadlock},
+  title = {Finding a Maximum Cut of a Planar Graph in Polynomial Time},
+  journal = {SIAM J. Comput.},
+  year = {1975},
+  volume = {4},
+  pages = {221-225},
+  number = {3},
+  bibsource = {DBLP, http://dblp.uni-trier.de}
+}
+
+@ARTICLE{Hammer:2002,
+  author = {P. Hammer and P. Hansen and P. Pardalos and D. Rader, Jr.},
+  title = {Maximizing the product of two linear functions in 0--1 variables},
+  journal = {Optimization},
+  year = {2002},
+  volume = {51},
+  pages = {511--537}
+}
+
+@ARTICLE{Hansen:1990,
+  author = {Hansen, Pierre and Jaumard, Brigitte},
+  title = {Algorithms for the maximum satisfiability problem},
+  journal = {Computing},
+  year = {1990},
+  volume = {44},
+  pages = {279--303},
+  month = {April},
+  acmid = {108091},
+  address = {New York, NY, USA},
+  issn = {0010-485X},
+  issue = {4},
+  numpages = {25},
+  publisher = {Springer-Verlag New York, Inc.}
+}
+
+@INPROCEEDINGS{Hastad:1996,
+  author = {J. Hastad},
+  title = {Clique is hard to approximate within n1-},
+  booktitle = {FOCS '96: Proceedings of the 37th Annual Symposium on Foundations
+	of Computer Science},
+  year = {1996},
+  pages = {627},
+  address = {Washington, DC, USA},
+  publisher = {IEEE Computer Society}
+}
+
+@ARTICLE{Helmberg:1999,
+  author = {Helmberg, C. and Rendl, F.},
+  title = {A Spectral Bundle Method for Semidefinite Programming},
+  journal = {SIAM J. on Optimization},
+  year = {1999},
+  volume = {10},
+  pages = {673--696},
+  month = {July},
+  acmid = {589294},
+  address = {Philadelphia, PA, USA},
+  issn = {1052-6234},
+  issue = {3},
+  keywords = {convex optimization, eigenvalue optimization, large-scale problems,
+	proximal bundle method, semidefinite programming},
+  numpages = {24},
+  publisher = {Society for Industrial and Applied Mathematics}
+}
+
+@ARTICLE{Helmberg:1998,
+  author = {C. Helmberg and F. Rendl},
+  title = {Solving Quadratic (0, 1)-Problems by Semidefinite Programs and Cutting
+	Planes},
+  journal = {Mathematical Programming},
+  year = {1998},
+  volume = {82},
+  pages = {291--315}
+}
+
+@INCOLLECTION{Henderson:2003,
+  author = {Henderson, D. and Jacobson, , S.H. and Johnson, A.W.},
+  title = {The Theory and Practice of Simulated Annealing},
+  booktitle = {Handbook of Metaheuristics},
+  publisher = {Boston: Kluwer Academic Publishers},
+  year = {2003},
+  editor = {Glover, F. and Kochenberger, G.},
+  pages = {287--319}
+}
+
+@BOOK{Hentenryck:2009,
+  title = {Constraint-based local search},
+  publisher = {The MIT Press},
+  year = {2009},
+  author = {Hentenryck, P.V. and Michel, L.}
+}
+
+@ARTICLE{Hersheya:1983,
+  author = {J. Hersheya and R. Yarlagadda},
+  title = {Two-dimensional synchronisation},
+  journal = { Electron. Lett.},
+  year = {1983},
+  volume = {19},
+  pages = {801--803}
+}
+
+@ARTICLE{Hopfield:1985,
+  author = {Hopfield, J. J. and Tank, D. W.},
+  title = {Neural computation of decisions in optimization problems},
+  journal = {Biological Cybernetics},
+  year = {1985},
+  volume = {52},
+  pages = {141-152},
+  issn = {0340-1200},
+  issue = {3},
+  keyword = {Biomedical and Life Sciences},
+  publisher = {Springer Berlin / Heidelberg}
+}
+
+@ARTICLE{Huberman:1997,
+  author = {Huberman, Bernardo A. and Lukose, Rajan M. and Hogg, Tad},
+  title = {{An Economics Approach to Hard Computational Problems}},
+  journal = {Science},
+  year = {1997},
+  volume = {275},
+  pages = {51-54},
+  number = {5296}
+}
+
+@ARTICLE{Iasemidis:2001,
+  author = {L.D. Iasemidis and P.M. Pardalos and J.C. Sackellares and D.S. Shiau},
+  title = {Quadratic binary programming and dynamical system approach to determine
+	the predictability of epileptic seizures},
+  journal = {Journal of Combinatorial Optimization},
+  year = {2001},
+  volume = {5},
+  pages = {9--26}
+}
+
+@MISC{Internet:,
+  author = {Internet},
+  title = {Job Shop Scheduling webpage, http://plaza.ufl.edu/shylo/jobshopinfo.html
+	(last accessed on March 3, 2012)}
+}
+
+@ARTICLE{J.Krarup:1978,
+  author = {J.Krarup and P.A. Pruzan},
+  title = {Computer aided layout design},
+  journal = {Mathematical Programming Study},
+  year = {1978},
+  volume = {9},
+  pages = {75--94}
+}
+
+@ARTICLE{Junger:1994,
+  author = {M. J\"{u}nger and A. Martin and G. Reinelt and R. Weismantel},
+  title = {Quadratic 0/1 Optimization and a Decomposition Approach for the Placement
+	of Electronic Circuits},
+  journal = {Mathematical Programming},
+  year = {1994},
+  volume = {63},
+  pages = {257--279}
+}
+
+@ARTICLE{Jain:1999,
+  author = {Jain, A.S. and Meeran, S. },
+  title = {Deterministic job shop scheduling: Past, present and future},
+  journal = {European Journal of Operational Research},
+  year = {1999},
+  volume = {113},
+  pages = {390--434}
+}
+
+@ARTICLE{Jain:2000,
+  author = {Jain, A.S. and Rangaswamy, B. and Meeran, S.},
+  title = {New and stronger job shop neighborshoods: A focus on the method of
+	Nowicki and Smutnicki (1996)},
+  journal = {Journal of Heuristics},
+  year = {2000},
+  volume = {6(4)},
+  pages = {457--480}
+}
+
+@ARTICLE{Kahruman:2007,
+  author = {Kahruman, Sera and Kolotoglu, Elif and Butenko, Sergiy and Hicks,
+	Illya V.},
+  title = {On greedy construction heuristics for the MAX-CUT problem},
+  journal = {Int. J. Comput. Sci. Eng.},
+  year = {2007},
+  volume = {3},
+  pages = {211--218},
+  number = {3},
+  address = {Inderscience Publishers, Geneva, SWITZERLAND},
+  issn = {1742-7185},
+  publisher = {Inderscience Publishers}
+}
+
+@INPROCEEDINGS{Kao:1994,
+  author = {Kao, Ming-Yang and Ma, Yuan and Sipser, Michael and Yin, Yiqun},
+  title = {Optimal constructions of hybrid algorithms},
+  booktitle = {SODA '94: Proceedings of the fifth annual ACM-SIAM symposium on Discrete
+	algorithms},
+  year = {1994},
+  pages = {372--381},
+  address = {Philadelphia, PA, USA},
+  publisher = {Society for Industrial and Applied Mathematics},
+  isbn = {0-89871-329-3},
+  location = {Arlington, Virginia, United States}
+}
+
+@INCOLLECTION{Karp:1972,
+  author = {R. Karp},
+  title = {Reducibility among combinatorial problems},
+  booktitle = {Complexity of Computer Computations},
+  publisher = {Plenum Press},
+  year = {1972},
+  editor = {R. Miller and J. Thatcher},
+  pages = {85--103},
+  interhash = {427e5bfc8069f94f57c5d43b6fd85949},
+  intrahash = {1fa7a672ce72ed916311dc52e5a93038}
+}
+
+@ARTICLE{Katayama:2001,
+  author = {Katayama, Kengo and Narihisa, Hiroyuki},
+  title = {Performance of simulated annealing-based heuristic for the unconstrained
+	binary quadratic programming problem},
+  journal = {European Journal of Operational Research},
+  year = {2001},
+  volume = {134},
+  pages = {103-119},
+  number = {1},
+  month = {October}
+}
+
+@INPROCEEDINGS{Katayama:2000,
+  author = {Kengo Katayama and Masafumi Tani and Hiroyuki Narihisa},
+  title = {Solving Large Binary Quadratic Programming Problems by Effective
+	Genetic Local Search Algorithm},
+  booktitle = {Proceedings of the Genetic and Evolutionary Computation Conference
+	(GECCO '00), Las Vegas, Nevada, USA, July 8-12, 2000},
+  year = {2000},
+  editor = {L. Darrell Whitley and David E. Goldberg and Erick Cant{\'u}-Paz
+	and Lee Spector and Ian C. Parmee and Hans-Georg Beyer},
+  pages = {643-650},
+  publisher = {Morgan Kaufmann},
+  isbn = {1-55860-708-0}
+}
+
+@INPROCEEDINGS{Khot:2001,
+  author = {S. Khot},
+  title = {Improved Inapproximability Results for MaxClique, Chromatic Number
+	and Approximate Graph Coloring},
+  booktitle = {FOCS '01: Proceedings of the 42nd IEEE symposium on Foundations of
+	Computer Science},
+  year = {2001},
+  pages = {600},
+  address = {Washington, DC, USA},
+  publisher = {IEEE Computer Society},
+  isbn = {0-7695-1390-5}
+}
+
+@ARTICLE{Kirkpatrick:1983,
+  author = {S. Kirkpatrick and C. D. Gelatt and M. P. Vecchi},
+  title = {Optimization by Simulated Annealing},
+  journal = {Science},
+  year = {1983},
+  volume = {220},
+  pages = {671--680},
+  number = {4598},
+  editor = {Uni Oldenburg, FachbereichEditor},
+  publisher = {American Association for the Advancement of Science}
+}
+
+@INCOLLECTION{Kirkpatricks:1987,
+  author = {S. Kirkpatricks and C. D. Gelatt and M. P. Vecchi},
+  title = {Optimization by simulated annealing},
+  publisher = {Morgan Kaufmann Publishers Inc.},
+  year = {1987},
+  pages = {606--615},
+  address = {San Francisco, CA, USA},
+  book = {Readings in computer vision: issues, problems, principles, and paradigms},
+  isbn = {0-934613-33-8}
+}
+
+@ARTICLE{Klepeis:2004,
+  author = {Klepeis, J.L. and Floudas, C.A. and Morikis, D. and Tsokos, C.G.
+	and Lambris, J.D.},
+  title = {Design of Peptide Analogues with Improved Activity Using a Novel
+	de Novo Protein Design Approach},
+  journal = {Industrial $\&$ Engineering Chemistry Research},
+  year = {2004},
+  volume = {43},
+  pages = {3817-3826},
+  number = {14},
+  issn = {0888-5885}
+}
+
+@BOOK{Knuth:1978,
+  title = {The Art of Computer Programming, 2nd Ed. (Addison-Wesley Series in
+	Computer Science and Information)},
+  publisher = {Addison-Wesley Longman Publishing Co., Inc.},
+  year = {1978},
+  author = {Knuth, Donald Ervin},
+  address = {Boston, MA, USA},
+  edition = {2nd},
+  isbn = {0201038099}
+}
+
+@ARTICLE{Kochenberger:2004,
+  author = {Kochenberger, Gary A. and Glover, Fred and Alidaee, Bahram and Rego,
+	Cesar},
+  title = {A unified modeling and solution framework for combinatorial optimization
+	problems},
+  journal = {OR Spectrum},
+  year = {2004},
+  volume = {26},
+  pages = {237-250},
+  affiliation = {School of Business University of Colorado at Denver CO 80217 Denver
+	USA},
+  issn = {0171-6468},
+  issue = {2},
+  keyword = {Business and Economics},
+  publisher = {Springer Berlin / Heidelberg}
+}
+
+@ARTICLE{Kotsireas:2007,
+  author = {I. S. Kotsireas and C. Koukouvinos},
+  title = {Hadamard ideals and Hadamard matrices from two circulant submatrices},
+  journal = { J. Combin. Math. Combin. Comput.},
+  year = {2007},
+  volume = {61 },
+  pages = {97--110}
+}
+
+@ARTICLE{Kotsireas:,
+  author = {I. S. Kotsireas and C. Koukouvinos and P. M. Pardalos O. V. Shylo},
+  title = {Periodic Complementary Binary Sequences and Combinatorial Optimization
+	Algorithms},
+  journal = {Journal of Combinatorial Optimization (submitted October 2008)}
+}
+
+@INCOLLECTION{Koukouvinos:1996,
+  author = {C. Koukouvinos},
+  title = {Sequences with Zero Autocorrelation},
+  booktitle = {The CRC Handbook of Combinatorial Designs},
+  publisher = {CRC Press},
+  year = {1996},
+  editor = {C. J. Colbourn and J. H. Dinitz},
+  series = {Part VI},
+  chapter = {42}
+}
+
+@ARTICLE{Krishnan:2006,
+  author = {Krishnan, Kartik and Mitchell, John E.},
+  title = {A Semidefinite Programming Based Polyhedral Cut and Price Approach
+	for the Maxcut Problem},
+  journal = {Comput. Optim. Appl.},
+  year = {2006},
+  volume = {33},
+  pages = {51--71},
+  number = {1},
+  address = {Norwell, MA, USA},
+  issn = {0926-6003},
+  publisher = {Kluwer Academic Publishers}
+}
+
+@INBOOK{Lawler:1982,
+  pages = {35--73},
+  title = {Recent Developments in Deterministic Sequencing and Scheduling},
+  publisher = {Reidel, Dordrecht, The Netherlands},
+  year = {1982},
+  author = {Lawler, E. L. and Lenstra, J.-K. and Rinnooy, Kan A.H.G.}
+}
+
+@MISC{Lawrence:1984,
+  author = {Lawrence, S.},
+  title = {Resource constrained project scheduling: an experimental investigation
+	of heuristic scheduling techniques (Supplement)},
+  howpublished = {Graduate School of Industrial Administration, Carnegie-Mellon University,
+	Pittsburgh, Pennsylvania},
+  year = {1984}
+}
+
+@INCOLLECTION{Lee:2002,
+  author = {Lee, C.-Y. and Pinedo, M.},
+  title = {Optimization and heuristics of scheduling},
+  booktitle = {Handbook of Applied Optimization},
+  publisher = {Oxford University Press},
+  year = {2002},
+  editor = {P.M. Pardalos and M.G.C. Resende},
+  pages = {569-584}
+}
+
+@ARTICLE{Lodi:1999,
+  author = { A. Lodi and K. Allemand and T.M. Liebling},
+  title = {An Evolutionary Heuristic for Quadratic 0-1 Programming},
+  journal = {European Journal of Operational Research},
+  year = {1999},
+  volume = {119},
+  pages = {662--670}
+}
+
+@INBOOK{Lourenco:2003,
+  title = {Iterated local search},
+  publisher = { In F. Glover and G. Kochenberger (Eds), Kluwer Academic Publishers},
+  year = {2003},
+  author = {Lourenco, H.R. and Martin, O. and Sttzle, T.},
+  series = {Handbook of Metaheuristics}
+}
+
+@INPROCEEDINGS{Luby:1994,
+  author = {Luby, Michael and Ertel, Wolfgang},
+  title = {Optimal Parallelization of Las Vegas Algorithms},
+  booktitle = {Proceedings of the 11th Annual Symposium on Theoretical Aspects of
+	Computer Science},
+  year = {1994},
+  series = {STACS '94},
+  pages = {463--474},
+  address = {London, UK, UK},
+  publisher = {Springer-Verlag},
+  acmid = {695012},
+  isbn = {3-540-57785-8},
+  numpages = {12}
+}
+
+@ARTICLE{Luby:1993,
+  author = {Luby, Michael and Sinclair, Alistair and Zuckerman, David},
+  title = {Optimal speedup of Las Vegas algorithms},
+  journal = {Inf. Process. Lett.},
+  year = {1993},
+  volume = {47},
+  pages = {173--180},
+  month = {September},
+  acmid = {173184},
+  address = {Amsterdam, The Netherlands, The Netherlands},
+  issn = {0020-0190},
+  issue = {4},
+  keywords = {Las Vegas algorithms, design of algorithms, expected running time,
+	optimal strategy, proof search, randomized algorithms, theorem-proving},
+  numpages = {8},
+  publisher = {Elsevier North-Holland, Inc.}
+}
+
+@ARTICLE{Lund:1994,
+  author = {Lund, Carsten and Yannakakis, Mihalis},
+  title = {On the hardness of approximating minimization problems},
+  journal = {J. ACM},
+  year = {1994},
+  volume = {41},
+  pages = {960--981},
+  number = {5},
+  month = sep,
+  address = {New York, NY, USA},
+  issue_date = {Sept. 1994},
+  numpages = {22},
+  publisher = {ACM}
+}
+
+@ARTICLE{Lue:2010,
+  author = {Zhipeng Lü and Fred Glover and Jin-Kao Hao},
+  title = {A hybrid metaheuristic approach to solving the UBQP problem},
+  journal = {European Journal of Operational Research},
+  year = {2010},
+  volume = {207},
+  pages = {1254 - 1262},
+  number = {3},
+  doi = {10.1016/j.ejor.2010.06.039},
+  issn = {0377-2217},
+  keywords = {UBQP},
+  url = {http://www.sciencedirect.com/science/article/pii/S0377221710004789}
+}
+
+@ARTICLE{Marti:2009,
+  author = {Mart\'{\i}, Rafael and Duarte, Abraham and Laguna, Manuel},
+  title = {Advanced Scatter Search for the Max-Cut Problem},
+  journal = {INFORMS J. on Computing},
+  year = {2009},
+  volume = {21},
+  pages = {26--38},
+  month = {January},
+  acmid = {1535806},
+  address = {Institute for Operations Research and the Management Sciences (INFORMS),
+	Linthicum, Maryland, USA},
+  issn = {1526-5528},
+  issue = {1},
+  keywords = {evolutionary algorithms, max-cut problem, metaheuristics, scatter
+	search},
+  numpages = {13},
+  publisher = {INFORMS}
+}
+
+@INPROCEEDINGS{Merz:1999,
+  author = {Merz, Peter and Freisleben, Bernd},
+  title = {Genetic Algorithms for Binary Quadratic Programming},
+  booktitle = {Proceedings of the Genetic and Evolutionary Computation Conference},
+  year = {1999},
+  editor = {Banzhaf, Wolfgang and Daida, Jason and Eiben, Agoston E. and Garzon,
+	Max H. and Honavar, Vasant and Jakiela, Mark and Smith, Robert E.},
+  volume = {1},
+  pages = {417--424},
+  address = {Orlando, Florida, USA},
+  month = {13-17 July},
+  publisher = {Morgan Kaufmann},
+  added-at = {2008-06-19T17:46:40.000+0200},
+  interhash = {9020e75de557ff27160cd36729d229b2},
+  intrahash = {2e8be8bb0bfa2ec30b0f303d0fac5969},
+  isbn = {1-55860-611-4},
+  keywords = {algorithms and classifier genetic systems},
+  notes = {GECCO-99 A joint meeting of the eighth international conference on
+	genetic algorithms (ICGA-99) and the fourth annual genetic programming
+	conference (GP-99)
+	
+	 Linear binary string representation},
+  publisher_address = {San Francisco, CA 94104, USA},
+  timestamp = {2008-06-19T17:46:40.000+0200}
+}
+
+@ARTICLE{Merz:2004,
+  author = {Merz, Peter and Katayama, Kengo},
+  title = {Memetic algorithms for the unconstrained binary quadratic programming
+	problem.},
+  journal = {Bio Systems},
+  year = {2004},
+  volume = {78},
+  pages = {99--118},
+  number = {1-3},
+  editor = {Onwubolu, G C and Babu, B VEditors},
+  publisher = {Springer}
+}
+
+@BOOK{Mikhalevich:1983,
+  title = {Methods of serial optimization in discrete network problems of optimal
+	resourse distribution, methods, algorithm},
+  publisher = {Nauka},
+  year = {1983},
+  author = {Mikhalevich, V.S. and Kuksa, A.I.},
+  address = {Moscow},
+  language = {russian}
+}
+
+@BOOK{Mikhalevich:1986,
+  title = {Optimization problems of production-transportation planning. Models,
+	methods, algorithm},
+  publisher = {Nauka},
+  year = {1986},
+  author = {Mikhalevich, V. S. and Trubin, V. A. and Shor, N.Z.},
+  address = {Moscow},
+  language = {russian}
+}
+
+@MISC{Mills:,
+  author = {Patrick Mills},
+  title = { Constraint Programming and Optimization Laboratory, University of
+	Essex, GLS Solver, Algorithm: Extended GLS, \url{http://cswww.essex.ac.uk/CSP/glsdemo.html}
+	(last accessed on October 2008)}
+}
+
+@ARTICLE{Mills:2000,
+  author = {Mills, Patrick and Tsang, Edward},
+  title = {Guided Local Search for Solving SAT and Weighted MAX-SAT Problems},
+  journal = {J. Autom. Reason.},
+  year = {2000},
+  volume = {24},
+  pages = {205--223},
+  month = {February},
+  acmid = {594289},
+  address = {Secaucus, NJ, USA},
+  issn = {0168-7433},
+  issue = {1-2},
+  keywords = {SAT problem, local search, meta-heuristics, optimization},
+  numpages = {19},
+  publisher = {Springer-Verlag New York, Inc.}
+}
+
+@ARTICLE{Misevicius:2005,
+  author = {Misevicius, Alfonsas},
+  title = {A Tabu Search Algorithm for the Quadratic Assignment Problem},
+  journal = {Computational Optimization and Applications},
+  year = {2005},
+  volume = {30},
+  pages = {95-111},
+  affiliation = {Department of Practical Informatics Kaunas University of Technology
+	Studentu St. 50-416a LT-3031 Kaunas Lithuania},
+  issn = {0926-6003},
+  issue = {1},
+  keyword = {Mathematics and Statistics},
+  keywords = {heuristics, meta-heuristics, quadratic assignment problem, tabu search},
+  publisher = {Springer Netherlands}
+}
+
+@ARTICLE{Misevicius:2005a,
+  author = {Misevicius, A., and Blonskis, J.},
+  title = {Experiments with Tabu Search for Random Quadratic Assignment Problems},
+  journal = {Information Technology And Control},
+  year = {2005},
+  volume = {34},
+  pages = {237-244},
+  number = {3},
+  address = {Department of Multimedia Engineering, Kaunas University of Technology,
+	Student? St. 50  401, LT-51368 Kaunas, Lithuania},
+  publisher = {Technologija}
+}
+
+@ARTICLE{Misevicius:2006,
+  author = {Misevicius, A., and Lenkevi?ius, A., and Rubliauskas, D.},
+  title = {Iterated Tabu Search: an Improvement to Standard Tabu Search},
+  journal = {Information Technology And Control},
+  year = {2006},
+  volume = {35},
+  pages = {187-197},
+  number = {3},
+  address = {Department of Multimedia Engineering, Kaunas University of Technology,
+	Student? St. 50  401, LT-51368 Kaunas, Lithuania},
+  publisher = {Technologija}
+}
+
+@INPROCEEDINGS{Moorsel:2004,
+  author = {Aad P. A. van Moorsel and Katinka Wolter},
+  title = {Analysis and Algorithms for Restart},
+  booktitle = {QEST '04: Proceedings of the The Quantitative Evaluation of Systems,
+	First International Conference},
+  year = {2004},
+  pages = {195--204},
+  address = {Washington, DC, USA},
+  publisher = {IEEE Computer Society},
+  isbn = {0-7695-2185-1}
+}
+
+@ARTICLE{Mostovyi:2012,
+  author = {Mostovyi, O. and Prokopyev, O.A. and Shylo, O.V.},
+  title = {On Maximum Speedup Ratio of Restart Algorithm Portfolios},
+  journal = {INFORMS Journal on Computing},
+  year = {2012},
+  doi = {doi: 10.1287/ijoc.1120.0497}
+}
+
+@ARTICLE{Nesterov:1998,
+  author = {Yu.E. Nesterov},
+  title = {Semidefinite relaxation and nonconvex quadratic optimization},
+  journal = {Optimization Methods and Software},
+  year = {1998},
+  volume = {9},
+  pages = {141--160}
+}
+
+@MISC{Nesterov:1997,
+  author = {Yu.E. Nesterov},
+  title = { Quality of semidefinite relaxation for nonconvex},
+  howpublished = {CORE Discussion Paper \#9719, Belgium},
+  month = {March},
+  year = {1997}
+}
+
+@ARTICLE{Nowicki:2006,
+  author = {E. Nowicki and C. Smutnicki},
+  title = { Some aspects of scatter search in the flow-shop problem},
+  journal = {EJOR},
+  year = {2006},
+  volume = {169(2)},
+  pages = {654--666}
+}
+
+@INBOOK{Nowicki:2005,
+  pages = {165--190},
+  title = { Some New Ideas in TS for Job Shop Scheduling},
+  publisher = { Springer},
+  year = {2005},
+  author = {E. Nowicki and C. Smutnicki},
+  volume = {30 ,Part II},
+  series = {Operations Research/Computer Science Interfaces Series}
+}
+
+@ARTICLE{Nowicki:2005a,
+  author = {E. Nowicki and C. Smutnicki},
+  title = {An Advanced Tabu Search Algorithm for the Job Shop Problem},
+  journal = {Journal of Scheduling},
+  year = {2005},
+  volume = {8(2)},
+  pages = {145--159}
+}
+
+@MISC{Nowicki:2002,
+  author = {Nowicki, E. and Smutnicki, C.},
+  title = {Some New Tools to Solve the Job Shop Problem},
+  howpublished = {Technical Report 60/2002, Institute of Engineering Cybernetics, Technical
+	University of Wroclaw, Wroclaw, Poland},
+  year = {2002}
+}
+
+@MISC{Nowicki:2001,
+  author = {Nowicki, E. and Smutnicki, C.},
+  title = {Some new ideas in TS for job shop scheduling},
+  howpublished = {Technical Report 50/01. Institute of Engineering Cybernetics, Wroclaw
+	University of Technology.},
+  year = {2001}
+}
+
+@ARTICLE{Nowicki:1996,
+  author = {Nowicki, E. and Smutnicki, C.},
+  title = {A fast tabu search algorithm for the job-shop problem},
+  journal = {Management Science},
+  year = {1996},
+  volume = {42},
+  pages = {797--813},
+  number = {6}
+}
+
+@ARTICLE{Ohlsson:1993,
+  author = {Ohlsson, Mattais and Peterson, Carsten and S\"{o}derberg, Bo},
+  title = {Neural networks for optimization problems with inequality constraints:
+	the knapsack problem},
+  journal = {Neural Comput.},
+  year = {1993},
+  volume = {5},
+  pages = {331--339},
+  month = {March},
+  acmid = {159639},
+  address = {Cambridge, MA, USA},
+  issn = {0899-7667},
+  issue = {2},
+  numpages = {9},
+  publisher = {MIT Press}
+}
+
+@ARTICLE{Osorio:2002,
+  author = {Maria A. Osorio and Fred Glover and Peter Hammer},
+  title = {Cutting and Surrogate Constraint Analysis for Improved Multidimensional
+	Knapsack Solutions},
+  journal = {Annals OR},
+  year = {2002},
+  volume = {117},
+  pages = {71-93},
+  number = {1-4}
+}
+
+@MISC{Palubeckis:,
+  author = {G. Palubeckis},
+  title = {Unconstrained Binary Quadratic Optimization, \url{http://www.soften.ktu.lt/~gintaras/binqopt.html}
+	(last accessed on October 2008)}
+}
+
+@ARTICLE{Palubeckis:2006,
+  author = {Palubeckis, Gintaras},
+  title = {Iterated Tabu Search for the Unconstrained Binary Quadratic Optimization
+	Problem},
+  journal = {Informatica},
+  year = {2006},
+  volume = {17},
+  pages = {279--296},
+  month = {April},
+  acmid = {1413850},
+  address = {Amsterdam, The Netherlands, The Netherlands},
+  issn = {0868-4952},
+  issue = {2},
+  keywords = {binary quadratic optimization, heuristics, iterated tabu search},
+  numpages = {18},
+  publisher = {IOS Press}
+}
+
+@ARTICLE{Palubeckis:2004a,
+  author = {Gintaras Palubeckis},
+  title = {Multistart {T}abu Search Strategies for the Unconstrained Binary
+	Quadratic Optimization Problem},
+  journal = {JournalAnnals of Operations Research},
+  year = {2004},
+  volume = {131},
+  pages = {259--282},
+  number = {1-4},
+  month = {October},
+  issn = {0254-5330},
+  publisher = {Springer Netherlands}
+}
+
+@ARTICLE{Palubeckis:1995,
+  author = {Palubeckis, G.},
+  title = {A heuristic-based branch and bound algorithm for unconstrained quadratic
+	zero-one programming},
+  journal = {Computing},
+  year = {1995},
+  volume = {54},
+  pages = {283-301},
+  doi = {10.1007/BF02238228},
+  issn = {0010-485X},
+  issue = {4},
+  keywords = {65K05; 90C09; Integer quadratic programming; branch and bound; graphs},
+  language = {English},
+  publisher = {Springer-Verlag},
+  url = {http://dx.doi.org/10.1007/BF02238228}
+}
+
+@ARTICLE{Palubeckis:2004,
+  author = {Palubeckis, G. and Krivickiene, V.},
+  title = {Application of Multistart Tabu Search to the Max-cut Problem},
+  journal = {Information Technology And Control},
+  year = {2004},
+  volume = {31},
+  pages = {29-35},
+  number = {2},
+  publisher = {Technologija}
+}
+
+@BOOK{Papadimitriou:1982,
+  title = {Combinatorial optimization: algorithms and complexity},
+  publisher = {Prentice-Hall, Inc.},
+  year = {1982},
+  author = {Papadimitriou, Christos H. and Steiglitz, Kenneth},
+  address = {Upper Saddle River, NJ, USA},
+  isbn = {0-13-152462-3}
+}
+
+@ARTICLE{Pardalos:1992a,
+  author = { P.M. Pardalos and S. Jha},
+  title = {Complexity of uniqueness and local search in quadratic 0--1 programming},
+  journal = {Operations Research Letters},
+  year = {1992},
+  volume = {11},
+  pages = {119--123}
+}
+
+@ARTICLE{Pardalos:1991a,
+  author = {P.M. Pardalos and S. Jha},
+  title = {Graph separation techniques for quadratic zero-one programming},
+  journal = {Computers and Mathematics with Applications},
+  year = {1991},
+  volume = {21},
+  pages = {107--113}
+}
+
+@INBOOK{Pardalos:1992b,
+  chapter = {3},
+  title = {Topics in Parallel Computing in Mathematical Programming},
+  publisher = {Science Press},
+  year = {1992},
+  author = {P.M. Pardalos and A.T. Philips and J.B. Rosen},
+  volume = {2}
+}
+
+@ARTICLE{Pardalos:2006,
+  author = {Panos Pardalos and Oleg Shylo},
+  title = {An Algorithm for the Job Shop Scheduling Problem based on Global
+	Equilibrium Search Techniques},
+  journal = {Computational Management Science},
+  year = {2006},
+  volume = {3},
+  pages = {331-348},
+  number = {4},
+  month = {September},
+  keywords = {Job shop scheduling problem; Makespan; Global equilibrium search;
+	Metaheuristics; 90B35}
+}
+
+@ARTICLE{Pardalos:1994,
+  author = {P.M. Pardalos and J. Xue },
+  title = {The Maximum Clique Problem},
+  journal = {Journal of Global Optimization},
+  year = {1994},
+  volume = {4},
+  pages = {301--328}
+}
+
+@ARTICLE{Pardalos:1991,
+  author = {Panos M. Pardalos},
+  title = {Construction of test problems in quadratic bivalent programming},
+  journal = {ACM Trans. Math. Softw.},
+  year = {1991},
+  volume = {17},
+  pages = {74--87},
+  number = {1},
+  address = {New York, NY, USA},
+  issn = {0098-3500},
+  publisher = {ACM}
+}
+
+@ARTICLE{Pardalos:2008,
+  author = {Pardalos, Panos M. and Prokopyev, Oleg A. and Shylo, Oleg V. and
+	Shylo, Vladimir P.},
+  title = {Global equilibrium search applied to the unconstrained binary quadratic
+	optimization problem},
+  journal = {Optimization Methods Software},
+  year = {2008},
+  volume = {23},
+  pages = {129--140},
+  month = {February},
+  address = {Bristol, PA, USA},
+  issn = {1055-6788},
+  issue = {1},
+  keywords = {binary quadratic programming, global equilibrium search, tabu search},
+  numpages = {12},
+  publisher = {Taylor \& Francis, Inc.}
+}
+
+@ARTICLE{Pardalos:1992,
+  author = {Panos M. Pardalos and Gregory P. Rodgers},
+  title = {A branch and bound algorithm for the maximum clique problem},
+  journal = {Computers OR},
+  year = {1992},
+  pages = {363-375}
+}
+
+@ARTICLE{Pardalos:1990,
+  author = {Pardalos, P. M. and Rodgers, G. P.},
+  title = {Computational aspects of a branch and bound algorithm for quadratic
+	zero-one programming},
+  journal = {Computing},
+  year = {1990},
+  volume = {45},
+  pages = {131--144},
+  number = {2},
+  month = jun,
+  address = {New York, NY, USA},
+  issue_date = {June 1990},
+  numpages = {14},
+  publisher = {Springer-Verlag New York, Inc.}
+}
+
+@ARTICLE{DBLP:journals/eor/PezzellaM00,
+  author = {Ferdinando Pezzella and Emanuela Merelli},
+  title = {A tabu search method guided by shifting bottleneck for the job shop
+	scheduling problem},
+  journal = {European Journal of Operational Research},
+  year = {2000},
+  volume = {120},
+  pages = {297-310},
+  number = {2}
+}
+
+@ARTICLE{Pezzella:2000,
+  author = {Pezzella, Ferdinando and Merelli, Emanuela},
+  title = {A tabu search method guided by shifting bottleneck for the job shop
+	scheduling problem},
+  journal = {European Journal of Operational Research},
+  year = {2000},
+  volume = {120},
+  pages = {297-310},
+  number = {2},
+  month = {January}
+}
+
+@ARTICLE{Picard:1975,
+  author = {J.C. Picard and H.D. Ratliff},
+  title = {Minimum cuts and related problems},
+  journal = {Networks},
+  year = {1975},
+  volume = {5},
+  pages = {357--370}
+}
+
+@INBOOK{Poljak:1995,
+  pages = {181--244},
+  title = {Maximum cuts and large bipartite subgraphs},
+  publisher = {American Mathematical Soc.},
+  year = {1995},
+  editor = {Cook, W., Lovasz, L., Seymour, P.},
+  author = {Poljak, S. and Tuza, Z.},
+  volume = {20},
+  booktitle = {Combinatorial optimization papers from the DIMACS Special Year}
+}
+
+@MISC{Resende:,
+  author = {M.G.C.M. Resende},
+  title = { Algorithm source code distribution, \url{http://research.att.com/~mgcr/src}
+	(last accessed on October 2012)}
+}
+
+@MISC{Resende:a,
+  author = {M.G.C. Resende},
+  title = { Test problem distribution, \url{http://research.att.com/~mgcr/data}
+	(last accessed on October 2008)}
+}
+
+@MISC{Resende:b,
+  author = {M.G.C. Resende},
+  title = {Algorithm source code distribution, \url{http://research.att.com/~mgcr/data}
+	(last accessed on October 2012)}
+}
+
+@MISC{Resende:c,
+  author = {M.G.C. Resende},
+  title = {Test problem distribution, \url{http://research.att.com/~mgcr/data}
+	(last accessed on October 2008)}
+}
+
+@INCOLLECTION{Resende:1996,
+  author = {M.G.C. Resende and T.A. Feo},
+  title = {A GRASP for Satisfiability},
+  booktitle = {The Second {DIMACS} Implementation Challenge},
+  publisher = {American Mathematical Society},
+  year = {1996},
+  editor = {D.S. Johnson and M.A. Trick},
+  volume = {26},
+  series = {{DIMACS} Series on Discrete Mathematics and Theoretical Computer
+	Science},
+  pages = {499--520}
+}
+
+@INCOLLECTION{Resende:1997,
+  author = {M.G.C. Resende and L.S. Pitsoulis and P.M. Pardalos},
+  title = {Approximate solution of weighted MAX-SAT problems using GRASP},
+  booktitle = {Satisfiability Problem: Theory and Applications},
+  publisher = {American Mathematical Society},
+  year = {1997},
+  editor = {J. Gu and P.M. Pardalos},
+  volume = {35},
+  series = {{DIMACS} Series on Discrete Mathematics and Theoretical Computer
+	Science},
+  pages = {393--405}
+}
+
+@BOOK{Ross:1996,
+  title = {Stochastic processes},
+  publisher = { Wiley, New York},
+  year = { 1996},
+  author = {Sheldon M. Ross}
+}
+
+@MISC{Roy:1964,
+  author = {{Roy}, B. and {Sussman}, B.},
+  title = {Les problemes d'ordonnancement avec contraintes disjonctives},
+  howpublished = { Note DS9 bis, SEMA, Paris (in French)},
+  year = {1964}
+}
+
+@BOOK{Schrijver:1998,
+  title = {Theory of Linear and Integer Programming},
+  publisher = {John Wiley \& Sons},
+  year = {1998},
+  author = {Schrijver, A.},
+  series = {Wiley Series in Discrete Mathematics \& Optimization}
+}
+
+@ARTICLE{Schuur:1997,
+  author = {Schuur, Peter C.},
+  title = {Classification of Acceptance Criteria for the Simulated Annealing
+	Algorithm},
+  journal = {Mathematics of Operations Research},
+  year = {1997},
+  volume = {22},
+  pages = {pp. 266-275},
+  number = {2},
+  abstract = {We present a complete and explicit description of the class of all
+	acceptance criteria for the simulated annealing algorithm that uniformly
+	depend on the cost of the current and the candidate configuration
+	and that lead to detailed balance when combined with a symmetric
+	generation matrix. Here the cost dependence is called uniform if
+	it is expressed by one and the same function for all cost functions.
+	As an important special case we identify the subclass consisting
+	of those acceptance criteria that depend uniformly on the difference
+	in cost. Furthermore, we present a simple characterization of the
+	Metropolis and the Barker criterion.},
+  copyright = {Copyright © 1997 INFORMS},
+  issn = {0364765X},
+  jstor_formatteddate = {May, 1997},
+  language = {English},
+  publisher = {INFORMS},
+  url = {http://www.jstor.org/stable/3690264}
+}
+
+@BOOK{Sergienko:1999,
+  title = {Information science in Ukraine – formation, development, problems},
+  publisher = {Naukova Dumka},
+  year = {1999},
+  author = {Sergienko, I.V.},
+  address = {Kyiv},
+  language = {Ukrainian}
+}
+
+@ARTICLE{Sergienko:1964,
+  author = {Sergienko, I.V.},
+  title = {A method used to solve problems of finding of extremal, (in Ukrainian)},
+  journal = {Avtomatika},
+  year = {1964},
+  volume = {5},
+  pages = {15--21},
+  publisher = { V. M. Glushkov Inst. Cybern., NAS Ukraine, Kiev}
+}
+
+@ARTICLE{Sergienko:2006,
+  author = {Sergienko, I. and Shylo, V.},
+  title = {Problems of discrete optimization: Challenges and main approaches
+	to solve them},
+  journal = {Cybernetics and Systems Analysis},
+  year = {2006},
+  volume = {42},
+  pages = {465-482},
+  affiliation = {National Academy of Sciences of Ukraine V. M. Glushkov Institute of
+	Cybernetics Kiev Ukraine},
+  issn = {1060-0396},
+  issue = {4},
+  keyword = {Mathematics and Statistics},
+  publisher = {Springer New York}
+}
+
+@BOOK{Sergienko:2010,
+  title = {Methods of Optimization and systems analysis for problems of supercomputing
+	complexity},
+  publisher = {Akademperiodyka},
+  year = {2010},
+  author = {Sergienko, I. V.},
+  address = {Kyiv},
+  language = {ukrainian}
+}
+
+@BOOK{Sergienko:1988,
+  title = {Mathematical Models and Methods for Solving Discrete Optimization
+	Problems},
+  publisher = {Naukova Dumka},
+  year = {1988},
+  author = {Sergienko, I. V.},
+  address = {Kiev},
+  language = {russian}
+}
+
+@BOOK{Sergienko:1980,
+  title = {Approximate Methods of Solving Discrete Optimization Problems},
+  publisher = {Naukova Dumka},
+  year = {1980},
+  author = {Sergienko, I. V. and Lebedeva, T.T. and Roshchin, V.A.},
+  address = {Kiev},
+  language = {russian}
+}
+
+@ARTICLE{Sergienko:2004,
+  author = {I. V. Sergienko and V. P. Shilo and V. A. Roshchin},
+  title = {Optimization Parallelizing for Discrete Programming Problems},
+  journal = {Cybernetics and Sys. Anal.},
+  year = {2004},
+  volume = {40},
+  pages = {184--189},
+  number = {2},
+  address = {Hingham, MA, USA},
+  issn = {1060-0396},
+  publisher = {Kluwer Academic Publishers}
+}
+
+@ARTICLE{Sergienko:2000,
+  author = {I. V. Sergienko and V. P. Shilo and V. A. Roshchin},
+  title = {RESTART Technology for Solving Discrete Optimization Problems},
+  journal = {Cybernetics and Sys. Anal.},
+  year = {2000},
+  volume = {36},
+  pages = {659--666},
+  number = {5},
+  address = {Hingham, MA, USA},
+  issn = {1060-0396},
+  publisher = {Kluwer Academic Publishers}
+}
+
+@BOOK{Sergienko:2003,
+  title = {Discrete Optimization Problems: Challenges, Solution Techniques,
+	and Analysis},
+  publisher = {Naukova Dumka},
+  year = {2003},
+  author = {Sergienko, I. V. and Shylo, V. P.},
+  address = {Kiev},
+  language = {russian}
+}
+
+@ARTICLE{Shilo:1999,
+  author = {Shilo, V.},
+  title = {The method of global equilibrium search},
+  journal = {Cybernetics and Systems Analysis},
+  year = {1999},
+  volume = {35},
+  pages = {68-74},
+  note = {10.1007/BF02667916},
+  issn = {1060-0396},
+  issue = {1},
+  keyword = {Mathematics and Statistics},
+  publisher = {Springer New York},
+  url = {http://dx.doi.org/10.1007/BF02667916}
+}
+
+@INCOLLECTION{Short:2009,
+  author = {Erika J. Short and Oleg V. Shylo},
+  title = {Global Equilibrium Search},
+  booktitle = {Encyclopedia of Optimization, Second Edition},
+  publisher = {Springer},
+  year = {2009},
+  editor = {Christodoulos A. Floudas and Panos M. Pardalos},
+  pages = {1268--1272}
+}
+
+@ARTICLE{Shylo:2011,
+  author = {O.V. Shylo and O.A. Prokopyev and J. Rajgopal},
+  title = {On algorithm portfolios and restart strategies},
+  journal = {Operations Research Letters},
+  year = {2011},
+  volume = {39},
+  pages = {49--52},
+  number = {1}
+}
+
+@ARTICLE{Shylo:2011b,
+  author = {Shylo, Oleg V. and Middelkoop, Timothy and Pardalos, Panos M.},
+  title = {Restart strategies in optimization: parallel and serial cases},
+  journal = {Parallel Comput.},
+  year = {2011},
+  volume = {37},
+  pages = {60--68},
+  month = jan,
+  acmid = {1920620},
+  address = {Amsterdam, The Netherlands, The Netherlands},
+  issn = {0167-8191},
+  issue = {1},
+  issue_date = {January, 2011},
+  keywords = {Las Vegas algorithm, Parallel optimization, Restart, Super linear
+	speedup},
+  numpages = {9},
+  publisher = {Elsevier Science Publishers B. V.}
+}
+
+@ARTICLE{Shylo:2008a,
+  author = {Oleg V. Shylo and Oleg A. Prokopyev and Vladimir P. Shylo},
+  title = {Solving weighted MAX-SAT via global equilibrium search},
+  journal = {Operations Research Letters},
+  year = {2008},
+  volume = {36},
+  pages = {434--438},
+  issue = {4}
+}
+
+@ARTICLE{Shylo:2000,
+  author = {Shylo, V.P.},
+  title = {Solution of multidimensional knapsack problems by global equilibrium
+	search, (in Russian)},
+  journal = {Theory of Optimal Solutions},
+  year = {2000},
+  pages = {10--13},
+  publisher = { V. M. Glushkov Inst. Cybern., NAS Ukraine, Kiev}
+}
+
+@ARTICLE{Shylo:1999,
+  author = {Shylo, V.},
+  title = {Results of an experimental investigation of the efficiency of the
+	global-equilibrium-search method},
+  journal = {Cybernetics and Systems Analysis},
+  year = {1999},
+  volume = {35},
+  pages = {253-261},
+  issn = {1060-0396},
+  issue = {2},
+  keyword = {Mathematics and Statistics},
+  publisher = {Springer New York}
+}
+
+@ARTICLE{Shylo:2011a,
+  author = {Shylo, Volodymyr and Shylo, Oleg V.},
+  title = {Path Relinking Scheme for the Max-Cut Problem within Global Equilibrium
+	Search.},
+  journal = {IJSIR},
+  year = {2011},
+  volume = {2},
+  pages = {42-51},
+  number = {2},
+  added-at = {2011-07-12T00:00:00.000+0200},
+  keywords = {dblp},
+  timestamp = {2011-07-12T00:00:00.000+0200}
+}
+
+@ARTICLE{Shylo:2001,
+  author = {Shylo, V. P.},
+  title = {Discrete optimization algorithms and RESTART-distribution},
+  journal = {Reports of the National Academy of Sciences of Ukraine},
+  year = {2001},
+  pages = {79--83},
+  number = {1},
+  address = {Kiev},
+  keywords = {RESTART-distribution, combinatorial algorithms, computational experiment,
+	optimization process, RESTART-criterion},
+  language = {russian}
+}
+
+@ARTICLE{Shylo:2008,
+  author = {Shylo, V. P. and Korenkevych, D. E. and Lyashko, V.I.},
+  title = {Optimization problem on permutations},
+  journal = {Scientific Reports of NAUKMA. Computer Sciences},
+  year = {2008},
+  volume = {86},
+  pages = {21--24},
+  address = {Kyiv},
+  keywords = {quadratic assignment problem, permutations, approximate methods, computational
+	experiment, global equilibrium search},
+  language = {ukrainian}
+}
+
+@ARTICLE{Shylo:2011c,
+  author = {Shylo, V. P. and Shylo, O. V.},
+  title = {Systems Analysis; Solving unconstrained binary quadratic programming
+	problem by global equilibrium search},
+  journal = {Cybernetics and Sys. Anal.},
+  year = {2011},
+  volume = {47},
+  pages = {889--897},
+  month = oct,
+  acmid = {2088103},
+  address = {Hingham, MA, USA},
+  issn = {1060-0396},
+  issue = {6},
+  issue_date = {October 2011},
+  keywords = {approximate methods, binary quadratic programming, comparative analysis
+	of algorithms, computational experiment, global equilibrium search},
+  numpages = {9},
+  publisher = {Kluwer Academic Publishers}
+}
+
+@ARTICLE{Shylo:2010,
+  author = {Shylo, V. P. and Shylo, O. V.},
+  title = {Solving the maxcut problem by the global equilibrium search},
+  journal = {Cybernetics and Sys. Anal.},
+  year = {2010},
+  volume = {46},
+  pages = {744--754},
+  month = {September},
+  acmid = {1891623},
+  address = {Hingham, MA, USA},
+  issn = {1060-0396},
+  issue = {5},
+  issue_date = {September 2010},
+  keywords = {algorithm efficiency, approximate methods, computational experiment,
+	cutset, global equilibrium search},
+  numpages = {11},
+  publisher = {Kluwer Academic Publishers}
+}
+
+@MISC{Sloane:,
+  author = {N. Sloane},
+  title = { Challenge Problems: Independent Sets in Graphs, \url{http://www.research.att.com/~njas/doc/graphs.html}
+	(last accessed on October 2008)}
+}
+
+@INCOLLECTION{Spears:1996,
+  author = {Spears, W. M.},
+  title = {Simulated Annealing for Hard Satisfiability Problems},
+  booktitle = {The Second {DIMACS} Implementation Challenge},
+  publisher = {American Mathematical Society},
+  year = {1996},
+  editor = {D.S. Johnson and M.A. Trick},
+  volume = {26},
+  series = {{DIMACS} Series on Discrete Mathematics and Theoretical Computer
+	Science},
+  pages = {533-558}
+}
+
+@BOOK{Stinson:2003,
+  title = {Combinatorial Designs: Constructions and Analysis},
+  publisher = {SpringerVerlag},
+  year = {2003},
+  author = {Douglas R. Stinson},
+  isbn = {0387954872}
+}
+
+@ARTICLE{Streeter:2006,
+  author = {J. Streeter and S. Smith},
+  title = { How the Landscape of Random Job Shop Scheduling Instances Depends
+	on the Ratio of Jobs to Machines},
+  journal = { Journal of Artificial Intelligence Research },
+  year = {2006},
+  volume = {26},
+  pages = {247--287}
+}
+
+@ARTICLE{Taillard:1993,
+  author = {Taillard, E.},
+  title = {Benchmarks for basic scheduling problems},
+  journal = {European Journal of Operational Research},
+  year = {1993},
+  volume = {64},
+  pages = {278-285}
+}
+
+@ARTICLE{Taillard:1991,
+  author = {Taillard, E.},
+  title = {Paper: Robust taboo search for the quadratic assignment problem},
+  journal = {Parallel Comput.},
+  year = {1991},
+  volume = {17},
+  pages = {443--455},
+  month = {July},
+  acmid = {1746143},
+  address = {Amsterdam, The Netherlands, The Netherlands},
+  issn = {0167-8191},
+  issue = {4-5},
+  keywords = {Combinatorial optimization, efficiency, parallel algorithms, quadratic
+	assignment problem, taboo search},
+  numpages = {13},
+  publisher = {Elsevier Science Publishers B. V.}
+}
+
+@ARTICLE{Tseng:2006,
+  author = {Tseng, Lin-Yu and Liang, Shyi-Ching},
+  title = {A Hybrid Metaheuristic for the Quadratic Assignment Problem},
+  journal = {Computational Optimization and Applications},
+  year = {2006},
+  volume = {34},
+  pages = {85-113},
+  affiliation = {National Chung Hsing University Department of Computer Science Taichung
+	Taiwan 402 R.O.C.},
+  issn = {0926-6003},
+  issue = {1},
+  keyword = {Mathematics and Statistics},
+  publisher = {Springer Netherlands}
+}
+
+@ARTICLE{VanLaarhoven:1992,
+  author = {Van Laarhoven, P.J.M. and Aarts, E.H.L. and Lenstra, J.K.},
+  title = {Job Shop Scheduling by Simulated Annealing},
+  journal = {Operations Research},
+  year = {1992},
+  volume = {40},
+  pages = { 113-125}
+}
+
+@INPROCEEDINGS{Vasquez:2001,
+  author = {Vasquez, Michel and Hao, Jin-Kao},
+  title = {A hybrid approach for the 0-1 multidimensional knapsack problem},
+  booktitle = {Proceedings of the 17th international joint conference on Artificial
+	intelligence - Volume 1},
+  year = {2001},
+  pages = {328--333},
+  address = {San Francisco, CA, USA},
+  publisher = {Morgan Kaufmann Publishers Inc.},
+  acmid = {1642136},
+  isbn = {1-55860-812-5, 978-1-558-60812-2},
+  location = {Seattle, WA, USA},
+  numpages = {6}
+}
+
+@ARTICLE{Watson:2003a,
+  author = {Watson, J.P. and Howe, A.E. and Whitley, L.D.},
+  title = {An Analysis of Iterated Local Search for Job-Shop Scheduling},
+  journal = {Fifth Metaheuristics International Conference (MIC 2003)},
+  year = {2003},
+  month = {September}
+}
+
+@ARTICLE{Watson:2003,
+  author = {Watson, J.-P. and Beck, J.C. and Howe, A.E. and Whitley, L.D.},
+  title = { Problem Difficulty for Tabu Search in Job-Shop Scheduling},
+  journal = {Artificial Intelligence},
+  year = {2003},
+  volume = {143(2)},
+  pages = {189--217}
+}
+
+@ARTICLE{Watson:2001,
+  author = { Watson, J.-P. and Beck, J.C. and Howe, A.E. and Whitley, L.D.},
+  title = {Toward an understanding of local search cost in job-shop scheduling},
+  journal = {in: A. Cesta (Ed.), Proceedings of the Sixth European Conference
+	on Planning, Springer-Verlag},
+  year = {2001}
+}
+
+@ARTICLE{Weathers:1983,
+  author = {G. Weathers and E. M. Holiday},
+  title = {Group-complementary array coding for radar clutter rejection},
+  journal = { IEEE Transaction on Aerospace and Electronic Systems},
+  year = {1983},
+  volume = {19},
+  optpages = {369--379}
+}
+
+@TECHREPORT{Wu:2006,
+  author = {Huayue Wu},
+  title = {Randomization and restart strategies},
+  year = {2006}
+}
+
+@MISC{Yagiura:,
+  author = {M. Yagiura},
+  title = { Benchmark Instances and Program Codes for MAX SAT, \url{http://www.al.cm.is.nagoya-u.ac.jp/~yagiura/msat.html}
+	(last accessed on October 2008)}
+}
+
+@ARTICLE{Yagiura:2001,
+  author = {Yagiura, M. and Ibaraki, T.},
+  title = {Efficient 2 and 3-Flip Neighborhood Search Algorithms for the MAX
+	SAT: Experimental Evaluation},
+  journal = {Journal of Heuristics},
+  year = {2001},
+  volume = {7},
+  pages = {423--442},
+  month = {September},
+  acmid = {595065},
+  address = {Hingham, MA, USA},
+  issn = {1381-1231},
+  issue = {5},
+  keywords = {SAT, local search, metaheuristics, neighborhood, weighted MAX SAT},
+  numpages = {20},
+  publisher = {Kluwer Academic Publishers}
+}
+
+@ARTICLE{Yagiura:1999,
+  author = {Yagiura, M. and Ibaraki, T.},
+  title = {Analyses on the 2 and 3-Flip Neighborhoods for the MAX SAT},
+  journal = {Journal of Combinatorial Optimization},
+  year = {1999},
+  volume = {3},
+  pages = {95-114},
+  issn = {1382-6905},
+  issue = {1},
+  keyword = {Mathematics and Statistics},
+  publisher = {Springer Netherlands}
+}
+
+@ARTICLE{Ye:1999,
+  author = {Yinyu Ye},
+  title = {Approximating Global Quadratic Optimization with Convex Quadratic
+	Constraints},
+  journal = {J. of Global Optimization},
+  year = {1999},
+  volume = {15},
+  pages = {1--17},
+  number = {1},
+  address = {Hingham, MA, USA},
+  issn = {0925-5001},
+  publisher = {Kluwer Academic Publishers}
+}
+
+@article{agresti1998approximate,
+  title={Approximate is better than “exact” for interval estimation of binomial proportions},
+  author={Agresti, Alan and Coull, Brent A},
+  journal={The American Statistician},
+  volume={52},
+  number={2},
+  pages={119--126},
+  year={1998},
+  publisher={Taylor \& Francis}
+}
+
+@article{brown2001interval,
+  title={Interval estimation for a binomial proportion},
+  author={Brown, Lawrence D and Cai, T Tony and DasGupta, Anirban},
+  journal={Statistical science},
+  pages={101--117},
+  year={2001},
+  publisher={JSTOR}
+}
+
+@article{clopper1934use,
+  title={The use of confidence or fiducial limits illustrated in the case of the binomial},
+  author={Clopper, Charles J and Pearson, Egon S},
+  journal={Biometrika},
+  pages={404--413},
+  year={1934},
+  publisher={JSTOR}
+}
+
+@article{wilson1927probable,
+  title={Probable inference, the law of succession, and statistical inference},
+  author={Wilson, Edwin B},
+  journal={Journal of the American Statistical Association},
+  volume={22},
+  number={158},
+  pages={209--212},
+  year={1927},
+  publisher={Taylor \& Francis Group}
+}
+
+@article{newcombe1998two,
+  title={Two-sided confidence intervals for the single proportion: comparison of seven methods},
+  author={Newcombe, Robert G},
+  journal={Statistics in medicine},
+  volume={17},
+  number={8},
+  pages={857--872},
+  year={1998}
+}
+
+@article{vollset1993confidence,
+  title={Confidence intervals for a binomial proportion},
+  author={Vollset, Stein Emil},
+  journal={Statistics in medicine},
+  volume={12},
+  number={9},
+  pages={809--824},
+  year={1993},
+  publisher={Wiley Online Library}
+}
+
+@article{newcombe1998improved,
+  title={Improved confidence intervals for the difference between binomial proportions based on paired data},
+  author={Newcombe, Robert G},
+  journal={Statistics in medicine},
+  volume={17},
+  number={22},
+  pages={2635--2650},
+  year={1998}
+}
+
+@article{blyth1983binomial,
+  title={Binomial confidence intervals},
+  author={Blyth, Colin R and Still, Harold A},
+  journal={Journal of the American Statistical Association},
+  volume={78},
+  number={381},
+  pages={108--116},
+  year={1983},
+  publisher={Taylor \& Francis}
+}
+
+@BOOK{Dingzhu:1997,
+  title = {Satisfiability Problem: Theory and Applications},
+  publisher = {American Mathematical Society},
+  year = {1997},
+  editor = {Dingzhu, Du and Pardalos, Panos M. and Gu, Jun},
+  address = {Boston, MA, USA},
+  isbn = {0821804790}
+}
+
+@BOOK{Floudas:2009,
+  title = {Encyclopedia of Optimization, Second Edition},
+  publisher = {Springer},
+  year = {2009},
+  editor = {Christodoulos A. Floudas and Panos M. Pardalos},
+  bibsource = {DBLP, http://dblp.uni-trier.de},
+  isbn = {978-0-387-74758-3}
+}
+
+@book{agresti2007introduction,
+  title={An introduction to categorical data analysis},
+  author={Agresti, Alan},
+  year={2007},
+  publisher={John Wiley}
+}
+
+@book{fleiss2013statistical,
+  title={Statistical methods for rates and proportions},
+  author={Fleiss, Joseph L and Levin, Bruce and Paik, Myunghee Cho},
+  year={2013},
+  publisher={John Wiley \& Sons}
+}
+
+@MISC{:,
+  howpublished = {Internet, \\http://www.eivd.ch/ina/collaborateurs/etd/default.htm},
+  key = { Home page {E}ric {T}aillar}
+}
+
+@MISC{:a,
+  howpublished = {Internet, \\http://www.eivd.ch/ina/collaborateurs/etd/default.htm},
+  key = { Home page {E}ric {T}aillard}
+}
+
+@MISC{:b,
+  howpublished = {Job Shop Scheduling webpage, Internet, http://goo.gl/iKv87},
+  key = {Job Shop Scheduling webpage}
+}
+
+@MISC{NewtonHPC,
+  title = {The University of {T}ennessee, {N}ewton {HPC} Program – High Performance Computing},
+  key = {UT Newton HPC},
+  howpublished = {\url{http://newton.utk.edu}},
+  year   = "[Accessed on 30 January 2017]"
+}

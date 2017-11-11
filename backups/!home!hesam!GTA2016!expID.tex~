@@ -1,0 +1,86 @@
+% Created 2016-11-13 Sun 04:21
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Hesam}
+\date{\today}
+\title{Experience ID explanation}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\begin{table}[]
+\centering
+\caption{Experience ID classifications for GES}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{No. of Iterations} & \textbf{min Tenure} & \textbf{max Tenure} & \textbf{Exp ID} \\ \hline
+\multirow{100,000}         & \multirow{5}        & 80                  & 2016C01         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C02         \\ \cline{2-4} 
+                           & \multirow{7}        & 80                  & 2016C03         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C04         \\ \hline
+\multirow{300,000}         & \multirow{5}        & 80                  & 2016C05         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C06         \\ \cline{2-4} 
+                           & \multirow{7}        & 80                  & 2016C07         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C08         \\ \hline
+\multirow{500,000}         & \multirow{5}        & 80                  & 2016C09         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C10         \\ \cline{2-4} 
+                           & \multirow{7}        & 80                  & 2016C11         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C12         \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\centering
+\caption{Experience ID classifications for Standard Tabu}
+\label{my-label}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{No. of Iterations} & \textbf{Algorithm} & \textbf{Exp ID} \\ \hline
+100,000                    & Standard Tabu      & 2016T02         \\ \hline
+300,000                    & Standard Tabu      & 2016T01         \\ \hline
+500,000                    & Standard Tabu      & 2016T03         \\ \hline
+\end{tabular}
+\end{table}
+\section{{\bfseries\sffamily TODO} Run \textbf{2016T02} for \texttt{ta61-ta80}.}
+\label{sec-1}
+\section{{\bfseries\sffamily TODO} Run \textbf{2016T02} for \texttt{ta01-ta20}.}
+\label{sec-2}
+\section{{\bfseries\sffamily TODO} Run \textbf{2016T03} for \texttt{ta01-ta20}.}
+\label{sec-3}
+\section{{\bfseries\sffamily TODO} Run \textbf{2016T03} for \texttt{ta61-ta80}.}
+\label{sec-4}
+\section{{\bfseries\sffamily TODO} Run \textbf{2016C01} for \texttt{ta61-ta80}.}
+\label{sec-5}
+\section{{\bfseries\sffamily TODO} Run \textbf{2016C05} for \texttt{ta61-ta80}.}
+\label{sec-6}
+\section{{\bfseries\sffamily TODO} Run \textbf{2016C09} for \texttt{ta61-ta80}.}
+\label{sec-7}
+ I ran \textbf{2016T01} for all Problems. I ran \texttt{ta01-ta20} for ExpID's
+ \textbf{2016C01}, \textbf{2016C02}, \textbf{2016C03}, \textbf{2016C04}, \textbf{2016C05}, and \textbf{2016C09}
+ until now (\emph{Sunday Morning 13th}).
+The plan: Run \textbf{2016T02} and \textbf{2016T03} for \texttt{ta01-ta20} and \texttt{ta61-ta80}.
+The plan: Run \textbf{2016C01}, \textbf{2016C05}, and \textbf{2016C09} for \texttt{ta61-ta80}.
+Sum: 5 remaining runs.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

@@ -1,0 +1,31 @@
+#+TITLE: Homework 04 Solutions - IE310 \\
+#+TITLE: Operation Research in Industrial Engineering II \\
+#+TITLE: Probabilistic Model \\
+#+TITLE: Spring 2017
+
+* Exercise 41 - Chapter 3 - Ross (10th Edition)
+Let $x$ denotes the number of minutes the rat trapped in the maze. The
+rat has two choices *Right* and *Left* with equal probability. If it
+goes to the *Left*, two possibilities can be happened, return to the
+initial position or departing from the maze. So, we have three
+possible events. The possible events by $e_1$, $e_2$, and $e_3$ are as
+follows:
+
+$P($ Rat goes to Right $)=P(e_1)=\frac{1}{2}$ \\
+$P($ Rat goes to Left then departs $)=P(e_2)=\frac{1}{2} \times \frac{1}{3}=\frac{1}{6}$ \\
+$P($ Rat goes to Left then returns $)=P(e_3)=\frac{1}{2} \times
+\frac{2}{3}=\frac{1}{3}$ \\
+
+Therefore, the estimated number of minutes $E[x]$ is: \\
+\begin{align}
+E[x] &= E[x|e_1] \times P(e_1) + E[x|e_2] \times P(e_2) + E[x|e_3]
+\times P(e_3) \\ 
+E[x] &= (3+E[x]) \times \frac{1}{2} + 2 \times \frac{1}{6} + (5+E[x])
+\times \frac{1}{3} \\
+E[x] &= \frac{3}{2} + \frac{E[x]}{2} + \frac{1}{3} + \frac{5}{3} +
+\frac{E[x]}{3} \\
+E[x] - \frac{E[x]}{2} - \frac{E[x]}{3} &= \frac{3}{2} + \frac{1}{3} +
+\frac{5}{3} \\
+\frac{E[x]}{6} &= \frac{21}{6} \\
+E[x] &= 21 \textbf{minutes} \\
+\end{align}

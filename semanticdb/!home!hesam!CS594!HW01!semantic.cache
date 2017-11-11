@@ -1,0 +1,64 @@
+;; Object HW01/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "HW01/"
+  :tables
+  (list
+    (semanticdb-table "degree.cc"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("iostream" include (:system-flag t) nil [21 40])
+            ("fstream" include (:system-flag t) nil [41 59])
+            ("sstream" include (:system-flag t) nil [60 78])
+            ("stdlib.h" include (:system-flag t) nil [79 98])
+            ("math.h" include (:system-flag t) nil [99 116])
+            ("time.h" include (:system-flag t) nil [117 134])
+            ("string.h" include (:system-flag t) nil [135 154])
+            ("stdio.h" include (:system-flag t) nil [155 173])
+            ("unistd.h" include (:system-flag t) nil [174 193])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [195 215])
+            ("no_ver" variable (:type "int") nil [217 231])
+            ("n" variable (:type "int") nil [217 231])
+            ("max_deg" function
+               (:arguments 
+                  ( ("graph" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [301 312]))                  
+                :type "int")
+                nil [289 539])
+            ("min_deg" function
+               (:arguments 
+                  ( ("graph" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [608 619]))                  
+                :type "int")
+                nil [596 851])
+            ("density_g" function
+               (:arguments 
+                  ( ("graph" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [918 929]))                  
+                :type "double")
+                nil [901 1028])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [1039 1048])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1049 1061]))                  
+                :type "int")
+                nil [1030 1977]))          
+      :file "degree.cc"
+      :pointmax 1978
+      :fsize 1977
+      :lastmodtime '(22682 8111 628006 151000)
+      :unmatched-syntax nil))
+  :file "!home!hesam!CS594!HW01!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -1,0 +1,1248 @@
+% Created 2017-09-22 Fri 16:09
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{color}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{graphicx}
+\usepackage[tight,hang,nooneline,raggedright,figtopcap]{subfigure}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage[english]{babel}
+\usepackage{multimedia}
+\usepackage[boxed]{algorithm}
+\usepackage{algorithmic}
+\usepackage{natbib}
+\author{Hesam Shams}
+\date{\today}
+\title{Guided Tabu Algorithm}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+asdf, or whatever I want to write in the abstract \ldots{}
+\end{abstract}
+
+\section{Introduction}
+\label{sec-1}
+During recent years, solving large combinatorial optimization problems
+have been studied extensively. Many techniques and algorithms are
+developed for \emph{NP}-complete problems. Tabu search (TS) algorithm
+\citep{Glover:1989} is a distinguished one because of its better
+performance in compare with other search algorithms on discrete
+optimization problems. Tabu search algorithm provides a general
+framework which can be applied on many problems and it is not designed
+for a specific class of problems.
+
+In compare with other heuristics, TS can be seen as a
+meta-heuristic. In fact there exists a heuristic local search within
+the TS which guides to a better solution. The TS algorithm break down
+the optimization process into local searches to more global
+searches. At each step, TS construct a memory to guide the process to
+a better solution. In this regards, TS is an intelligent algorithm
+which conducts searches.
+
+The focus of this PhD thesis is designing efficient mechanisms for
+binary optimization problems which can be applied to approximate
+algorithms such as TS. These mechanisms include using information by
+components to have an efficient memory storing method and implementing
+machine learning methods to a given set of solutions in order to
+classify the components. Both mechanism are applied to TS and a Guided
+Tabu Algorithm (GTA) is proposed. Since TS shows an acceptable
+performance on scheduling problems, the proposed algorithm is applied
+on job shop scheduling problems.
+
+The performance of an approximate algorithm is usually measured by
+statistics methods such as \emph{p}-value. This measurement technique
+compares the performance of the proposed algorithm to an old one and
+it reports the performance by some \emph{p}-values. In this thesis, we also
+develop a visual comparison method which the performance can be viewed
+during a time period. This visualization has some advantages, it is
+easy to understand and easy to interpret the performance of an
+algorithm compared to another. This technique has also an interval in
+which a nominal confidence level is guaranteed.
+
+Fused deposition modelling (FDM) is one of the most popular and the
+most primary technique for Additive Manufacturing (AM). The AM is a
+process in which the raw material is added layer by layer to build up
+a solid physical object. There exist a few research have been studied
+the improvement for build-time model. At the end of the thesis, we
+also construct a build-time model based on experimental results in
+tool-path generation which can be improved by optimization techniques.
+
+The rest of this manuscript is divided into five chapters that are as
+follows. First, the GTA is explained in chapter 2, then the machine
+learning mechanism of binary optimization problems is described in
+chapter 3. The visual comparison technique is provided in
+chapter 4. The FDM build-time model is discussed in chapter 5 and
+finally the chapter 6 sums up the expecting conclusions and provide a
+work plan to finalize the thesis.
+
+\section{Guided Tabu Algorithm}
+\label{sec-2}
+\subsection{Introduction}
+\label{sec-2-1}
+
+When considering successful applications, the tabu search method
+\citep{Glover:1989} is arguably one of the best standalone
+optimization approaches among those based on the local search, where a
+set of moves transform one solution into another through modification
+of their constituent attributes. Tabu search employs a short-term
+memory prohibition mechanism, a rule that prevents revisiting of
+solution attributes recently removed from the current solution. Less
+commonly, tabu restrictions inhibit removal of attributes that were
+recently introduced into the current solution. In general, these two
+types of restrictions lead to different search trajectories and might
+be employed in parallel, however in case of 0-1 optimization problems
+they are equivalent \citep{Glover:1989}. Through inhibition mechanisms
+and by enabling non-improving solution attributes, the tabu search
+method provides an almost effortless escape from local minima together
+with efficient exploration of alternative solutions.
+
+Typically, when a certain attribute enters a list of prohibited
+attributes, the tabu list, it will remain there for a fixed number of
+iterations determined by a \emph{tabu tenure} parameter. Most tabu search
+implementations adopt a single tabu tenure parameter for each of the
+solution attributes, which is often defined as a function of problem
+size and might be dynamically adjusted to avoid cycling effects
+\citep{Battiti:1994}. The attribute-dependent tenures, where each
+solution attribute is assigned a separate tabu tenure value, has been
+also identified in earlier publications
+\citep{Glover:1993,Glover:1990a}. However, previous discussions of the
+attribute-dependent tenures mainly focused on the variability with
+respect to restrictive powers of different move attributes
+\citep{Glover:1993}, with an emphasis being placed on an idea that
+when using the same tabu tenure for all solution components,
+prohibition of certain solution attributes might have a stronger
+impact on search process than prohibition of the others. 
+
+Many optimization approaches rely on the tabu method, but often
+utilize additional mechanisms for diversification and intensification
+of the search. For example, multi-start tabu strategies repeatedly
+launch the tabu search procedure using different initial solutions. In
+the path-relinking framework one collects a set of diverse
+high-quality solutions, the elite set, constructs paths between them,
+and explores the neighborhoods of the intermediate solutions using
+local search or tabu search procedures. However, when implementing a
+path-relinking algorithm, there are many questions that are not easy
+to answer: what is the optimal size of the elite set, how much time
+should be spend constructing the elite set versus exploring the paths
+between them.
+
+In this proposal, we propose to integrate the path-relinking stage with
+the main tabu search procedure by embedding the long term memory into
+the tabu list mechanism. Instead of using a single tabu tenure
+parameter, each component of a solution vector is assigned a separate
+tabu tenure value that is dynamically updated and depends on
+previously found solutions. To define the values for tabu tenures, we
+propose to use an approximation to the Boltzmann's distribution. The
+proposed algorithm is inspired by the Global Equilibrium Search
+method, and can be considered as a crossover between tabu search and
+global equilibrium search.
+
+\subsection{Description of the approach}
+\label{sec-2-2}
+\label{desc.apprch}
+\subsubsection{Main Idea}
+\label{sec-2-2-1}
+
+Consider a binary optimization problem in \ref{general.model}:
+
+\begin{equation}\label{general.model}
+\begin{array}{cc}
+\min f(x) \\
+\text{s.t. } x \in S \subset \{0,1\}^n
+\end{array}
+\end{equation}
+
+In a simplest form, the tabu search algorithm iteratively moves from
+one solution to another using the values of the corresponding
+objective values for guidance. Given a current solution $x$, at each
+iteration the algorithm moves to one of the solutions in its
+neighborhood $N(x)$, however the tabu search method prohibits some of
+the solutions in $N(x)$. Suppose that $latestChange(j)$ is the latest
+iteration when the solution component $j$ changed its value, then any
+solution in $N(x)$ that differs from $x$ in $jth$ component is
+prohibited until the iteration number $latestChange(j)+tenure$, where
+$tenure$ defines a length of the tabu period. There are many
+variations of tabu search implementations, but the idea is similar:
+prohibit changes in components that were recently modified. Typically,
+the best non-tabu solution in $N(x)$ is chosen as a next current
+solution, and after that the process repeats.
+
+In the current manuscript, we explore an approach that uses the tabu
+prohibition mechanism both for escaping from local minima, and for
+guiding the search to promising solution areas. Instead of a single
+tabu parameter, each solution component is assigned its own tabu
+parameter $\mathrm{tabu}_j$ that is dynamically updated during the search. By
+assigning large values to $\mathrm{tabu}_j$ the algorithm attempts to preserve
+the current value of the $x_j$, while small $\mathrm{tabu}_j$ will indicate
+that the component $x_j$ can be modified at a faster pace. For
+example, if we wish to guide the tabu search to a specified solution
+$x^*$, we can use a standard tabu search procedure, but whenever $x_j$
+takes the same value as $x^*_j$, we would set $\mathrm{tabu}_j$ to $T^{U}$, and
+set it to $T^{L}$ if the new $x_j$ is different from $x^*_j$, where
+$T^{U}>T^{L}$. If the neighborhood is connected (any solution can be
+reached from any other solution), then an appropriate choice of
+$T^{L}$ and $T^{U}$ will guarantee the convergence.
+
+\subsubsection{Long-term Memory}
+\label{sec-2-2-2}
+\label{long.term.memory}
+
+To accumulate information about the search space, we will maintain an
+approximation to the Boltzmann's distribution defined for the
+optimization problem given in (\ref{general.model}). Similar
+approximation was first introduced within the Global Equilibrium
+Search method. In this distribution (\ref{eq:GE}) the random vector
+$\xi$ takes values from the set of all feasible solution $S$ and the
+probability mass function depend on a temperature parameter $\mu$:
+\begin{equation}
+P\{\xi=x\}=\frac{ e^{-\mu f(x)}}{\displaystyle \sum_{x\in S} e^{-\mu  f(x)}} \label{eq:GE}
+\end{equation}
+or, if considering each component separately we have \ref{distribution.2}:
+\begin{equation}
+P\{\xi_j=1\}=\frac{\displaystyle  \sum_{x\in S^1_j} e^{-\mu f(x)}}{\displaystyle  \sum_{x\in S} e^{-\mu f(x)}} \label{distribution.2}
+\end{equation}
+where $S$ is the set of feasible solutions and $S^1_j$ is the set of
+solutions with $j$-th component equal to 1.  The larger temperature
+values lead to the distributions that have higher probabilities
+assigned to better solutions, while zero temperature produces a
+uniform distribution on the set of all feasible solutions.
+
+To approximate (\ref{distribution.2}), we will use up to $l$ entries
+for the sums in the denominator and enumerator using only the latest
+solutions and the best solution found by the search procedure.  For
+each solution component $j$, let $f^1_j$ ($f^0_j$) be the best found
+objective for the solution with $x_j=1$  $(x_j=0)$. Consider two sets
+of objective values, $H^1_j$ and $H^0_j$, which contain the most
+recent objective values corresponding to the solutions having the
+$j$-th component equal to 1 and 0, respectively. The formulation for
+$H^1_j$ and $H^0_j$ are show in \ref{listH0} and \ref{listH1}
+accordingly.
+\begin{align}
+H^1_j &= \{h^{1,j}_0,h^{1,j}_1,\ldots, h^{1,j}_{l_1}\}, (l_1 \leq l) \label{listH0} \\
+H^0_j &= \{h^{0,j}_0,h^{0,j}_1,\ldots, h^{0,j}_{l_0}\}, (l_0 \leq l) \label{listH1}
+\end{align}
+
+Since the algorithm might never find a feasible solution with $j$-th
+component equal to 0 (or 1), either $l_0$ or $l_1$ might be less
+than $l$. Every time a new solution is encountered, these sets can be
+updated in a constant time using linked lists. Overall, this will
+require storing approximately $2n\cdot l$ objective values plus some
+overhead for implementation of linked lists.
+
+Now, we can approximate Boltzmann's probabilities using the equations
+in \ref{eq:numerator}, \ref{eq:denominator}, and
+\ref{approximation.probability}.
+\begin{align}
+Z_j^1(\mu) =& \exp\left(\mu\left[f(x^{min})-f^1_j\right]\right)+\sum\limits_{k=1}^{\min\left\{|H_j^1|,|H_j^0|\right\}} \exp\left(\mu\left[f(x^{min})-h_k^{1,j}\right]\right) \label{eq:numerator} \\
+Z_j(\mu) =& \exp\left(\mu\left[f(x^{min})-f^1_j\right]\right)+\exp\left(\mu\left[f(x^{min})-f^0_j\right]\right) \nonumber \\
+&+ \sum\limits_{k=1}^{\min\left\{|H_j^1|, |H_j^0|\right\}}\exp\left(\mu\left[f(x^{min})-h_k^{1,j}\right]\right) \nonumber \\
+&+ \sum\limits_{k=1}^{\min\left\{|H_j^1|, |H_j^0|\right\}}\exp\left(\mu\left[f(x^{min})-h_k^{0,j}\right]\right) \label{eq:denominator} \\
+\tilde{p}_j(\mu) =& \frac{Z^1_j(\mu)}{Z_j(\mu)} \label{approximation.probability}
+\end{align}
+
+The sum in (\ref{eq:numerator}) is a partial sum corresponding to the
+numerator in (\ref{distribution.2}), while (\ref{eq:denominator}) is
+the partial sum corresponding to the denominator of the expression in
+(\ref{distribution.2}). When using this approximation, we need to
+store $n$ values for $x^{min}$, $2n$ values for the vectors $f^0$ and
+$f^1$, and up to $2nl$ values for storing $H^1$ and $H^0$. As the
+temperature parameter $\mu$ increases, the probability vector
+$\tilde{p}(\mu)$ is converging to the solution vector $x_{min}$,
+however the convergence rate is different for every solution
+component: the components that are common for all high-quality
+solutions will converge faster than all the others. Thus, when
+increasing the temperature parameter $\mu$, the probability value
+change from 0.5 (no bias towards 0 or 1) to the value that is typical
+to the best encountered solutions. The main advantage of this long
+term memory implementation is that there is no need to store the
+solutions explicitly.
+
+\subsubsection{Dynamic tabu search tenure}
+\label{sec-2-2-3}
+
+In the proposed approach, an approximation to the Boltzmann's
+distribution from Section \ref{long.term.memory} defines dynamic tabu
+tenures. Whenever $x_j$ is modified, we compare its new value to the
+current best solution $x^{best}_j$. If the probability
+in(\ref{approximation.probability}) is close to 1 or 0 and the new
+value is the same as $x^{best}_j$, then we assign a large tenure value
+to $x_j$.  Otherwise, we want to enforce a faster rate of change
+for $x_j$, so we assign a smaller tenure value. Next, we define a
+function that link probabilities to tabu tenures.
+
+\subsubsection{Quadratic Tenure Function}
+\label{sec-2-2-4}
+After every local search transition, the tenure for each component
+that has changed is determined by the quadratic function in \ref{tenure.formula1}.
+
+\begin{equation}
+ \mathrm{tabu}_j(\tilde{p}_j(\mu)) = \left\{
+\begin{array}{ll}
+      4(T^{U}-T^{L}) \tilde{p}_j(\mu)^2-4(T^{U}-T^{L})\tilde{p}_j(\mu)+T^{U} & x_j = x^{best}_j \\
+      T^{L}  & x_j \neq x^{best}_j \\
+\end{array} 
+\right. \label{tenure.formula1}
+\end{equation} 
+where an interval $[T^{L},T^{U}]$ defines a range of possible tenure
+values. The coefficients of this quadratic function are chosen to
+satisfy the conditions in \ref{cond1}, \ref{cond2}, and \ref{cond3}.
+\begin{align}
+\mathrm{tabu}_j(\tilde{p}_j(\mu) ) &= T^{U} \text{ if } \tilde{p}_j(\mu)=1 \label{cond1} \\
+\mathrm{tabu}_j(\tilde{p}_j(\mu) ) &= T^{U} \text{ if } \tilde{p}_j(\mu)=0 \label{cond2} \\
+\mathrm{tabu}_j(\tilde{p}_j(\mu)) &= T^{L} \text{ if } \tilde{p}_j(\mu)=0.5 \label{cond3}
+\end{align}
+
+If the $j$-th component is set to a different value than the $j$-th
+component in the best known solution, then the variable $j$ is
+assigned a low tenure value $T^{L}$. Otherwise, the tenure value is a
+quadratic function of the probabilities that approximate Boltzmann's
+distribution: the closer probability $\tilde{p}_j$ is to 1 or 0, the
+larger is the value of the assigned tabu tenure, with the maximum
+possible value of $T^{U}$.
+
+\subsubsection{Other possible choices for the tenure function}
+\label{sec-2-2-5}
+\paragraph{Sigmoid Tenure Function}
+\label{sec-2-2-5-1}
+
+Similarly to the quadratic function, the assigned tenures belong to
+the interval $[T^{L},T^{U}]$. Whenever a solution component $x_j$ is
+modified its tenure is determined by the function in
+\ref{tenure.formula2}.
+\begin{equation}
+ \mathrm{tabu}_j(\tilde{p}_j(\mu)) = \left\{
+\begin{array}{ll}
+      \frac{2T^{U}+T^L\exp(\alpha \tilde{p}_j(\mu))-T^L}{1+\exp(\alpha \tilde{p}_j(\mu))}& x_j = x^{best}_j,\tilde{p}_j(\mu)\leq 0.5\\
+      \frac{2T^{U}+T^L\exp(\alpha (1-\tilde{p}_j(\mu)))-T^L}{1+\exp(\alpha(1-\tilde{p}_j(\mu)))}& x_j = x^{best}_j,\tilde{p}_j(\mu)>0.5\\
+      T^{L}  & x_j \neq x^{best}_j \\
+\end{array} 
+\right. \label{tenure.formula2}
+\end{equation}
+
+This function is equal to $T^{U}$ for when $\tilde{p}_j(\mu)$  equals
+to 1 and 0 as is shown in \ref{func:sigm}.
+\begin{align}
+\mathrm{tabu}_j(\tilde{p}_j(\mu)) &= T^{U} \text{ if } \tilde{p}_j(\mu)=1 \nonumber \\
+\mathrm{tabu}_j(\tilde{p}_j(\mu)) &= T^{U} \text{ if } \tilde{p}_j(\mu)=0 \label{func:sigm}
+\end{align}
+where parameter $\alpha>0$ defines the steepness of the function, and
+it should be chosen to satisfy the condition in \ref{cond:sigm}.
+\begin{align}
+\mathrm{tabu}_j(\tilde{p}_j(\mu)) &\approx T^{L} \qquad \text{ if } \quad \tilde{p}_j(\mu)=0.5 \label{cond:sigm}
+\end{align}
+
+\paragraph{Unbounded Tenure Function}
+\label{sec-2-2-5-2}
+
+Whenever a solution component $x_j$ is modified its tenure is
+determined by the function in \ref{tenure.formula3}.
+
+\begin{equation}
+ \mathrm{tabu}_j(\tilde{p}_j(\mu)) = \left\{
+\begin{array}{ll}
+      T^{L}\frac{ 1-\tilde{p}_j(\mu))}{ \tilde{p}_j(\mu)}& x_j = x^{best}_j,\tilde{p}_j(\mu)\leq 0.5\\
+        T^{L}\frac{ \tilde{p}_j(\mu))}{1- \tilde{p}_j(\mu)} & x_j = x^{best}_j,\tilde{p}_j(\mu)>0.5\\
+      T^{L}  & x_j \neq x^{best}_j \\
+\end{array} 
+\right. \label{tenure.formula3}
+\end{equation}
+
+The plots of different tenure functions are shown in figure
+\ref{tenure.functions}.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3in]{./figs/compareTenure.pdf}
+\caption{\label{tenure.functions}Tenure as a function of approximation probabilities, $T^{U}=100$ and $T^{L}=10$.}
+\end{figure}
+
+\subsubsection{Algorithm}
+\label{sec-2-2-6}
+
+Based on the previous discussion, we can provide a description of the
+\textbf{Guided Tabu Algorithm} (GTA) (see Algorithm \ref{FigGTA}).
+
+\begin{algorithm}
+\caption{Guided Tabu Algorithm (general scheme)} \label{FigGTA}
+\begin{algorithmic}[1]
+\REQUIRE $\mu$ -- vector of temperature values, $K$ -- number of
+temperature stages, $nfail^*$ -- restart parameter, $niters$ -- maximum
+number of tabu search iterations, $d$ -- number of
+iterations between memory updates.  
+\ENSURE \STATE $x^{best}=$construct random solution;
+  \WHILE {stopping criterion =  FALSE} \label{main.cycle.start} 
+   \STATE $x =$ construct random solution 
+   \STATE $x^{min}=x$ \STATE reset the long term memory: $H^1$, $H^0$, $f^1$, $f^0$ 
+   \STATE update vectors $H^1$, $H^0$, $f^1$, $f^0$ using $x^{min}$ 
+    \FOR {$nfail=0$ to $nfail^*$}\label{nfail.start}
+      \STATE $x^{old}=x^{min}$ 
+          \FOR{$k=0$ to $K$}        \label{temp.start}
+            \STATE SearchProcedure($x,x^{min},H^1,H^0,f^1,f^0,niters,\mu_k,d$) [see Alg. \ref{FigTabu}]\label{temp.end}
+         \ENDFOR
+         \IF{$f(x^{old})>f(x^{min})$}
+             \STATE $nfail=0$
+         \ENDIF        
+    \ENDFOR \label{chapter2:FigGES:nfail.end}
+    \IF{$f(x^{best})>f(x^{min})$}
+        \STATE $x^{best}=x^{min}$
+    \ENDIF            
+\ENDWHILE \label{main.cycle.end}
+\RETURN $x^{best}$
+\end{algorithmic}
+\end{algorithm}
+
+The presented pseudo-code describes the algorithm for solving
+minimization problems similar to (\ref{general.model}). The main loop
+(lines\ref{main.cycle.start}-\ref{main.cycle.end}) is repeated until
+some stopping criteria is satisfied.  Within a temperature cycle
+(lines\ref{temp.start}-\ref{temp.end}), we repeatedly launch a version
+of a tabu search (line \ref{temp.end}) using an increasing sequence of
+temperatures,  $\mu_1,\ldots\mu_k$. The long term memory captured in
+vectors $H_0,H_1,f^1,f^0$ is constantly updated inside the search
+procedure.  The temperature cycles are repeated until $nfail^*$
+consecutive cycles without any improvement  (line \ref{nfail.start}).
+
+\begin{algorithm}
+\caption{Tabu Search Procedure} \label{FigTabu}
+\begin{algorithmic}[1]
+\REQUIRE $x$ -- current solution, $x^{min}$ -- current best solution, $H^1$, $H^0$  -- long term memory data [see (\ref{listH0}), (\ref{listH1})],  vectors $f^1, f^0$  [ $f^1_j$ ($f^0_j$) equals to the best found objective for the solution having $jth$ component equal to one (zero)], $\mu_k$ -- current temperature value, $niters$ -- maximum number of tabu iterations, $d$~-- number of iterations between memory updates.
+    \STATE $\tilde{p}(\mu_k)$=\text{calculate probabilities}(${H^1},H^0,f^1,f^0, \mu_k$)$\quad\quad\quad\quad$\label{probability.generation} $\quad\quad$[see (\ref{approximation.probability})]    
+    %\STATE $x_{best}=x$; $n=|x|$; $M=\{1,2,\ldots,n\}$; $step=0$;
+    %$impr=$\bf{true}; $R=\emptyset$
+    \STATE $lastChanged(j)=-\infty$; $tabu(j)=T^{L}$ for all $j$
+    \FOR{$iter=1$ to $niters$}
+            \STATE $TabuSet=\emptyset$ \label{init.tabu.set}
+            \FOR{$y$ in $N(x)$}
+                   \STATE $modInd = \{j: x_j\neq y_j\}$
+                   \FOR{$j$ in $modInd$}
+                        \IF{[$iter-lastChanged(j)<tabu(j)$] and [$f(y)\geq f(x_{min})$]} 
+                        \STATE $TabuSet=TabuSet\cup y$
+                        \ENDIF
+                   \ENDFOR
+            \ENDFOR
+            \STATE $NonTabuSet= N(x)- TabuSet$
+            \IF{$NonTabuSet\neq \emptyset$}
+            \STATE $x^{new} = $ the best solution in $NonTabuSet$            
+            \ELSE
+            \STATE $x^{new} = $ the oldest tabu solution in $TabuSet$
+            \ENDIF             \label{xnew.choosen}
+            \STATE $modInd = \{j: x^{new}_j\neq x_j\}$ {\it \#only look at the components that changed}\label{who.changed}
+            \FOR{$j$ in $modInd$}
+            \IF{($x_j^{min}\neq x^{new}_j$)} 
+            \STATE $tabu(j)=4(T^U-T^L) \tilde{p}_j(\mu)^2 -4(T^{U}-T^{L}) \tilde{p}_j(\mu)+T^{U} $  $\quad$[see (\ref{tenure.formula3})]
+            \ELSE 
+            \STATE $tabu(j)=T^{L}$ $\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad$[see (\ref{tenure.formula3})]\label{set.tabu2}
+            \ENDIF
+            \ENDFOR            
+            \IF{[$iteration \bmod d = 0 $] OR [$f(x)<f(x^{min})$]} 
+            \STATE update vectors $H^1$, $H^0$, $f^1$, $f^0$ using $x$             
+            \ENDIF %    \ENDWHILE
+            \STATE $x=x^{new}$
+            \IF{[$f(x)<f(x^{min})$]} 
+            \STATE $x^{min}=x$
+            \ENDIF %    \ENDWHILE            
+    \ENDFOR
+    \RETURN $x,x^{min}$
+\end{algorithmic}
+\end{algorithm}
+
+
+Our search procedure is similar to the tabu search method, but it also
+includes a dynamic tabu tenure mechanism that uses long-term
+memory(see Algorithm \ref{FigTabu}). At the beginning of the search
+procedure, we calculate the approximation probabilities to Boltzmann's
+distribution as defined in (\ref{approximation.probability}) using the
+long-term memory data structures (Algorithm \ref{FigTabu},
+line\ref{probability.generation}). The search procedure consists
+of$niters$ iterations. At each iteration, all the solution in the
+neighborhood of a current solution $x$ are split into two
+sets$TabuSet$ and $NonTabuSet$. If $NonTabuSet$ is not empty, then the
+best solution in this set becomes a new current solution, otherwise we
+select the solution from $TabuSet$ that is closest to a non-tabu
+status (Algorithm \ref{FigTabu},
+lines\ref{init.tabu.set}-\ref{xnew.choosen}). After a new current
+solution is chosen, we scan trough all the components that were
+modified and set the prohibition duration $\mathrm{tabu}_j$ for each
+of the corresponding components (Algorithm \ref{FigTabu},
+lines\ref{who.changed}-\ref{set.tabu2}). We use the current solution
+to update the memory structures involved in calculations of
+probabilities $\bar{p}_j$ every $d$ iterations or if the current
+solution $x$ is better than $x^{min}$.
+
+\section{Enhancing Optimization Algorithm Via Machine Learning}
+\label{sec-3}
+\subsection{Introduction}
+\label{sec-3-1}
+\subsection{Description of the approach}
+\label{sec-3-2}
+\subsubsection{Main idea}
+\label{sec-3-2-1}
+\section{Algorithms Comparison Method}
+\label{sec-4}
+\subsection{Introduction}
+\label{sec-4-1}
+A number of research have been studied on comparisons of
+meta-heuristics and heuristics algorithm. Some of them are based on
+counting number of successes on a same benchmark, others are on design
+of experiments and reporting the \emph{p}-value. The common feature of
+these approaches is that all are based on numbers which can be
+confusing. In order to resolve this confusion, visual comparison
+methods are proposed in this chapter.
+
+These methods are inspired by the runtime distribution proposed by
+\citep{aiex2002probability}. The runtime distribution or
+time-to-target plots is 2-dimensional plot which \emph{x}-axis is the
+probability that an algorithm will find a solution at least as good as
+a given target value within a given running time which is shown on
+\emph{y}-axis. But the proposed methods in this manuscript have some
+advantages such as a nominal confidence level is guaranteed in these
+methods. We present the methods in the following sections.
+\subsection{Description of the method}
+\label{sec-4-2}
+For a pairwise comparison, we consider two algorithms $\mathcal A$ and
+$\mathcal B$ on a set of benchmark instances $\mathcal C$. To estimate
+the related parameters, we repeatedly run $\mathcal A$ and $\mathcal
+B$ on each instance in $\mathcal C$ and record corresponding
+performance measures for each run (e.g., time to optimality, best
+objective value). Let $X^{\mathcal A}_c$ denote a vector of
+performance measures obtained by repeatedly executing $\mathcal A$ on
+a problem $c\in \mathcal C$. The notation is clarified in Table \ref{tab:not1},
+where $n_i$ correspond to the total number of runs for $\mathcal A$ on
+$c_i$, and similarly $m_i$ denotes number of runs for $\mathcal B$ on
+$c_i$.
+
+\begin{longtable}{|c|c|c|}
+\caption{\label{tab:not1}Notation for comparing algorithms.}
+\\
+\hline
+Problem & Algorithm $\mathcal A$ & Algorithm $\mathcal B$\\
+\hline
+\endhead
+\hline\multicolumn{3}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+$c_1$ & $X^{\mathcal A}_{c_1}:= (x^1_1, x^1_2, \ldots,x^1_{n_1})$ & $X^{\mathcal B}_{c_1}:= (y^1_1, y^1_2, \ldots,y^1_{m_1})$\\
+$c_2$ & $X^{\mathcal A}_{c_2}:= (x^2_1, x^2_2, \ldots,x^2_{n_2})$ & $X^{\mathcal B}_{c_2}:= (y^2_1, y^2_2, \ldots,y^2_{m_2})$\\
+$\cdots$ & $\cdots$ & $\cdots$\\
+$c_k$ & $X^{\mathcal A}_{c_k}:= (x^k_1, x^k_2, \ldots,x^k_{n_k})$ & $X^{\mathcal B}_{c_k}:= (y^k_1, y^k_2, \ldots,y^k_{m_k})$\\
+\hline
+\end{longtable}
+
+In order to compare these samples on a specific problem, we need to
+downsample the runs on both algorithms $\mathcal A$ and $\mathcal B$
+into the minimum number of runs. In other words, we generate pairs of
+samples $(x,y)$'s in size of $\mathcal N_c= \min\{|X^{\mathcal A}_c|, |X^{\mathcal
+B}_c|\}$. Each set of $X^{\mathcal A}_{c}$ and $X^{\mathcal B}_{c}$ is
+randomly downsized in size of $\mathcal N_c$. The downsized sample $D^{\mathcal
+A, \mathcal B}_c$ includes pairs of $(x,y)$ from downsized sets of
+$X^{\mathcal A}_{c}$ and $X^{\mathcal B}_{c}$ which are still noted as
+$X^{\mathcal A}_{c}$ and $X^{\mathcal B}_{c}$.
+\begin{equation}
+D^{\mathcal A, \mathcal B}_c = \{(x_1,y_1), (x_2,y_2), ..., (x_{\mathcal N_c},y_{\mathcal N_c}) \},   x_i \in X^{\mathcal A}_{c} \text{ and }   y_i \in X^{\mathcal B}_{c})
+\end{equation}
+
+We develop two approaches to estimate the performance and risk
+differences. In addition, confidence intervals are approximated in
+order to interpret the comparisons. The following variables are
+required in the approaches. By comparing solutions which are obtained
+by $\mathcal A$ and $\mathcal B$ on a problem $c$, when the goal is
+minimization the number of runs which are better, same, and worse are
+presented respectively as $N_{\mathcal A < \mathcal B|c}$,
+$N_{\mathcal A = \mathcal B|c}$ and $N_{\mathcal A > \mathcal B|c}$
+and are calculated respectively in \ref{eq:nbetter}, \ref{eq:nsame},
+and \ref{eq:nworse}.
+\begin{align}
+N_{\mathcal A < \mathcal B|c} &= \sum\limits_{(x,y)\in D^{\mathcal A, \mathcal B}_c} 1_{x < y}\label{eq:nbetter}\\
+N_{\mathcal A = \mathcal B|c} &= \sum\limits_{(x,y)\in D^{\mathcal A, \mathcal B}_c} 1_{x = y}\label{eq:nsame}\\
+N_{\mathcal A > \mathcal B|c} &= \sum\limits_{(x,y)\in D^{\mathcal A, \mathcal B}_c} 1_{x > y}\label{eq:nworse}
+\end{align}
+where  $1_{x < y}(x,y)$, $1_{x > y}(x,y)$, and $1_{x = y}(x,y)$ are
+indicator functions as in \ref{eq:indicator}.
+
+\begin{align}
+\nonumber
+1_{x < y}(x,y) &= 
+\begin{cases} 
+1, & \text{if } x < y\\ 
+0, & \text{otherwise.}
+\end{cases} \\
+\nonumber
+1_{x > y}(x,y) &= 
+\begin{cases} 
+1, & \text{if } x > y\\ 
+0, & \text{otherwise.}
+\end{cases} \\
+1_{x = y}(x,y) &= 
+\begin{cases} 
+1, & \text{if } x = y\\ 
+0, & \text{otherwise.}
+\end{cases}\label{eq:indicator}
+\end{align}
+
+On a random instance from $\mathcal C$, the total number of runs which
+are better, same, and worse are respectively an aggregation of
+$N_{\mathcal A < \mathcal B|c}$, $N_{\mathcal A = \mathcal B|c}$ and
+$N_{\mathcal A > \mathcal B|c}$ over all problems in $\mathcal C$ and
+are calculated respectively in \ref{eq:nbetter:total}, \ref{eq:nsame:total}, and
+\ref{eq:nworse:total}.
+
+\begin{align}
+N_{\mathcal A < \mathcal B|\mathcal C} = \sum\limits_{c\in \mathcal C} N_{\mathcal A < \mathcal B|c}\label{eq:nbetter:total}\\
+N_{\mathcal A = \mathcal B|\mathcal C} = \sum\limits_{c\in \mathcal C} N_{\mathcal A = \mathcal B|c}\label{eq:nsame:total}\\
+N_{\mathcal A > \mathcal B|\mathcal C} = \sum\limits_{c\in \mathcal C} N_{\mathcal A > \mathcal B|c}\label{eq:nworse:total}
+\end{align}
+
+\subsubsection{Performance probability}
+\label{sec-4-2-1}
+\label{performance.prob}
+In this approach, we are interested in estimating the probability of
+$\mathcal A$ having better performance than $\mathcal B$ with respect
+to one-dimensional performance measure when presented with a random
+instance from $\mathcal C$ (each instance is equally likely to be
+selected). When the goal is to minimize the performance measure, the
+probability that $\mathcal A$ outperforms $\mathcal B$ on a problem
+$c$ can be estimated in \ref{eq:pprob1} or \ref{eq:pprob2}.
+
+\begin{align}
+P_{\mathcal A\leq \mathcal B|c} &=\frac{1}{\mathcal N_c}{\sum_{(x,y)\in D^{\mathcal A, \mathcal B}_c} 1_{x\leq y}(x,y)}\label{eq:pprob1}\\
+\nonumber \\
+P_{\mathcal A\leq \mathcal B|c} &= \frac{N_{\mathcal A < \mathcal B|c} + N_{\mathcal A = \mathcal B|c}}{\mathcal N_c}\label{eq:pprob2}
+\end{align}
+
+The probability of $\mathcal A$ outperforming $\mathcal B$ on a random
+instance from $\mathcal C$ is an average of $P_{\mathcal A\leq
+\mathcal B|c}$ over all problems in $\mathcal C$ is calculated in
+\ref{eq:pprob:total1} or \ref{eq:pprob:total2}.
+\begin{align}
+P_{\mathcal A\leq \mathcal B|\mathcal C} &= \frac{1}{|\mathcal C|}\sum_{c\in \mathcal C} P_{\mathcal A\leq \mathcal B|c} \label{eq:pprob:total1} \\
+P_{\mathcal A\leq \mathcal B|\mathcal C} &= \frac{N_{\mathcal A < \mathcal B|C} + N_{\mathcal A = \mathcal B|C}}{\mathcal N_{\mathcal C}} \label{eq:pprob:total2}
+\end{align}
+where $|\mathcal C|$ is the number of instances and $\mathcal
+N_{\mathcal C}$ is the total number of runs on the random instance and
+can be calculated in \ref{eq:runs:total}.
+
+\begin{align}
+\mathcal N_{\mathcal C} = \sum\limits_{c \in \mathcal C}\mathcal N_{c} = N_{\mathcal A < \mathcal B|\mathcal C} + N_{\mathcal A = \mathcal B|\mathcal C} + N_{\mathcal A > \mathcal B|\mathcal C} \label{eq:runs:total}
+\end{align}
+
+An estimation of the probability by itself is useful but the
+proportion has limitations. First, it is a binomial proportion of a
+sample and by increasing the population (number of runs), the
+probability is getting more accurate and it is impossible to have an
+infinity population. Second, the approximate proportion does not
+reveal how the estimation has uncertainty. In order to deal with these
+limitations, we provide more information through confidence interval
+in which a nominal confidence level ($\alpha \%$) guarantees the
+interval. Since the performance probability is a binomial proportion
+and discrete, it is not possible to calculate the exact nominal
+confidence level. A confidence interval is preferred when the actual
+coverage probability is close to the nominal confidence level. In the
+followings, different types of interval for binomial proportions and
+their advantages and disadvantages are studied.
+
+The Wald Interval approximation is defined based on normal theory
+approximation. The upper and lower bound of interval with the nominal
+confidence level of $\alpha$ for $P_{\mathcal A\leq \mathcal
+B|\mathcal C}$ is defined in \ref{eq:wald-int}. This type is easy to
+calculate and popular in practice but it has a poor performance when
+the sample size is small \citep{agresti1998approximate} and the actual
+coverage probability is also poor when the point is near to 0 or 1
+\citep{brown2001interval}.
+
+\begin{align}
+L_{CI} &= P_{\mathcal A\leq \mathcal B|\mathcal C} - z_{\frac{\alpha}{2}}\sqrt{\frac{P_{\mathcal A\leq \mathcal B|\mathcal C}(1- P_{\mathcal A\leq \mathcal B|\mathcal C})}{\mathcal N_{\mathcal C}}} \nonumber \\
+U_{CI} &= P_{\mathcal A\leq \mathcal B|\mathcal C} + z_{\frac{\alpha}{2}}\sqrt{\frac{P_{\mathcal A\leq \mathcal B|\mathcal C}(1- P_{\mathcal A\leq \mathcal B|\mathcal C})}{\mathcal N_{\mathcal C}}} \label{eq:wald-int}
+\end{align}
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$
+quantile of the standard normal distribution and $\mathcal N_{\mathcal
+C}$ is the total number of runs which is discussed before.
+
+Another approach to construct confidence interval is based on
+reverting the one-tailed hypothesis test procedure for the null
+hypothesis $H_0:p=p_0$ as in \ref{eq:null-hypo}. Since the interval
+estimator is constructed to have at least $1-\alpha$ coverage
+probability for every proportion, this approach is called exact method
+\citep{clopper1934use}.
+\begin{align}
+\sum_{k=x}^{n} \binom{n}{k} p^k_0(1-p_0)^{n-k} &= \frac{\alpha}{2} \nonumber \\
+\sum_{k=0}^{x} \binom{n}{k} p^k_0(1-p_0)^{n-k} &= \frac{\alpha}{2} \label{eq:null-hypo}
+\end{align}
+
+This approach is also known as Clopper-Pearson confidence interval and
+the lower and upper bound of the interval with the nominal confidence
+level $\alpha$ for  $P_{\mathcal A\leq \mathcal B|\mathcal C}$ is
+defined in \ref{eq:CP-int}. This type of interval guarantees the
+coverage probability and is applied to avoid interval approximation
+but it is conservative \citep{agresti1998approximate}. In other words,
+the actual coverage probability is much larger than the nominal
+confidence level. This difference between actual and nominal level can
+be negligible for a quite large sample size.
+
+\begin{align}
+L_{CI} &= \frac{N_{\mathcal A \leq \mathcal B|\mathcal C}}{N_{\mathcal A \leq \mathcal B|\mathcal C}+(\mathcal N_{\mathcal C}-N_{\mathcal A \leq \mathcal B|\mathcal C}+1)F^{\nu_1}_{\nu_2,(1-\frac{\alpha}{2})}} \nonumber \\
+U_{CI} &= \frac{(N_{\mathcal A \leq \mathcal B|\mathcal C}+1)F^{\nu_3}_{\nu_4,\frac{\alpha}{2}}}{\mathcal N_{\mathcal C}-N_{\mathcal A \leq \mathcal B|\mathcal C}+(N_{\mathcal A \leq \mathcal B|\mathcal C}+1)F^{\nu_3}_{\nu_4,\frac{\alpha}{2}}} \label{eq:CP-int}
+\end{align}
+where $N_{\mathcal A \leq \mathcal B|\mathcal C} = N_{\mathcal A <
+\mathcal B|\mathcal C} + N_{\mathcal A = \mathcal B|\mathcal C}$, and
+$\mathcal N_{\mathcal C}$ is the total number of runs of the random
+instance as mentioned before. Moreover, $F^a_{b,c}$ represents the $c$
+quantile from an $F$-distribution with $a$ and $b$ degrees of
+freedom in which $\nu_1 = 2 N_{\mathcal A \leq \mathcal B|\mathcal
+C}$, $\nu_2 = 2(\mathcal N_{\mathcal C}-N_{\mathcal A \leq \mathcal
+B|\mathcal C}+1)$, $\nu_3 = 2(N_{\mathcal A \leq \mathcal B|\mathcal
+C} + 1)$, and $\nu_4 = 2(\mathcal N_{\mathcal C} - N_{\mathcal A \leq
+\mathcal B|\mathcal C})$.
+
+There exists another method which is the inverse of the Wald method
+procedure by considering null hypothesis $H_0:p=p_0$ on the
+approximate normal test. In other words, the lower and upper bound are
+calculated by solving the equation \ref{eq:WS:null}. The approach is
+first discussed by \citep{wilson1927probable} and is known as Wilson's
+score interval.
+\begin{align}
+\frac{P_{\mathcal A\leq \mathcal B|\mathcal C} - p_0}{\sqrt{\frac{p_0(1-p_0)}{\mathcal N_{\mathcal C}}}} = \pm z_{\frac{\alpha}{2}}\label{eq:WS:null}
+\end{align}
+
+The Wilson's score interval has a coverage probability close to
+nominal confidence level \citep{agresti2007introduction}. In compare
+with Wald interval and Clopper-Pearson intervals, the Wilson's score
+performs better for any sample sizes and parameter values
+\citep{agresti1998approximate}. On the other hand, Wilson's score
+method has a poor coverage probability near 0 or 1 which is below the
+nominal confidence level \citep{agresti1998approximate}. The lower and
+upper bound of the Wilson's score interval with the nominal confidence
+level of $\alpha$ for $P_{\mathcal A\leq \mathcal B|\mathcal C}$ is
+formulated in \ref{eq:WS-int}.
+\begin{align}
+L_{CI} &= \frac{P_{\mathcal A\leq \mathcal B|\mathcal C} + \frac{z^2_{\frac{\alpha}{2}}}{2\mathcal N_{\mathcal C}} - z_{\frac{\alpha}{2}} \sqrt{\frac{P_{\mathcal A\leq \mathcal B|\mathcal C} (1-P_{\mathcal A\leq \mathcal B|\mathcal C})+\frac{z^2_{\frac{\alpha}{2}}}{4\mathcal N_{\mathcal C}}}{\mathcal N_{\mathcal C}}}}{1+\frac{z^2_{\frac{\alpha}{2}}}{\mathcal N_{\mathcal C}}} \nonumber \\
+\nonumber \\
+U_{CI} &= \frac{P_{\mathcal A\leq \mathcal B|\mathcal C} + \frac{z^2_{\frac{\alpha}{2}}}{2\mathcal N_{\mathcal C}} + z_{\frac{\alpha}{2}} \sqrt{\frac{P_{\mathcal A\leq \mathcal B|\mathcal C} (1-P_{\mathcal A\leq \mathcal B|\mathcal C})+\frac{z^2_{\frac{\alpha}{2}}}{4\mathcal N_{\mathcal C}}}{\mathcal N_{\mathcal C}}}}{1+\frac{z^2_{\frac{\alpha}{2}}}{\mathcal N_{\mathcal C}}} \label{eq:WS-int}
+\end{align}
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$
+quantile of the standard normal distribution.
+
+Since the Wilson's score formula \ref{eq:WS-int} is hard to interpret,
+a modification is applied to the simplest approach (Wald interval) by
+\citep{agresti1998approximate} which is called adjusted Wald
+interval. In order to construct 95\% confidence interval, we have
+$z^2_{\frac{\alpha}{2}} = 1.96^2 \approx 4$ which the Wilson's score
+formulation becomes similar to ordinary Wald interval where we add two
+successes and two fails to the number of runs. This simple
+modification changes the interval from highly liberal to slightly
+conservative. It is a little more conservative than Wilson's score,
+especially for small size samples \citep{brown2001interval}. This
+method is recommended when the sample size is larger than 40 ($n
+\geq 40$) \citep{brown2001interval}. Although it is easy to formulate
+this approach as described, the lower and upper bound of adjusted Wald
+interval with the nominal confidence interval of $\alpha$ for
+$P_{\mathcal A\leq \mathcal B|\mathcal C}$ is shown in
+\ref{eq:AW-int}.
+\begin{align}
+L_{CI} &= P'_{\mathcal A\leq \mathcal B|\mathcal C} - z_{\frac{\alpha}{2}}\sqrt{\frac{P'_{\mathcal A\leq \mathcal B|\mathcal C}(1- P'_{\mathcal A\leq \mathcal B|\mathcal C})}{\mathcal N_{\mathcal C}+4}} \nonumber \\
+U_{CI} &= P'_{\mathcal A\leq \mathcal B|\mathcal C} + z_{\frac{\alpha}{2}}\sqrt{\frac{P'_{\mathcal A\leq \mathcal B|\mathcal C}(1- P'_{\mathcal A\leq \mathcal B|\mathcal C})}{\mathcal N_{\mathcal C}+4}} \label{eq:AW-int}
+\end{align}
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$
+quantile of the standard normal distribution and \$P'$_{\mathcal\ \text{A}\le\text{
+}\mathcal\ \text{B|}\mathcal\ \text{C}}$ = \frac\{N$_{\mathcal\ \text{A < }\mathcal\ \text{B|}\mathcal\ \text{C}}$ +
+N$_{\mathcal\ \text{A = }\mathcal\ \text{B|}\mathcal\ \text{C}}$ + 2\}\{\mathcal N$_{\mathcal\text{
+C}}$+4\}\$.
+
+\subsubsection{Risk difference}
+\label{sec-4-2-2}
+\label{risk.diff}
+In this approach, we make another estimation based on paired data. In
+order to do so, the parameter of interest is the difference between
+the probability of outperforming $\mathcal A$ over $\mathcal B$ and
+outperforming $\mathcal B$ over $\mathcal A$ on a random instances
+from $\mathcal C$. Considering the problem is minimization, the risk
+difference that $\mathcal A$ outperforms $\mathcal B$ on a problem $c$
+is calculated in \ref{eq:riskDiff1}.
+\begin{align}
+RD_{\mathcal A < \mathcal B|c} &=\frac{N_{A<B|c} - N_{A>B|c}}{\mathcal N_{c}} \label{eq:riskDiff1}
+\end{align}
+
+The risk difference of $\mathcal A$ outperforming $\mathcal B$ on a
+random instances from $\mathcal C$ can be calculated as in
+\ref{eq:riskDiff:total}.
+\begin{align}
+RD_{\mathcal A < \mathcal B|\mathcal C} &=\frac{N_{A<B|\mathcal C} - N_{A>B|\mathcal C}}{\mathcal N_{\mathcal C}} \label{eq:riskDiff:total}
+\end{align}
+where the parameters are explained above.
+
+The risk difference proportion result in to a value within the
+interval $[-1,+1]$. Similar to the performance probability, risk
+difference estimation has its own limitations. It is not determined
+how the proportion is reliable and how much changes will be on other
+random samples. Confidence interval for risk difference between
+binomial proportions on paired data is a useful tool to identify the
+uncertainties. The confidence interval guarantees at least nominal
+confidence level ($\alpha \%$) will be covered in the intervals. The zero
+value is the null value of the parameter of interest. If the interval
+contains zero, it means that the difference between two proportions is
+not statistically meaningful. The confidence interval is considered
+appropriate when it covers the nominal confidence interval closely, it
+does not violate the border (-1 and 1), and it does not also have zero
+width \citep{newcombe1998two}. In the followings, different types of
+confidence interval for paired data are described with their
+performances.
+
+Asymptotic method without continuity correction is based on normal
+theory. This method is basically inverting the Wald interval for
+single proportion \citep{vollset1993confidence}. The upper and lower
+bound of the interval is formulated in \ref{eq:asympt:NC}.
+\begin{align}
+L_{CI} &= RD_{\mathcal A < \mathcal B|\mathcal C} - z_{\frac{\alpha}{2}} \times \widehat{SE} \nonumber \\
+U_{CI} &= RD_{\mathcal A < \mathcal B|\mathcal C} + z_{\frac{\alpha}{2}} \times \widehat{SE} \label{eq:asympt:NC}
+\end{align}
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$
+quantile of the standard normal distribution and $\widehat{SE}$ is the
+estimation of standard error for $RD_{\mathcal A < \mathcal B|\mathcal
+C}$ which is calculated by \citep{fleiss2013statistical} and the
+formulation is shown in \ref{eq:se:asympt:NC}.
+\begin{align}
+\widehat{SE} &= \frac{\sqrt{\mathcal N_{\mathcal C}(N_{A<B|\mathcal C}+N_{A>B|\mathcal C})-(N_{A<B|\mathcal C}-N_{A>B|\mathcal C})^2}}{\mathcal N_{\mathcal C} \sqrt{\mathcal N_{\mathcal C}}} \label{eq:se:asympt:NC}
+\end{align}
+
+The asymptotic method is a simple method but is very anti-conservative
+on average, and there exists zero width interval at 0. It also may
+violate the boundaries (-1, 1) \citep{newcombe1998improved}. It also
+has the coverage probability of below 90\% on average even for large
+sample sizes \citep{newcombe1998improved}.
+
+In order to correct the continuity of the interval,
+\citet{blyth1983binomial} proposed the following modification to the
+asymptotic method. The upper and lower bound of the interval is
+formulated in \ref{eq:asympt:CC}.
+\begin{align}
+L_{CI} &= RD_{\mathcal A < \mathcal B|\mathcal C} - (z_{\frac{\alpha}{2}} \times \widehat{SE} +\frac{1}{\mathcal N_{\mathcal C}}) \nonumber \\
+U_{CI} &= RD_{\mathcal A < \mathcal B|\mathcal C} + (z_{\frac{\alpha}{2}} \times \widehat{SE} -\frac{1}{\mathcal N_{\mathcal C}}) \label{eq:asympt:CC}
+\end{align}
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$
+quantile of the standard normal distribution and $\widehat{SE}$ is the
+estimation of standard error which is shown in \ref{eq:se:asympt:NC}.
+
+The asymptotic method with continuity correction has a better
+performance than the previous method and is more conservative on
+average but it is still anti-conservative \citep{newcombe1998improved}
+and \citep{newcombe1998two}. Since it is symmetric in coverage, its
+coverage probability is still inadequate and it is possible to violate
+the boundaries (-1,1). In general, it is as simple as the asymptotic
+method without continuity but it is an improvement
+\citep{newcombe1998improved}. Asymptotic methods performances, without
+or with continuity correction, depend on $\mathcal N_{\mathcal C}$ and
+$RD_{\mathcal A < \mathcal B|\mathcal C}$ and they produce better
+confidence intervals for large sample sizes but they are unacceptable
+in general \citep{newcombe1998two}.
+
+There exists another method based on Wilson's score for the single
+proportion \citep{wilson1927probable} in order to fix the symmetric
+intervals. This method has no continuity correction and is explained
+in \citep{newcombe1998improved}. The lower and upper bound of
+confidence interval are shown in \ref{eq:wilson:NC}.
+\begin{align}
+L_{CI} &= RD_{\mathcal A < \mathcal B|\mathcal C} - \delta \nonumber \\
+U_{CI} &= RD_{\mathcal A < \mathcal B|\mathcal C} + \varepsilon \label{eq:wilson:NC}
+\end{align}
+where $\delta$ and $\varepsilon$ are non-negative values as are
+calculated in \ref{eq:delta:epsilon}.
+\begin{align}
+\delta &= \sqrt{\mathrm{d}l^2_2-2\hat{\phi}\mathrm{d}l_2\mathrm{d}u_3+\mathrm{d}u^2_3} \nonumber \\
+\varepsilon &= \sqrt{\mathrm{d}u^2_2-2\hat{\phi}\mathrm{d}u_2\mathrm{d}l_3+\mathrm{d}l^2_3} \label{eq:delta:epsilon}
+\end{align}
+where $\hat{\phi}$ is calculate in \ref{eq:phi:hat} and let $\mathcal
+Q = (N_{A=B|\mathcal C}+N_{A<B|\mathcal C})(N_{A=B|\mathcal C}+N_{A>B|\mathcal C})(N_{A<B|\mathcal C})(N_{A>B|\mathcal C})$
+\begin{align}
+\hat{\phi} &=
+\begin{cases}
+0, & \text{if } \mathcal Q=0\\ 
+\frac{-N_{A<B|\mathcal C}\times N_{A>B|\mathcal C}}{\sqrt{\mathcal Q}}, & \text{otherwise.} \label{eq:phi:hat}
+\end{cases}
+\end{align}
+
+and in \ref{eq:delta:epsilon} formulation, $\mathrm{d}l_2$,
+$\mathrm{d}u_2$, $\mathrm{d}l_3$, and $\mathrm{d}u_3$ are calculated
+as in \ref{eq:dl:du}.
+\begin{align}
+\mathrm{d}l_2 &= \frac{N_{A=B|\mathcal C} + N_{A<B|\mathcal C}}{\mathcal N_{\mathcal C}} - l_2 \nonumber \\
+\mathrm{d}u_2 &= u_2 - \frac{N_{A=B|\mathcal C} + N_{A<B|\mathcal C}}{\mathcal N_{\mathcal C}} \nonumber \\
+\mathrm{d}l_3 &= \frac{N_{A=B|\mathcal C} + N_{A>B|\mathcal C}}{\mathcal N_{\mathcal C}} - l_3 \nonumber \\
+\mathrm{d}u_3 &= u_3 - \frac{N_{A=B|\mathcal C} + N_{A>B|\mathcal C}}{\mathcal N_{\mathcal C}} \label{eq:dl:du}
+\end{align}
+where $l_2$ and $u_2$ are roots of \ref{eq:l2:u2} and $l_3$ and $u_3$
+are roots of \ref{eq:l3:u3}.
+
+\begin{align}
+\left| x- \frac{N_{A=B|\mathcal C} + N_{A<B|\mathcal C}}{\mathcal N_{\mathcal C}}\right| &= z_{\frac{\alpha}{2}}\sqrt{\frac{x(1-x)}{\mathcal N_{\mathcal C}}} \label{eq:l2:u2} \\
+\left| x- \frac{N_{A=B|\mathcal C} + N_{A>B|\mathcal C}}{\mathcal N_{\mathcal C}}\right| &= z_{\frac{\alpha}{2}}\sqrt{\frac{x(1-x)}{\mathcal N_{\mathcal C}}} \label{eq:l3:u3}
+\end{align}
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$
+quantile of the standard normal distribution.
+
+The Wilson's score method is a complicated approach but compared to
+previous methods it has a better performance in general. This method
+do not violate the limits $\left[-1,+1\right]$. This method has coverage
+probability of 95\% on average and the probability of zero width
+interval is very low. But it is anti-conservative for many zones with
+different values of $\mathcal N_{\mathcal C}$ and $RD_{\mathcal A <
+\mathcal B|\mathcal C}$ \citep{newcombe1998improved}.
+
+Using continuity correction over the Wilson's score method
+\citep{newcombe1998improved} leads to the following lower and upper
+bound as mentioned before in \ref{eq:wilson:NC}. All calculations
+\ref{eq:delta:epsilon}, \ref{eq:dl:du}, and \ref{eq:phi:hat} are
+applicable to this method but the continuity correction modifies the
+calculations for $l_2$, $u_2$, $l_3$, and $u_3$ where $l_2$ and $u_2$
+are roots of \ref{eq:l2:u2:modified} and $l_3$ and $u_3$ are roots of
+\ref{eq:l3:u3:modified}.
+\begin{align}
+\left| x- \frac{N_{A=B|\mathcal C} + N_{A<B|\mathcal C}}{\mathcal N_{\mathcal C}}\right| - \frac{1}{2\mathcal N_{\mathcal C}}&= z_{\frac{\alpha}{2}}\sqrt{\frac{x(1-x)}{\mathcal N_{\mathcal C}}} \label{eq:l2:u2:modified} \\
+\left| x- \frac{N_{A=B|\mathcal C} + N_{A>B|\mathcal C}}{\mathcal N_{\mathcal C}}\right| - \frac{1}{2\mathcal N_{\mathcal C}}&= z_{\frac{\alpha}{2}}\sqrt{\frac{x(1-x)}{\mathcal N_{\mathcal C}}} \label{eq:l3:u3:modified}
+\end{align}
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$
+quantile of the standard normal distribution.
+
+The continuity correction effects on the coverage probability to
+increase over the 95\% on average and fixes the anti-conservative
+property for many zones. In general, this correction leads
+to a better confidence interval than Wilson's score without continuity
+\citep{newcombe1998improved}. This method is slightly
+anti-conservative and it do not violate the boundaries
+\citep{newcombe1998two}. Wilson's core method, with or without
+continuity correction, do not perform as well as Wilson's score for
+single proportions but they produces acceptable confidence intervals
+even for small sample sizes \citep{newcombe1998improved}.
+
+\subsection{Results}
+\label{sec-4-3}
+\label{param.alg}
+
+In order to study the performance of the proposed algorithm, the
+guided tabu algorithm (GTA) is compared with standard tabu. Based on
+experience, the most important parameters in GTA are number of
+iterations, minimum tenure size, and maximum tenure size. In the other
+hand, the number of iterations is the only factor which has an effect
+on standard tabu. Different algorithms were designed and ran on test
+problems. The settings for each algorithms are as follows.
+
+The number of iterations for each loop of GTA is designed in
+$100,000$, $300,000$, and $500,000$. The number of iterations for
+standard Tabu is set to infinity and the algorithm will be stop on run
+time criterion and is shown as Tabu experiment ID. The reason is
+resetting the standard tabu on a fixed number of iterations make it
+memoryless whereas the GTA improves the solution in each iterations by
+keeping the memory. The minimum tenure size is set to 5 and 7 and the
+maximum tenure size is set 80 and 120 for GTA. Different algorithms
+and settings with the corresponding experience ID are shown in table
+\ref{param.alg.table}.
+
+\begin{table}[h]
+\centering
+\caption{Experiment IDs with its parameter setting}
+\label{param.alg.table}
+\begin{tabular}{l|l|l|l}
+\hline
+\textbf{No. of Iterations} & \textbf{Min Tenure} & \textbf{Max Tenure} & \textbf{Exp ID} \\ \hline
+\multirow{4}{*}{100,000}   & \multirow{2}{*}{5}  & 80                  & GTA01           \\ \cline{3-4} 
+                           &                     & 120                 & GTA02           \\ \cline{2-4} 
+                           & \multirow{2}{*}{7}  & 80                  & GTA03           \\ \cline{3-4} 
+                           &                     & 120                 & GTA04           \\ \hline
+\multirow{4}{*}{300,000}   & \multirow{2}{*}{5}  & 80                  & GTA05           \\ \cline{3-4} 
+                           &                     & 120                 & GTA06           \\ \cline{2-4} 
+                           & \multirow{2}{*}{7}  & 80                  & GTA07           \\ \cline{3-4} 
+                           &                     & 120                 & GTA08           \\ \hline
+\multirow{4}{*}{500,000}   & \multirow{2}{*}{5}  & 80                  & GTA09           \\ \cline{3-4} 
+                           &                     & 120                 & GTA10           \\ \cline{2-4} 
+                           & \multirow{2}{*}{7}  & 80                  & GTA11           \\ \cline{3-4} 
+                           &                     & 120                 & GTA12           \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Test Problems}
+\label{test.problems}
+Tabu algorithm can be applied in a different variety of problems. In a
+special case, tabu algorithm shows a good performance in scheduling
+problems in the literature. In order to evaluate the algorithm, we use
+the Taillard's benchmark \citep{Taillard:1993} on job shop
+scheduling. The local search is adapted from \citep{Grabowski:1986} on
+both standard tabu and GTA.
+
+Taillard's job shop test problems were randomly generated for
+different sizes of machines and jobs. The number of machines varies
+from 15 to 20 and the number of jobs from 15 to 100. They were
+generated in different sizes as shown in table
+\ref{table.taillards}. For each problems size, 10 random test problems
+were generated.
+
+
+\begin{table}[h]
+\centering
+\caption{Problems Size for Taillard's Job Shop Benchmark}
+\label{table.taillards}
+\begin{tabular}{l|l|l}
+\hline
+\textbf{No. of Machines} & \textbf{No . of Jobs} & \textbf{Problem Size} \\ \hline
+15                       & 15                    & Problems 1             \\ \hline
+15                       & 20                    & Problems 2             \\ \hline
+20                       & 20                    & Problems 3             \\ \hline
+15                       & 30                    & Problems 4             \\ \hline
+20                       & 30                    & Problems 5             \\ \hline
+15                       & 50                    & Problems 6             \\ \hline
+20                       & 50                    & Problems 7             \\ \hline
+20                       & 100                   & Problems 8             \\ \hline
+\end{tabular}
+\end{table}
+
+\label{computations}
+All test problems are ran by all experiment ID algorithms using Newton
+high performance computing (HPC) program at the University of
+Tennessee \citep{NewtonHPC}. Each test problem ran ten times to reduce
+random initial solution effect. The stopping criterion was 30
+minutes.
+
+Performance probability and risk difference which are discussed before
+in \ref{performance.prob} and \ref{risk.diff} respectively, are
+applied to evaluate the GTA performance. They are also plotted in 2-D
+plot in which \emph{x}-axis is the running time and \emph{y}-axis is
+probabilities for performance probability plot and portions for risk
+difference plot. The plots also include appropriate confidence
+interval. For the probability plot, when the probabilities and confidence
+interval are close to 1, it shows that the proposed algorithm
+performed better than tabu on the test problem. Similarly for risk
+difference plot, when the proportions and confidence interval are
+positive it means that the proposed algorithm is better than tabu on test
+problems, when they are negative it means the proposed algorithm is
+worse than tabu on test problems and if they are close to 0 it means
+there is no meaningful difference between tabu and GTA on test
+problems.
+
+Among all experiment IDs in table \ref{param.alg.table}, it has been
+observed that the experiment ID GTA04 performed better than the others
+on the test problems. It has been also observed that both GTA and tabu
+algorithm perform similarly on test problems in problem sizes problem
+1, problem 6, problem 7, and problem 8 in table
+\ref{table.taillards}. \emph{I DO NOT KNOW THE RESEAON}. Therefore, we
+compared the GTA04 with tabu algorithm on problem sizes problem 2,
+problem 3, problem 4, and problem 5in table \ref{table.taillards}.
+
+Since the experiment ID GTA04 outperformed other experiment IDs, the
+standard tabu algorithm is only compared with GTA04 in detail. The
+performance probability plot for GTA04 compared to standard tabu on all
+problems sizes 2, 3, 4, and 5 samples is shown in figure
+\ref{fig.GTA04}. Since the sample size is large enough, the confidence
+interval method is adjusted Wald and the confidence nominal level is
+95\%. In order to see the performance in detail, the performance
+probability plot for each problems size is shown separately in figure
+\ref{fig.GTA04.4p}. In this plot, we applied Wilson's score confidence
+interval with 95\% nominal level because this method has a good
+coverage probability for any size of sample. As we can see in figures
+\ref{fig.GTA04} and \ref{fig.GTA04.4p}, the GTA outperformed
+significantly on all problems sizes significantly.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3in]{./figs/comparenotworse-all-ref2016T04-2016C04-Adjusted-Wald-Interval.png}
+\caption{\label{fig.GTA04}Performance probability plot for GTA04 compared to tabu on problems sizes 2, 3, 4, and 5.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=2.7in]{./figs/comparenotworse-detail-ref2016T04-2016C04-Wilsons-Score.png}
+\caption{\label{fig.GTA04.4p}Performance probability plot for GTA04 compared to tabu for each problem size.}
+\end{figure}
+
+The risk difference plot for GTA04 is necessary to show how much this
+algorithm is better than tabu algorithm. Therefore, the risk
+difference plot over all problem sizes 2, 3, 4, and 5 is shown in
+figure \ref{fig.RD.GTA04}. The detail plots for problem sizes 1, 2, 3,
+and 4 are shown separately in figure \ref{fig.RD.GTA04.4p}. The
+confidence intervals with confidence nominal level 95\% in both figures
+\ref{fig.RD.GTA04} and \ref{fig.RD.GTA04.4p} are calculated by
+Wilson's score with continuity correction, because this method has the
+best performance among all others. We can see that the GTA04 has a
+significant superiority in performance compared to tabu algorithm.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3in]{./figs/comparediff-all-ref2016T04-2016C04-Wilson-w-Cont.png}
+\caption{\label{fig.GTA04}Risk difference plot for GTA04 compared to tabu on problems sizes 2, 3, 4, and 5.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=2.7in]{./figs/comparediff-detail-ref2016T04-2016C04-Wilson-w-Cont.png}
+\caption{\label{fig.GTA04.4p}Risk difference plot for GTA04 compared to tabu for each problem size.}
+\end{figure}
+
+\section{Build-Time Model for FDM}
+\label{sec-5}
+\subsection{Introduction}
+\label{sec-5-1}
+Fused deposition modelling (FDM) is one of the most popular and the
+most primary technique for Additive Manufacturing (AM). The AM is a
+process in which the raw material is added layer by layer to build up
+a solid physical object. Objects in a FDM process are fabricated by a
+heated nozzle extruding molten filament in a determined pattern. When
+the material is deposited, it gets cool down fast then solidify and it
+bonds with material. Later, as one layer is deposited, the height of
+nozzle or base plate is changed to deposit next layer.
+
+Since FDM process is primary for other AM technologies and new
+development can be applied to other technologies, a number of
+improvements are subjected. Build-time, mechanical properties, and
+geometric qualities. Considerable research has been conducted in order
+to improve the mechanical properties \cite{yardimci1996part},
+\cite{yardimci1999process}, \cite{bellehumeur2004modeling},
+\cite{sun2003experimental}, and \cite{bellini2002fused}. To enhance
+the geometric quality several research have been conducted
+\cite{anitha2001critical}, \cite{perez2002analysis}, and
+\cite{pandey2003improvement}.
+
+Chen and Sullivan \cite{chen1996predicting} studied accurate
+build-time prediction of streolithograph. Giannatsis et
+al. \cite{giannatsis2001study} have studied the build time estimation
+problem by using experimental results from different case studies. Han
+et al. \cite{han2003process} have been conducted a build-time analysis
+for Fused Deposition (FD) process.
+
+An FDM process planning includes four steps \cite{jin2013adaptive}
+orientation determination, support structure determination, slicing,
+and tool-path generation. The tool-path is a sequence of positions
+ordered into a determined spatial pattern. The tool-path generation is
+an important step in FDM process planning that affects the build-time,
+geometrical quality, strength and stiffness of a building model. The
+most common patterns for FDM are zigzag, spiral, contour, and space
+filling curves. Each one of them has drawbacks and benefits. Among all
+research and studies on FDM process, there is no build-time model for
+one layer manufacturing which is based on tool-path. The tool-path
+generation for each layer in deposition provides researchers with
+noteworthy information for various build-time parameter.  A predicting
+build-time model based on tool-path can be applied to optimize the
+fabricating process.
+
+The purpose of the current study is to investigate a build-time
+estimator based on tool-path generation. Build-time is analyzed and
+significant factors which are affecting on the build-time are
+identified through experimental on sample cases.
+
+\subsection{The approach}
+\label{sec-5-2}
+The build-time is the required time by FDM process to fabricate a
+part. The fabrication of a part is done by adding materials gradually
+layer by layer, so the build-time for a whole part is proposed by Han
+et al. \cite{han2003process} as follows:
+
+\begin{align}
+T = \displaystyle\sum_{i=1}^{I} \sum_{j=1}^{\frac{H_i}{t_i}} (\sum_{k=1}^{K} ({T_{pre-delay}}_{ijk} + \frac{L_{ijk}}{V_w})+\sum_{r=1}^{R} RD_{ijr} + \sum_{c=1}^{C} CD_{ijc} + \sum_{q=1}^{Q} {T_{p}}_{ijq})/V_d
+\end{align}
+where $V_w$ denotes nozzle speed while printing, $V_d$ represents
+nozzle speed in idle status, $T_{p_{ijq}}$ denotes $q$-th purging time
+in a given layer, ${T_{pre-delay}}_{ijk}$ denotes pre-delay time of
+$k$-th path, $L_{ijk}$ represents tool-path length, $RD_{ijr}$ and
+$CD_{ijc}$ respectively denotes re-positioning distance and the $c$-th
+distance for cleaning, $R$ represents number of re-positioning, and
+$\frac{H_i}{t_i}$ denotes number of layers.
+
+Most conventional build-time predictors are based on equations or
+function of total volume of the parts. In addition, the existing
+build-time models are not based on tool-path generation. Predictors
+based on tool-path generation is able to estimate the bonding between
+materials, build-time, and surface quality by several factors such as
+length of tool-path, number of re-positioning of nozzle, etc.
+
+In order to develop a build-time model based on tool-path generation,
+two experimental works are studied. One of them is based on different
+sizes and parameters to identify significant factors. Some factors are
+fixed to determine the other factors significance. The experiment in
+this research was fabricated in acrylonitrile butadien styrene (ABS
+P400) using by  Solidoodle 4 \textregistered. The bed heat was set to
+100 degree Celsius and the nozzle heat was set to 215 degree Celsius.
+
+\subsection{Experiments}
+\label{sec-5-3}
+Tool-path generation is an important step in FDM process planning that
+affects the build time, geometrical quality, strength and stiffness of
+a building model, efficiency of FDM process, and other
+considerations. Various types of tool-path patterns are developed for
+FDM process. In the experiments we applied spiral curve and two space
+filling curves (Hilbert curves and Sierpinski Curve).
+
+Lou et al. \cite{luo2010optimisation} applied the spiral tool-path
+generation for five-axis milling. The spiral tool-path which is shown
+in Figure 1.a can be applied for FDM process in order to solve poor
+geometrical quality and warpage problem. The Hilbert curve is a
+continuous fractal space-filling curve which is shown in Figure 1.b,
+first described by the German mathematician David Hilbert
+\cite{sagan2012space}. Since it is space-filling, its graph is a
+compact set to the closed unit interval. So, it is the motivation for
+researchers to apply it as tool-path generation to reduce shrinkage
+during fabrication process \cite{bertoldi1998domain}. Sierpinski curve
+is another continuous closed plane fractal curve which is shown in
+Figure 1.c discovered by Waclaw Sierpinski \cite{sagan2012space}. The
+Sierpinski curve can also be applied to FDM process.
+
+
+Figure 1
+
+Based on experience, the most important factors affecting on
+build-time are the nozzle diameter, the size of a part, filling
+percent (gap among the pattern), the length of extruding, the length
+of idle moving, and the number of changing direction of the
+nozzle. The three factors of the length of extruding, the length of
+idle moving, the number of changing direction of the nozzle are
+embedded in tool-path generation. Therefore, the classification of
+generated test problems is performed by considering these parameters
+as the followings:
+
+\begin{itemize}
+\item \textit{Nozzle diameter}:  test problems by considering the nozzle diameter in millimeter are generated in two different levels. In the first level, nozzle diameter is considered 0.2 millimeter and the second level is considered 0.4 millimeter.
+\item \textit{Size of a part}: the size of parts are considered in three different levels in square shape. The levels are in millimeter in size of $20 \times 20$, $40 \times 40$, and $80 \times 80$.
+\item \textit{Gap}: test problems are generated in six different levels based on gap between specimen. The levels are $0$, $0.2$, $0.4$, $0.6$, $0.8$, and $1$ in millimeter.
+\item \textit{Tool-path}: test problems are generated in three tool-path pattern, Spiral, Hilbert curve, and Sierpinski curve.
+\end{itemize}
+
+\section{Conclusions and Work Plan}
+\label{sec-6}
+\subsection{Conclusions}
+\label{sec-6-1}
+This is conclusions.
+\subsection{Work plan}
+\label{sec-6-2}
+\subsubsection{Time table}
+\label{sec-6-2-1}
+
+
+\bibliographystyle{apalike}
+
+\bibliography{overallliterature.bib}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

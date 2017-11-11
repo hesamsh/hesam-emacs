@@ -1,0 +1,13 @@
+#+TITLE: Homework 3 - Hesam Shams
+
+* Problem 1:
+** a) NO.
+The following graph is a counter example.
+0 3
+1 2
+2 3
+0 1
+To find a path from 0 to 3, the BFS will be: 0 3 1 2. This gives us
+path 0 3 which is less than the path 0 1 2 3 in the graph.
+
+** b) NO.

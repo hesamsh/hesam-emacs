@@ -1,0 +1,13 @@
+#$ -N iorun200
+#$ -o iorun200.out
+#$ -e iorun200.err
+#$ -M hshams@vols.utk.edu
+#$ -m abe
+#$ -q medium*
+#$ -l s_cpu=00:30:00 
+#$ -cwd
+
+
+
+
+$HOME/RGTA2016/GTA2016/GES_client -problem jsp_problems/ta20.txt  -time 3600 -expid 2016C04 -runid 200 -alg GES -niters 100000 -mintenure 7 -maxtenure 120

@@ -1,0 +1,53 @@
+% Created 2017-02-15 Wed 13:48
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Hesam - Andrii}
+\date{\textit{<2017-02-15 Wed>}}
+\title{Proposal for Research Project CS594}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{The Problem:}
+\label{sec-1}
+In this research project, we are studying traveling salesman problem
+(TSP). The TSP is an important optimization problem which is related
+to graph theory.
+
+\section{The Algorithm:}
+\label{sec-2}
+Since TSP is np-complete problem, we need to develop an approximation
+algorithm to solve it. There exist a tabu algorithm in the literature
+implemented on TSP. We are going to code the standard tabu for the
+TSP. Moreover, we developed a guided tabu algorithm (GTA) for optimization
+problem which is using long term memory to improve the solution. We
+also are going to code GTA as well.
+
+\section{The Computational Results}
+\label{sec-3}
+We are going to implement both standard tabu and GTA on a benchmark
+problems and compare the results and evaluate the efficiency of GTA in
+compared to standard tabu.
+The test problems are taken from \url{http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsplib.html}.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

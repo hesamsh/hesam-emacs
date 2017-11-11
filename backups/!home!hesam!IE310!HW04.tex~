@@ -1,0 +1,263 @@
+% Created 2017-02-24 Fri 17:12
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Hesam}
+\date{\today}
+\title{Homework 04 Solutions - IE310 \\ Operation Research in Industrial Engineering II \\ Probabilistic Model \\ Spring 2017}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Exercise 41 - Chapter 3 - Ross (10th Edition)}
+\label{sec-1}
+Let $x$ denotes the number of minutes the rat trapped in the maze. The
+rat has two choices \textbf{Right} and \textbf{Left} with equal probability. If it
+goes to the \textbf{Left}, two possibilities can be happened, return to the
+initial position or departing from the maze. So, we have three
+possible events. The possible events by $e_1$, $e_2$, and $e_3$ are as
+follows: \\
+$P($ Rat goes to Right $)=P(e_1)=\frac{1}{2}$ \\
+$P($ Rat goes to Left then departs $)=P(e_2)=\frac{1}{2} \times \frac{1}{3}=\frac{1}{6}$ \\
+$P($ Rat goes to Left then returns $)=P(e_3)=\frac{1}{2} \times
+\frac{2}{3}=\frac{1}{3}$ \\
+
+Therefore, the estimated number of minutes $E[x]$ is: \\
+\begin{align*}
+E[x] &= E[x|e_1] \times P(e_1) + E[x|e_2] \times P(e_2) + E[x|e_3]
+\times P(e_3) \\ 
+E[x] &= (3+E[x]) \times \frac{1}{2} + 2 \times \frac{1}{6} + (5+E[x])
+\times \frac{1}{3} \\
+E[x] &= \frac{3}{2} + \frac{E[x]}{2} + \frac{1}{3} + \frac{5}{3} +
+\frac{E[x]}{3} \\
+E[x] - \frac{E[x]}{2} - \frac{E[x]}{3} &= \frac{3}{2} + \frac{1}{3} +
+\frac{5}{3} \\
+\frac{E[x]}{6} &= \frac{21}{6} \\
+E[x] &= 21 \textbf{ minutes} \\
+\end{align*}
+
+\section{Exercise 50 - Chapter 3 - Ross (10th Edition)}
+\label{sec-2}
+\subsection{\emph{(a)}}
+\label{sec-2-1}
+Let $X$ is the random selection variable which takes values of 1, 2,
+or 3. The probability of no head comes up is as follows:
+
+\begin{align*}
+P(N=0) &= P(N=0|X=1).P(X=1)+P(N=0|X=2).P(X=2)+P(N=0|X=3).P(X=3) \\
+P(N=0) &= \frac{1}{3}.(1-0.3)^10+\frac{1}{3}.(1-0.5)^10+\frac{1}{3}.(1-0.7)^10 \\
+P(N=0) &= 0.00974333076
+\end{align*}
+
+\subsection{\emph{(b)}}
+\label{sec-2-2}
+Let $X$ is the random selection variable which takes values of 1, 2,
+or 3. The probability of number of heads for $n=1,2,3,...,10$ is as
+follows:
+
+\begin{align*}
+P(N=n) =& \sum_{i=1}^3{P(N=n|X=i).P(X=i)} \\
+P(N=n) =& \frac{1}{3}\{ ^{10}C_n (0.3)^n.(0.7)^{10-n} + ^{10}C_n (0.5)^n.(0.5)^{10-n} + \\
+        & ^{10}C_n (0.7)^n.(0.3)^{10-n}\} \\
+P(N=n) =& \frac{1}{3}\{ \frac{10!}{n!.(10-n)!}(0.3)^n.(0.7)^{10-n} + \frac{10!}{n!.(10-n)!} (0.5)^n.(0.5)^{10-n} +\\
+        & \frac{10!}{n!.(10-n)!} (0.7)^n.(0.3)^{10-n}\}
+\end{align*}
+Using a computer program, the following probabilities were obtained.
+
+\begin{center}
+\begin{tabular}{rr}
+$n$ & $P(N=n)$\\
+\hline
+1 & 0.04365474233333331\\
+2 & 0.09295548449999996\\
+3 & 0.13100570799999994\\
+4 & 0.14731866099999996\\
+5 & 0.15064414679999996\\
+6 & 0.14731866099999996\\
+7 & 0.13100570799999994\\
+8 & 0.09295548449999996\\
+9 & 0.04365474233333331\\
+10 & 0.00974333076666666\\
+\end{tabular}
+\end{center}
+
+\subsection{\emph{(c)}}
+\label{sec-2-3}
+No, the distribution of $N$ is not binomial. If the distribution
+would be binomial with parameters $m$ and $p$, then random variables
+only will be 0,1,2, \ldots{}, or 10. The parameter $m$ equals 10. On the
+other hand, $P(N=0)=P(N=10)$ so we have $p^10=(1-p)^10$ and
+$p=0.5$. Therefore, the probability of binomial variable to be 0 is
+0.00097 which is not equal to $P(N=0) = 0.00974333076$.
+
+\subsection{\emph{(d)}}
+\label{sec-2-4}
+Let $Y$ is the outcome when a coin is chosen randomly and
+flipped. $Y=1$ when head comes up and $Y=-1$ when tail comes up. So,
+the following is the probability of head comes up. \\
+$P(Y=1)= \frac{1}{3} (0.7+0.5+0.3)=0.5$ \\
+
+So, the game is FAIR because $P(Y=1)=P(Y=-1)=0.5$ and the expected
+value of $Y$ is $E[Y]=0$.
+
+\section{Exercise 57 - Chapter 3 - Ross (10th Edition)}
+\label{sec-3}
+Let $X$ be the number of storms, the following is the probability of
+at least three storms happen this season. \\
+
+\begin{align*}
+P(X \ge 3) =& 1 - P(X \le 2) \\ 
+=& 1 - \int_0^5{P \{X \le 2 | \Lambda = x \} \frac{1}{5}.dx }  \\ 
+=& 1 - \int_0^5{ [ e^{-x}+xe^{-x}+\frac{e^{-x}x^2}{2} ] \frac{1}{5}.dx} \\
+=& 1 - \frac{3}{5} + \frac{51}{10e^5} \\
+=& 0.43436352969
+\end{align*}
+
+\section{Exercise 66 - Chapter 3 - Ross (10th Edition)}
+\label{sec-4}
+\subsection{\emph{(a)}}
+\label{sec-4-1}
+Let $G$ be the number of goals team $A$. $G_k$ denotes the number of
+goals team $A$ om match $k$ and $M_k=C_i$ means opponent of match $k$
+is class of $i$. The expected value of $G$ is as follows:\\
+
+\begin{align*}
+E[G] =& E[G_1|M_1=C_1].P(M_1=C_1)+E[G_1|M_1=C_2].P(M_1=C_2) \\ 
+=& (2+E[G_2])(0.6) + (3+E[G_2])(0.4)
+\end{align*}
+
+Similarly, we have:
+
+\begin{align*}
+E[G_2] =& E[G_2|M_2=C_1].P(M_2=C_1)+E[G_2|M_2=C_2].P(M_2=C_2) \\ 
+=& (2)(0.3) + (3)(0.7) \\
+=& 0.6 + 2.1 \\
+=& 2.7 \textsf{ Number of goals in second match}
+\end{align*}
+
+By substituting $E[G_2]$ by 2.7, we have:
+
+\begin{align*}
+E[G] =& (2+2.7)(0.6) + (3+2.7)(0.4) \\
+=& (4.7)(0.6) + (5.7)(0.4) \\
+=& 5.1 \textsf{ the expected number of goals team $A$ will score this weekend}
+\end{align*}
+
+\subsection{\emph{(b)}}
+\label{sec-4-2}
+Let $G_k$ be the number of goals team $A$ in match $k$. Conditioning
+on the types and using that the sum of independent Poissons is Poisson
+gives the followings:
+
+\begin{align*}
+P(G=5) =& \sum_{i=0}^{\infty}{P(G=5|G_1=i).P(G_1=i)}
+\end{align*}
+
+The first part of summation ($P(G=5|G_1=i)$) should be separated as
+follows:
+
+\begin{align*}
+P(G=5|G_1=0) =& P(G_2=5) \\
+P(G=5|G_1=1) =& P(G_2=4) \\
+P(G=5|G_1=2) =& P(G_2=3) \\
+P(G=5|G_1=3) =& P(G_2=2) \\
+P(G=5|G_1=4) =& P(G_2=1) \\
+P(G=5|G_1=5) =& P(G_2=0) \\
+P(G=5|G_1=i) =& 0,  \forall i \ge 6 
+\end{align*}
+
+By substituting these components we have the followings:
+
+\begin{align*}
+P(G=5) =& \sum_{i=0}^{5}{P(G_2=5-i).P(G_1=i)}
+\end{align*}
+
+Now, conditioning on opponent class in first match.
+
+\begin{align*}
+P(G_1=i) =& P(G_1=i|M_1=C_1).P(C_1) + P(G_1=i|M_1=C_2).P(C_2) \\
+=& \frac{2^i}{i!}e^{-2}(0.6)+ \frac{3^i}{i!}e^{-3}(0.4), \forall i=0,1,2,3,4,5 
+\end{align*}
+
+So, we have the following table:
+
+\begin{center}
+\begin{tabular}{rr}
+$i$ & $P(G_1=i)$\\
+\hline
+0 & 0.10111599728911319\\
+1 & 0.22214682192537197\\
+2 & 0.25201906294609033\\
+3 & 0.19788494965144526\\
+4 & 0.1213466555912614\\
+5 & 0.06198117069582783\\
+\end{tabular}
+\end{center}
+
+Conditioning on opponent class in second match.
+
+\begin{align*}
+P(G_2=j) =& P(G_2=j|M_2=C_1).P(C_1) + P(G_2=j|M_2=C_2).P(C_2) \\
+=& \frac{2^j}{j!}e^{-2}(0.3)+ \frac{3^j}{j!}e^{-3}(0.7), \forall j=0,1,2,3,4,5 
+\end{align*}
+
+So, we have the following table:
+
+\begin{center}
+\begin{tabular}{rr}
+$j$ & $P(G_2=j)$\\
+\hline
+5 & 0.08139999207037615\\
+4 & 0.1446890056664011\\
+3 & 0.2109633786534165\\
+2 & 0.23803043530073903\\
+1 & 0.1857540135144819\\
+0 & 0.07545153282848857\\
+\end{tabular}
+\end{center}
+
+By combining these two, we have the followings:
+
+\begin{align*}
+P(G=5) = \sum_{i=0}^{5}{P(G_2=5-i).P(G_1=i)}
+\end{align*}
+
+So, we have the following table which shows all:
+
+\begin{center}
+\begin{tabular}{rrrr}
+$i$ & $P(G_1=i)$ & $P(G_2=5-i)$ & $P(G_1=i).P(G_2=5-i)$\\
+\hline
+0 & 0.10111599728911319 & 0.08139999207037615 & 0.00823084137752199\\
+1 & 0.22214682192537197 & 0.1446890056664011 & 0.032142202776333145\\
+2 & 0.25201906294609033 & 0.2109633786534165 & 0.05316679300417526\\
+3 & 0.19788494965144526 & 0.23803043530073903 & 0.04710264070499834\\
+4 & 0.1213466555912614 & 0.1857540135144819 & 0.02254062830263635\\
+5 & 0.06198117069582783 & 0.07545153282848857 & 0.004676574335504407\\
+ &  &  & --------------------\\
+ &  &  & 0.1678596805011695\\
+ &  &  & \\
+\end{tabular}
+\end{center}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

@@ -1,0 +1,17 @@
+* Database
+** TODO Create a database similar to the followings
+exp_id, algo_name, problem_name, RunID, time, Solution
+** TODO Code something to generate solution and save it to the database
+** TODO Use random generating solution
+** TODO Use SQLite to mange database
+* Comparison 
+** For each class of benchmark we can have something as follows
+** Assume the following figure
+*** One axis should be time, another axis should be objective value. This figure should be for one problem.
+*** One axis should be time, another axis should be the probability of that the Tabu 1 has better solution than Tabu 2. The probability is equal to the followings:
+\begin{equation}
+\frac{\text{number of solutions in Tabu 1 better than Tabu 2 in time } t}{\text{total number of problems ran on both algorithms in time } t}
+\end{equation}
+
+ 
+

@@ -1,0 +1,77 @@
+//Standard headers 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <list>
+
+using namespace std;
+
+int no_ver, no_edge;
+//list<int> pruf;
+//list<int> dg;
+int main(int argc, char **argv)
+{
+  cout<<"========================================================="<<endl<<endl;
+  cout<<"Hesam Shams, hshams@vols.utk.edu, University of Tennessee"<<endl;
+  cout<<endl<<"========================================================="<<endl;
+
+  int *pruf = new int[argc];
+  pruf[0] = 0;
+  //Process command line argument
+  for (int i = 1; i < argc; i++)
+  {
+    pruf[i] = atoi(argv[i]);
+  }
+
+  no_ver = argc+2;
+  cout << no_ver-1 << "  " << no_ver-2 << "\n";
+  int *dg = new int[no_ver];
+  dg[0] = 0;
+  for (int j = 1; j < no_ver; j++)
+  {
+    int temp_d = 1;
+    for (int i = 1; i < argc; i++)
+    {
+      if (pruf[i] == j)
+        temp_d++;
+    }
+    dg[j] = temp_d;
+  }
+
+  for (int i = 1; i < argc; i++)
+  {
+    int j = 1;
+    int f = 0;
+    while ((j < no_ver) && (f == 0))
+    {
+      if (dg[j] == 1)
+        f = 1;
+      else
+        j++;
+    }
+    cout << i << "  " << j << "\n";
+    for (int k=1; k < no_ver; k++)
+    {
+      if (k == j)
+        dg[k] = dg[k]-1;
+      if (k == i)
+        dg[k] = dg[k]-1;
+    }
+  }
+  for (int i = 1; i < no_ver; i++)
+  {
+    if (dg[i] == 1)
+      cout << i << "  ";
+  }
+  cout << endl;
+
+  delete[] pruf;
+  delete[] dg;
+  //dg.clear();
+}

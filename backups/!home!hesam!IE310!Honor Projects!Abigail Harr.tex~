@@ -1,0 +1,53 @@
+% Created 2017-04-28 Fri 13:52
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\date{}
+\title{Abigail Harr - Honor Project [94/100]}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Mechanics and Presentation [10/10]}
+\label{sec-1}
+\section{Language and Style [10/10]}
+\label{sec-2}
+\section{Organization and Technical Content [58/60]}
+\label{sec-3}
+\section{Overall Conclusions [7/10]}
+\label{sec-4}
+\section{Overall Quality [9/10]}
+\label{sec-5}
+The article is well written and uses good tools and plots to convey
+the project in a scientific approach. The author avoids overstatements
+and use a clear language to explain what are presented in the paper.
+However there exist a few imperfections through organizing the  paper.
+It could be useful to extend the introduction part and finalize this
+part by paragraph describing what are other sections. The correct
+methods are applied to analyze data. The conclusions section should be
+summarize the  analysis in previous sections. This section does not
+also contain comprehensive and clear conclusions. The overall study satisfies
+all project goals, however there are several lacks.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

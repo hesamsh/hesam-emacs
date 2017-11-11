@@ -1,0 +1,151 @@
+% Created 2016-12-09 Fri 00:30
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Hesam}
+\date{\today}
+\title{Results}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Classes and Experiment ID's}
+\label{sec-1}
+I ran all Tailard's benchmark on the following classes. For each
+problem instance there exist 10 different runs.
+\begin{table}[]
+\centering
+\caption{Experience ID classifications for GES}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{No. of Iterations} & \textbf{min Tenure} & \textbf{max Tenure} & \textbf{Exp ID} \\ \hline
+\multirow{100,000}         & \multirow{5}        & 80                  & 2016C01         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C02         \\ \cline{2-4} 
+                           & \multirow{7}        & 80                  & 2016C03         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C04         \\ \hline
+\multirow{300,000}         & \multirow{5}        & 80                  & 2016C05         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C06         \\ \cline{2-4} 
+                           & \multirow{7}        & 80                  & 2016C07         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C08         \\ \hline
+\multirow{500,000}         & \multirow{5}        & 80                  & 2016C09         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C10         \\ \cline{2-4} 
+                           & \multirow{7}        & 80                  & 2016C11         \\ \cline{3-4} 
+                           &                     & 120                 & 2016C12         \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\centering
+\caption{Experience ID classifications for Standard Tabu}
+\label{my-label}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{No. of Iterations} & \textbf{Algorithm} & \textbf{Exp ID} \\ \hline
+100,000                    & Standard Tabu      & 2016T01         \\ \hline
+300,000                    & Standard Tabu      & 2016T02         \\ \hline
+500,000                    & Standard Tabu      & 2016T03         \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Figures}
+\label{sec-2}
+
+\subsection{All classes compared with each others on all problems. (\texttt{all\_vs})}
+\label{sec-2-1}
+\includegraphics[width=.9\linewidth]{./figs/all_vs.png}
+\subsection{Each class compared to its standard Tabu based on iterations on all problems. (\texttt{all\_C01})}
+\label{sec-2-2}
+\subsubsection{\textbf{Iteration number of 100,000} including classes \textbf{2016C01}, \textbf{2016C02}, \textbf{2016C03}, and \textbf{2016C04} vs. \textbf{2016T01}.}
+\label{sec-2-2-1}
+\includegraphics[width=.9\linewidth]{./figs/100k.png}
+\subsubsection{\textbf{Iteration number of 300,000} including classes \textbf{2016C05}, \textbf{2016C06}, \textbf{2016C07}, and \textbf{2016C08} vs. \textbf{2016T02}.}
+\label{sec-2-2-2}
+\includegraphics[width=.9\linewidth]{./figs/300k.png}
+\subsubsection{\textbf{Iteration number of 500,000} including classes \textbf{2016C09}, \textbf{2016C10}, \textbf{2016C11}, and \textbf{2016C12} vs. \textbf{2016T03}.}
+\label{sec-2-2-3}
+\includegraphics[width=.9\linewidth]{./figs/500k.png}
+\subsection{Each class beat its standard Tabu based on iterations on separate chunk of problems. Moreover, GES vs. Tabu for all problem chunks in detail. (\texttt{chunk\_C01}, \texttt{detail\_C01})}
+\label{sec-2-3}
+\subsubsection{\textbf{2016C01}}
+\label{sec-2-3-1}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C01.png}
+\\
+\includegraphics[width=.9\linewidth]{./figs/detail_C01.png}
+\subsubsection{\textbf{2016C02}}
+\label{sec-2-3-2}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C02.png}
+\\
+\includegraphics[width=.9\linewidth]{./figs/detail_C02.png}
+\subsubsection{\textbf{2016C03}}
+\label{sec-2-3-3}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C03.png}
+\\ 
+\includegraphics[width=.9\linewidth]{./figs/detail_C03.png}
+\subsubsection{\textbf{2016C04}}
+\label{sec-2-3-4}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C04.png}
+\\ 
+\includegraphics[width=.9\linewidth]{./figs/detail_C01.png}
+\subsubsection{\textbf{2016C05}}
+\label{sec-2-3-5}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C05.png}
+\\ 
+\includegraphics[width=.9\linewidth]{./figs/detail_C05.png}
+\subsubsection{\textbf{2016C06}}
+\label{sec-2-3-6}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C06.png}
+\\ 
+\includegraphics[width=.9\linewidth]{./figs/detail_C06.png}
+\subsubsection{\textbf{2016C07}}
+\label{sec-2-3-7}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C07.png}
+\\ 
+\includegraphics[width=.9\linewidth]{./figs/detail_C07.png}
+\subsubsection{\textbf{2016C08}}
+\label{sec-2-3-8}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C08.png}
+\\ 
+\includegraphics[width=.9\linewidth]{./figs/detail_C08.png}
+\subsubsection{\textbf{2016C09}}
+\label{sec-2-3-9}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C09.png}
+\\ 
+\includegraphics[width=.9\linewidth]{./figs/detail_C09.png}
+\subsubsection{\textbf{2016C10}}
+\label{sec-2-3-10}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C10.png}
+\\ 
+\includegraphics[width=.9\linewidth]{./figs/detail_C10.png}
+\subsubsection{\textbf{2016C11}}
+\label{sec-2-3-11}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C11.png}
+\\ 
+\includegraphics[width=.9\linewidth]{./figs/detail_C11.png}
+\subsubsection{\textbf{2016C12}}
+\label{sec-2-3-12}
+\includegraphics[width=.9\linewidth]{./figs/chunk_C12.png}
+\\ 
+\includegraphics[width=.9\linewidth]{./figs/detail_C12.png}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}
