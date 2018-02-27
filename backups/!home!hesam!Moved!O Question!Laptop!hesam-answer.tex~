@@ -1,0 +1,103 @@
+% Created 2018-01-21 Sun 13:33
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{color}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{graphicx}
+\usepackage[tight,hang,nooneline,raggedright,figtopcap]{subfigure}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage[english]{babel}
+\usepackage{multimedia}
+\usepackage[boxed]{algorithm}
+\usepackage{algorithmic}
+\usepackage{natbib}
+\author{Hesam Shams}
+\date{\today}
+\title{Answers to Dr. Ostrowski's Questions}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+
+\section{Question 1}
+\label{sec-1}
+Study of degeneracy in the analysis of the randomized simplex algorithm is important because the algorithm complexity is exponential in the worst-cases. On the other hand, degeneracy can cause local optimal in the local search algorithms. So, it is interesting to see our proposed algorithm (directional tabu algorithm (DTA)) behavior when there are multiple optimal solutions and near optimal solutions.
+
+The features of the search space which have effects on static cost models of local search in jobshop scheduling problems (JSP) are studied by \cite{watson2003problem}. They studied the problem difficulty models for the JSP on tabu search algorithms. The research includes a statistical study on different instances of medium sized JSP problems which are rectangular and squared. According to their experiments, there exists high correlation between backbone size and the number of optimal solutions. This finding is well-connected to our proposed model because of the definition of backbone size.
+
+The backbone size of a problem instance is the number of variables which have identical values in all optimal solutions for the instance. For example, assume a binary vector of $X_j=\{x^j_1,x^j_2, \dots, x^j_n\}$ is a feasible solution to a typical JSP problem and the set of $S^*=\{X_1^*,X_2^*, \dots, X_s^*\}$ is the set of optimal solutions to the problem. Let $y_i^* = \big[\frac{\sum_{j=1}^{s}{x_i^j}}{|S^*|}\big]$ which returns zero if there exists at least a non-identical value for the component $x_i$ in all optimal solutions, and returns one if all optimal solutions have an identical value one. Similarly, let $z_i^* = \big[\frac{\sum_{j=1}^{s}{|x_i^j-1|}}{|S^*|}\big]$ which returns zero if there exists at least a non-identical value for the component $x_i$ in all optimal solutions, and returns one if all optimal solutions have an identical value zero. So, we can calculate the backbone size of the problem ($B_p$) as follows.
+
+\begin{equation*}
+B_p = \sum_{i=1}^{n}{y_i+z_i}
+\end{equation*}
+
+As we discussed, there is high correlation between backbone size ($B_p$) and the number of optimal solutions ($|opt|$) \cite{watson2003problem}. The correlation is positive which means larger size of backbone leads to more number of optimal solutions, and vice-versa. In other words, more decision variables are fixed, the more number of optimal solutions to the problem. So, the concern of degeneracy can be resolved by our approach because if there exists more $|opt|$, it will be larger $B_p$.
+
+In order to illustrate the changes of probabilities over time, we have studied a medium sized instances ($6\times 6$, \texttt{ft06}) from the benchmark \cite{fisher1963probabilistic}. We solved the problem and added a constraint which exclude the optimal solutions (i.e., we added the constraint $C_{\max} \leq C_{\max}^* + \varepsilon$ where $\varepsilon=\{0,1,2, \ldots, 11\}$ in each stage in order to investigate near optimal solutions. We applied the following steps to see the changes of $|opt|$, $B_p$, and the probabilities for each stage $\varepsilon$.
+
+\begin{itemize}
+\item Solve the problem including the constraint $C_{\max} \leq C_{\max}^* + \varepsilon$.
+\item Store all optimal solutions ($S$) and corresponding components.
+\item For each component $x_i$ we compute the percentage of similarity which equals to $x_i = \frac{\sum_{j=1}^{S}{x_i^j}}{|S|}\times 100$.
+\item Sort the vector $X=\big[x_1, x_2, \ldots, x_n\big]$.
+\item Plot percentage of similarity where $x$-axis is $\big[1,2,\ldots, n\big]$ and $y$-axis is corresponding values from vector $X$.
+\item Plot histogram on vector $X$.
+\end{itemize}
+
+The percentage of similarities plot for all stages is as follows.
+\begin{figure}[H]
+\centering
+\includegraphics[height=5 in]{./prob.png}
+\caption{\label{fig.01}Probability of similarities plot for optimal solutions and near optimal solutions.}
+\end{figure}
+
+
+The histogram plot is shown in the followings.
+\begin{figure}[H]
+\centering
+\includegraphics[height=4 in]{./hist.png}
+\caption{\label{fig.02}Probability of similarities plot for optimal solutions and near optimal solutions.}
+\end{figure}
+
+For each stage $\varepsilon$, we calculate the backbone percentage to all components (i.e., $B_p^{\varepsilon}=\frac{B_p}{n}\times 100$). The plot of $B_p^{\varepsilon}$ vector with the vector of objective solutions ($obj = \{C^*_{\max}, C^*_{\max}+1, C^*_{\max}+2, \ldots, C^*_{\max}+11\}$) is as follows.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3 in]{./backbone.png}
+\caption{\label{fig.02}Probability of similarities plot for optimal solutions and near optimal solutions.}
+\end{figure}
+
+\section{Question 2}
+\label{sec-2}
+The operations in jobshop scheduling problems are required to be processed in some pre-defined orders. So, the problem solutions are not symmetric usually because the operations orders are important.
+
+\bibliographystyle{apalike}
+
+\bibliography{overallliterature.bib}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

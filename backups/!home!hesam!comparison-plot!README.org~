@@ -1,0 +1,84 @@
+# comparison-plot
+## ABOUT
+Tool for visualizing experimental analysis of optimization algorithms. This tool can be used in order to compare and contrast two optimization algorithms which depends on random initial seed. For more information, refer to **OUR PAPER**.
+
+## REQUIREMENTS
+This package relies on 'numpy', 'matplotlib', and 'pandas'. It also requires Python3 or higher.
+
+## INSTALL
+algplot is available on PyPI at https://pypi.python.org/pypi/algplot. **(NOT YET)**
+
+Install using [pip](http://www.pip-installer.org/):
+```
+    pip install algplot
+```
+Install from source:
+```
+    python setup.py install
+```
+
+## SOLUTIONS FORMAT
+You are required to save solutions from each algorithms in the following format in csv.
+For each row you need to store time, solution, and random seed.
+For example:
+|Time    |Solution    |Random Seed   |
+|--------|------------|--------------|
+|33      |1646        |454578789     |
+|58      |1646        |454578789     |
+|85      |1638        |454578789     |
+|102     |1634        |454578789     |
+|151     |1626        |454578789     |
+|178     |1621        |454578789     |
+|214     |1618        |454578789     |
+|262     |1614        |454578789     |
+
+* Random seed is associated with each run.
+* Each time the algorithm for a run finds a new solution, you are required to save the information which includes the new solution value and the time that algorithm found that solution.
+
+### Solution Directories
+Each algorithm solution is needed to be stored in a directory. In addition, all runs for each problem instance solution are required to be saved in **ONE** csv file. For example, consider we want to study 'algorithm a' and compare and contrast it with a reference 'algorithm b'. We implement these two algorithms on a benchmark which includes 'problem 1', 'problem 2', and 'problem 3'. We need to save solutions obtained by algorithms in the following directories and files.
+
+```
+solutions
+|
+|
+|__ algorithm a
+|     |
+|     |__ problem_1.csv
+|     |__ problem_2.csv
+|     |__ problem_3.csv
+|
+|__ algorithm b
+|     |
+|     |__ problem_1.csv
+|     |__ problem_2.csv
+|     |__ problem_3.csv
+```
+* To make it more clear, each problem instance file contains all runs solutions with associated random seed stored in the csv file third column. Moreover, the counterpart problems must have a same file name in both algorithms directories.
+
+## Example
+### 'cc_plot'
+You can find an example in test directory. We have generated random solutions an saved into different files in directories of imaginery algorithms 'alg_a' and 'alg_b'. The following scripts shows both performance probability plot and risk difference plot.
+```
+from algplot import *
+alg_a = 'test_data/alg_a/'
+alg_b = 'test_data/alg_b/'
+cc_plot(alg_a, alg_b)
+```
+### 'perf_plot'
+If your are interested only in performance probability plot, you can use the following scripts.
+```
+from algplot import *
+alg_a = 'test_data/alg_a/'
+alg_b = 'test_data/alg_b/'
+perf_plot(alg_a, alg_b)
+```
+
+### 'risk_plot'
+Similarly, if your are interested only in risk difference plot, you can use the following scripts.
+```
+from algplot import *
+alg_a = 'test_data/alg_a/'
+alg_b = 'test_data/alg_b/'
+perf_plot(alg_a, alg_b)
+```

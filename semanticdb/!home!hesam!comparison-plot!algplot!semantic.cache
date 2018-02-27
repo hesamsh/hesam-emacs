@@ -1,0 +1,150 @@
+;; Object algplot/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "algplot/"
+  :tables
+  (list
+    (semanticdb-table "ci_mtd.py"
+      :major-mode 'python-mode
+      :tags 
+        '( ("numpy" include nil nil [1 25])
+            ("_gen_alg_obj" include nil nil [40 72])
+            ("_time_range" include nil nil [40 72])
+            ("_product_wise_compare" function
+               (:documentation "
+    The module pulls selected objective for a single problem on each run,
+    and compares two vectors in Cartesian product wise method (down-sizing based on bootstrap parameter).
+    It returns a dictionary of number of better, worse, same, and total of each run.
+  
+    \\par selected_obj -- a dictionary of best obtained objectives of runs for both algorithms (the outpu from _gen_alg_obj)
+    "
+                :arguments 
+                  ( ("selected_obj" variable nil (reparse-symbol function_parameters) [100 112]))                  )
+                nil [74 1360])
+            ("_element_wise_compare" function
+               (:documentation "
+    The module pulls selected objective for a single problem on each run,
+    and compares two vectors in element wise method (down-sizing based on the minimum size of two lists).
+    It returns a dictionary of number of better, worse, same, and total of each run.
+  
+    \\par selected_obj -- a dictionary of best obtained objectives of runs for both algorithms (the outpu from _gen_alg_obj)
+    "
+                :arguments 
+                  ( ("selected_obj" variable nil (reparse-symbol function_parameters) [1387 1399]))                  )
+                nil [1361 2893])
+            ("_bootstrap_prob_calc" function (:arguments 
+              ( ("dataset" variable nil (reparse-symbol function_parameters) [2919 2926])
+                ("no_bootstrap_repl" variable nil (reparse-symbol function_parameters) [2928 2945])
+                ("column_id" variable nil (reparse-symbol function_parameters) [2947 2956])
+                ("x_length" variable nil (reparse-symbol function_parameters) [2958 2966])
+                ("alg_a" variable nil (reparse-symbol function_parameters) [2968 2973])
+                ("alg_b" variable nil (reparse-symbol function_parameters) [2975 2980]))              ) nil [2894 5260])
+            ("_simple_prob_calc" function (:arguments 
+              ( ("dataset" variable nil (reparse-symbol function_parameters) [5283 5290])
+                ("column_id" variable nil (reparse-symbol function_parameters) [5292 5301])
+                ("x_length" variable nil (reparse-symbol function_parameters) [5303 5311])
+                ("alg_a" variable nil (reparse-symbol function_parameters) [5313 5318])
+                ("alg_b" variable nil (reparse-symbol function_parameters) [5320 5325]))              ) nil [5261 7252]))          
+      :file "ci_mtd.py"
+      :pointmax 7252
+      :fsize 7412
+      :lastmodtime '(23152 56418 504650 949000)
+      :unmatched-syntax '((FROM 26 . 30) (PERIOD 31 . 32) (FROM 26 . 30) (PERIOD 31 . 32) (NAME 7129 . 7140) (NEWLINE 7151 . 7152) (FROM 26 . 30) (PERIOD 31 . 32) (NAME 7129 . 7140) (NEWLINE 7151 . 7152)))
+    (semanticdb-table "cc_mtd.py"
+      :major-mode 'python-mode
+      :tags 
+        '( ("" code nil nil [19 77])
+            ("" code nil nil [107 246])
+            ("" code nil nil [270 293])
+            ("_perf_calc_bootstrap" function (:arguments 
+              ( ("prob_better_time" variable nil (reparse-symbol function_parameters) [320 336])
+                ("prob_same_time" variable nil (reparse-symbol function_parameters) [338 352])
+                ("prob_worse_time" variable nil (reparse-symbol function_parameters) [354 369])
+                ("ci_per" variable nil (reparse-symbol function_parameters) [371 377])
+                ("x_length" variable nil (reparse-symbol function_parameters) [379 387]))              ) nil [295 946])
+            ("_perf_calc_binomial" function (:arguments 
+              ( ("nbetter_time" variable nil (reparse-symbol function_parameters) [971 983])
+                ("nsame_time" variable nil (reparse-symbol function_parameters) [985 995])
+                ("nworse_time" variable nil (reparse-symbol function_parameters) [997 1008])
+                ("perf_ci" variable nil (reparse-symbol function_parameters) [1010 1017])
+                ("ci_per" variable nil (reparse-symbol function_parameters) [1019 1025])
+                ("x_length" variable nil (reparse-symbol function_parameters) [1027 1035])
+                ("ntotal_time" variable nil (reparse-symbol function_parameters) [1037 1048]))              ) nil [947 3499])
+            ("_risk_calc_bootstrap" function (:arguments 
+              ( ("prob_better_time" variable nil (reparse-symbol function_parameters) [3525 3541])
+                ("prob_same_time" variable nil (reparse-symbol function_parameters) [3543 3557])
+                ("prob_worse_time" variable nil (reparse-symbol function_parameters) [3559 3574])
+                ("perf_ci" variable nil (reparse-symbol function_parameters) [3576 3583])
+                ("ci_per" variable nil (reparse-symbol function_parameters) [3585 3591])
+                ("x_length" variable nil (reparse-symbol function_parameters) [3593 3601]))              ) nil [3500 4202])
+            ("_risk_calc_binomial" function (:arguments 
+              ( ("nbetter_time" variable nil (reparse-symbol function_parameters) [4227 4239])
+                ("nsame_time" variable nil (reparse-symbol function_parameters) [4241 4251])
+                ("nworse_time" variable nil (reparse-symbol function_parameters) [4253 4264])
+                ("risk_ci" variable nil (reparse-symbol function_parameters) [4266 4273])
+                ("ci_per" variable nil (reparse-symbol function_parameters) [4275 4281])
+                ("x_length" variable nil (reparse-symbol function_parameters) [4283 4291])
+                ("ntotal_time" variable nil (reparse-symbol function_parameters) [4293 4304]))              ) nil [4203 5716])
+            ("_perf_plot_sub" function (:arguments 
+              ( ("fin_time" variable nil (reparse-symbol function_parameters) [5740 5748])
+                ("fin_prob_notw" variable nil (reparse-symbol function_parameters) [5750 5763])
+                ("fin_prob_min" variable nil (reparse-symbol function_parameters) [5765 5777])
+                ("fin_prob_max" variable nil (reparse-symbol function_parameters) [5779 5791])
+                ("plot_color" variable nil (reparse-symbol function_parameters) [5793 5803]))              ) nil [5721 6406])
+            ("_risk_plot_sub" function (:arguments 
+              ( ("fin_time" variable nil (reparse-symbol function_parameters) [6426 6434])
+                ("fin_prob_diff" variable nil (reparse-symbol function_parameters) [6436 6449])
+                ("fin_prob_min" variable nil (reparse-symbol function_parameters) [6451 6463])
+                ("fin_prob_max" variable nil (reparse-symbol function_parameters) [6465 6477])
+                ("plot_color" variable nil (reparse-symbol function_parameters) [6479 6489]))              ) nil [6407 7126]))          
+      :file "cc_mtd.py"
+      :pointmax 7126
+      :fsize 7127
+      :lastmodtime '(23152 63720 215862 670000)
+      :unmatched-syntax nil)
+    (semanticdb-table "mk_plots.py"
+      :major-mode 'python-mode
+      :tags 
+        '( ("\"\"\"
+mk_plots module (Make Plots) includes public plot modules.
+
+References
+----------
+.. [1] Our paper.
+\"\"\"" code nil nil [1 108])
+            ("_read_all_files" include nil nil [123 165])
+            ("_load_default_vals" include nil nil [123 165])
+            ("_bootstrap_prob_calc" include nil nil [179 206])
+            ("_risk_plot_sub" include nil nil [220 301])
+            ("_risk_calc_bootstrap" include nil nil [220 301])
+            ("_perf_plot_sub" include nil nil [220 301])
+            ("_perf_calc_bootstrap" include nil nil [220 301])
+            ("time" include nil nil [302 341])
+            ("perf_plot" function (:arguments 
+              ( ("dir_alg_a" variable nil (reparse-symbol function_parameters) [357 366])
+                ("dir_alg_b" variable nil (reparse-symbol function_parameters) [368 377])
+                ("kwarg" variable nil (reparse-symbol function_parameters) [379 386]))              ) nil [343 2002])
+            ("risk_plot" function (:arguments 
+              ( ("dir_alg_a" variable nil (reparse-symbol function_parameters) [2017 2026])
+                ("dir_alg_b" variable nil (reparse-symbol function_parameters) [2028 2037])
+                ("kwarg" variable nil (reparse-symbol function_parameters) [2039 2046]))              ) nil [2003 3670])
+            ("cc_plot" function
+               (:documentation "
+       This module plot both performance probability and risk differences.
+       Multi plotting in one function is done much faster than plotting each of them separately.
+       The input arguments are file path for algorithm A and file path for reference algorithm.
+       ..TO DO: The optional arguments are confidence interval as integer percent, confidence interval methods, plot options.
+       ..TO DO: The optional minimum or maximum objectives.
+    "
+                :arguments 
+                  ( ("dir_alg_a" variable nil (reparse-symbol function_parameters) [3683 3692])
+                    ("dir_alg_b" variable nil (reparse-symbol function_parameters) [3694 3703])
+                    ("kwarg" variable nil (reparse-symbol function_parameters) [3705 3712]))                  )
+                nil [3671 6822]))          
+      :file "mk_plots.py"
+      :pointmax 7980
+      :fsize 7979
+      :lastmodtime '(23153 2498 982911 834000)
+      :unmatched-syntax nil))
+  :file "!home!hesam!comparison-plot!algplot!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

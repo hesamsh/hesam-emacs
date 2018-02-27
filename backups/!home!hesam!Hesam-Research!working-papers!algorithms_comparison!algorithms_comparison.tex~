@@ -1,0 +1,434 @@
+% Created 2018-02-24 Sat 20:00
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{color}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{graphicx}
+\usepackage[tight,hang,nooneline,raggedright,figtopcap]{subfigure}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage[english]{babel}
+\usepackage{multimedia}
+\usepackage[boxed]{algorithm}
+\usepackage{algorithmic}
+\usepackage{natbib}
+\author{Hesam Shams,  Oleg Shylo}
+\date{\today}
+\title{Extensive Trials of Algorithms}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\begin{abstract}
+This research describes an integrated framework for comparison and contrast of optimization algorithms which are trying to find solutions using any random seed inside the algorithms. It is useful to compare optimization algorithms performance and observe the differences over a time period. This approach is based on strong statistics methods and make an extensive trials for algorithms in order to do a pair-wise comparison. It can be widely used as a tool for algorithm design and development in the operations research. We proposed different binomial models and a bootstrap method for the framework and used it on a randomly generated solution to see how each model works.
+\end{abstract}
+
+\section{Introduction}
+\label{sec-1}
+
+When someone develop a new optimization algorithm, finding an approach to analyze its performance is an important step in order to examine the performance. A number of research have been studied on measuring and analyzing the algorithm performance which can be divided into three main categories: the worst case analysis, the average case analysis, and the experimental analysis.
+
+The worst case analysis focuses on the rigorous theoretical guarantees of the algorithm performance (e.g., run time) in the worst possible scenario. For some problems, the worst case scenarios are quite common, but often it is not the case, which leads to overly pessimistic predictions for its performance. The average case analysis considers the expected performance for a particular distribution of the input data. The common difficulty with this approach is to identify the average-case input that is well-justified for applications. The focus of this paper is on the experimental analysis of the algorithms. 
+
+The experimental analysis of the algorithms is very common for the modern optimization techniques. While the worst-case or the average-case approaches often provide solid theoretical guarantees of the algorithmic performance, they cannot provide a general overview of performances for practical reasons. The worst-case guarantees are usually too pessimistic (e.g., in the worst case scenario, the simplex algorithm may visit $2^n$ vertices for the problem of size $n$), and the tractable average-case derivations may require distributional assumptions that are far from reality. 
+
+The objective of the experimental analysis is typically to highlight the strengths and weaknesses of an algorithm. Such analysis is commonly accompanied by the comparison with the previously known methods, which is sometimes called a \emph{horse race} analysis, as it focuses on showing that the algorithm dominates the existing competition. For example, \cite{mittelmann2017benchmarks} run commercial and open source solvers (such as \cite{cplex2009v12} or \cite{gurobi}) on a set of the benchmark instances and maintained a comparison analysis over solvers.
+
+The common approach to experimental analysis of an algorithm involves a set of a well-established benchmark problems. The algorithm is applied to these problems, and the results are reported in the form of tables. The main problem with these experimental evaluations is a lack of a common experimental design which usually renders a meaningful comparison impossible. For example, the exact algorithms would often report run times till optimal solutions are obtained. If the problems are hard enough, the algorithm might not find the optimal solution within a certain time threshold, prompting the reports of the optimality gaps or percentage of problems solved to optimality. Clearly, the choice of the time threshold would heavily impact the reported results. The algorithm that dominates the field with one hour of computing time, might perform poorly if two hours of computing time are considered. As the researchers are an interested party, they might be inclined to choose the threshold that favors their algorithm. Furthermore, the table results might not clearly indicate the superiority of one algorithm over another, as the method would look better on some problems, but not on the others. Therefore, we proposed an integrated framework for comparing and contrasting algorithms that alleviates some of the drawbacks discussed above. 
+
+This paper is organized as follows. First, we present a review of some common approaches for algorithm evaluations in section 2. Then the notations and definitions of the proposed framework are discussed in section 3. The binomial models associated with the approach is explained in section 4. The independent model based on bootstrapping is presented in section 5, and results for benchmark examples are illustrated in section 6. Finally, conclusions are given in section 7.
+
+\section{Literature Review}
+\label{sec-2}
+
+Since it is not possible to test the algorithm performance on every instance of NP-hard problems, the research community often identifies a comprehensive set of sample problems. These problems are often match the size of practical problems, and are commonly considered difficult for the state-of-the-art optimization methods. For example, such collections of benchmark exist for the scheduling problems  \cite{Taillard:1993}, traveling salesman problems \cite{reinelt1995tsplib95}, vehicle routing problems \cite{vidal2013hybrid}. Benchmarking process is reviewed in \cite{beiranvand2017best} and challenges of different approaches are discussed.
+
+After choosing the benchmark set, the algorithm is evaluated with respect to the run time and solution quality. Different authors have applied different experimental designs for such evaluations. The common approach is to record the best objective value or the best lower bound obtained within a fixed time budget for every instance in the benchmark set \cite{mladenovic1997variable,montane2006tabu}. 
+
+In the case of the randomized algorithms, the authors often count the number of time the algorithm finds an optimal solution (success rate) for each benchmark \cite{shelokar2007particle}. The performance report may include the average optimality gaps across a fixed number of runs. This approach may not be feasible, as it requires a benchmark which can be solved exactly in order to calculate meaningful  success rates and average optimality gaps. Another metric for evaluation of the algorithm performance is the number of function evaluations \cite{noman2008accelerating,pham2011bees}, but it is only feasible for the local search based methods. Also, the comparison between algorithms that use different neighborhood structures is not possible, and it may be difficult to translate the reported data to the run time values.
+
+Another class of widely used approaches is based on statistical methods, such as analysis of variance (ANOVA) or hypothesis testing. For example relative percentage deviation (RDP) has been used as the performance measure in \cite{naderi2012permutation}. Mean-value of the objectives values and its  standard deviation was proposed to measure the algorithm performance in \cite{civicioglu2013conceptual}. A broad review on similar approaches can be found in \cite{derrac2011practical} and a review on developments of comparison methods of evolutionary algorithms has been done in \cite{dimopoulos2000recent}. In a comparable study, \cite{carrano2011multicriteria} proposed a multiple criteria for comparing algorithms and construct an algorithm ranking table. The common feature of these approaches is that all provide numerous tables filled with different scaled numbers which do not give a general overview to the algorithm performance and can be quite confusing. In order to resolve this confusion, visual comparison methods can provide a useful tool for a clear presentation of the performance results.
+
+A widely used visual tool is developed in \cite{dolan2002benchmarking} and is called performance profile. The performance profile provides a plot including the probability of success for each algorithm on different instances of a benchmark. These plots are useful to see how an algorithm runs over time visually. But the main drawback is that each plot shows the performance of one single problem and it cannot be used for benchmarking. Another visual comparison method is proposed in \cite{ribeiro2012exploiting}. The authors develop a framework for the run time distributions or time-to-target plots which is applied and extended in \cite{resende2016optimization}. The time-to-target plot is a 2-dimensional plot which \emph{x}-axis is the probability that an algorithm will find a solution at least as good as a given target value within a given running time which is shown on \emph{y}-axis. The target values are choosen as the objective values  found by the state-of-the-art algorithms. This visualization is a useful tool for comparing algorithms as it provides an overview to the algorithm performance alongside with a statistical estimates of the errors. However, the main issues are that the choice of the target value is arbitrary and may skew the comparison results. Moreover, the uncertainty of the comparison is not identified in this approach and the superiority of the studied algorithm over the other is not presented clearly.
+
+Considering the above drawbacks of different comparison approaches, we design a framework which provides a comprehensive overview to the algorithm performance along with a strong statistical conclusions about the significance of the observed differences. The approach is explained in the followings in which two measures are introduced: performance probability and risk differences. Moreover, confidence interval methods and guidelines toward a good coverage is described in each section. We also illustrate this approach by comparing directional tabu algorithm with the standard tabu algorithm at the end of this chapter.
+
+\section{Notation and Definitions}
+\label{sec-3}
+For a pairwise comparison, we consider two algorithms $\mathcal A$ and $\mathcal B$ on a set of benchmark instances $\Omega$. To estimate the related parameters, we repeatedly run $\mathcal A$ and $\mathcal B$ on each instance in $\Omega$ and record corresponding performance measures for each run (e.g., time to optimality, and best objective value). Let $X^{\mathcal A}_{\omega}$ denote a vector of performance measures (e.g., objective function value) obtained by repeatedly executing $\mathcal A$ on a problem $\omega \in \Omega$. The notation is clarified in Table \ref{tab:not1}, where $n_i$ correspond to the total number of runs for $\mathcal A$ on $\omega_i$, and similarly $m_i$ denotes number of runs for $\mathcal B$ on $\omega_i$. Assume that the selected benchmark $\Omega$ includes $k$ problems $\{\omega_1, \omega_2, \ldots, \omega_k\}$.
+
+\begin{longtable}{|c|c|c|}
+\caption{\label{tab:not1}Notation of the proposed framework. \label{tab:not1}}
+\\
+\hline
+Problem & Algorithm $\mathcal A$ & Algorithm $\mathcal B$\\
+\hline
+\endhead
+\hline\multicolumn{3}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+$\omega_1$ & $X^{\mathcal A}_{\omega_1}= \{x^1_1, x^1_2, \ldots,x^1_{n_1}\}$ & $X^{\mathcal B}_{\omega_1}= \{y^1_1, y^1_2, \ldots,y^1_{m_1} \}$\\
+$\omega_2$ & $X^{\mathcal A}_{\omega_2}= \{x^2_1, x^2_2, \ldots,x^2_{n_2}\}$ & $X^{\mathcal B}_{\omega_2}= \{y^2_1, y^2_2, \ldots,y^2_{m_2}\}$\\
+$\cdots$ & $\cdots$ & $\cdots$\\
+$\omega_k$ & $X^{\mathcal A}_{\omega_k}= \{x^k_1, x^k_2, \ldots,x^k_{n_k}\}$ & $X^{\mathcal B}_{\omega_k}= \{y^k_1, y^k_2, \ldots,y^k_{m_k}\}$\\
+\hline
+\end{longtable}
+
+The measures which are proposed in this paper are the performance probability, and the risk difference. The \emph{Performance Probability} of algorithm $\mathcal A$ at time $t$ on benchmark $\Omega$ in compare with algorithm $\mathcal B$ ($P_{\mathcal A\leq \mathcal B|\Omega}$) is the probability of that algorithm $\mathcal A$ gives a performance metric value at least smaller than that algorithm $\mathcal B$ at time $t$ on a problem in the benchmark $\Omega$. The performance probability takes a value between zero and one and as the value closer to one means better performance. Similarly, the \emph{Risk Difference} of algorithm $\mathcal A$ at time $t$ on benchmark $\Omega$ in contrast to algorithm $\mathcal B$ ($RD_{\mathcal A < \mathcal B|\Omega}$) is the difference between probability of that algorithm $\mathcal A$ provides a performance metric value less than that algorithm $\mathcal B$, and probability of that algorithm $\mathcal B$ provides a performance metric value less than that algorithm $\mathcal A$ at time $t$ on a problem in the benchmark $\Omega$. This difference reveals the absolute performance of algorithm $\mathcal A$ and takes a value between -1 and +1 and a positive value closer to +1 means more assured performance.
+
+\section{Binomial Models}
+\label{sec-4}
+
+In this section we assume that the number of evaluations is equal for algorithm $\mathcal A$ and $\mathcal B$ ($n_i=m_i$ for $i=1,\ldots, k$), which can be easily achieved by \textbf{downsampling}. In other words, we can generate pairs of samples $(x,y)$'s of size $\mathcal N_{\omega}= \min\{|X^{\mathcal A}_{\omega}|, |X^{\mathcal B}_{\omega}|\}$. Each set of $X^{\mathcal A}_{\omega}$ and $X^{\mathcal B}_{\omega}$ is randomly downsized to $\mathcal N_{\omega}$ elements. The downsized sample $D^{\mathcal A, \mathcal B}_{\omega}$ includes pairs of $(x,y)$ from downsized sets of $X^{\mathcal A}_{\omega}$ and $X^{\mathcal B}_{\omega}$ which are still noted as $X^{\mathcal A}_{\omega}$ and $X^{\mathcal B}_{\omega}$.
+
+\begin{equation}
+D^{\mathcal A, \mathcal B}_{\omega} = \{(x_1,y_1), (x_2,y_2), ..., (x_{\mathcal N_{\omega}},y_{\mathcal N_{\omega}}) \},   x_i \in X^{\mathcal A}_{\omega} \text{ and }   y_i \in X^{\mathcal B}_{\omega}
+\end{equation}
+
+We propose two approaches to estimate the performance and risk differences. In addition, confidence intervals are estimated to provide assessment of the errors. 
+
+In the following discussion, we use the indicator functions that can be defined as follows.
+\begin{align}
+\nonumber
+1_{x < y}(x,y) &= 
+\begin{cases} 
+1, & \text{if } x < y\\ 
+0, & \text{otherwise.}
+\end{cases} \\
+\nonumber
+1_{x > y}(x,y) &= 
+\begin{cases} 
+1, & \text{if } x > y\\ 
+0, & \text{otherwise.}
+\end{cases} \\
+1_{x = y}(x,y) &= 
+\begin{cases} 
+1, & \text{if } x = y\\ 
+0, & \text{otherwise.}
+\end{cases}\label{eq:indicator}
+\end{align}
+
+Using the indicator functions in (\ref{eq:indicator}), we can count the number of performance metric pairs, where the performance metric values of $\mathcal A$ are larger, equal or greater than the performance metrics of $\mathcal B$ on a particular problem $\omega$. 
+\begin{align}
+N_{\mathcal A < \mathcal B|{\omega}} &= \sum\limits_{(x,y)\in D^{\mathcal A, \mathcal B}_{\omega}} 1_{x < y}\label{eq:nbetter}\\
+N_{\mathcal A = \mathcal B|{\omega}} &= \sum\limits_{(x,y)\in D^{\mathcal A, \mathcal B}_{\omega}} 1_{x = y}\label{eq:nsame}\\
+N_{\mathcal A > \mathcal B|{\omega}} &= \sum\limits_{(x,y)\in D^{\mathcal A, \mathcal B}_{\omega}} 1_{x > y}\label{eq:nworse}
+\end{align}
+
+On a random instance from ${\Omega}$, the total number of runs which are better, same, and worse are respectively an aggregation of $N_{\mathcal A < \mathcal B|{\omega}}$, $N_{\mathcal A = \mathcal B|{\omega}}$ and $N_{\mathcal A > \mathcal B|{\omega}}$ over all problems in ${\Omega}$ and are calculated as
+
+\begin{align}
+N_{\mathcal A < \mathcal B|{\Omega}} = \sum\limits_{{\omega}\in {\Omega}} N_{\mathcal A < \mathcal B|{\omega}}\label{eq:nbetter:total}\\
+N_{\mathcal A = \mathcal B|{\Omega}} = \sum\limits_{{\omega}\in {\Omega}} N_{\mathcal A = \mathcal B|{\omega}}\label{eq:nsame:total}\\
+N_{\mathcal A > \mathcal B|{\Omega}} = \sum\limits_{{\omega}\in {\Omega}} N_{\mathcal A > \mathcal B|{\omega}}\label{eq:nworse:total}
+\end{align}
+
+\subsection{Performance probability}
+\label{sec-4-1}
+\label{performance.prob}
+
+Now we can estimate the probability of $\mathcal A$ having larger or equal performance metric value than $\mathcal B$ on a problem ${\omega} \in {\Omega}$.
+
+\begin{align}
+P_{\mathcal A\leq \mathcal B|{\omega}} &=\frac{1}{\mathcal N_{\omega}}{\sum_{(x,y)\in D^{\mathcal A, \mathcal B}_{\omega}} 1_{x\leq y}(x,y)}\label{eq:pprob1}\\
+\nonumber \\
+& \text{or} \nonumber \\
+P_{\mathcal A\leq \mathcal B|{\omega}} &= \frac{N_{\mathcal A < \mathcal B|{\omega}} + N_{\mathcal A = \mathcal B|{\omega}}}{\mathcal N_{\omega}}\label{eq:pprob2}
+\end{align}
+
+
+The probability that $\mathcal A$ produces a larger of equal performance metric than $\mathcal B$ on a random instance from ${\Omega}$ (each instance is equally likely to be selected) is an average of $P_{\mathcal A\leq \mathcal B|{\omega}}$ across all problems in ${\Omega}$.
+
+\begin{align}
+P_{\mathcal A\leq \mathcal B|{\Omega}} &= \frac{1}{|{\Omega}|}\sum_{{\omega}\in {\Omega}} P_{\mathcal A\leq \mathcal B|{\omega}} \label{eq:pprob:total1} \\
+P_{\mathcal A\leq \mathcal B|{\Omega}} &= \frac{N_{\mathcal A < \mathcal B|{\Omega}} + N_{\mathcal A = \mathcal B|{\Omega}}}{\mathcal N_{\Omega}} \label{eq:pprob:total2}
+\end{align}
+
+where $|{\Omega}|$ is the number of instances in ${\Omega}$,  and $\mathcal N_{{\Omega}}$ is the total number runs that were used to produce the metrics and equals to the following.
+
+\begin{align}
+\mathcal N_{\Omega} = \sum\limits_{{\omega} \in {\Omega}}\mathcal N_{\omega} = N_{\mathcal A < \mathcal B|{\Omega}} + N_{\mathcal A = \mathcal B|{\Omega}} + N_{\mathcal A > \mathcal B|{\Omega}} \label{eq:runs:total}
+\end{align}
+
+An estimate of the probability does not provide any information about its accuracy. In order to provide such estimate, we calculate the confidence interval for the estimated value with a nominal confidence level ($\alpha \%$). Since the performance probability is a binomial proportion and discrete, it is not possible to calculate the exact nominal confidence level. A confidence interval is preferred when the actual coverage probability is close to the nominal confidence level. In the following discussion, we present different types of interval for binomial proportions along with  their advantages and disadvantages.
+
+The \textbf{Wald} Interval approximation is defined based on normal theory approximation. The upper and lower bound of interval with the nominal confidence level of $\alpha$ for $P_{\mathcal A\leq \mathcal B|{\Omega}}$ is defined in (\ref{eq:wald-int}). This type is easy to calculate and popular in practice but it has a poor performance when the sample size is small which is studied in \cite{agresti1998approximate} and the actual coverage probability is also poor when the point of interest is near to zero or one according to \cite{brown2001interval}.
+
+\begin{align}
+L_{CI} &= P_{\mathcal A\leq \mathcal B|{\Omega}} - z_{\frac{\alpha}{2}}\sqrt{\frac{P_{\mathcal A\leq \mathcal B|{\Omega}}(1- P_{\mathcal A\leq \mathcal B|{\Omega}})}{\mathcal N_{\Omega}}} \nonumber \\
+U_{CI} &= P_{\mathcal A\leq \mathcal B|{\Omega}} + z_{\frac{\alpha}{2}}\sqrt{\frac{P_{\mathcal A\leq \mathcal B|{\Omega}}(1- P_{\mathcal A\leq \mathcal B|{\Omega}})}{\mathcal N_{\Omega}}} \label{eq:wald-int}
+\end{align}
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$ quantile of the standard normal distribution and $\mathcal N_{{\Omega}}$ is the total number of runs which is discussed before.
+
+An alternative approach constructs confidence interval based on reverting the one-tailed hypothesis test procedure for the null hypothesis $H_0:p=p_0$ as in \ref{eq:null-hypo}. Since the interval estimator is constructed to have at least $1-\alpha$ coverage probability for every proportion, this approach is called exact method from \cite{clopper1934use}.
+
+\begin{align}
+\sum_{j=x}^{n} \binom{n}{j} p^j_0(1-p_0)^{n-j} &= \frac{\alpha}{2} \nonumber \\
+\sum_{j=0}^{x} \binom{n}{j} p^j_0(1-p_0)^{n-j} &= \frac{\alpha}{2} \label{eq:null-hypo}
+\end{align}
+
+This approach is also known as \textbf{Clopper-Pearson} confidence interval and the lower and upper bound of the interval with the nominal confidence level $\alpha$ for  $P_{\mathcal A\leq \mathcal B|{\Omega}}$ is defined in (\ref{eq:CP-int}). This type of interval guarantees the coverage probability and is applied to avoid interval approximation but it is conservative which is investigated in \cite{agresti1998approximate}. In other words, the actual coverage probability is much larger than the nominal confidence level. This difference between actual and nominal level can be negligible for a quite large sample size.
+
+\begin{align}
+L_{CI} &= \frac{N_{\mathcal A \leq \mathcal B|{\Omega}}}{N_{\mathcal A \leq \mathcal B|{\Omega}}+(\mathcal N_{\Omega}-N_{\mathcal A \leq \mathcal B|{\Omega}}+1)F^{\nu_1}_{\nu_2,(1-\frac{\alpha}{2})}} \nonumber \\
+U_{CI} &= \frac{(N_{\mathcal A \leq \mathcal B|{\Omega}}+1)F^{\nu_3}_{\nu_4,\frac{\alpha}{2}}}{\mathcal N_{\Omega}-N_{\mathcal A \leq \mathcal B|{\Omega}}+(N_{\mathcal A \leq \mathcal B|{\Omega}}+1)F^{\nu_3}_{\nu_4,\frac{\alpha}{2}}} \label{eq:CP-int}
+\end{align}
+
+where $N_{\mathcal A \leq \mathcal B|{\Omega}} = N_{\mathcal A < \mathcal B|{\Omega}} + N_{\mathcal A = \mathcal B|{\Omega}}$, and $\mathcal N_{\Omega}$ is the total number of runs of the random instance as mentioned before. Moreover, $F^d_{e,q}$ represents the $q$ quantile from an $F$-distribution with $d$ and $e$ degrees of freedom in which $\nu_1 = 2 N_{\mathcal A \leq \mathcal B|{\Omega}}$, $\nu_2 = 2(\mathcal N_{\Omega}-N_{\mathcal A \leq \mathcal B|{\Omega}}+1)$, $\nu_3 = 2(N_{\mathcal A \leq \mathcal B|{\Omega}} + 1)$, and $\nu_4 = 2(\mathcal N_{\Omega} - N_{\mathcal A \leq \mathcal B|{\Omega}})$.
+
+There exists another method which is the inverse of the Wald method procedure by considering null hypothesis $H_0:{P_{\mathcal A\leq \mathcal B|{\Omega}}=p_0$ on the approximate normal test. In other words, the lower and upper bound are calculated by solving the equation (\ref{eq:WS:null}). The approach is first discussed by \cite{wilson1927probable} and is known as \textbf{Wilson's score} interval.
+
+\begin{align}
+\frac{P_{\mathcal A\leq \mathcal B|{\Omega}} - p_0}{\sqrt{\frac{p_0(1-p_0)}{\mathcal N_{\Omega}}}} = \pm z_{\frac{\alpha}{2}}\label{eq:WS:null}
+\end{align}
+
+The Wilson's score interval has a coverage probability close to nominal confidence level as discussed in \cite{agresti2007introduction}. When comparing with the Wald interval and Clopper-Pearson intervals, the Wilson's score performs better for any sample sizes and parameter values according to \cite{agresti1998approximate}. On the other hand, Wilson's score method has a poor coverage probability near 0 or 1 which is below the nominal confidence level. The lower and upper bound of the Wilson's score interval with the nominal confidence level of $\alpha$ for $P_{\mathcal A\leq \mathcal B|{\Omega}}$ is formulated as follows:
+
+\begin{align}
+L_{CI} &= \frac{P_{\mathcal A\leq \mathcal B|{\Omega}} + \frac{z^2_{\frac{\alpha}{2}}}{2\mathcal N_{\Omega}} - z_{\frac{\alpha}{2}} \sqrt{\frac{P_{\mathcal A\leq \mathcal B|{\Omega}} (1-P_{\mathcal A\leq \mathcal B|{\Omega}})+\frac{z^2_{\frac{\alpha}{2}}}{4\mathcal N_{\Omega}}}{\mathcal N_{\Omega}}}}{1+\frac{z^2_{\frac{\alpha}{2}}}{\mathcal N_{\Omega}}} \nonumber \\
+\nonumber \\
+U_{CI} &= \frac{P_{\mathcal A\leq \mathcal B|{\Omega}} + \frac{z^2_{\frac{\alpha}{2}}}{2\mathcal N_{\Omega}} + z_{\frac{\alpha}{2}} \sqrt{\frac{P_{\mathcal A\leq \mathcal B|{\Omega}} (1-P_{\mathcal A\leq \mathcal B|{\Omega}})+\frac{z^2_{\frac{\alpha}{2}}}{4\mathcal N_{\Omega}}}{\mathcal N_{\Omega}}}}{1+\frac{z^2_{\frac{\alpha}{2}}}{\mathcal N_{\Omega}}} \label{eq:WS-int}
+\end{align}
+
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$ quantile of the standard normal distribution.
+
+Since the Wilson's score formula (\ref{eq:WS-int}) is difficult to interpret, a modification was applied to the simplest approach (Wald interval) by \cite{agresti1998approximate} which is called \textbf{adjusted Wald} interval. In order to construct 95\% confidence interval, we have  $z^2_{\frac{\alpha}{2}} = 1.96^2 \approx 4$ which the Wilson's score formulation becomes similar to ordinary Wald interval where we add two successes and two fails to the number of runs. This simple modification changes the interval from highly liberal to slightly conservative. It is a little more conservative than Wilson's score, especially for small size samples according to \cite{brown2001interval}. This method is recommended when the sample size is larger than 40 ($n \geq 40$). It is easy to formulate this approach as described and the lower and upper bound of adjusted Wald interval with the nominal confidence interval of $\alpha$ for $P_{\mathcal A\leq \mathcal B|{\Omega}}$ is shown in the followings.
+
+\begin{align}
+L_{CI} &= P'_{\mathcal A\leq \mathcal B|{\Omega}} - z_{\frac{\alpha}{2}}\sqrt{\frac{P'_{\mathcal A\leq \mathcal B|{\Omega}}(1- P'_{\mathcal A\leq \mathcal B|{\Omega}})}{\mathcal N_{\Omega}+4}} \nonumber \\
+U_{CI} &= P'_{\mathcal A\leq \mathcal B|{\Omega}} + z_{\frac{\alpha}{2}}\sqrt{\frac{P'_{\mathcal A\leq \mathcal B|{\Omega}}(1- P'_{\mathcal A\leq \mathcal B|{\Omega}})}{\mathcal N_{{\Omega}}+4}} \label{eq:AW-int}
+\end{align}
+
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$ quantile of the standard normal distribution and $P'_{\mathcal A\leq \mathcal B|{\Omega}} = \frac{N_{\mathcal A < \mathcal B|{\Omega}} + N_{\mathcal A = \mathcal B|{\Omega}} + 2}{\mathcal N_{\Omega}+4}$.
+
+\subsection{Risk difference}
+\label{sec-4-2}
+\label{risk.diff}
+Here, we provide another useful estimate based on the paired data. In order to do so, the parameter of interest is the difference between the probability of rigorously outperforming by $\mathcal A$ and the probability of rigorously outperforming by $\mathcal B$ on a random instances from $\Omega$. Considering the minimization of the performance metric, the risk difference that $\mathcal A$ outperforms $\mathcal B$ on a problem instance $\omega$ is calculated as follows:
+
+\begin{align}
+RD_{\mathcal A < \mathcal B|\omega} &=\frac{N_{A<B|\omega} - N_{A>B|\omega}}{\mathcal N_{\omega}} \label{eq:riskDiff1}
+\end{align}
+
+The risk difference of $\mathcal A$ outperforming $\mathcal B$ on a random instances from $\Omega$ can be calculated as:
+\begin{align}
+RD_{\mathcal A < \mathcal B|\Omega} &=\frac{N_{A<B|\Omega} - N_{A>B|\Omega}}{\mathcal N_{\Omega}} \label{eq:riskDiff:total}
+\end{align}
+where the parameters $N_{A<B|\Omega}$, $N_{A>B|\Omega}$, and $\mathcal N_{\Omega}$  are explained in (\ref{eq:nbetter:total}), (\ref{eq:nworse:total}), and (\ref{eq:runs:total}) respectively.
+
+The risk difference proportion results into a value within the interval $[-1,+1]$. The measure is useful to see the performance differences between two algorithms, especially when they behave similar because the performance probability is unable to show the priority while the risk difference highlights the dissimilarity. Risk difference estimation has also its own limitations. It is not determined how the proportion is reliable and how much changes will be on other random samples. Confidence interval for risk difference between binomial proportions on paired data is a useful tool to identify the uncertainties. The confidence interval guarantees at least nominal confidence level ($\alpha \%$) will be covered in the intervals. The zero value is the null value of the parameter of interest. If the interval contains zero, it means that the difference between two proportions is not statistically meaningful. The confidence interval is considered appropriate when it covers the nominal confidence interval closely, it does not violate the border (-1 and 1), and it does not also have zero width \cite{newcombe1998two}. In the followings, different types of confidence interval for paired data are described with their performances.
+
+\textbf{Asymptotic method without continuity correction} is based on normal theory. This method is basically inverting the Wald interval for single proportion \cite{vollset1993confidence}. The upper and lower bound of the interval is formulated as follows:
+\begin{align}
+L_{CI} &= RD_{\mathcal A < \mathcal B|\Omega} - z_{\frac{\alpha}{2}} \times \widehat{SE} \nonumber \\
+U_{CI} &= RD_{\mathcal A < \mathcal B|\Omega} + z_{\frac{\alpha}{2}} \times \widehat{SE} \label{eq:asympt:NC}
+\end{align}
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$ quantile of the standard normal distribution and $\widehat{SE}$ is the estimation of standard error for $RD_{\mathcal A < \mathcal B|\Omega}$ which is calculated by \cite{fleiss2013statistical} and the formulation is shown in the followings.
+\begin{align}
+\widehat{SE} &= \frac{\sqrt{\mathcal N_{\Omega}(N_{A<B|\Omega}+N_{A>B|\Omega})-(N_{A<B|\Omega}-N_{A>B|\Omega})^2}}{\mathcal N_{\Omega} \sqrt{\mathcal N_{\Omega}}} \label{eq:se:asympt:NC}
+\end{align}
+
+The asymptotic method is a simple method but is very anti-conservative on average, and there exists zero width interval at 0. It also may violate the boundaries (-1, 1) \cite{newcombe1998improved}. It has the coverage probability of below 90\% on average even for large sample sizes \cite{newcombe1998improved}.
+
+In order to correct the continuity of the interval, \cite{blyth1983binomial} proposed the following modification to the asymptotic method. The upper and lower bound of the interval is formulated in (\ref{eq:asympt:CC}).
+\begin{align}
+L_{CI} &= RD_{\mathcal A < \mathcal B|\Omega} - (z_{\frac{\alpha}{2}} \times \widehat{SE} +\frac{1}{\mathcal N_{\Omega}}) \nonumber \\
+U_{CI} &= RD_{\mathcal A < \mathcal B|\Omega} + (z_{\frac{\alpha}{2}} \times \widehat{SE} -\frac{1}{\mathcal N_{\Omega}}) \label{eq:asympt:CC}
+\end{align}
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$ quantile of the standard normal distribution and $\widehat{SE}$ is the estimation of standard error which is shown in (\ref{eq:se:asympt:NC}).
+
+The \textbf{asymptotic method with continuity correction} has a better performance than the previous method and is more conservative on average but it is still anti-conservative according to \cite{newcombe1998improved} and \cite{newcombe1998two}. Since it is symmetric in coverage, its coverage probability is still inadequate and it is possible to violate the boundaries (-1,1). In general, it is as simple as the asymptotic method without continuity but it is an improvement \cite{newcombe1998improved}. Asymptotic methods performances, without or with continuity correction, depend on $\mathcal N_{\Omega}$ and $RD_{\mathcal A < \mathcal B|\Omega}$ values and they produce better confidence intervals for large sample sizes but they are unacceptable in general \cite{newcombe1998two}.
+
+There exists another method based on \textbf{Wilson's score} for the single proportion \cite{wilson1927probable} in order to fix the symmetric intervals. This method has no continuity correction and is explained in \cite{newcombe1998improved}. The lower and upper bound of confidence interval are shown in the followings.
+\begin{align}
+L_{CI} &= RD_{\mathcal A < \mathcal B|\Omega} - \delta \nonumber \\
+U_{CI} &= RD_{\mathcal A < \mathcal B|\Omega} + \varepsilon \label{eq:wilson:NC}
+\end{align}
+where $\delta$ and $\varepsilon$ are non-negative values as are calculated as follows:
+\begin{align}
+\delta &= \sqrt{\mathrm{d}l^2_2-2\hat{\phi}\mathrm{d}l_2\mathrm{d}u_3+\mathrm{d}u^2_3} \nonumber \\
+\varepsilon &= \sqrt{\mathrm{d}u^2_2-2\hat{\phi}\mathrm{d}u_2\mathrm{d}l_3+\mathrm{d}l^2_3} \label{eq:delta:epsilon}
+\end{align}
+where $\hat{\phi}$ is calculate in (\ref{eq:phi:hat}) and let $\mathcal Q = (N_{A=B|\Omega}+N_{A<B|\Omega})(N_{A=B|\Omega}+N_{A>B|\Omega})(N_{A<B|\Omega})(N_{A>B|\Omega})$
+\begin{align}
+\hat{\phi} &=
+\begin{cases}
+0, & \text{if } \mathcal Q=0\\ 
+\frac{-N_{A<B|\Omega}\times N_{A>B|\Omega}}{\sqrt{\mathcal Q}}, & \text{otherwise.} \label{eq:phi:hat}
+\end{cases}
+\end{align}
+
+and in (\ref{eq:delta:epsilon}) formulation, $\mathrm{d}l_2$, $\mathrm{d}u_2$, $\mathrm{d}l_3$, and $\mathrm{d}u_3$ are calculated in the followings.
+\begin{align}
+\mathrm{d}l_2 &= \frac{N_{A=B|\Omega} + N_{A<B|\Omega}}{\mathcal N_{\Omega}} - l_2 \nonumber \\
+\mathrm{d}u_2 &= u_2 - \frac{N_{A=B|\Omega} + N_{A<B|\Omega}}{\mathcal N_{\Omega}} \nonumber \\
+\mathrm{d}l_3 &= \frac{N_{A=B|\Omega} + N_{A>B|\Omega}}{\mathcal N_{\Omega}} - l_3 \nonumber \\
+\mathrm{d}u_3 &= u_3 - \frac{N_{A=B|\Omega} + N_{A>B|\Omega}}{\mathcal N_{\Omega}} \label{eq:dl:du}
+\end{align}
+where $l_2$ and $u_2$ are roots of (\ref{eq:l2:u2}) and $l_3$ and $u_3$ are roots of (\ref{eq:l3:u3}).
+
+\begin{align}
+\left| x- \frac{N_{A=B|\Omega} + N_{A<B|\Omega}}{\mathcal N_{\Omega}}\right| &= z_{\frac{\alpha}{2}}\sqrt{\frac{x(1-x)}{\mathcal N_{\Omega}}} \label{eq:l2:u2} \\
+\left| x- \frac{N_{A=B|\Omega} + N_{A>B|\Omega}}{\mathcal N_{\Omega}}\right| &= z_{\frac{\alpha}{2}}\sqrt{\frac{x(1-x)}{\mathcal N_{\Omega}}} \label{eq:l3:u3}
+\end{align}
+and $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$ quantile of the standard normal distribution.
+
+The Wilson's score method is a complicated approach but in compare with previous methods, it has a better performance in general. This method do not violate the limits $\left[-1,+1\right]$ and the coverage probability is around 95\% on average and the probability of zero width interval is very low. But it is anti-conservative for many zones with different values of $\mathcal N_{\Omega}$ and $RD_{\mathcal A < \mathcal B|\Omega}$ \cite{newcombe1998improved}.
+
+Using \textbf{continuity correction over the Wilson's score} method \cite{newcombe1998improved} leads to another lower and upper bound based on (\ref{eq:wilson:NC}). All calculations (\ref{eq:delta:epsilon}), (\ref{eq:phi:hat}), and (\ref{eq:dl:du}) are applicable to this method but the continuity correction modifies the calculations for $l_2$, $u_2$, $l_3$, and $u_3$ where $l_2$ and $u_2$ are roots of (\ref{eq:l2:u2:modified}) and $l_3$ and $u_3$ are roots of (\ref{eq:l3:u3:modified}).
+\begin{align}
+\left| x- \frac{N_{A=B|\Omega} + N_{A<B|\Omega}}{\mathcal N_{\Omega}}\right| - \frac{1}{2\mathcal N_{\Omega}}&= z_{\frac{\alpha}{2}}\sqrt{\frac{x(1-x)}{\mathcal N_{\Omega}}} \label{eq:l2:u2:modified} \\
+\left| x- \frac{N_{A=B|\Omega} + N_{A>B|\Omega}}{\mathcal N_{\Omega}}\right| - \frac{1}{2\mathcal N_{\Omega}}&= z_{\frac{\alpha}{2}}\sqrt{\frac{x(1-x)}{\mathcal N_{\Omega}}} \label{eq:l3:u3:modified}
+\end{align}
+where $z_{\frac{\alpha}{2}}$ is the $1 - z_{\frac{\alpha}{2}}$ quantile of the standard normal distribution.
+
+The continuity correction effects on the coverage probability to increase over the 95\% on average and fixes the anti-conservative property for many zones. In general, this correction leads to a better confidence interval than Wilson's score without continuity \cite{newcombe1998improved}. This method is slightly anti-conservative and it does not violate the boundaries \cite{newcombe1998two}. Wilson's score methods, with or without continuity correction, do not perform as well as Wilson's score for single proportions but they produces acceptable confidence intervals even for small sample sizes \cite{newcombe1998improved}.
+
+\section{Bootstrap}
+\label{sec-5}
+\label{bootstrap}
+
+In order to avoid the assumptions on previously mentioned techniques and also downsampling on our dataset which is similar to Table \ref{tab:not1}, we introduce a strong statistical technique in this section in which the confidence intervals are more reliable and than other techniques. Bootstrap is an empirical statistical technique which is popularized by \cite{efron1979computers} and is simple to implement but is more accurate due to computations on data itself to estimate the variation. In precise description, the technique repeatedly random sampling on dataset for many times to estimate the variation and it only can be implemented by modern computing power.
+
+The beginning of this method is \emph{re-sampling} step in our approach to estimate the measures. Consider runs which are presented in Table \ref{tab:not1}. First, we random sample $n_1$ runs with replacement from $X_{\omega_1}^{\mathcal A}$ and random sample $m_1$ runs with replacement from $X_{\omega_1}^{\mathcal B}$. We denoted the new samples by $X'^{\mathcal A}_{\omega_1} = (x'^1_1, x'^1_2, \ldots,x'^1_{n_1})$ and $X'^{\mathcal B}_{\omega_1}:= (y'^1_1, y'^1_2, \ldots,y'^1_{m_1})$ respectively. Second, we generate the pairs set from $X'_{\omega_1}^{\mathcal A}$ and $X'_{\omega_1}^{\mathcal B}$ by Cartesian product-wise. So, we have all pairs from two set as is shown in the followings.
+\begin{align}
+O^{\mathcal A, \mathcal B}_\omega = \{ &(x'_1,y'_1), (x'_1,y'_2), \ldots, (x'_1,y'_{m_1}), \nonumber \\
+& (x'_2,y'_1), (x'_2,y'_2), \ldots, (x'_2,y'_{m_1}), \nonumber \\
+& \ldots \nonumber \\ 
+& (x'_{n_1},y'_1), (x'_{n_1},y'_2), \ldots, (x'_{n_1},y'_{m_1})  \}, \nonumber \\
+& x'_i \in X^{\mathcal A}_{\omega} \text{ and }   y'_i \in X^{\mathcal B}_{\omega} \label{cross:cart}
+\end{align}
+
+Next, in calculations similar to (\ref{eq:nbetter}), (\ref{eq:nsame}), and (\ref{eq:nworse}), we calculate the comparisons as follows:
+\begin{align}
+N^r_{\mathcal A < \mathcal B|\omega} &= \sum\limits_{(x,y)\in O^{\mathcal A, \mathcal B}_\omega} 1_{x < y}\label{eq:nbetterp}\\
+N^r_{\mathcal A = \mathcal B|\omega} &= \sum\limits_{(x,y)\in O^{\mathcal A, \mathcal B}_\omega} 1_{x = y}\label{eq:nsamep}\\
+N^r_{\mathcal A > \mathcal B|\omega} &= \sum\limits_{(x,y)\in O^{\mathcal A, \mathcal B}_\omega} 1_{x > y}\label{eq:nworsep}
+\end{align}
+where  $1_{x < y}(x,y)$, $1_{x > y}(x,y)$, and $1_{x = y}(x,y)$ are indicator functions as in (\ref{eq:indicator}). Moreover, the aggregations of different problems are calculated as follows.
+\begin{align}
+N^r_{\mathcal A < \mathcal B|\Omega} = \sum\limits_{\omega \in \Omega} N^r_{\mathcal A < \mathcal B|\omega}\label{eq:nbetter:totalp}\\
+N^r_{\mathcal A = \mathcal B|\Omega} = \sum\limits_{\omega \in \Omega} N^r_{\mathcal A = \mathcal B|\omega}\label{eq:nsame:totalp}\\
+N^r_{\mathcal A > \mathcal B|\Omega} = \sum\limits_{\omega \in \Omega} N^r_{\mathcal A > \mathcal B|\omega}\label{eq:nworse:totalp}
+\end{align}
+
+The performance probability is calculated as in (\ref{eq:pprob:total2p}) and the risk difference are calculated as in (\ref{eq:riskDiff:totalp}).
+
+\begin{align}
+P^r_{\mathcal A\leq \mathcal B|\Omega} &= \frac{N^r_{\mathcal A < \mathcal B|\Omega} + N^r_{\mathcal A = \mathcal B|\Omega}}{\mathcal N \times \mathcal M} \label{eq:pprob:rep} \\
+RD^r_{\mathcal A < \mathcal B|\Omega} &=\frac{N^r_{\mathcal A < \mathcal B|\Omega} - N^r_{\mathcal A > \mathcal B|\Omega}}{\mathcal N \times \mathcal M} \label{eq:riskDiff:rep}
+\end{align}
+where $\mathcal N \times \mathcal M =  \sum_{i=1}^k{n_i \times m_i}$. 
+
+
+We repeat the process from the re-sampling step for $R$ replicates independently and record values from (\ref{eq:pprob:rep}) and (\ref{eq:riskDiff:rep}) for each iteration. Then, we report the average of these values as an approximation for performance probability and risk difference which are calculated as follows.
+
+\begin{align}
+P_{\mathcal A\leq \mathcal B|\Omega} &= \frac{\displaystyle\sum_{r=1}^R{P^r_{\mathcal A\leq \mathcal B|\Omega}}}{R} \label{eq:pprob:boot} \\
+RD_{\mathcal A < \mathcal B|\Omega} &= \frac{\displaystyle\sum_{r=1}^R{RD^r_{\mathcal A < \mathcal B|\Omega}}}{R} \label{eq:riskDiff:boot}
+\end{align}
+
+Similar to binomial methods, an estimate of the measures does not provide any information about its accuracy and we need to calculate the confidence interval the estimated value with a nominal confidence level ($\alpha \%$). There exist different methods for calculating the confidence interval for bootstrapping approach according to \cite{diciccio1996bootstrap}. A generic confidence interval is adjusted for \textbf{normal} estimation which the bootstrap bias is considered and calculated as follows.
+\begin{align*}
+L_{CI} &= \hat{\theta} - z_{\frac{\alpha}{2}} \times SE(\hat{\theta}) \\
+U_{CI} &= \hat{\theta} + z_{\frac{\alpha}{2}} \times SE(\hat{\theta})
+\end{align*}
+where $\hat{\theta}$ is the estimation of parameter of interest (either $P_{\mathcal A\leq \mathcal B|\Omega}$, or $RD_{\mathcal A < \mathcal B|\Omega}$) and $z_{\frac{\alpha}{2}}$ is the $1-z_{\frac{\alpha}{2}}$ quantile of the standard normal distribution. Moreover, $SE(\hat{\theta})$ is the estimation of standard error which is calculated in the following.
+\begin{align}
+SE(\hat{\theta}) &= \Big[ \sum_{r=1}^R{\frac{(\hat{\theta_r} - \hat{\theta})^2}{R-1}} \Big]^{\frac{1}{2}} \label{se.est.bs}
+\end{align}
+where $\hat{\theta_r}$ is the statistic of interest in each replication $r$ (either $P^r_{\mathcal A\leq \mathcal B|\Omega}$, or $RD^r_{\mathcal A < \mathcal B|\Omega}$). The normal approximation method requires large size sample and shows poor performance on coverage probability. The using bootstrap is especially useful when the distribution of the parameters are unknown. The \textbf{percentile} method uses the bootstrap distribution itself. The lower-bound and upper-bound of the interval are the quantiles of parameters in all bootstrap replications. In other words, we sort the values of \ref{eq:pprob:rep} and \ref{eq:riskDiff:rep} (e.g., $\{\hat{\theta^*_1}, \hat{\theta^*_2}, \ldots, \hat{\theta^*_R} \}$). The lower-bound is the interpolation of $\frac{\alpha}{2}\times R$-th of the vectors and the interpolation of $(1-\frac{\alpha}{2})\times R$-th of the vectors is considered as the upper-bound as follows.
+\begin{align*}
+L_{CI} &=  \hat{\theta}^*_{\frac{\alpha}{2}\times R}\\
+U_{CI} &=  \hat{\theta}^*_{(1-\frac{\alpha}{2})\times R}
+\end{align*}
+where $\hat{\theta^*_i}$'s are the sorted vector of parameter of interest for all replications. Although the percentile method is highly symmetric and simple to calculate, there exist substantial coverage error and tends to be narrow for small size samples. Another method for confidence interval is \textbf{basic bootstrap} which
+tries to estimate the distribution of parameter by the empirical replications. The lower-bound and upper bound of the method are in the followings.
+\begin{align*}
+L_{CI} &=  2\hat{\theta} - \hat{\theta}^*_{(1-\frac{\alpha}{2})\times R} \\
+U_{CI} &=  2\hat{\theta} - \hat{\theta}^*_{\frac{\alpha}{2}\times R}
+\end{align*}
+where $\hat{\theta}$ is the estimation of parameter of interest (either $P_{\mathcal A\leq \mathcal B|\Omega}$, or $RD_{\mathcal A < \mathcal B|\Omega}$) and $\hat{\theta^*_i}$'s are the sorted vector of parameter of interest for all replications. This method is simple and reasonably accurate, but it does not have correctness for bias and skewness.  Bias-corrected and accelerated (\textbf{BCa}) method is proposed by cite: to correct the bias and skew. The lower-bound and upper-bound of the confidence interval are calculated in the followings according to \cite{efron1987better}.
+\begin{align*}
+L_{CI} &= \hat{\theta}^*_{\alpha_1\times R} \\
+U_{CI} &= \hat{\theta}^*_{\alpha_2\times R}
+\end{align*}
+where $\hat{\theta^*_i}$'s are the sorted vector of parameter of interest for all replications and $\alpha_1$ and $\alpha_2$ are computed as follows.
+
+\begin{align*}
+\alpha_1 &= \Phi\Big( \hat{z} + \frac{\hat{z} + z_{\frac{\alpha}{2}}}{1 - \hat{a}.(\hat{z} +  z_{\frac{\alpha}{2}})} \Big) \\
+\alpha_2 &= \Phi\Big( \hat{z} + \frac{\hat{z} + z_{1 - \frac{\alpha}{2}}}{1 - \hat{a}.(\hat{z} +  z_{1 - \frac{\alpha}{2}})} \Big)
+\end{align*}
+
+where $\Phi$ is cumulative distribution function (CDF) of the standard normal distribution, $\hat{z}$ is bias parameter, and $\hat{a}$ is skewness correction factor. The values of $\hat{z}$ and $\hat{a}$ are calculated in the followings.
+
+\begin{align*}
+\hat{z} &= \Phi^{-1} \big( \frac{\sum_{r=1}^R 1_{\hat{\theta_r} < \hat{\theta}}(\hat{\theta_r}, \hat{\theta}) }{R} \big)
+\end{align*}
+where $1_{\hat{\theta_r} < \hat{\theta}}(\hat{\theta_r}, \hat{\theta})$ is the indicator functions, $\hat{\theta_r}$ is the statistic of interest in each replication $r$ (either $P^r_{\mathcal A\leq \mathcal B|\Omega}$, or $RD^r_{\mathcal A < \mathcal B|\Omega}$), and $\hat{\theta}$ is the estimation of parameter of interest (either $P_{\mathcal A\leq \mathcal B|\Omega}$, or $RD_{\mathcal A < \mathcal B|\Omega}$). In other words, $\hat{z}$ equals to the inverse CDF of probability of that $\hat{\theta_r} < \hat{\theta}$ on all $R$ replications.
+
+\begin{align*}
+\hat{a} &= \frac{\sum_{i=1}^n (\hat{\theta}_{(.)} - \hat{\theta}_{(-i)})^3}{6 \big[ \sum_{i=1}^n (\hat{\theta}_{(.)} - \hat{\theta}_{(-i)})^2  \big]^{\frac{3}{2}}}
+\end{align*}
+where $\hat{\theta}_{(-i)}$ is the estimation of parameter of interest when the $i$-th sample is eliminated from the original dataset. This value can be either $P_{\mathcal A\leq \mathcal B|\Omega}$, or $RD_{\mathcal A < \mathcal B|\Omega}$ while the $i$-th sample is removed from the original dataset. In the above equation, the dataset size is denoted by $n$, and $\hat{\theta}_{(.)} = \sum_{i=1}^n \frac{\hat{\theta}_{(-i)}}{n}$. Although the \textbf{BCa} method is rather complicated and computationally expensive, the confidence interval is more accurate than other bootstrapping because it is similar to percentile with considering that is un-biased and skewness corrected.
+\section{Results}
+\label{sec-6}
+\label{param.alg}
+
+In order to demonstrate the proposed methodology for comparing algorithms, we present a comparison of a solutions set which are randomly generated by normal distribution with mean of 1400 and standard deviation of 40 (Algorithm $\mathcal A \sim \mathcal{N}(\mu=1400,\,\sigma^{2}=1600$)) and another set of solutions which are randomly generated by normal distribution with mean of 1390 and standard deviation of 40 (Algorithm $\mathcal B \sim \mathcal{N}(\mu=1390,\,\sigma^{2}=1600$)). We have tested on 100 runs on 30 minutes for the performance comparison.
+
+The performance probability plots of different binomial models and bootstrap are shown as follows. As we can see, all plots are similar to each other except the confidence intervals which shows the coverage probability of confidence interval. Moreover, the bootstrap plot is smoother than others and the coverage probability is higher than other models. Therefore, bootstrap model is more reliable than other methods and the Wilson's score method shows a good performance compared to other binomial models.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=4 in]{./figs/01.png}
+\caption{The probability of that algorithm $\mathcal A$ outperforms $\mathcal B$ at time $t$ on problems $\mathcal C$ with 95\% confidence. \label{fig.DTA04}}
+\end{figure}
+
+In addition, risk difference plots are shown in the followings. All models shows a similar behavior but the coverage probability of confidence intervals are higher in bootstrap method. The Wilson's score method shows a good performance among other binomial models.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3in]{./figs/02.png}
+\caption{The probability of that algorithm $\mathcal A$ outperforms $\mathcal B$ minus the probability of that algorithm $\mathcal B$ outperforms $\mathcal A$ at time $t$ on problems $\mathcal C$ with 95\% confidence. \label{fig.DTA03}}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3in]{./figs/03.png}
+\caption{The probability of that algorithm $\mathcal A$ outperforms $\mathcal B$ minus the probability of that algorithm $\mathcal B$ outperforms $\mathcal A$ at time $t$ on problems $\mathcal C$ with 95\% confidence. \label{fig.DTA02}}
+\end{figure}
+
+\section{Conclusions}
+\label{sec-7}
+
+In this paper, we proposed an integrated approach to compare and contrast optimization algorithms which are based on random seed. These algorithms contains a large set of optimization problems, from exact algorithms that branching and bounding randomly to meta-heuristics which search the solution space by a random mechanisms. It can also be used for either deterministic or stochastic optimization algorithms. Observing the behavior of a new proposed algorithm compared to an existing one over a specific period is possible through this framework. This approach is simple to interpret while has a strong statistics methods behind it. It can be also applied for any new developed algorithm in optimization. Therefore, we develop a \texttt{Python} package for this framework which can be find in the references section.
+\bibliographystyle{apalike}
+\bibliography{overallliterature}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

@@ -122,3 +122,31 @@
 
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+
+;Ref
+(starter-kit-install-if-needed 'org-ref)   
+(setq reftex-default-bibliography '("~/hesam.shams@gmail.com/bibliography/references.bib"))
+
+;; see org-ref for use of these variables
+(setq org-ref-bibliography-notes "~/hesam.shams@gmail.com/bibliography/notes.org"
+      org-ref-default-bibliography '("~/hesam.shams@gmail.com/bibliography/references.bib")
+      org-ref-pdf-directory "~/hesam.shams@gmail.com/bibliography/bibtex-pdfs/")
+
+(setq helm-bibtex-bibliography "~/hesam.shams@gmail.com/bibliography/references.bib")
+(setq helm-bibtex-library-path "~/hesam.shams@gmail.com/bibliography/bibtex-pdfs")
+
+
+;; alternative
+(setq helm-bibtex-pdf-open-function 'org-open-file)
+
+(setq helm-bibtex-notes-path "~/hesam.shams@gmail.com/bibliography/helm-bibtex-notes.org")
+(require 'org-ref)
+
+(setq bibtex-autokey-year-length 4
+    bibtex-autokey-name-case-convert-function (quote capitalize)
+    bibtex-autokey-name-year-separator "-"
+    bibtex-autokey-year-title-separator "-"
+    bibtex-autokey-titleword-separator "-"
+    bibtex-autokey-titlewords 2 bibtex-autokey-titlewords-stretch 1
+    bibtex-autokey-titleword-length 5)

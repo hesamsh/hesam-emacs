@@ -1,0 +1,657 @@
+% Created 2018-01-29 Mon 16:11
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{color}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{graphicx}
+\usepackage[tight,hang,nooneline,raggedright,figtopcap]{subfigure}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage[english]{babel}
+\usepackage{multimedia}
+\usepackage[boxed]{algorithm}
+\usepackage{algorithmic}
+\usepackage{natbib}
+\author{Hesam Shams,  Oleg Shylo}
+\date{\today}
+\title{Learning Models in Optimization Algorithms}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\begin{abstract}
+This paper explores the applications of learning models to design algorithms for binary optimization problems. The logistic regression learning model is used to construct a directional tabu algorithm (DTA). We test the algorithm on benchmark instances of the job shop scheduling problem. Using this experiments, we demonstrate that the inclusion of the logistic regression model into the tabu search method provides significant boost its performance. 
+\end{abstract}
+
+\section{Introduction}
+\label{sec-1}
+
+When considering successful applications, the tabu search method
+\citep{Glover:1989} is arguably one of the best standalone
+optimization approaches among those based on the local search, where a
+set of moves transform one solution into another through modification
+of their constituent attributes. Tabu search employs a short-term
+memory prohibition mechanism, a rule that prevents revisiting of
+solution attributes recently removed from the current solution. Less
+commonly, tabu restrictions inhibit removal of attributes that were
+recently introduced into the current solution. In general, these two
+types of restrictions lead to different search trajectories and might
+be employed in parallel, however in case of 0-1 optimization problems
+they are equivalent \citep{Glover:1989}. Through inhibition mechanisms
+and by enabling non-improving solution attributes, the tabu search
+method provides an almost effortless escape from local minima together
+with efficient exploration of alternative solutions.
+
+Typically, when a certain attribute enters a list of prohibited
+attributes, the tabu list, it will remain there for a fixed number of
+iterations determined by a \emph{tabu tenure} parameter. Most tabu search
+implementations adopt a single tabu tenure parameter for each of the
+solution attributes, which is often defined as a function of problem
+size and might be dynamically adjusted to avoid cycling effects
+\citep{Battiti:1994}. The attribute-dependent tenures, where each
+solution attribute is assigned a separate tabu tenure value, has been
+also identified in earlier publications
+\citep{Glover:1993,Glover:1990a}. However, previous discussions of the
+attribute-dependent tenures mainly focused on the variability with
+respect to restrictive powers of different move attributes
+\citep{Glover:1993}, with an emphasis being placed on an idea that
+when using the same tabu tenure for all solution components,
+prohibition of certain solution attributes might have a stronger
+impact on search process than prohibition of the others. 
+
+Many optimization approaches rely on the tabu method, but often
+utilize additional mechanisms for diversification and intensification
+of the search. For example, multi-start tabu strategies repeatedly
+launch the tabu search procedure using different initial solutions. In
+the path-relinking framework one collects a set of diverse
+high-quality solutions, the elite set, constructs paths between them,
+and explores the neighborhoods of the intermediate solutions using
+local search or tabu search procedures. However, when implementing a
+path-relinking algorithm, there are many questions that are not easy
+to answer: what is the optimal size of the elite set, how much time
+should be spend constructing the elite set versus exploring the paths
+between them.
+
+In this paper, we propose to integrate the path-relinking stage with
+the main tabu search procedure by embedding the long term memory into
+the tabu list mechanism. Instead of using a single tabu tenure
+parameter, each component of a solution vector is assigned a separate
+tabu tenure value that is dynamically updated and depends on
+previously found solutions. To define the values for tabu tenures, we
+propose to use an approximation to the Boltzmann's distribution. The
+proposed algorithm is inspired by the Global Equilibrium Search
+method, and can be considered as a crossover between tabu search and
+global equilibrium search.
+
+\section{Machine Learning in Binary Optimization}
+\label{sec-2}
+
+Local search methods iteratively move from one solution to another using the values of the corresponding objective values for guidance. In the process, these algorithms evaluate numerous solutions, but ignore most of the infromation they present. Instead, this infromation can be analyzed for consistent patterns to guide the search process. In this section we describe the statistical prediction model for binary optimization problems, and describe a simple, scalable implementation.
+
+\subsection{Statistical Model}
+\label{sec-2-1}
+
+A binary optimization problem can be formulated as 
+
+
+\begin{equation}\label{general.model}
+\begin{array}{cc}
+\text{minimize } f(x) \\
+\text{s.t. } x \in S \subset \{0,1\}^n
+\end{array}
+\end{equation}
+
+
+Since each component of a feasible vector $x$ is either 0 or 1, the index set $\overline{1,n} \equiv \{1,\ldots,n\}$ can be split into two classes based on an optimal solution $x^*$ to the problem (\ref{general.model}). To the first class we assign all indexes for which the component value is equal to one, while the remaining indexes are assigned to the second class. Formally, these classes are denoted $\mathcal C^1=\{j | x_j^*=1\}$ and $\mathcal C^0=\{j | x_j^*=0\}$, $j\in \overline{1,n}$. Clearly, there are as many such partitions as there are optimal solutions.
+
+As one solves the problem (\ref{general.model}), some subset of feasible solutions gets discovered. Let $I_j(t)$ denote a vector of discovered information about the variable $x_j$ that is formed by jth components of the set of feasible solutions, $x^1, \ldots, x^m\in S$, representing solutions visited by an algorithm $\mathcal A$ after time $t$, and their corresponding objectives, $f(x_1), \ldots, f(x_m)$:
+
+\begin{equation}\label{infromation.vec}
+I$_{\text{j}}$(t)=[ (x$^{\text{1}}_{\text{j}}$, f(x$^{\text{1}}$)), (x$^{\text{2}}_{\text{j}}$,f(x$^{\text{2}}$)), \ldots, (x$^{\text{m}}_{\text{j}}$, f(x$^{\text{m}}$))]
+\end{equation}
+
+
+Assuming that each time the algorithm produces a different information vector $I_j(t)$ after time $t$, we would like to classify each vector $I_j(t)$ either as belonging to $\mathcal C_1$ or $\mathcal C_0$. In other words, we would like to build a prediction model $M$ that would map vectors $I_j(t)$, $j \in \overline{1,n}$, into the interval [0,1], returning a conditional probability $Pr(j\in \mathcal C^1 | I_j(t))$. If there are no consistent patterns in $I_j(t)$, the model should return the probabilities close to 0.5, otherwise the probabilities may get closer to the ends of the interval [0,1], yileding predictions that can guide the search. 
+
+The applications have to implement the prediction models using some reductions of $I_j(t)$ due to memory constraints. Next, we present a a simple, scalable implementation based on the logistic regression method.
+
+\subsection{Logistic Regression Model}
+\label{sec-2-2}
+
+\subsubsection{Average Difference}
+\label{sec-2-2-1}
+
+-- idea: we have average solution quality with xj=0 and xj=1, next we build regression model on top of this
+
+
+
+\subsubsection{Difference of}
+\label{sec-2-2-2}
+
+Given $I_j(t)$ (defined in (\ref{infromation.vec}), we can calulcate the minimum objective value among visited solutions with $x_j=1$, and the minimum objective among solutions with $x_j=0$:
+$$
+D^1_j(t)=\min \{ f(x_j^k) | (x_j^k, f(x^k)) \in I_j(t), x_j^k=1\}
+$$
+and 
+$$
+D^0_j(t)=\min \{ f(x_j^k) | (x_j^k, f(x^k)) \in I_j(t), x_j^k=0\}
+$$
+We define the reduced information vector as $I^R_j(t)=[D^1_j(t), D^0_j(t)]\in \mathcal R^2$. Hence, we reduce $I_j(t)$ just to a vector of size two. Clearly, instead of storing $I_j(t)$ in the memory for these calculations, $I_j^R(t)$ should be updated directly every time the algorithm finds a new feasible solution.
+
+\section{Description of the approach}
+\label{sec-3}
+
+problem of data accumulationour approach for data collection and pattern analysis.
+
+a statisitcal model detect patterns in 
+
+\subsection{Main Idea}
+\label{sec-3-1}
+
+
+In a simplest form, the tabu search algorithm iteratively moves from one solution to another using the values of the corresponding objective values for guidance. Given a current solution $x$, at each iteration the algorithm moves to one of the solutions in its neighborhood $N(x)$, however the tabu search method prohibits some of the solutions in $N(x)$. Suppose that $latestChange(j)$ is the latest iteration when the solution component $j$ changed its value, then any solution in $N(x)$ that differs from $x$ in $jth$ component is prohibited until the iteration number $latestChange(j)+tenure$, where $tenure$ defines a length of the tabu period. There are many variations of tabu search implementations, but the idea is similar: prohibit changes in components that were recently modified. Typically, the best non-tabu solution in $N(x)$ is chosen as a next current solution, and after that the process repeats.
+
+In the current paper, we explore an approach that uses the tabu prohibition mechanism both for escaping from local minima, and for guiding the search to promising solution areas. Instead of a single tabu parameter, each solution component is assigned its own tabu parameter $tabu_j$ that is dynamically updated during the search. By assigning large values to $tabu_j$ the algorithm attempts to preserve the current value of the $x_j$, while small $tabu_j$ will indicate that the component $x_j$ can be modified at a faster pace. For example, if we wish to guide the tabu search to a specified solution $x^*$, we can use a standard tabu search procedure, but whenever $x_j$ takes the same value as $x^*_j$, we would set $tabu_j$ to $T^{U}$, and set it to $T^{L}$ if the new $x_j$ is different from $x^*_j$, where $T^{U}>T^{L}$. If the neighborhood is connected (any solution can be reached from any other solution), then an appropriate choice of $T^{L}$ and $T^{U}$ will guarantee the convergence.
+
+
+\subsection{Long-term Memory}
+\label{sec-3-2}
+\label{long.term.memory}
+
+To accumulate information about the search space, we will maintain an
+approximation to the Boltzmann's distribution defined for the
+optimization problem given in (\ref{general.model}). Similar
+approximation was first introduced within the Global Equilibrium
+Search method. In this distribution (\ref{eq:GE}) the random vector
+$\xi$ takes values from the set of all feasible solution $S$ and the
+probability mass function depend on a temperature parameter $\mu$:
+\begin{equation}
+P\{\xi=x\}=\frac{ e^{-\mu f(x)}}{\displaystyle \sum_{x\in S} e^{-\mu  f(x)}} \label{eq:GE}
+\end{equation}
+or, if considering each component separately we have \ref{distribution.2}:
+\begin{equation}
+P\{\xi_j=1\}=\frac{\displaystyle  \sum_{x\in S^1_j} e^{-\mu f(x)}}{\displaystyle  \sum_{x\in S} e^{-\mu f(x)}} \label{distribution.2}
+\end{equation}
+where $S$ is the set of feasible solutions and $S^1_j$ is the set of
+solutions with $j$-th component equal to 1.  The larger temperature
+values lead to the distributions that have higher probabilities
+assigned to better solutions, while zero temperature produces a
+uniform distribution on the set of all feasible solutions.
+
+To approximate (\ref{distribution.2}), we will use up to $l$ entries
+for the sums in the denominator and enumerator using only the latest
+solutions and the best solution found by the search procedure.  For
+each solution component $j$, let $f^1_j$ ($f^0_j$) be the best found
+objective for the solution with $x_j=1$  $(x_j=0)$. Consider two sets
+of objective values, $H^1_j$ and $H^0_j$, which contain the most
+recent objective values corresponding to the solutions having the
+$j$-th component equal to 1 and 0, respectively. The formulation for
+$H^1_j$ and $H^0_j$ are show in \ref{listH0} and \ref{listH1}
+accordingly.
+\begin{align}
+H^1_j &= \{h^{1,j}_0,h^{1,j}_1,\ldots, h^{1,j}_{l_1}\}, (l_1 \leq l) \label{listH0} \\
+H^0_j &= \{h^{0,j}_0,h^{0,j}_1,\ldots, h^{0,j}_{l_0}\}, (l_0 \leq l) \label{listH1}
+\end{align}
+
+Since the algorithm might never find a feasible solution with $j$-th
+component equal to 0 (or 1), either $l_0$ or $l_1$ might be less
+than $l$. Every time a new solution is encountered, these sets can be
+updated in a constant time using linked lists. Overall, this will
+require storing approximately $2n\cdot l$ objective values plus some
+overhead for implementation of linked lists.
+
+Now, we can approximate Boltzmann's probabilities using the equations
+in \ref{eq:numerator}, \ref{eq:denominator}, and
+\ref{approximation.probability}.
+\begin{align}
+Z_j^1(\mu) =& \exp\left(\mu\left[f(x^{min})-f^1_j\right]\right)+\sum\limits_{k=1}^{\min\left\{|H_j^1|,|H_j^0|\right\}} \exp\left(\mu\left[f(x^{min})-h_k^{1,j}\right]\right) \label{eq:numerator} \\
+Z_j(\mu) =& \exp\left(\mu\left[f(x^{min})-f^1_j\right]\right)+\exp\left(\mu\left[f(x^{min})-f^0_j\right]\right) \nonumber \\
+&+ \sum\limits_{k=1}^{\min\left\{|H_j^1|, |H_j^0|\right\}}\exp\left(\mu\left[f(x^{min})-h_k^{1,j}\right]\right) \nonumber \\
+&+ \sum\limits_{k=1}^{\min\left\{|H_j^1|, |H_j^0|\right\}}\exp\left(\mu\left[f(x^{min})-h_k^{0,j}\right]\right) \label{eq:denominator} \\
+\tilde{p}_j(\mu) =& \frac{Z^1_j(\mu)}{Z_j(\mu)} \label{approximation.probability}
+\end{align}
+
+The sum in (\ref{eq:numerator}) is a partial sum corresponding to the
+numerator in (\ref{distribution.2}), while (\ref{eq:denominator}) is
+the partial sum corresponding to the denominator of the expression in
+(\ref{distribution.2}). When using this approximation, we need to
+store $n$ values for $x^{min}$, $2n$ values for the vectors $f^0$ and
+$f^1$, and up to $2nl$ values for storing $H^1$ and $H^0$. As the
+temperature parameter $\mu$ increases, the probability vector
+$\tilde{p}(\mu)$ is converging to the solution vector $x_{min}$,
+however the convergence rate is different for every solution
+component: the components that are common for all high-quality
+solutions will converge faster than all the others. Thus, when
+increasing the temperature parameter $\mu$, the probability value
+change from 0.5 (no bias towards 0 or 1) to the value that is typical
+to the best encountered solutions. The main advantage of this long
+term memory implementation is that there is no need to store the
+solutions explicitly.
+
+\subsection{Dynamic tabu search tenure}
+\label{sec-3-3}
+
+In the proposed approach, an approximation to the Boltzmann's
+distribution from Section \ref{long.term.memory} defines dynamic tabu
+tenures. Whenever $x_j$ is modified, we compare its new value to the
+current best solution $x^{best}_j$. If the probability
+in(\ref{approximation.probability}) is close to 1 or 0 and the new
+value is the same as $x^{best}_j$, then we assign a large tenure value
+to $x_j$.  Otherwise, we want to enforce a faster rate of change
+for $x_j$, so we assign a smaller tenure value. Next, we define a
+function that link probabilities to tabu tenures.
+
+\subsubsection{Quadratic Tenure Function}
+\label{sec-3-3-1}
+After every local search transition, the tenure for each component
+that has changed is determined by the quadratic function in \ref{tenure.formula1}.
+
+\begin{equation}
+ \mathrm{tabu}_j(\tilde{p}_j(\mu)) = \left\{
+\begin{array}{ll}
+      4(T^{U}-T^{L}) \tilde{p}_j(\mu)^2-4(T^{U}-T^{L})\tilde{p}_j(\mu)+T^{U} & x_j = x^{best}_j \\
+      T^{L}  & x_j \neq x^{best}_j \\
+\end{array} 
+\right. \label{tenure.formula1}
+\end{equation} 
+where an interval $[T^{L},T^{U}]$ defines a range of possible tenure
+values. The coefficients of this quadratic function are chosen to
+satisfy the conditions in \ref{cond1}, \ref{cond2}, and \ref{cond3}.
+\begin{align}
+\mathrm{tabu}_j(\tilde{p}_j(\mu) ) &= T^{U} \text{ if } \tilde{p}_j(\mu)=1 \label{cond1} \\
+\mathrm{tabu}_j(\tilde{p}_j(\mu) ) &= T^{U} \text{ if } \tilde{p}_j(\mu)=0 \label{cond2} \\
+\mathrm{tabu}_j(\tilde{p}_j(\mu)) &= T^{L} \text{ if } \tilde{p}_j(\mu)=0.5 \label{cond3}
+\end{align}
+
+If the $j$-th component is set to a different value than the $j$-th
+component in the best known solution, then the variable $j$ is
+assigned a low tenure value $T^{L}$. Otherwise, the tenure value is a
+quadratic function of the probabilities that approximate Boltzmann's
+distribution: the closer probability $\tilde{p}_j$ is to 1 or 0, the
+larger is the value of the assigned tabu tenure, with the maximum
+possible value of $T^{U}$.
+
+\subsubsection{Other possible choices for the tenure function}
+\label{sec-3-3-2}
+\paragraph{Sigmoid Tenure Function}
+\label{sec-3-3-2-1}
+
+Similarly to the quadratic function, the assigned tenures belong to
+the interval $[T^{L},T^{U}]$. Whenever a solution component $x_j$ is
+modified its tenure is determined by the function in
+\ref{tenure.formula2}.
+\begin{equation}
+ \mathrm{tabu}_j(\tilde{p}_j(\mu)) = \left\{
+\begin{array}{ll}
+      \frac{2T^{U}+T^L\exp(\alpha \tilde{p}_j(\mu))-T^L}{1+\exp(\alpha \tilde{p}_j(\mu))}& x_j = x^{best}_j,\tilde{p}_j(\mu)\leq 0.5\\
+      \frac{2T^{U}+T^L\exp(\alpha (1-\tilde{p}_j(\mu)))-T^L}{1+\exp(\alpha(1-\tilde{p}_j(\mu)))}& x_j = x^{best}_j,\tilde{p}_j(\mu)>0.5\\
+      T^{L}  & x_j \neq x^{best}_j \\
+\end{array} 
+\right. \label{tenure.formula2}
+\end{equation}
+
+This function is equal to $T^{U}$ for when $\tilde{p}_j(\mu)$  equals
+to 1 and 0 as is shown in \ref{func:sigm}.
+\begin{align}
+\mathrm{tabu}_j(\tilde{p}_j(\mu)) &= T^{U} \text{ if } \tilde{p}_j(\mu)=1 \nonumber \\
+\mathrm{tabu}_j(\tilde{p}_j(\mu)) &= T^{U} \text{ if } \tilde{p}_j(\mu)=0 \label{func:sigm}
+\end{align}
+where parameter $\alpha>0$ defines the steepness of the function, and
+it should be chosen to satisfy the condition in \ref{cond:sigm}.
+\begin{align}
+\mathrm{tabu}_j(\tilde{p}_j(\mu)) &\approx T^{L} \qquad \text{ if } \quad \tilde{p}_j(\mu)=0.5 \label{cond:sigm}
+\end{align}
+
+\paragraph{Unbounded Tenure Function}
+\label{sec-3-3-2-2}
+
+Whenever a solution component $x_j$ is modified its tenure is
+determined by the function in \ref{tenure.formula3}.
+
+\begin{equation}
+ \mathrm{tabu}_j(\tilde{p}_j(\mu)) = \left\{
+\begin{array}{ll}
+      T^{L}\frac{ 1-\tilde{p}_j(\mu))}{ \tilde{p}_j(\mu)}& x_j = x^{best}_j,\tilde{p}_j(\mu)\leq 0.5\\
+        T^{L}\frac{ \tilde{p}_j(\mu))}{1- \tilde{p}_j(\mu)} & x_j = x^{best}_j,\tilde{p}_j(\mu)>0.5\\
+      T^{L}  & x_j \neq x^{best}_j \\
+\end{array} 
+\right. \label{tenure.formula3}
+\end{equation}
+
+The plots of different tenure functions are shown in figure
+\ref{tenure.functions}.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3in]{./figs/compareTenure.pdf}
+\caption{\label{tenure.functions}Tenure as a function of approximation probabilities, $T^{U}=100$ and $T^{L}=10$.}
+\end{figure}
+
+\subsection{Algorithm}
+\label{sec-3-4}
+
+Based on the previous discussion, we can provide a description of the
+\textbf{Directional Tabu Algorithm} (DTA) (see Algorithm \ref{FigDTA}).
+
+\begin{algorithm}
+\caption{Directional Tabu Algorithm (general scheme)} \label{FigDTA}
+\begin{algorithmic}[1]
+\REQUIRE $\mu$ -- vector of temperature values, $K$ -- number of
+temperature stages, $nfail^*$ -- restart parameter, $niters$ -- maximum
+number of tabu search iterations, $d$ -- number of
+iterations between memory updates.  
+\ENSURE \STATE $x^{best}=$construct random solution;
+  \WHILE {stopping criterion =  FALSE} \label{main.cycle.start} 
+   \STATE $x =$ construct random solution 
+   \STATE $x^{min}=x$ \STATE reset the long term memory: $H^1$, $H^0$, $f^1$, $f^0$ 
+   \STATE update vectors $H^1$, $H^0$, $f^1$, $f^0$ using $x^{min}$ 
+    \FOR {$nfail=0$ to $nfail^*$}\label{nfail.start}
+      \STATE $x^{old}=x^{min}$ 
+          \FOR{$k=0$ to $K$}        \label{temp.start}
+            \STATE SearchProcedure($x,x^{min},H^1,H^0,f^1,f^0,niters,\mu_k,d$) [see Alg. \ref{FigTabu}]\label{temp.end}
+         \ENDFOR
+         \IF{$f(x^{old})>f(x^{min})$}
+             \STATE $nfail=0$
+         \ENDIF        
+    \ENDFOR \label{chapter2:FigGES:nfail.end}
+    \IF{$f(x^{best})>f(x^{min})$}
+        \STATE $x^{best}=x^{min}$
+    \ENDIF            
+\ENDWHILE \label{main.cycle.end}
+\RETURN $x^{best}$
+\end{algorithmic}
+\end{algorithm}
+
+The presented pseudo-code describes the algorithm for solving
+minimization problems similar to (\ref{general.model}). The main loop
+(lines\ref{main.cycle.start}-\ref{main.cycle.end}) is repeated until
+some stopping criteria is satisfied.  Within a temperature cycle
+(lines\ref{temp.start}-\ref{temp.end}), we repeatedly launch a version
+of a tabu search (line \ref{temp.end}) using an increasing sequence of
+temperatures,  $\mu_1,\ldots\mu_k$. The long term memory captured in
+vectors $H_0,H_1,f^1,f^0$ is constantly updated inside the search
+procedure.  The temperature cycles are repeated until $nfail^*$
+consecutive cycles without any improvement  (line \ref{nfail.start}).
+
+\begin{algorithm}
+\caption{Tabu Search Procedure} \label{FigTabu}
+\begin{algorithmic}[1]
+\REQUIRE $x$ -- current solution, $x^{min}$ -- current best solution, $H^1$, $H^0$  -- long term memory data [see (\ref{listH0}), (\ref{listH1})],  vectors $f^1, f^0$  [ $f^1_j$ ($f^0_j$) equals to the best found objective for the solution having $jth$ component equal to one (zero)], $\mu_k$ -- current temperature value, $niters$ -- maximum number of tabu iterations, $d$~-- number of iterations between memory updates.
+    \STATE $\tilde{p}(\mu_k)$=\text{calculate probabilities}(${H^1},H^0,f^1,f^0, \mu_k$)$\quad\quad\quad\quad$\label{probability.generation} $\quad\quad$[see (\ref{approximation.probability})]    
+    %\STATE $x_{best}=x$; $n=|x|$; $M=\{1,2,\ldots,n\}$; $step=0$;
+    %$impr=$\bf{true}; $R=\emptyset$
+    \STATE $lastChanged(j)=-\infty$; $tabu(j)=T^{L}$ for all $j$
+    \FOR{$iter=1$ to $niters$}
+            \STATE $TabuSet=\emptyset$ \label{init.tabu.set}
+            \FOR{$y$ in $N(x)$}
+                   \STATE $modInd = \{j: x_j\neq y_j\}$
+                   \FOR{$j$ in $modInd$}
+                        \IF{[$iter-lastChanged(j)<tabu(j)$] and [$f(y)\geq f(x_{min})$]} 
+                        \STATE $TabuSet=TabuSet\cup y$
+                        \ENDIF
+                   \ENDFOR
+            \ENDFOR
+            \STATE $NonTabuSet= N(x)- TabuSet$
+            \IF{$NonTabuSet\neq \emptyset$}
+            \STATE $x^{new} = $ the best solution in $NonTabuSet$            
+            \ELSE
+            \STATE $x^{new} = $ the oldest tabu solution in $TabuSet$
+            \ENDIF             \label{xnew.choosen}
+            \STATE $modInd = \{j: x^{new}_j\neq x_j\}$ {\it \#only look at the components that changed}\label{who.changed}
+            \FOR{$j$ in $modInd$}
+            \IF{($x_j^{min}\neq x^{new}_j$)} 
+            \STATE $tabu(j)=4(T^U-T^L) \tilde{p}_j(\mu)^2 -4(T^{U}-T^{L}) \tilde{p}_j(\mu)+T^{U} $  $\quad$[see (\ref{tenure.formula3})]
+            \ELSE 
+            \STATE $tabu(j)=T^{L}$ $\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad$[see (\ref{tenure.formula3})]\label{set.tabu2}
+            \ENDIF
+            \ENDFOR            
+            \IF{[$iteration \bmod d = 0 $] OR [$f(x)<f(x^{min})$]} 
+            \STATE update vectors $H^1$, $H^0$, $f^1$, $f^0$ using $x$             
+            \ENDIF %    \ENDWHILE
+            \STATE $x=x^{new}$
+            \IF{[$f(x)<f(x^{min})$]} 
+            \STATE $x^{min}=x$
+            \ENDIF %    \ENDWHILE            
+    \ENDFOR
+    \RETURN $x,x^{min}$
+\end{algorithmic}
+\end{algorithm}
+
+
+Our search procedure is similar to the tabu search method, but it also
+includes a dynamic tabu tenure mechanism that uses long-term
+memory(see Algorithm \ref{FigTabu}). At the beginning of the search
+procedure, we calculate the approximation probabilities to Boltzmann's
+distribution as defined in (\ref{approximation.probability}) using the
+long-term memory data structures (Algorithm \ref{FigTabu},
+line\ref{probability.generation}). The search procedure consists
+of$niters$ iterations. At each iteration, all the solution in the
+neighborhood of a current solution $x$ are split into two
+sets$TabuSet$ and $NonTabuSet$. If $NonTabuSet$ is not empty, then the
+best solution in this set becomes a new current solution, otherwise we
+select the solution from $TabuSet$ that is closest to a non-tabu
+status (Algorithm \ref{FigTabu},
+lines\ref{init.tabu.set}-\ref{xnew.choosen}). After a new current
+solution is chosen, we scan trough all the components that were
+modified and set the prohibition duration $\mathrm{tabu}_j$ for each
+of the corresponding components (Algorithm \ref{FigTabu},
+lines\ref{who.changed}-\ref{set.tabu2}). We use the current solution
+to update the memory structures involved in calculations of
+probabilities $\bar{p}_j$ every $d$ iterations or if the current
+solution $x$ is better than $x^{min}$.
+
+\section{Computational Tests}
+\label{sec-4}
+
+\label{comp.test}
+
+\subsection{Experimental Setup for Pairwise Comparison}
+\label{sec-4-1}
+
+
+
+For a pairwise comparison, we consider the framework developed by \cite{shams2018} to analysis the proposed algorithm. We implemented performance probability and risk differences using bootstrap method. The performance probability measure the similarities between DTA and standard tabu and the risk differences contrasts these two algorithms. In the performance probability we calculate the probability of DTA obtains at least as good as standard tabu over time and in risk differences we compute the difference probability of DTA obtains strictly better solution than tabu, and the probability of that standard tabu obtains strictly better solution than DTA. Therefore, in performance probability growing the number to 1 shows a better performance and in risk differences taking distance from zero to 1 shows the priority. 
+two algorithms $\mathcal A$ and
+\subsection{Experiment Identifications and Parameters}
+\label{sec-4-2}
+\label{param.alg}
+
+In order to study the performance of the proposed algorithm, the
+directional tabu algorithm (DTA) is compared with standard tabu. Based on
+experience, the most important parameters in DTA are number of
+iterations, minimum tenure size, and maximum tenure size. In the other
+hand, the number of iterations is the only factor which has an effect
+on standard tabu. Different algorithms were designed and ran on test
+problems. The settings for each algorithms are as follows.
+
+The number of iterations for each loop of DTA is designed in
+$100,000$, $300,000$, and $500,000$. The number of iterations for
+standard Tabu is set to infinity and the algorithm will be stop on run
+time criterion and is shown as Tabu experiment ID. The reason is
+resetting the standard tabu on a fixed number of iterations make it
+memoryless whereas the DTA improves the solution in each iterations by
+keeping the memory. The minimum tenure size is set to 5 and 7 and the
+maximum tenure size is set 80 and 120 for DTA. Different algorithms
+and settings with the corresponding experience ID are shown in table
+\ref{param.alg.table}.
+
+\begin{table}[h]
+\centering
+\caption{Experiment IDs with its parameter setting}
+\label{param.alg.table}
+\begin{tabular}{l|l|l|l}
+\hline
+\textbf{No. of Iterations} & \textbf{Min Tenure} & \textbf{Max Tenure} & \textbf{Exp ID} \\ \hline
+\multirow{4}{*}{100,000}   & \multirow{2}{*}{5}  & 80                  & DTA01           \\ \cline{3-4} 
+                           &                     & 120                 & DTA02           \\ \cline{2-4} 
+                           & \multirow{2}{*}{7}  & 80                  & DTA03           \\ \cline{3-4} 
+                           &                     & 120                 & DTA04           \\ \hline
+\multirow{4}{*}{300,000}   & \multirow{2}{*}{5}  & 80                  & DTA05           \\ \cline{3-4} 
+                           &                     & 120                 & DTA06           \\ \cline{2-4} 
+                           & \multirow{2}{*}{7}  & 80                  & DTA07           \\ \cline{3-4} 
+                           &                     & 120                 & DTA08           \\ \hline
+\multirow{4}{*}{500,000}   & \multirow{2}{*}{5}  & 80                  & DTA09           \\ \cline{3-4} 
+                           &                     & 120                 & DTA10           \\ \cline{2-4} 
+                           & \multirow{2}{*}{7}  & 80                  & DTA11           \\ \cline{3-4} 
+                           &                     & 120                 & DTA12           \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Test Problems}
+\label{test.problems}
+Tabu algorithm can be applied in a different variety of problems. In a
+special case, tabu algorithm shows a good performance in scheduling
+problems in the literature. In order to evaluate the algorithm, we use
+the Taillard's benchmark \citep{Taillard:1993} on job shop
+scheduling. The local search is adapted from \citep{Grabowski:1986} on
+both standard tabu and DTA.
+
+Taillard's job shop test problems were randomly generated for
+different sizes of machines and jobs. The number of machines varies
+from 15 to 20 and the number of jobs from 15 to 100. They were
+generated in different sizes as shown in table
+\ref{table.taillards}. For each problems size, 10 random test problems
+were generated.
+
+
+\begin{table}[h]
+\centering
+\caption{Problems Size for Taillard's Job Shop Benchmark}
+\label{table.taillards}
+\begin{tabular}{l|l|l}
+\hline
+\textbf{No. of Machines} & \textbf{No . of Jobs} & \textbf{Problem Size} \\ \hline
+15                       & 15                    & Problems 1             \\ \hline
+15                       & 20                    & Problems 2             \\ \hline
+20                       & 20                    & Problems 3             \\ \hline
+15                       & 30                    & Problems 4             \\ \hline
+20                       & 30                    & Problems 5             \\ \hline
+15                       & 50                    & Problems 6             \\ \hline
+20                       & 50                    & Problems 7             \\ \hline
+20                       & 100                   & Problems 8             \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Computations}
+\label{sec-4-3}
+\label{computations}
+All test problems are ran by all experiment ID algorithms using Newton
+high performance computing (HPC) program at the University of
+Tennessee \citep{NewtonHPC}. Each test problem ran ten times to reduce
+random initial solution effect. The stopping criterion was 30
+minutes.
+
+Performance probability and risk difference which are discussed before
+in \ref{performance.prob} and \ref{risk.diff} respectively, are
+applied to evaluate the DTA performance. They are also plotted in 2-D
+plot in which \emph{x}-axis is the running time and \emph{y}-axis is
+probabilities for performance probability plot and portions for risk
+difference plot. The plots also include appropriate confidence
+interval. For the probability plot, when the probabilities and confidence
+interval are close to 1, it shows that the proposed algorithm
+performed better than tabu on the test problem. Similarly for risk
+difference plot, when the proportions and confidence interval are
+positive it means that the proposed algorithm is better than tabu on test
+problems, when they are negative it means the proposed algorithm is
+worse than tabu on test problems and if they are close to 0 it means
+there is no meaningful difference between tabu and DTA on test
+problems.
+
+Among all experiment IDs in table \ref{param.alg.table}, it has been
+observed that the experiment ID DTA04 performed better than the others
+on the test problems. It has been also observed that both DTA and tabu
+algorithm perform similarly on test problems in problem sizes problem
+1, problem 6, problem 7, and problem 8 in table
+\ref{table.taillards} because they are easy to solve. Therefore, we
+compared the DTA04 with tabu algorithm on problem sizes problem 2,
+problem 3, problem 4, and problem 5in table \ref{table.taillards}.
+
+Since the experiment ID DTA04 outperformed other experiment IDs, the
+standard tabu algorithm is only compared with DTA04 in detail. The
+performance probability plot for DTA04 compared to standard tabu on all
+problems sizes 2, 3, 4, and 5 samples is shown in figure
+\ref{fig.DTA04}. Since the sample size is large enough, the confidence
+interval method is adjusted Wald and the confidence nominal level is
+95\%. In order to see the performance in detail, the performance
+probability plot for each problems size is shown separately in figure
+\ref{fig.DTA04.4p}. In this plot, we applied Wilson's score confidence
+interval with 95\% nominal level because this method has a good
+coverage probability for any size of sample. As we can see in figures
+\ref{fig.DTA04} and \ref{fig.DTA04.4p}, the DTA outperformed
+significantly on all problems sizes significantly.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3in]{./figs/comparenotworse-all-ref2016T04-2016C04-Adjusted-Wald-Interval.png}
+\caption{\label{fig.DTA04}Performance probability plot for DTA04 compared to tabu on problems sizes 2, 3, 4, and 5.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=2.7in]{./figs/comparenotworse-detail-ref2016T04-2016C04-Wilsons-Score.png}
+\caption{\label{fig.DTA04.4p}Performance probability plot for DTA04 compared to tabu for each problem size.}
+\end{figure}
+
+The risk difference plot for DTA04 is necessary to show how much this
+algorithm is better than tabu algorithm. Therefore, the risk
+difference plot over all problem sizes 2, 3, 4, and 5 is shown in
+figure \ref{fig.RD.DTA04}. The detail plots for problem sizes 1, 2, 3,
+and 4 are shown separately in figure \ref{fig.RD.DTA04.4p}. The
+confidence intervals with confidence nominal level 95\% in both figures
+\ref{fig.RD.DTA04} and \ref{fig.RD.DTA04.4p} are calculated by
+Wilson's score with continuity correction, because this method has the
+best performance among all others. We can see that the DTA04 has a
+significant superiority in performance compared to tabu algorithm.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3in]{./figs/comparediff-all-ref2016T04-2016C04-Wilson-w-Cont.png}
+\caption{\label{fig.DTA04}Risk difference plot for DTA04 compared to tabu on problems sizes 2, 3, 4, and 5.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=2.7in]{./figs/comparediff-detail-ref2016T04-2016C04-Wilson-w-Cont.png}
+\caption{\label{fig.DTA04.4p}Risk difference plot for DTA04 compared to tabu for each problem size.}
+\end{figure}
+
+\section{Conclusions}
+\label{sec-5}
+
+The proposed logistic regression model achieves high accuracy for the tabu algorithm on the considered class of job shop scheduling problems. The optimal parameter $\theta$ changes with respect to the time used to collect the information, but the range of the optimal values is stable across different problem instances. Hence, it is possible to find an interval $[\theta_{min},\theta_{max}]$ that contains all optimal values for a given set of problem instances and time threshold $t$. Our working hypothesis is that this interval would provide a good estimate for the location of optimal $\theta$ values for the problem instance that were not used to train the model. In some sense, the interval $[\theta_{min},\theta_{max}]$ provides a prediction for what is optimal for a class of scheduling problems. 
+
+Importantly, in order to find an optimal value of $\theta$ for a given problem, one needs to know an optimal solution of that problem. Clearly, when considering an optimization problem, which has not been previously solved, its optimal solution is not available. However, we can use the range $[\theta_{min},\theta_{max}]$ estimated from the testing problems as a predictor for the location of the optimal logistic parameter of the new problem instance. Given a grid of points from the interval $[\theta_{min},\theta_{max}]$, one of the points will be close to the optimal value. This property can be used to develop an algorithm that can use the logistic model to guide the search process. 
+
+In this research, we have studied the use of learning models inside approximation algorithms for discrete optimization problems in which the algorithms are able to learn from the patterns in the search space. This learning improved the performance of algorithms during the process and there is no need to train the algorithm offline. Recent research has shown that training optimization algorithms can improve the performance significantly. Our contribution to this field cover the development in learning models in a way that no upfront learning is required for the algorithms. We provide the logistic regression learning model and also designed a directional tabu algorithm based on this idea in which a parameter of the algorithm is tuned during the process. We implemented the DTA on a benchmark of job shop scheduling problems to compare the performance with standard tabu algorithm. We compare the proposed DTA with standard tabu and it showed a good performance on job shop scheduling problems benchmark.
+
+
+\bibliographystyle{apalike}
+
+\bibliography{overallliterature.bib}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

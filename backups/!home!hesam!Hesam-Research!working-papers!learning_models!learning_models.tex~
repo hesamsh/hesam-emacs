@@ -1,0 +1,589 @@
+% Created 2018-02-06 Tue 15:42
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{color}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{graphicx}
+\usepackage[tight,hang,nooneline,raggedright,figtopcap]{subfigure}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage[english]{babel}
+\usepackage{multimedia}
+\usepackage[boxed]{algorithm}
+\usepackage{algorithmic}
+\usepackage{natbib}
+\author{Hesam Shams,  Oleg Shylo}
+\date{\today}
+\title{Learning Models for Discrete Optimization}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\begin{abstract}
+This paper explores the applications of learning models to design algorithms for binary optimization problems. The logistic regression learning model is used to construct a directional tabu algorithm (DTA). We tested the algorithm on benchmark instances of the jobshop scheduling problem. Using this experiments, we demonstrate that the inclusion of the logistic regression model into the tabu search method provides significant boost its performance. 
+\end{abstract}
+
+\section{Introduction}
+\label{sec-1}
+\label{intro}
+
+The main focus of this research is to establish optimization procedures that can learn distinctive features of an optimization problem, and can use the obtained information to improve their performance. In other words, the proposed framework is based on an integration of an optimization algorithm with a machine learning component. The field of machine learning routinely uses  optimization theory and algorithms. Alternatively, our goal is to utilize machine learning techniques to design optimization algorithms for discrete optimization.
+
+Similar ideas have recently attracted attentions due to the potential computational benefits that can be obtained by embedding learning into the optimization procedures. Most machine learning applications in optimization can be divided into three different categories: models of optimal decision rules for exact solvers (e.g., branching decisions and node selection), automatic algorithm selection and parameter tuning, and optimization methods that construct machine learning models during the search process.
+
+A large class of exact solvers for mixed integer programming (MIP) is based on the idea of branch and bound. Two design objectives are important for these techniques: One is to avoid generation of large tree expansions without improvements to an incumbent solution, and the other is to increase the chance of proving optimality. The first can be achieved by branching variable selection, and the latter is possible by node selection on a solution tree. In the literature of MIP, many studies propose approaches for node selection in branching schemes. In addition to many heuristics for branching and node selection, the recent developments in machine learning motivate researchers to explore the application of machine learning methods to guide the branching process (\cite{nannicini2011probing}, \cite{alvarez2014supervised}, \cite{alvarez2017machine}, \cite{he2014learning}, \cite{kruber2017learning}, \cite{basso2017random}, \cite{fischetti2014exploiting},  and \cite{bussieck2010minlp}).
+
+Khalil et. al. \cite{khalil2016learning} have been proposed a framework to support intelligent decision making during branch and bound. They trained a model to predict the rank of the strong branching scores, using an adaptive and computationally inexpensive procedure. The proposed method consists of three phases. First it derives features and node labels for the training set. Then a supervised learning is applied on the ranking function, and the final branching model is used instead of the strong branching. The approach is using a binary labeling to determine if the rank of a variable belongs to the set of high-ranked variables. The results showed that the proposed framework outperforms the default strategy of CPLEX \cite{cplex2009v12}. A scheme is proposed by Khalil et. al.  \cite{khalil2017learning} to decide when to run a heuristic that tries to find a feasible solution during the branch and bound process. A logistic regression is used to learn from different instances. The features and node labels in the training phase are similar to \cite{khalil2016learning}. The experiments showed strong improvement in performance, resulting from embedding the learning component into the branch and bound procedure.
+
+If the approach includes offline training, the training phase can be expensive computationally. Alternatively,Khalil \cite{khalil2016machine} proposed an approach that can be applied to instances on-the-fly. Unfortunately, the approach does not work as well as the off-line training methods. A framework in \cite{marcos2016online} was used to predict strong branching scores. This approach has no preliminary training phase, and the training data is generated during the branch and bound process. If the approximation for the strong branching scores correlated with the true scores, the algorithm starts using the approximations. The approach was not able to achieve significant improvement over the offline framework. In \cite{khalil2016machine}, the reinforcement learning was applied for branching in an online manner. In particular, the multi-arm bandit model was studied as a potential approach to tune the strategies for branching and variable selection. A comprehensive overview of machine learning techniques in MIP solvers has been done by the authors in \cite{lodi2017learning}. The survey presents the problems of branching variable selection and node selection, existing early methods and their limitations, and recent approaches in which modern machine learning techniques are applied to guide decision-making in branch-and-bound procedures. Furthermore, Dilkina et. al. \cite{dilkina2017comments} and Louveaux \cite{louveaux2017comments} made comments on the survey and provided some future directions for intelligent branch-and-bound in MIP.
+
+When dealing with large scale problems, approximate algorithms can provide efficient solutions to discrete optimization problems in a reasonable time. Although such methods do not guarantee  optimality, they can provide near-optimal solutions with a reasonable computational effort. The performance of the approximate algorithms depends on several key factors. Many such techniques have internal parameters, which require extensive tuning. The algorithm selection and parameter tuning is often done manually, using  computationally expensive experimentation. Furthermore, the optimal parameters on one problem class are not necessarily optimal for another class of problem instances. Recently, researchers have employed machine learning techniques to automatically tune the parameters or to select a satisfactory algorithm for a specific problem instance (\cite{hutter2009paramils}, \cite{burke2013hyper}, \cite{kotthoff2016algorithm}, \cite{di2016dash}, and \cite{bischl2016aslib}).
+
+The design of an optimization algorithm is considered as a learning problem in  \cite{andrychowicz2016learning}, where the algorithm learns the structure of optimization problems. Through learning, the algorithm automatically tunes its parameters to optimize its performance on a particular class of optimization problems. They trained the model to optimize a training process of the neural networks. The results show that the tuned neural optimizers outperformed optimization methods used in deep learning. A similar technique, which is called hyper configurable reactive search was proposed in \cite{ansotegui2017reactive}. The authors applied a linear regression to update parameters of a meta-heuristic. The weights of the regression were trained upfront by a configurator inspired by genetic algorithms. They tested the framework on the maximum satisfiability instances.
+
+An incorporation of learning in the optimization algorithm was pioneered by Glover in \cite{glover1986future} and \cite{glover1989new}, where a general scheme is proposed, in which each branch is rated based on a weighted sum to choose the branch with the highest rating. The weights can be calculated offline by a learning procedure. A learning algorithm is embedded into a greedy search process in \cite{daume2009search}. The proposed algorithm, search and learn (SEARN), transforms complex problems into simple classification problems, and any binary classifier can be used. The assumption in this paper is that any solution for a given problem can be decomposed into a number of independent components, and a learning technique can be applied to each component individually. However, the approach has one major drawback, it may generate infeasible solutions, even when feasible solutions are available.
+
+A method for using machine learning inside a heuristic was proposed in \cite{dai2017learning}, where a partial solution to a problem is updated based on a deep learning model. The authors proposed a greedy process, in which a solution is constructed incrementally. The idea here is to strengthen the machine learning branching by deep learning techniques. Extensive experiments showed that this approach is promising for learning greedy heuristics for discrete optimization problems such as vertex cover, maximum cut, and the traveling salesman problem.
+
+We consider a class of optimization approaches that incorporate learning models into the algorithm structure. Our focus is on the algorithms that can learn the patterns in the search space in order to boost computational performance. The idea is to design optimization techniques that allow for computationally efficient tuning a priori. The final objective of this work is to provide efficient solvers that can be tuned for optimal performance in serial and parallel environments. This study provides a novel learning model based on logistic regression and describes an implementation for scheduling problems. We incorporate the proposed learning model into a well-known optimization algorithm, and demonstrate the potential of the underlying ideas. Finally, we outline a new methodology for modeling optimization algorithms based on the semi-Markov processes and demonstrate its potential for computationally efficient tuning.
+
+The remainder of this paper is organized as follows. In section \ref{ml.bin}, we describe a general statistical learning model for binary optimization and establish an efficient implementation based on logistic regression. We also describe the computational performance of the model on the classic job-shop scheduling problem. In section \ref{desc.appr}, we design an efficient optimization algorithm that is based on the learning model from section \ref{ml.bin}. We compare this algorithm to a similar approach that does not include a learning component in section \ref{comp.test}, in order to quantify the value of the learning model proposed in section \ref{ml.bin} and finally, in section \ref{conclusions}, we discuss the results and our conclusions.
+
+\section{Machine Learning in Binary Optimization}
+\label{sec-2}
+\label{ml.bin}
+\subsection{Main Idea}
+\label{sec-2-1}
+There is a class of algorithmic techniques in operations research and computer science that are employed to find the best option from a finite set of possibilities. Such problems are commonly referred to as combinatorial optimization problems. Many algorithms in this class operate in the following manner. The algorithm starts with some initial solution and proceeds to move from one solution to another until the best solution is found. 
+
+For example, the primal simplex algorithm for linear programming problems \cite{Dantzig-1963-linear-prog} starts by finding an initial feasible solution and iteratively transitions from one feasible solution to another using the intermediate solutions for guidance. In the case of linear programming, the algorithm  continuously improves the objective, and if the improvement is not possible, the last visited solution is guaranteed to be optimal. 
+
+However, when dealing with non-linear problems, such a convenient stopping rule is not available. Many of the methods allow transitions to non-improving solutions, for example, the simulated annealing method \cite{Aarts:1989}. In the simulated annealing method, at every iteration, the algorithm considers a finite set of options for the future transition, and it may choose any of the non-improving options with a positive probability. In the process, similar iterative algorithms evaluate a large number of solutions, but ignore most of the information they present. Clearly, such information may provide a significant boost to performance if used efficiently, which provides the motivation for the ideas discussed in this section. 
+
+The main idea is to analyze the search trajectory for consistent patterns that can guide the search process. In this section we describe a statistical prediction model for binary optimization problems and explore its ability to learn the properties of the search space. 
+
+A binary optimization problem can be formulated as 
+
+\begin{equation}\label{general.binary.model}
+\begin{array}{cc}
+\text{minimize } f(x) \\
+\text{s.t. } x \in S \subset \{0,1\}^n
+\end{array}
+\end{equation}
+
+Since each component of a feasible vector $x$ is either 0 or 1, the index set $\overline{1,n} \equiv \{1,\ldots,n\}$ can be split into two classes based on an optimal solution $x^*$ to the problem (\ref{general.binary.model}). To the first class we assign all indexes for which the component value is equal to one, while the remaining indexes are assigned to the second class. Formally, these classes are denoted $\mathcal C^1=\{j | x_j^*=1\}$ and $\mathcal C^0=\{j | x_j^*=0\}$, $j\in \overline{1,n}$. Clearly, there are as many such partitions as there are optimal solutions.
+
+Here we will focus on the iterative methods, which move from one solution to another using some internal logic. As one solves the problem (\ref{general.binary.model}), some subset of feasible solutions gets discovered. Let $I_j(t)$ denote a vector of discovered information about the variable $x_j$ that is formed by the $j$ components of the set of feasible solutions, $x^1, \ldots, x^m\in S$, representing solutions visited by an algorithm $\mathcal A$ up to time $t$, and their corresponding objectives, $f(x_1), \ldots, f(x_m)$:
+
+\begin{equation}
+I_j(t)=[ (x^1_j, f(x^1)), (x^2_j,f(x^2)), \ldots, (x^m_j, f(x^m))] \label{infromation.vec}
+\end{equation}
+
+Assuming that every run of the algorithm produces a different information vector $I_j(t)$, we would like to classify $I_j(t)$ either as belonging to $\mathcal C_1$ or $\mathcal C_0$. In other words, we would like to build a prediction model $M$ that would map vectors $I_j(t)$, $j \in \overline{1,n}$, into the interval [0,1], returning a conditional probability $Pr(j\in \mathcal C^1 | I_j(t))$. If there are no consistent patterns in $I_j(t)$, the model should return the probabilities close to 0.5. Otherwise the probabilities may get closer to the ends of the interval [0,1], yielding predictions that can guide the search. Clearly, the model will change with respect to the threshold time $t$, the time (number of iterations) that was spent to collect the information in $I_j(t)$.
+
+\subsection{Logistic Regression Model}
+\label{sec-2-2}
+The logistic regression model is a special case of a generalized linear model \cite{freedman2009statistical}. The logistic regression model is a predictive tool that can be used to describe the relationship between one dependent binary variable and one or more nominal, ordinal, or interval independent variables. In other words, when we have a binary output variable $Y$, the model  predicts the conditional probability $p(x)\equiv P(Y=1|x)$.  A general formulation of logistic regression is provided by 
+\begin{equation}
+\log{\frac{p(x)}{1-p(x)}} = \theta_0 + \theta x \label{logit:form}
+\end{equation}
+where, by solving the equation for $p$, we have the following formulation.
+
+\begin{equation}
+p(x;\theta_0,\theta) = \frac{e^{\theta_0 + \theta x}}{1+e^{\theta_0 + \theta x}} = \frac{1}{1+e^{-(\theta_0 + \theta x)}} \label{logit:fin}
+\end{equation}
+
+In the logistic regression model, the parameters $\theta_0$ and $\theta$ are found by using the maximum likelihood method. The model gives us a classifier, which predicts $Y=1$ if $p(x)$ is greater than 0.5 and predicts $Y=0$ if the probability is less than 0.5. The decision boundary dividing the two predicted classes is the solution of $\theta_0 + \theta x = 0$.  Logistic regression is one of the most widely used statistical techniques for discrete data analysis.
+
+In the optimization domain, the logistic model can be trained using the information vector $I(t)$. Each component of $I(t)$ contains a sequence of  objectives for a certain solution component. If the algorithm visited $m$ solutions, then the total number of elements in $I(t)$ would be equal to $n\cdot m$, where $n$ is the size of the binary solution vector. In the proposed model, all components of $I(t)$ are treated similarly, so the index of the corresponding variable does not play any role. Furthermore, the results of different runs can be merged by simply concatenating the obtained information vectors into a single information vector $I(t)$. Each component of $I(t)$ has a true label that determines whether the corresponding optimal solution value is zero or one. We will denote the vector of such ground truth labels as $L(t)$.
+
+Consider a decomposition of $I_j(t)$ into two sequences, $I_j^1(t)$ and $I_j^0(t)$:
+
+$$
+I_j^1(t)=\{ (x^k_j, f(x^k)): (x^k_j, f(x^k))\in I_j(t), x^k_j=1\}
+$$
+
+$$
+I_j^0(t)=\{ (x^k_j, f(x^k)): (x^k_j, f(x^k))\in I_j(t), x^k_j=0\}
+$$
+
+Here, $I_j^1(t)$ describes all the visited objectives, where the $j$ component was equal to one, and $I_j^0(t)$ corresponds to the objectives of solutions, where the $j$ component was equal to zero. One of the sequences can be larger than the other, which makes it difficult to parametrize the model. To avoid this, we add dummy entries to the smaller one until the sizes match. The added entries are either of the form $(1, f_{0})$ or $(0, f_0)$, with $f_0$ denoting some large constant. Let the number of entries in each of the above sequences be $N$.
+
+Now, the hypothesis model $h_{\theta}( I_j(t) )$ can be defined using the sigmoid function:
+\begin{equation}
+h_{\theta}( ( I_j(t) ) =\frac{1}{1+e^G} \label{H.function}
+\end{equation}
+\begin{equation}
+G=\displaystyle \sum_{ (1,f(x_k))\in I_j^1(t) } \theta f(x_k) - \displaystyle \sum_{ (0,f(x_k))\in I_j^0(t) } \theta f(x_k)
+ \label{G.function}
+\end{equation}
+
+Notice, that there is a single parameter in this model, $\theta\in \mathbb{R}^1$. To understand this modeling restriction, assume that the solutions vector $x$ in (\ref{general.binary.model}) is substituted with $x_{new}=\bold{1}-x$, and the objective becomes $f(\bold{1}-x_{new})$. Clearly, this substitution would not change the optimal objective, as it is a symmetric encoding. Now, if we look at the changes in (\ref{G.function}), the terms in the summations will switch from one sum to another. Hence, by using the same parameter $\theta$ for the left summation and for right summation, we guarantee that the equivalent encodings would produce the same model.
+
+Similarly, if we would use different parameter $\theta$ for each of the terms in summations, it would imply that the order of the visited solutions matter. However, we would like to avoid that by ignoring the ordering of the elements in the information vector $I_j(t)$.
+
+Notice that the number of parameters in the model (\ref{H.function})-(\ref{G.function}), depends on the number of visited solutions. The optimal value of $\theta$ would change for different sizes of $I_j(t)$. To avoid this, we can project $I_j(t)$ to a smaller dimension. Next, we present one of such possible reductions using the minimum and the average function. 
+
+\subsection{Dimensionality Reduction}
+\label{sec-2-3}
+
+Given $I^1_j(t)$ and $I^0_j(t)$ defined in (\ref{infromation.vec}), we can reduce them using some mapping $M$ to $\mathbb{R}^1$. For example, such a reduction can be achieved using the minimum of average functions. Denote the resulting values by $D^1_j(t)$ and $D^0_j(t)$:
+\begin{align*}
+D^1_j(t)&=M( \{ f(x_j^k) | (x_j^k, f(x^k)) \in I_j(t), x_j^k=1\}) \\
+D^0_j(t)&=M( \{ f(x_j^k) | (x_j^k, f(x^k)) \in I_j(t), x_j^k=0\})
+\end{align*}
+
+This provides us with the reduced information vector $I^R_j(t)=[D^1_j(t), D^0_j(t)]\in \mathbb R^2$,  $I_j(t)$ is mapped to a vector in $\mathbb{R}^2$. Clearly, instead of storing $I_j(t)$ in the memory for these calculations, $I_j^R(t)$ should be updated directly every time the algorithm finds a new feasible solution. 
+
+The corresponding logistic regression model can be described using the following hypothesis function $h_{\theta}$. 
+
+\begin{equation}
+h_{\theta}(  D^1_j(t) , D^0_j(t) ) =\frac{1}{1+e^G} \label{HA.function}
+\end{equation}
+\begin{equation}
+G= \theta D^1_j(t) - \theta D^0_j(t) \label{GA.function}
+\end{equation}
+
+To clarify the problem, consider the snapshot of the training data in Table \ref{table.logreg}. Two predictors, $D^1(t)$ and $D^0(t)$ are used to predict whether the corresponding component is equal to zero or one, with the ground truth values in column \texttt{opt}. To collect the training data for columns $D^1(t)$ and $D^0(t)$, the algorithm runs repeatedly for time $t$ and reports the best objective for each solution component. Since the algorithm may not encounter certain solution components with a value zero (one), the corresponding entry in $D_j^0$ ($D_j^1$) is set to a large constant. In Table \ref{table.logreg} this constant was set to 100000. If the solution consists of $n$ components, each run (with a time threshold $t$) would generate $n$ rows for the data set. To generate a diverse dataset, we run the algorithm multiple times, so $R$ runs would produce a table with $R\cdot n$ rows. 
+
+\begin{table}[htb]
+\caption{An example of the training data for the logisitc regression model. \label{table.logreg}}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+D$^{\text{1}}$(t) & D$^{\text{0}}$(t) & opt\\
+\hline
+1366 & 100000 & 1\\
+1395 & 1366 & 0\\
+1368 & 1400 & 1\\
+1369 & 1380 & 1\\
+1364 & 100000 & 1\\
+1366 & 1438 & 1\\
+1373 & 1366 & 0\\
+1420 & 1366 & 0\\
+1379 & 1365 & 0\\
+1365 & 1389 & 1\\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Description of the approach}
+\label{sec-3}
+\label{desc.appr}
+
+In the optimization field, an ideal algorithm has to satisfy three requirements \cite{williamson2011design}: (1) it should be able to find an optimal solution (2) in polynomial time (3) for any problem instance. However, there is a large class of problems for which such ideal solvers are not available, a class of NP-hard problems.  For many of these problems, often inspired by practical applications, it is reasonable to relax the first requirement. An algorithm that satisfies the remaining conditions is commonly referred to as an approximate algorithm.  A good approximation algorithm is able to provide high quality solutions (not necessarily optimal) for a wide variety of problem instances in a reasonable amount of time. Most practical problems in discrete optimization are NP-hard, which stimulated the develop of approximate techniques. 
+
+When considering successful applications, the tabu search method \cite{Glover:1989} is arguably one of the best standalone optimization approaches among those based on local search. Local search provides a framework, which transforms one solution into another through modification of their constituent attributes. Tabu search employs a short-term memory prohibition mechanism, a rule that prevents revisiting of solution attributes recently removed from the current solution. Less commonly, tabu restrictions inhibit removal of attributes that were recently introduced into the current solution. In general, these two types of restrictions lead to different search trajectories and might be employed in parallel, however in the case of 0-1 optimization problems, they are equivalent \cite{Glover:1989}. Through inhibition mechanisms and by enabling non-improving solution attributes, the tabu search method provides an almost effortless escape from local minima together with efficient exploration of alternative solutions.
+
+Typically, when a certain attribute enters a list of prohibited attributes (i.e., the tabu list), it will remain there for a fixed number of iterations determined by a \emph{tabu tenure} parameter. Most tabu search implementations adopt a single tabu tenure parameter for each of the solution attributes, which is often defined as a function of problem size and might be dynamically adjusted to avoid cycling effects \cite{Battiti:1994}. The attribute-dependent tenures, where each solution attribute is assigned a separate tabu tenure value, has been also identified in earlier publications \cite{Glover:1993,Glover:1990a}. However, previous discussions of the attribute-dependent tenures mainly focused on the variability with respect to restrictive powers of different move attributes \cite{Glover:1993}, with an emphasis being placed on an idea that when using the same tabu tenure for all solution components, prohibition of certain solution attributes might have a stronger impact on search process than prohibition of the others. 
+
+Many optimization approaches rely on the tabu method, but often utilize additional mechanisms for diversification and intensification of the search. For example, multi-start tabu strategies repeatedly launch the tabu search procedure using different initial solutions. In the path-relinking framework, one collects a set of diverse high-quality solutions, the elite set, constructs paths between them, and explores the neighborhoods of the intermediate solutions using local search or tabu search procedures. However, when implementing a path-relinking algorithm, there are many questions that are not easy to answer: what is the optimal size of the elite set, how much time should be spend constructing the elite set versus exploring the paths between them.
+
+Instead of using a single tabu tenure parameter, each component of a solution vector is assigned a separate tabu tenure value that is dynamically updated and depends on previously found solutions. To define the values for tabu tenures, we use a logistic regression model as is described in section \ref{ml.bin}. The proposed algorithm is inspired by the Global Equilibrium Search method \cite{Shilo:1999}.
+
+In the simplest form, the tabu search algorithm iteratively moves from one solution to another using the values of the corresponding objective values for guidance. Given a current solution $x$, at each iteration the algorithm moves to one of the solutions in its neighborhood $N(x)$, however the tabu search method prohibits some of the solutions in $N(x)$. Suppose that $latestChange(j)$ is the latest iteration when the solution component $j$ changed its value, then any solution in $N(x)$ that differs from $x$ in the component $j$ is prohibited until the iteration number $latestChange(j)+tenure$, where $tenure$ defines a length of the tabu period. There are many variations of tabu search implementations, but the idea is similar: prohibit changes in components that were recently modified. Typically, the best non-tabu solution in $N(x)$ is chosen as a next current solution, and after that the process repeats.
+
+In the current section, we explore an approach that uses the tabu prohibition mechanism both for escaping from local minima, and for guiding the search to promising solution areas. Instead of a single tabu parameter, each solution component is assigned its own tabu parameter $\mathrm{tabu}_j$ that is dynamically updated during the search. By assigning large values to $\mathrm{tabu}_j$, the algorithm attempts to preserve the current value of the $x_j$, while small $\mathrm{tabu}_j$ will indicate that the component $x_j$ can be modified at a faster pace. For example, if we wish to guide the tabu search to a specified solution $x^*$, we can use a standard tabu search procedure, but whenever $x_j$ takes the same value as $x^*_j$, we would set $\mathrm{tabu}_j$ to $T^{U}$, and set it to $T^{L}$ if the new $x_j$ is different from $x^*_j$, where $T^{U}>T^{L}$. If the neighborhood is connected (any solution can be reached from any other solution), then an appropriate choice of $T^{L}$ and $T^{U}$ will guarantee the convergence.
+
+\subsection{Long-term Memory}
+\label{sec-3-1}
+\label{long.term.memory}
+
+To accumulate information about the search space, we will use a logistic regression model from previous section. Given $I^1_j(t)$ and $I^0_j(t)$ (defined in (\ref{infromation.vec}), we reduce them using the minimum function to $\mathbb{R}^1$. Denote the results of such reduction by $D^1_j(t)$ and $D^0_j(t)$.
+
+\begin{align*}
+D^1_j(t)&=\min( \{ f(x_j^k) | (x_j^k, f(x^k)) \in I_j(t), x_j^k=1\})\\
+D^0_j(t)&=\min( \{ f(x_j^k) | (x_j^k, f(x^k)) \in I_j(t), x_j^k=0\})
+\end{align*}
+
+This provides with the reduced information vector $I^R_j(t)=[D^1_j(t), D^0_j(t)]\in \mathbb R^2$. Hence, we reduce $I_j(t)$ to a vector in $\mathbb{R}^2$. Clearly, instead of storing $I_j(t)$ in the memory for these calculations, $I_j^R(t)$ should be updated directly every time the algorithm finds a new feasible solution. 
+
+The corresponding logistic regression model can be described using the hypodissertation function $h_{\theta}$ in (\ref{HA.function}) and (\ref{GA.function}). To guarantee that the expressions (\ref{HA.function}) and (\ref{GA.function}) are well-defined, we initialize each information vector using some large constant $f_{init}$ as follows.
+
+\begin{equation}
+I^{init}_j(t)=\{(1,f_{init}), (0,f_{init})\}
+\end{equation}
+
+The model will provide the predictions of optimal value for each solution component. The probability of component $j$ in the optimal solution equals to 1 is calculated as follows:
+
+\begin{equation}
+\tilde{p}_j(\theta)  \equiv P\{x*_j=1\}=\frac{ 1}{1+e^{\theta D^1_j(t) - \theta D^0_j(t) }} \label{approximation.probability}
+\end{equation}
+
+\subsection{Dynamic tabu search tenure}
+\label{sec-3-2}
+
+In the proposed approach, the logistic regression model defines dynamic tabu tenures. Whenever $x_j$ is modified, we compare its new value to the current best solution $x^{best}_j$. If the probability in (\ref{approximation.probability}) is close to 1 or 0 and the new
+value is the same as $x^{best}_j$, then we assign a large tenure value to $x_j$.  Otherwise, we want to enforce a faster rate of change for $x_j$, so we assign a smaller tenure value. Next, we define a
+function that links probabilities to tabu tenures.
+
+\subsection{Quadratic Tenure Function}
+\label{sec-3-3}
+After every local search transition, the tenure for each component that has changed is determined by the following quadratic function.
+
+\begin{equation}
+ \mathrm{tabu}_j(\tilde{p}_j(\theta)) = \left\{
+\begin{array}{ll}
+      4(T^{U}-T^{L}) \tilde{p}_j(\theta)^2-4(T^{U}-T^{L})\tilde{p}_j(\theta)+T^{U} & x_j = x^{best}_j \\
+      T^{L}  & x_j \neq x^{best}_j \\
+\end{array} 
+\right. \label{tenure.formula1}
+\end{equation} 
+where an interval $[T^{L},T^{U}]$ defines a range of possible tenure
+values. The coefficients of this quadratic function are chosen to
+satisfy the following equalities.
+\begin{align}
+\mathrm{tabu}_j(\tilde{p}_j(\theta) ) &= T^{U} \text{ if } \tilde{p}_j(\theta)=1 \label{cond1} \\
+\mathrm{tabu}_j(\tilde{p}_j(\theta) ) &= T^{U} \text{ if } \tilde{p}_j(\theta)=0 \label{cond2} \\
+\mathrm{tabu}_j(\tilde{p}_j(\theta)) &= T^{L} \text{ if } \tilde{p}_j(\theta)=0.5 \label{cond3}
+\end{align}
+
+If the component $j$ is set to a different value other than the best known solution, then the variable $j$ is assigned a low tenure value $T^{L}$. Otherwise, the tenure value is a quadratic function of the probabilities provided by the logistic regression: the closer probability $\tilde{p}_j$ is to 1 or 0, the larger is the value of the assigned tabu tenure, with the maximum possible value of $T^{U}$.
+
+\subsection{Other possible choices for the tenure function}
+\label{sec-3-4}
+\paragraph{Sigmoid Tenure Function}
+\label{sec-3-4-0-1}
+
+Similarly to the quadratic function, the assigned tenures belong to the interval $[T^{L},T^{U}]$. Whenever a solution component $x_j$ is modified, its tenure is determined by the function as follows.
+
+\begin{equation}
+ \mathrm{tabu}_j(\tilde{p}_j(\theta)) = \left\{
+\begin{array}{ll}
+      \frac{2T^{U}+T^L\exp(\alpha \tilde{p}_j(\theta))-T^L}{1+\exp(\alpha \tilde{p}_j(\theta))}& x_j = x^{best}_j,\tilde{p}_j(\theta)\leq 0.5\\
+      \frac{2T^{U}+T^L\exp(\alpha (1-\tilde{p}_j(\theta)))-T^L}{1+\exp(\alpha(1-\tilde{p}_j(\theta)))}& x_j = x^{best}_j,\tilde{p}_j(\theta)>0.5\\
+      T^{L}  & x_j \neq x^{best}_j \\
+\end{array} 
+\right. \label{tenure.formula2}
+\end{equation}
+
+where parameter $\alpha>0$ defines the steepness of the function, and it should be chosen to satisfy the condition in (\ref{cond:sigm}).
+
+\begin{align}
+\mathrm{tabu}_j(\tilde{p}_j(\theta)) &\approx T^{L} \qquad \text{ if } \quad \tilde{p}_j(\theta)=0.5 \label{cond:sigm}
+\end{align}
+
+This function equals to $T^{U}$ when $\tilde{p}_j(\theta)$ equals to 1 and 0 as is shown in the followings.
+
+\begin{align}
+\mathrm{tabu}_j(\tilde{p}_j(\theta)) &= T^{U} \text{ if } \tilde{p}_j(\theta)=1 \nonumber \\
+\mathrm{tabu}_j(\tilde{p}_j(\theta)) &= T^{U} \text{ if } \tilde{p}_j(\theta)=0 \label{func:sigm}
+\end{align}
+
+\paragraph{Unbounded Tenure Function}
+\label{sec-3-4-0-2}
+
+The tenure of the modified solution component $x_j$ is computed as follows:
+
+\begin{equation}
+ \mathrm{tabu}_j(\tilde{p}_j(\theta)) = \left\{
+\begin{array}{ll}
+      T^{L}\frac{ 1-\tilde{p}_j(\theta))}{ \tilde{p}_j(\theta)}& x_j = x^{best}_j,\tilde{p}_j(\theta)\leq 0.5\\
+        T^{L}\frac{ \tilde{p}_j(\theta))}{1- \tilde{p}_j(\theta)} & x_j = x^{best}_j,\tilde{p}_j(\theta)>0.5\\
+      T^{L}  & x_j \neq x^{best}_j \\
+\end{array} 
+\right. \label{tenure.formula3}
+\end{equation}
+
+The plots of tenure variations by different tenure functions are shown in Figure \ref{tenure.functions}.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3in]{./figs/compareTenure.pdf}
+\caption{\label{tenure.functions}Tenure as a function of approximation probabilities, $T^{U}=100$ and $T^{L}=10$. \label{tenure.functions}}
+\end{figure}
+
+\subsection{Algorithm}
+\label{sec-3-5}
+
+Based on the previous discussions, we provide a description of the \textbf{Directional Tabu Algorithm} (DTA) (see Algorithm \ref{FigDTA}).
+
+\begin{algorithm}
+\caption{Directional Tabu Algorithm (general scheme)} \label{FigDTA}
+\begin{algorithmic}[1]
+\REQUIRE $\theta$ -- vector of temperature values, $K$ -- number of
+stages, $nfail^*$ -- restart parameter, $niters$ -- maximum
+number of tabu search iterations, $d$ -- number of
+iterations between memory updates.  
+\ENSURE \STATE $x^{best}=$construct random solution;
+  \WHILE {stopping criterion =  FALSE} \label{main.cycle.start} 
+   \STATE $x =$ construct random solution 
+   \STATE $x^{min}=x$ \STATE reset the long term memory: $D^1$, $D^0$, $f^1$, $f^0$
+   \STATE update vectors $D^1$, $D^0$, $f^1$, $f^0$ using $x^{min}$ 
+    \FOR {$nfail=0$ to $nfail^*$}\label{nfail.start}
+      \STATE $x^{old}=x^{min}$ 
+          \FOR{$k=0$ to $K$}        \label{temp.start}
+            \STATE SearchProcedure($x,x^{min},D^1,D^0,f^1,f^0,niters,\theta_k,d$) [see Alg. \ref{FigTabu}]\label{temp.end}
+         \ENDFOR
+         \IF{$f(x^{old})>f(x^{min})$}
+             \STATE $nfail=0$
+         \ENDIF        
+    \ENDFOR \label{chapter2:FigGES:nfail.end}
+    \IF{$f(x^{best})>f(x^{min})$}
+        \STATE $x^{best}=x^{min}$
+    \ENDIF            
+\ENDWHILE \label{main.cycle.end}
+\RETURN $x^{best}$
+\end{algorithmic}
+\end{algorithm}
+
+The presented pseudo-code describes the algorithm for solving minimization problems similar to (\ref{general.binary.model}). The main loop  (lines \ref{main.cycle.start}-\ref{main.cycle.end}) is repeated until some stopping criteria is satisfied.  Within a temperature cycle (lines \ref{temp.start}-\ref{temp.end}), we repeatedly launch a version of a tabu search (line \ref{temp.end}) using an increasing sequence of temperatures,  $\theta_1,\ldots\theta_k$. The long term memory captured in vectors $D_0,D_1$ is constantly updated inside the search procedure. The temperature cycles are repeated until $nfail^*$ consecutive cycles without any improvement  (line \ref{nfail.start}).
+
+\begin{algorithm}
+\caption{Tabu Search Procedure} \label{FigTabu}
+\begin{algorithmic}[1]
+\REQUIRE $x$ -- current solution, $x^{min}$ -- current best solution, $D^1$, $D^0$  -- long term memory data,  vectors $f^1, f^0$  [ $f^1_j$ ($f^0_j$) equals to the best found objective for the solution with the component $j$ equal to one (zero)], $\theta_k$ -- current temperature value, $niters$ -- maximum number of tabu iterations, $d$~-- number of iterations between memory updates.
+    \STATE $\tilde{p}(\theta_k)$=\text{calculate probabilities}(${D^1},D^0,f^1,f^0, \theta_k$)$\quad\quad\quad\quad$\label{probability.generation} $\quad\quad$[see (\ref{approximation.probability})]    
+    %\STATE $x_{best}=x$; $n=|x|$; $M=\{1,2,\ldots,n\}$; $step=0$;
+    %$impr=$\bf{true}; $R=\emptyset$
+    \STATE $lastChanged(j)=-\infty$; $tabu(j)=T^{L}$ for all $j$
+    \FOR{$iter=1$ to $niters$}
+            \STATE $TabuSet=\emptyset$ \label{init.tabu.set}
+            \FOR{$y$ in $N(x)$}
+                   \STATE $modInd = \{j: x_j\neq y_j\}$
+                   \FOR{$j$ in $modInd$}
+                        \IF{[$iter-lastChanged(j)<tabu(j)$] and [$f(y)\geq f(x_{min})$]} 
+                        \STATE $TabuSet=TabuSet\cup y$
+                        \ENDIF
+                   \ENDFOR
+            \ENDFOR
+            \STATE $NonTabuSet= N(x)- TabuSet$
+            \IF{$NonTabuSet\neq \emptyset$}
+            \STATE $x^{new} = $ the best solution in $NonTabuSet$            
+            \ELSE
+            \STATE $x^{new} = $ the oldest tabu solution in $TabuSet$
+            \ENDIF             \label{xnew.choosen}
+            \STATE $modInd = \{j: x^{new}_j\neq x_j\}$ { \#only look at the components that changed}\label{who.changed}
+            \FOR{$j$ in $modInd$}
+            \IF{($x_j^{min}\neq x^{new}_j$)} 
+            \STATE $tabu(j)=4(T^U-T^L) \tilde{p}_j(\theta)^2 -4(T^{U}-T^{L}) \tilde{p}_j(\theta)+T^{U} $  $\quad$[see (\ref{tenure.formula3})]
+            \ELSE 
+            \STATE $tabu(j)=T^{L}$ $\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad$[see (\ref{tenure.formula3})]\label{set.tabu2}
+            \ENDIF
+            \ENDFOR            
+            \IF{[$iteration \bmod d = 0 $] OR [$f(x)<f(x^{min})$]} 
+            \STATE update vectors $D^1$, $D^0$, $f^1$, $f^0$ using $x$             
+            \ENDIF %    \ENDWHILE
+            \STATE $x=x^{new}$
+            \IF{[$f(x)<f(x^{min})$]} 
+            \STATE $x^{min}=x$
+            \ENDIF %    \ENDWHILE            
+    \ENDFOR
+    \RETURN $x,x^{min}$
+\end{algorithmic}
+\end{algorithm}
+
+
+Our search procedure is similar to the tabu search method, but it also includes a dynamic tabu tenure mechanism that uses long-term memory(see Algorithm \ref{FigTabu}). At the beginning of the search procedure, we calculate the probabilities from the logistic regression model using the long-term memory data structures (Algorithm \ref{FigTabu}, line\ref{probability.generation}). The search procedure runs for $niters$ iterations. At each iteration, all the solution in the neighborhood of a current solution $x$ are split into two sets, $TabuSet$ and $NonTabuSet$. If $NonTabuSet$ is not empty, then the best solution in this set becomes a new current solution, otherwise we select the solution from $TabuSet$ that is closest to a non-tabu status (Algorithm \ref{FigTabu}, lines \ref{init.tabu.set}-\ref{xnew.choosen}). After a new current solution is chosen, we scan trough all the components that were modified and set the prohibition duration $\mathrm{tabu}_j$ for each of the corresponding components (Algorithm \ref{FigTabu}, lines \ref{who.changed}-\ref{set.tabu2}). We use the current solution to update the memory structures involved in calculations of probabilities $\bar{p}_j$ every $d$ iterations or if the current solution $x$ is better than $x^{min}$.
+
+\section{Computational Tests}
+\label{sec-4}
+\label{comp.test}
+\subsection{Experimental Setup for Pairwise Comparison}
+\label{sec-4-1}
+
+For a pairwise comparison, we consider the framework developed by \cite{shams2018} to analysis the proposed algorithm. We implemented performance probability and risk differences using bootstrap method. The performance probability measure the similarities between DTA and standard tabu and the risk differences contrasts these two algorithms. In the performance probability we calculate the probability of DTA obtains at least as good as standard tabu over time and in risk differences we compute the difference probability of DTA obtains strictly better solution than tabu, and the probability of that standard tabu obtains strictly better solution than DTA. Therefore, in performance probability growing the number to 1 shows a better performance and in risk differences taking distance from zero to 1 shows the priority. 
+
+\subsection{Experiment Identifications and Parameters}
+\label{sec-4-2}
+\label{param.alg}
+
+In order to study the performance of the proposed algorithm, the
+directional tabu algorithm (DTA) is compared with standard tabu. Based on
+experience, the most important parameters in DTA are number of
+iterations, minimum tenure size, and maximum tenure size. In the other
+hand, the number of iterations is the only factor which has an effect
+on standard tabu. Different algorithms were designed and ran on test
+problems. The settings for each algorithms are as follows.
+
+The number of iterations for each loop of DTA is designed in
+$100,000$, $300,000$, and $500,000$. The number of iterations for
+standard Tabu is set to infinity and the algorithm will be stop on run
+time criterion and is shown as Tabu experiment ID. The reason is
+resetting the standard tabu on a fixed number of iterations make it
+memoryless whereas the DTA improves the solution in each iterations by
+keeping the memory. The minimum tenure size is set to 5 and 7 and the
+maximum tenure size is set 80 and 120 for DTA. Different algorithms
+and settings with the corresponding experience ID are shown in table
+\ref{param.alg.table}.
+
+\begin{table}[h]
+\centering
+\caption{Experiment IDs with its parameter setting}
+\label{param.alg.table}
+\begin{tabular}{l|l|l|l}
+\hline
+\textbf{No. of Iterations} & \textbf{Min Tenure} & \textbf{Max Tenure} & \textbf{Exp ID} \\ \hline
+\multirow{4}{*}{100,000}   & \multirow{2}{*}{5}  & 80                  & DTA01           \\ \cline{3-4} 
+                           &                     & 120                 & DTA02           \\ \cline{2-4} 
+                           & \multirow{2}{*}{7}  & 80                  & DTA03           \\ \cline{3-4} 
+                           &                     & 120                 & DTA04           \\ \hline
+\multirow{4}{*}{300,000}   & \multirow{2}{*}{5}  & 80                  & DTA05           \\ \cline{3-4} 
+                           &                     & 120                 & DTA06           \\ \cline{2-4} 
+                           & \multirow{2}{*}{7}  & 80                  & DTA07           \\ \cline{3-4} 
+                           &                     & 120                 & DTA08           \\ \hline
+\multirow{4}{*}{500,000}   & \multirow{2}{*}{5}  & 80                  & DTA09           \\ \cline{3-4} 
+                           &                     & 120                 & DTA10           \\ \cline{2-4} 
+                           & \multirow{2}{*}{7}  & 80                  & DTA11           \\ \cline{3-4} 
+                           &                     & 120                 & DTA12           \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Test Problems}
+\label{test.problems}
+Tabu algorithm can be applied in a different variety of problems. In a
+special case, tabu algorithm shows a good performance in scheduling
+problems in the literature. In order to evaluate the algorithm, we use
+the Taillard's benchmark \citep{Taillard:1993} on job shop
+scheduling. The local search is adapted from \citep{Grabowski:1986} on
+both standard tabu and DTA.
+
+Taillard's job shop test problems were randomly generated for
+different sizes of machines and jobs. The number of machines varies
+from 15 to 20 and the number of jobs from 15 to 100. They were
+generated in different sizes as shown in table
+\ref{table.taillards}. For each problems size, 10 random test problems
+were generated.
+
+
+\begin{table}[h]
+\centering
+\caption{Problems Size for Taillard's Job Shop Benchmark}
+\label{table.taillards}
+\begin{tabular}{l|l|l}
+\hline
+\textbf{No. of Machines} & \textbf{No . of Jobs} & \textbf{Problem Size} \\ \hline
+15                       & 15                    & Problems 1             \\ \hline
+15                       & 20                    & Problems 2             \\ \hline
+20                       & 20                    & Problems 3             \\ \hline
+15                       & 30                    & Problems 4             \\ \hline
+20                       & 30                    & Problems 5             \\ \hline
+15                       & 50                    & Problems 6             \\ \hline
+20                       & 50                    & Problems 7             \\ \hline
+20                       & 100                   & Problems 8             \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Computations}
+\label{sec-4-3}
+
+All test problems are ran by all experiment ID algorithms using Newton
+high performance computing (HPC) program at the University of
+Tennessee \citep{NewtonHPC}. Each test problem ran ten times to reduce
+random initial solution effect. The stopping criterion was 30
+minutes.
+
+Performance probability and risk difference which are discussed before are
+applied to evaluate the DTA performance. They are also plotted in 2-D
+plot in which \emph{x}-axis is the running time and \emph{y}-axis is
+probabilities for performance probability plot and probability differences for risk
+difference plot. The plots also include appropriate confidence
+interval. For the probability plot, when the probabilities and confidence
+interval are close to 1, it shows that the proposed algorithm
+outperformed tabu on the test problem. Similarly for risk
+difference plot, when the probability differences and confidence interval are
+positive it means that the proposed algorithm is better than tabu on test
+problems, when they are negative it means the proposed algorithm is
+worse than tabu on test problems and if they are close to 0 it means
+there is no meaningful difference between tabu and DTA on test
+problems.
+
+Among all experiment IDs in table \ref{param.alg.table}, it has been
+observed that the experiment ID DTA04 performed better than the others
+on the test problems. It has been also observed that both DTA and tabu
+algorithm performed similarly on test problems in problem sizes problem
+1, problem 6, problem 7, and problem 8 in table
+\ref{table.taillards} because they are easy to solve. Therefore, we
+compared the DTA04 with tabu algorithm on problem sizes problem 2,
+problem 3, problem 4, and problem 5 in table \ref{table.taillards}.
+
+Since the experiment ID DTA04 outperformed other experiment IDs, the
+standard tabu algorithm is only compared with DTA04 in detail. The
+performance probability plot for DTA04 compared to standard tabu on all
+problems sizes 2, 3, 4, and 5 samples is shown in figure
+\ref{fig.DTA04}. Since the sample size is large enough, the confidence
+interval method is adjusted Wald and the confidence nominal level is
+95\%. In order to see the performance in detail, the performance
+probability plot for each problems size is shown separately in figure
+\ref{fig.DTA04.4p}. In this plot, we applied bootstrap confidence
+interval with 95\% nominal level because this method has a good
+coverage probability for any size of sample. As we can see in figures
+\ref{fig.DTA04} and \ref{fig.DTA04.4p}, the DTA outperformed
+significantly on all problems sizes significantly.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3in]{./figs/comparenotworse-all-ref2016T04-2016C04-Adjusted-Wald-Interval.png}
+\caption{\label{fig.DTA04}Performance probability plot for DTA04 compared to tabu on problems sizes 2, 3, 4, and 5.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=2.7in]{./figs/comparenotworse-detail-ref2016T04-2016C04-Wilsons-Score.png}
+\caption{\label{fig.DTA04.4p}Performance probability plot for DTA04 compared to tabu for each problem size.}
+\end{figure}
+
+The risk difference plot for DTA04 is necessary to show how much this
+algorithm is better than tabu algorithm. Therefore, the risk
+difference plot over all problem sizes 2, 3, 4, and 5 is shown in
+figure \ref{fig.RD.DTA04}. The detail plots for problem sizes 2, 3, 4,
+and 5 are shown separately in figure \ref{fig.RD.DTA04.4p}. The
+confidence intervals with confidence nominal level 95\% in both figures
+\ref{fig.RD.DTA04} and \ref{fig.RD.DTA04.4p} are calculated by
+bootstrap method, because this method has the
+best performance among all others. We can see that the DTA04 has a
+significant superiority in performance compared to tabu algorithm.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.3in]{./figs/comparediff-all-ref2016T04-2016C04-Wilson-w-Cont.png}
+\caption{\label{fig.RD.DTA04}Risk difference plot for DTA04 compared to tabu on problems sizes 2, 3, 4, and 5.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=2.7in]{./figs/comparediff-detail-ref2016T04-2016C04-Wilson-w-Cont.png}
+\caption{\label{fig.RD.DTA04.4p}Risk difference plot for DTA04 compared to tabu for each problem size.}
+\end{figure}
+
+\section{Conclusions}
+\label{sec-5}
+\label{conclusions}
+
+The proposed logistic regression model achieves high accuracy for the tabu algorithm on the considered class of job shop scheduling problems. The optimal parameter $\theta$ changes with respect to the time used to collect the information, but the range of the optimal values is stable across different problem instances. Hence, it is possible to find an interval $[\theta_{min},\theta_{max}]$ that contains all optimal values for a given set of problem instances and time threshold $t$. Our working hypothesis is that this interval would provide a good estimate for the location of optimal $\theta$ values for the problem instance that were not used to train the model. In some sense, the interval $[\theta_{min},\theta_{max}]$ provides a prediction for what is optimal for a class of scheduling problems. 
+
+Importantly, in order to find an optimal value of $\theta$ for a given problem, one needs to know an optimal solution of that problem. Clearly, when considering an optimization problem, which has not been previously solved, its optimal solution is not available. However, we can use the range $[\theta_{min},\theta_{max}]$ estimated from the testing problems as a predictor for the location of the optimal logistic parameter of the new problem instance. Given a grid of points from the interval $[\theta_{min},\theta_{max}]$, one of the points will be close to the optimal value. This property can be used to develop an algorithm that can use the logistic model to guide the search process. 
+
+In this research, we have studied the use of learning models inside approximation algorithms for discrete optimization problems in which the algorithms are able to learn from the patterns in the search space. This learning improved the performance of algorithms during the process and there is no need to train the algorithm offline. Recent research has shown that training optimization algorithms can improve the performance significantly. Our contribution to this field covers the development in learning models in a way that no upfront learning is required for the algorithms. We provide the logistic regression learning model and also designed a directional tabu algorithm based on this idea in which a parameter of the algorithm is tuned during the process. We implemented the DTA on a benchmark of job shop scheduling problems to compare the performance with standard tabu algorithm. We compare the proposed DTA with standard tabu and it showed a good performance on job shop scheduling problems benchmark.
+
+
+\bibliographystyle{apalike}
+
+\bibliography{overallliterature.bib}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

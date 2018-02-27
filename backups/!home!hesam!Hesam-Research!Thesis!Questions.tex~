@@ -1,0 +1,94 @@
+% Created 2017-12-04 Mon 18:24
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage[margin=1in]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{graphicx}
+\usepackage[tight,hang,nooneline,raggedright,figtopcap]{subfigure}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage[english]{babel}
+\usepackage{multimedia}
+\usepackage[boxed]{algorithm}
+\usepackage{algorithmic}
+\usepackage{natbib}
+\usepackage{listings}
+\usepackage{minted}
+\author{Hesam Shams}
+\date{\today}
+\title{Proposal Questions}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+
+\section{Questions}
+\label{sec-1}
+\subsection{Show that the local minimum of the convex optimization problem is the global minimum.}
+\label{sec-1-1}
+Consider the following formulation is a convex optimization problem
+\begin{align*}
+\min{f(x)}  \\
+\text{s.t.     } x \in C
+\end{align*}
+where $C$ is a convex set and $f$ is a convex function over $C$. Let $f: C \rightarrow \R$ and $\bar{x}$ is a local minimum. So we have the following.
+\begin{equation*}
+\bar{x} \in C \text{ and } \exists \epsilon > 0 \text{ s.t. } f(\bar{x}) \leq f(x), \forall x \in B(\bar{x}, \epsilon)
+\end{equation*}
+
+If the local minimum is not the global, $\exists z \in C$ where $f(z) < f(\bar{x})$. Since the $C$ is convex we have the following:
+\begin{equation*}
+\lambda \bar{x} + (1-\lambda)z \in C, \forall \lambda \in \[0,1\]
+\end{equation*}
+
+Since the function $f$ is convex, we have the following.
+\begin{align*}
+f(\lambda \bar{x} + (1-\lambda)z) &\leq \lambda f(\bar{x}) + (1-\lambda)f(z) \\
+&< \lambda f(\bar{x}) + (1-\lambda)f(\bar{x}) = f(\bar{x})
+\end{align*}
+By the above formulation, if $\lambda \rightarrow 1$ $\Longrightarrow$ $\lambda \bar{x} + (1-\lambda)z \rightarrow \bar{x}$. So it contradicts the local minimum of $\bar{x}$ $\Box$.
+\subsection{Show that the job shop scheduling problem is NP-hard.}
+\label{sec-1-2}
+The job shop scheduling problem is strongly NP-hard. Let $j=\{1,\ldots, N\}$ is number of jobs required to be processed on $m=\{1,\ldots,M\}$. It is enough to prove that 2-machine job shop scheduling is NP-hard. The reduction is from 3-partition. Assume $A=\{a_1,\ldots,a_{3n}\}$, the associate job shop scheduling is as follows. The collection $\mathcal C$ of chains is made up $C_0$ which has $2n$ jobs, and $C_i, \forall i; 1 \leq i \leq 3n$, each with two tasks. The machine assignment and the processing times are calculated as follows.
+
+\begin{equation*}
+m(C_0[i]) = \begin{cases}
+P_1 & 2\leq i\leq 2n \text{ and } i \text{ is even} \\
+P_2 & 1\leq i\leq 2n-1 \text{ and } i \text{ is odd}
+\end{cases}
+\end{equation*}
+
+\begin{align*}
+m(C_j[1]) &= P_1, 1\leq j \leq 3n \\
+m(C_j[2]) &= P_2, 1\leq j \leq 3n \\
+T(C_0[i]) &= B, 1\leq i \leq 2n \\
+T(C_j[1]) &= 0, 1\leq j \leq 3n \\
+T(C_j[2]) &= a_j, 1\leq j \leq 3n
+\end{align*}
+where $m(C[i])$ is machine assignment and $T(C[i])$ is the processing time of task $C[i]$. Therefore, job shop scheduling problem is in NP-complete class of problems.
+
+In addition, each job shop scheduling problem can be reduced to job shop scheduling problem with one machine. And job shop scheduling problem with one machine can be reduced to traveling salesman problem (TSP) where a (salesman/machine) is set to (visit/process) all (cities/jobs) in order to minimize the total (distance/time).
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

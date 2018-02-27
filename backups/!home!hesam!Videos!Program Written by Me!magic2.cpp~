@@ -1,0 +1,151 @@
+/* wizard.cpp
+   from http://www.niehs.nih.gov/kids/brnumber.htm#denmark
+*/
+
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>  		// allows use of stream manipulators
+using namespace std;
+
+int main()
+{
+   // Variable declaration
+   long n1, n2, n3, n4, n5;      // store the 5 numbers to be entered
+   int menuOption;               // the selected menu option
+   char c;                       // used to read in extra carriage return characters
+
+ 	// Display identifying information
+	cout<< "Author: Dale Reed \n"
+       << "Assignment: #1, Magic\n"
+       << "TA: A. Stoun Ding, Mon 1:00-1:05 \n"
+       << "\n";
+   
+	// display menu, prompt for option and perform appropriate action
+   cout<< "Welcome to the mind reader.  \n"
+       << "\n"
+       << "Since computers are low-power devices at long range, \n"
+       << "it is vitally important for you to really concentrate.\n"
+       << "If you don't concentrate, I won't be able to detect any\n"
+       << "pattern in your thoughts. \n"
+       << "\n"
+       << "Please select one of the options below: \n"
+       << "         1. Adding Numbers\n"
+       << "         2. Choosing a Number\n"
+       << "         3. Exit the program \n"
+       << "Please enter your choice:  ";
+   cin >> menuOption;		// get menu option.     
+   cout<< "\n\n";
+
+   // handle menu option 1 for adding numbers
+   if ( menuOption == 1) {
+
+      // Explain what is to be done
+      cout<< "You chose 1, the \"Adding Numbers\" option.\n"
+          << "\n"
+          << "If you concentrate, I will be able to read your mind to \n"
+          << "a limited extent. We'll take turns entering some numbers,\n"
+          << "and I'll guess ahead of time what the sum will be.\n"
+          << "Press enter to continue...\n";
+      cin.get(c);
+      cin.get(c);
+      cout<< endl;
+
+      // Prompt for initial input
+      cout << "Please enter a 5-digit number, with no comma: ";
+      cin  >> n1;
+      cout << "Doing a brain scan... Concentrate now... Press enter\n";
+      cin.get( c);
+      cin.get( c);
+      cout << "Oooh, some interesting stuff in there.  (Don't worry, I won't tell)....\n";
+      cout << "Press enter\n";
+      cin.get( c);
+      cout << "Pre-computing what you'll think of... Press enter\n";
+      cin.get( c);
+      cout << endl;
+      cout<< "O.K., I'm ready.  I believe I know what numbers you will think of.\n" 
+          << "The answer will be displayed on the screen, and then I'll \n"
+          << "display some blank lines so that it can be temporarily hidden.\n"
+          << "Cover this part of the screen and press enter when you are ready...";
+      cin.get( c);
+
+      // Calculate and display answer
+      cout <<  "Answer will be:                  " << n1 - 2 + 200000 << "\n\n\n\n\n\n";
+      cout << "So far you entered the number     " << n1 << "\n\n";
+
+      // Get remaining 5-digit numbers, alternating between user's entry and the computer's
+      // number that it figures out.
+      cout << "Now enter another 5-digit number: ";
+      cin >> n2;
+      cout << "\n";
+      cout << "I choose the number:              ";  
+      // Here is the original approach, that doesn't always give leading zeros:
+      //       n3 = (9 - n2/10000) * 10000 + 
+      //            (9 - n2/1000%10) * 1000 + 
+      //            (9 - n2/100%10) * 100 + 
+      //            (9 - n2/10%10) * 10 + 
+      //            (9 - n2%10);
+      //       cout << n3 << "\n\n";
+      //       cout << "Now enter another 5-digit number: ";
+      //       cin >> n4;
+      //       cout << "\n";
+      //       cout << "I choose the number:              ";  
+      //       n5 = (9 - n4/10000) * 10000 + 
+      //            (9 - n4/1000%10) * 1000 + 
+      //            (9 - n4/100%10) * 100 + 
+      //            (9 - n4/10%10) * 10 + 
+      //            (9 - n4%10);
+      //       cout << n5 << "\n";
+      //       cout << "                                =========\n";
+
+      // Here is the modified approach that *does* give leading zeros
+      n3 = 99999 - n2;
+      cout << setw(5) << setfill('0') << n3 << "\n\n";
+      cout << "Now enter another 5-digit number: ";
+      cin >> n4;
+      cout << "I choose the number:              ";
+      n5 = 99999 - n4;
+      cout << setw(5) << setfill('0') << n5 << "\n";
+      cout << "                                =========\n";             
+      cout << "The sum of the 5 numbers is:     " << n1 + n2 + n3 + n4 + n5 << endl;
+      cout << "\n";
+      cout << "Now uncover my forecast above...\n\n";
+      cout << "...Voila, they're the same! \n";
+      cout << endl;
+   }
+   // Handle menu option 2, for number guessing
+   else if ( menuOption == 2) {
+      cout<< "You chose 2, the \"Choosing a Number\" option.\n"
+          << "\n"
+          << "You must concentrate for me to be able to read you mind. \n"
+          << "Do each of the following problems as FAST as you can in your head. \n"
+          << "\n"
+          << "Do not advance until you've done each problem.\n"
+          << "Press enter to continue...\n";
+      cin.get(c);
+      cin.get(c);
+      cout<< endl;
+
+      cout<< "What is 2 + 2? \n"
+          << "\n"
+          << "What is 4 + 4? \n"
+          << "\n"
+          << "What is 8 + 8? \n"
+          << "\n"
+          << "What is 16 + 16? \n"
+          << "\n"
+          << "Pick a number between 12 and 5."
+          << "\n"
+          << "\n"
+          << "Press enter to continue\n"
+          << "\n";
+      cin.get(c);
+      cout<< "The number you choose was 7.\n";
+   }
+
+   // if menu option 3 is chosen (to exit) the previous actions are simply bypassed.
+      
+   cout << "Thanks for playing.\n\n";
+
+	return 0;
+}
+

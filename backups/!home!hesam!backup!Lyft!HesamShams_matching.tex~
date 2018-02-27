@@ -1,0 +1,197 @@
+% Created 2017-12-06 Wed 15:20
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{minted}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{graphicx}
+\usepackage[tight,hang,nooneline,raggedright,figtopcap]{subfigure}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage[english]{babel}
+\usepackage{multimedia}
+\usepackage[boxed]{algorithm}
+\usepackage{algorithmic}
+\usepackage{natbib}
+\usepackage{listings}
+\usepackage{minted}
+\author{Hesam Shams}
+\date{\today}
+\title{Ride Matching - Lyft Challenge}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\label{sec-1}
+The problem of matching rides to minimize the total distance traveled in all matches can be considered in two different types of problem for different size of valid matches. We can see the problem of 2-matches as finding minimum weight perfect match of a graph in which each vertex is a request (ride) and the weight of each edge equals to the traveled distance of the match of regarding two vertices (requests). This helps to solve the problem in a smaller dimension and leads to less computations than a general model. First, calculate each possible pair which is in complexity of $O(n^2)$ and then find the minimum weight perfect match which can be done in a efficient heuristic. The 2-match problem is formulated and the solver is provided in the previous report as well as the coded solver. For the problem of 3-matches or more, it is more complicated than 2-match. We can see the problem as a special case of the capacitated vehicle routing problem (CVRP) with the constraint of pickup-drop off for each request. In order to solve the problem, I propose the following methods with the limitations for implementation, the solver, and the solution, if it is possible. The first approach is the exact solver with the mathematical formulation, the second solver is an approximation algorithm, and the final framework provides a solution in a inexpensive way which can be implemented on a large data and huge number of requests.
+
+\section{Exact Solver}
+\label{sec-2}
+\subsection{Mathematical Formulation}
+\label{sec-2-1}
+The matching problem is finding ride matching up to $k$ rides in order to minimize the total traveled distances in all matches. The problem is similar to CVRP in which there exists a constraint to select pickup and drop off of a ride in a unique route. First, we need to calculate the distance of each two locations in pickup and drop off. This calculation requires a $2.n\times 2.n$ \texttt{for loop} computations which needs to be considered. The mathematical formulation of binary optimization model is as follows. The decision variables and parameters are defined in the followings. The request of $r_i$ is associated with pickup location $i$ and drop off location $i+n$.
+
+\begin{table}[H]
+\centering
+\label{parameter}
+\begin{tabular}{ll}
+\multicolumn{2}{c}{Parameters}                                 \\ \hline
+$n$              & Number of requests \\
+$P$              & Set of pickup locations $\{1,2,\ldots,n\}$       \\
+$D$              & Set of drop off locations $\{n+1,n+2,\ldots,2n\}$ \\
+$w_{ij}$      & Distance between $i \in \{P\cup D\}$ and $j \in \{P\cup D\}$  \\
+$c$              & The maximum allowable number of ride matching ($c \geq 3$) \\
+$K$              & The maximum number of available cars (for unlimited $K = n$ )
+\end{tabular}
+\end{table}
+We also set $U = \{P\cup D\}$ to make the formulation simple.
+\begin{table}[H]
+\centering
+\label{parameter}
+\begin{tabular}{ll}
+\multicolumn{2}{c}{Decision Variables}                                 \\ \hline
+\multirow{3}{*}{$x_{ij}^k}$              & Equals to \textbf{1} if the location $i \in \{P\cup D\}$ and $j \in \{P\cup D\}$ \\ 
+ & is connected in the match $k$ \\
+ & and equals to \textbf{zero} otherwise.
+\end{tabular}
+\end{table}
+
+\begin{align}
+\min{\sum_{k=1}^K \sum_{i \in U} \sum_{j \in U} w_{ij}.x_{ij}^k} && & && \label{obj}\\
+\text{s.t.} && \sum_{i \in U} \sum_{j \in U} x_{ij}^k &\leq 2.c-1 && \forall k=\{1,\ldots, K\} \label{max:cap} \\
+ && \sum_{k=1}^K \sum_{j \in U} x_{ij}^k &= 1 && \forall i \in P \label{all:satisfied} \\
+ && \sum_{j \in U} x_{ij}^k &= \sum_{j \in U} x_{n+i,j}^k && \forall i \in P, \forall k=\{1,\ldots, K\} \label{pickup:dropoff} \\
+ && \sum_{j \in U} x_{ij}^k &= \sum_{j \in U} x_{j,i}^k && \forall i \in U, \forall k=\{1,\ldots, K\} \label{flow:balance} \\
+ && x_{ij}^k &\in \{0,1\} && \forall i,j \in U, \forall k=\{1,\ldots, K\} \nonumber
+\end{align}
+
+The (\ref{obj}) minimizes the total distances in all matches. In a match with $c$ rides, the number of total connection between locations is equal to $2.c-1$. To ensure that each match will not exceed the maximum allowable number of rides, the constraints set of (\ref{max:cap}) is proposed. The constraints set of (\ref{all:satisfied}) guarantees that all requests will be satisfied. The constraints set of (\ref{pickup:dropoff}) is incorporated with the constraint that if a match includes the pickup a specific request, then the drop off for that request must be assigned in that match and the pickup must be before the drop off. The constraints set of (\ref{flow:balance}) ensures the flow balance on each location.
+\subsection{Complexity Analysis}
+\label{sec-2-2}
+Two following steps are required to obtain the optimal solution for the problem of finding minimum total distances in all matches. First we need to calculate distances between each of two locations in the dataset, including the pickup locations and drop off locations. If we have $n$ requests for ride, we need to calculate Manhattan distance between $2.n$ nodes. So, the we need to store $4.n^2$ distances and the complexity of this step is $O(n^2)$. The limitations of implementation of this step are the memory constraint of storing distances and the calculation, specially when the requests increase. The next step is solving the mixed integer programming which is clearly NP-hard, because the problem is a generalization of CVRP. This means that it is impossible to solve it in polynomial time.
+
+Therefore, the main drawback of this approach is that it is impossible to find the optimal solution in a reasonable time. But finding the optimal solution for history data in expensive computations is beneficial. The benefit lies in using the history data in machine learning techniques to improve the performance of solver. Moreover, we need a commercial solver such as \texttt{CPLEX} and \texttt{Gurobi} to solve it which costs for the company. By the way, in the following section, I coded the exact solver in \texttt{Python} and \texttt{Gurobi} commercial solver with \texttt{Python}.
+
+\subsection{Solver Codes}
+\label{sec-2-3}
+I have coded the exact solver in \texttt{Python} and \texttt{Gurobi} API in \texttt{Python} in jupyter. The file was named as \texttt{Exact.ipynb} and it needs to set the maximum allowable match $n$ before run the program. The results is saved into a CSV file which is called \texttt{n\_matches.csv}. Each row in CSV file describe a single match which can be 2-match, 3-match, or $n$-match. It is not possible to run the program on a personal computer for the provided dataset because of memory constraint and the calculation time. But I tested the program on a reduced size of the dataset with first 50 requests and it took around 3 hours to solve on a PC with Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz and 8GiB memory RAM.
+\section{Approximation Algorithm}
+\label{sec-3}
+Since it is not possible to solve the problem in a reasonable time, I designed a solver based on Tabu search algorithm for the problem. In the simplest form, the tabu search algorithm iteratively moves from one solution to another using the values of the corresponding objective values for guidance. Given a current solution $x$, at each iteration the algorithm moves to one of the solutions in its neighborhood $N(x)$, however the tabu search method prohibits some of the solutions in $N(x)$. Suppose that $latestChange(j)$ is the latest iteration when the solution component $j$ changed its value, then any solution in $N(x)$ that differs from $x$ in the component $j$ is prohibited until the iteration number $latestChange(j)+tenure$, where $tenure$ defines a length of the tabu period. There are many variations of tabu search implementations, but the idea is similar: prohibit changes in components that were recently modified. Typically, the best non-tabu solution in $N(x)$ is chosen as a next current solution, and after that the process repeats. Based on this, I provide a description of the \textbf{Tabu Algorithm} (see Algorithm \ref{FigTabu}).
+
+\begin{algorithm}
+\caption{Tabu Search Procedure} \label{FigTabu}
+\begin{algorithmic}[1]
+\REQUIRE $x$ -- current solution, $x^{min}$ -- current best solution, $niters$ -- maximum number of Tabu iterations
+    \STATE $lastChanged(j)=-\infty$; $tabu(j)=L$ for all $j$
+    \STATE $x=$ \verb InitializeRandom()
+    \FOR{$iter=1$ to $niters$}
+           \STATE $TabuSet=\emptyset$ \label{init.tabu.set}
+            \STATE $N(x)$ = \verb LocalSearch(x)
+            \FOR{$y$ in $N(x)$}
+                   \STATE $modInd = \{j: x_j\neq y_j\}$
+                   \FOR{$j$ in $modInd$}
+                        \IF{[$iter-lastChanged(j)<tabu(j)$] and [$f(y)\geq f(x_{min})$]} 
+                        \STATE $TabuSet=TabuSet\cup y$
+                        \ENDIF
+                   \ENDFOR
+            \ENDFOR
+            \STATE $NonTabuSet= N(x)- TabuSet$
+            \IF{$NonTabuSet\neq \emptyset$}
+            \STATE $x^{new} = $ the best solution in $NonTabuSet$            
+            \ELSE
+            \STATE $x^{new} = $ the oldest tabu solution in $TabuSet$
+            \ENDIF             \label{xnew.choosen}
+            \STATE \verb Update $lastChanged(j)$
+            \STATE $x=x^{new}$
+            \IF{[$f(x)<f(x^{min})$]} 
+            \STATE $x^{min}=x$
+            \ENDIF %    \ENDWHILE            
+    \ENDFOR
+    \RETURN $x,x^{min}$
+\end{algorithmic}
+\end{algorithm}
+
+This method has an advantage that there is no need to calculate all distances which can be expensive computationally, instead this approach calculate each feasible solution distance. The two main procedures in the proposed Tabu are random initial solution and local search around the current solution. The random initial solution should create a feasible solution which depends on random seeds, therefore the initialization includes random $n$-match of all requests. For example, if we want to solve 3-match rides, we randomly generate 3-match over all requests which is feasible but probably a bad solution. The other important procedure is local search which is defined as follows.
+
+
+\subsection{Local Search}
+\label{sec-3-1}
+In this method, three swapping operators are used to define the local search. These operators are shift operator, exchange operator, and re-arrange operator which are explained in detail in the followings. The local search includes all these three procedures.
+
+\subsubsection{Shift Operator}
+\label{sec-3-1-1}
+This operator move a request from one match to another. The destination match must be strictly less than $n$. The pickup and drop off of that request must move to new match. The figure shows the shift procedure neighborhood.
+
+\begin{center}
+\includegraphics[height=3in]{./figs/shift.png}
+\end{center}
+In figure the locations of pickup ($P$) and drop off ($D$) of one request is originally in \emph{match 1}. The shift operator remove the request from \emph{match 1} and insert it into \emph{match 2}.
+\subsubsection{Exchange Operator}
+\label{sec-3-1-2}
+In this operator, two requests are swapped in two different matches. The locations of pickup and drop off for two requests are swapped in two different matches. The figure shows how this procedure works.
+
+\begin{center}
+\includegraphics[height=3in]{./figs/exchange.png}
+\end{center}
+In figure, request 1 is originally in match 1 which includes pickup ($P_1$) and drop off ($D_1$) and request 2 is originally in match 2 which includes pickup ($P_2$) and drop off ($D_2$). The operator swaps $P_1$ with $P_2$ and $D_1$ with $D_2$.
+
+\subsubsection{Re-arrange Operator}
+\label{sec-3-1-3}
+Within the same match, there exist many arranges which are required to be considered. The procedure includes select a request pickup and drop off location in the match and move it feasible through the match. The figure shows this procedure.
+
+\begin{center}
+\includegraphics[height=2in]{./figs/arrange.png}
+\end{center}
+In figure, the pickup ($P$) and drop off ($D$) location of a request in the match is relocated through the match in the new match.
+
+\subsection{Solver Code}
+\label{sec-3-2}
+The algorithm is coded in \texttt{Python} in jupyter environment and the file name is \texttt{Tabu.ipynb}. The input parameters are time limit, maximum allowable number of match, tabu tenure size, re arrange parameter, shift parameter, and exchange parameter. These parameters are required to be tuned with experiments on a set of different problems. I ran the problem for 30 minutes and the final result was saved on \texttt{n\_matches.csv}. The initial parameters can be found in the jupyter file.
+\section{Clustering Solver}
+\label{sec-4}
+The Tabu algorithm requires a huge run time to provide a good solution on this set of requests and we need to have a matching as soon as possible and the requests will not wait long time to find the best match. So, I think we can divide the original problem into small size problems which Tabu is able to provide a good solution on those small problems. In other words, I propose the following flowchart, in which first cluster close locations and then solve each cluster to minimize the total traveled distance. This framework will provide a good solution in a fast run time which is the goal of our ride sharing problem.
+
+\includegraphics[height=3in]{./figs/flowchart.png}
+
+In the location clustering, I propose $k$-means clustering approach which the Manhattan distance should be use for the distance calculations. The $n$-match solver for next step, we can use the provided Tabu algorithm to find a good match for that cluster. We repeat the clustering and solving the cluster matching problem until no request remains.
+
+In the clustering step, we first choose the number of clusters $k$ and then apply the following method for all pickup locations and drop off locations separately. Then we can solve each cluster in a limited time through Tabu algorithm.
+
+The cluster approach is coded in \texttt{Python} in jupyter environment and the code is provided in a file name \texttt{Cluster.ipynb}. 
+\section{Future Investigation}
+\label{sec-5}
+Since the problem of ride sharing is challenging in real life problem size, we need to explore other investigations to provide a \textbf{fast} and \textbf{efficient} match. My suggestion for future works are listed as follows:
+\begin{itemize}
+\item \textbf{Learning}: We are studying a specific discrete optimization problem. This can be helpful if we solve different problems to provide an offline training to learn the branch and bound heuristics to boost exact solver. In addition, if we have a good set of problems with different features, we are able to find optimal solutions as quick as searching the solution in our database. My Ph.D. thesis is about embedding learning techniques into optimization procedures and the results are promising.
+\item \textbf{Route Clustering}: We can cluster any possible routes on map of a city and cluster routes offline and update our database during the time. This database can be used for the clustering process of requests in a very fast and efficient way instead of clustering requests by requests which can be expensive computationally and does not provide a good cluster.
+\item \textbf{Parallel Computations}: We can divide any problem into smaller problems and use a parallel optimization methods to improve the searching process in the optimization step. We can use portfolio of algorithms and connect them in an efficient way to enhance the performance of optimization algorithms.
+\end{itemize}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

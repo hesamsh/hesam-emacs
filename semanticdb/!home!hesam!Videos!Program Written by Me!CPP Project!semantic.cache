@@ -1,0 +1,186 @@
+;; Object CPP Project/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "CPP Project/"
+  :tables
+  (list
+    (semanticdb-table "AMPLIT.CPP"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("math.h" include (:system-flag t) nil [559 576])
+            ("complex.h" include (:system-flag t) nil [577 597])
+            ("dos.h" include (:system-flag t) nil [598 614])
+            ("stdio.h" include (:system-flag t) nil [615 633])
+            ("stdlib.h" include (:system-flag t) nil [634 653])
+            ("conio.h" include (:system-flag t) nil [654 672])
+            ("graphics.h" include (:system-flag t) nil [673 694])
+            ("string.h" include (:system-flag t) nil [695 714])
+            ("pi" variable (:constant-flag t) nil [723 725])
+            ("writechar" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("ch" variable (:type "char") (reparse-symbol arg-sub-list) [752 760])
+                    ("back_color" variable (:type "int") (reparse-symbol arg-sub-list) [761 776])
+                    ("fore_color" variable (:type "int") (reparse-symbol arg-sub-list) [777 792])
+                    ("repeat_char" variable (:type "int") (reparse-symbol arg-sub-list) [793 809]))                  
+                :type "void")
+                nil [736 810])
+            ("shadow_box" function
+               (:arguments 
+                  ( ("" variable (:type ("X1" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [930 933])
+                    ("" variable (:type ("Y1" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [934 937])
+                    ("" variable (:type ("X2" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [938 941])
+                    ("" variable (:type ("Y2" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [942 945])
+                    ("" variable (:type ("back_color" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [946 957])
+                    ("" variable (:type ("fore_color" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [958 969]))                  
+                :type "void")
+                nil [913 1935])
+            ("writechar" function
+               (:arguments 
+                  ( ("ch" variable (:type "char") (reparse-symbol arg-sub-list) [2106 2114])
+                    ("back_color" variable (:type "int") (reparse-symbol arg-sub-list) [2115 2130])
+                    ("fore_color" variable (:type "int") (reparse-symbol arg-sub-list) [2131 2146])
+                    ("repeat_char" variable (:type "int") (reparse-symbol arg-sub-list) [2147 2163]))                  
+                :type "void")
+                nil [2090 2717])
+            ("LJ_Graphic" function (:type "void") nil [2719 4283])
+            ("read_char" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [4374 4379]))                  
+                :type "char")
+                nil [4358 4635])
+            ("reverse_video" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [4657 4662]))                  
+                :type "void")
+                nil [4637 4714])
+            ("normal_video" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [4735 4740]))                  
+                :type "void")
+                nil [4716 4792])
+            ("switch_line" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [4886 4891]))                  
+                :type "void")
+                nil [4868 5161])
+            ("help" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [5174 5179]))                  
+                :type "void")
+                nil [5163 6990])
+            ("beep" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [7002 7007]))                  
+                :type "void")
+                nil [6991 7052])
+            ("coeff_box" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [7407 7412]))                  
+                :type "void")
+                nil [7391 12334])
+            ("main" function (:type "int") nil [12336 17253]))          
+      :file "AMPLIT.CPP"
+      :pointmax 17278
+      :fsize 17889
+      :lastmodtime '(17185 22096 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("pi" . ((number "3.1415926" 726 . 735)))
+          )
+)
+    (semanticdb-table "Copy.CPP"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("stdio.h" include (:system-flag t) nil [1 19])
+            ("conio.h" include (:system-flag t) nil [20 38])
+            ("stdlib.h" include (:system-flag t) nil [39 58])
+            ("dos.h" include (:system-flag t) nil [59 75])
+            ("main" function (:type "int") nil [76 596]))          
+      :file "Copy.CPP"
+      :pointmax 596
+      :fsize 656
+      :lastmodtime '(17373 23880 0 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "Project1.cpp"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("gl/glut.h" include (:system-flag t) nil [1 21])
+            ("math.h" include (:system-flag t) nil [23 40])
+            ("stdio.h" include (:system-flag t) nil [41 59])
+            ("PI" variable (:constant-flag t) nil [68 70])
+            ("f1" variable (:type "float") nil [76 93])
+            ("f2" variable (:type "float") nil [76 93])
+            ("f3" variable (:type "float") nil [76 93])
+            ("visi" variable
+               (:dereference 1
+                :default-value "{false, false, false, false}"
+                :type "bool")
+                nil [94 137])
+            ("renderScene" function
+               (:prototype-flag t
+                :type "void")
+                nil [138 158])
+            ("renderBitmapString" function
+               (:arguments 
+                  ( ("x" variable (:type "float") (reparse-symbol arg-sub-list) [184 192])
+                    ("y" variable (:type "float") (reparse-symbol arg-sub-list) [193 201])
+                    ("font" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [202 213])
+                    ("string" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [214 227]))                  
+                :type "void")
+                nil [159 340])
+            ("processSpecialKeys" function
+               (:arguments 
+                  ( ("key" variable (:type "int") (reparse-symbol arg-sub-list) [366 374])
+                    ("x" variable (:type "int") (reparse-symbol arg-sub-list) [375 381])
+                    ("y" variable (:type "int") (reparse-symbol arg-sub-list) [382 388]))                  
+                :type "void")
+                nil [341 992])
+            ("processNormalKeys" function
+               (:arguments 
+                  ( ("key" variable (:type "unsigned char") (reparse-symbol arg-sub-list) [1017 1035])
+                    ("x" variable (:type "int") (reparse-symbol arg-sub-list) [1036 1042])
+                    ("y" variable (:type "int") (reparse-symbol arg-sub-list) [1043 1049]))                  
+                :type "void")
+                nil [993 1082])
+            ("processMenuEvents" function
+               (:arguments 
+                  ( ("option" variable (:type "int") (reparse-symbol arg-sub-list) [1107 1118]))                  
+                :type "void")
+                nil [1083 2789])
+            ("createGLUTMenus" function (:type "void") nil [2790 3282])
+            ("renderScene" function (:type "void") nil [3283 9106])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [9118 9127])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [9128 9140]))                  
+                :type "void")
+                nil [9107 9603]))          
+      :file "Project1.cpp"
+      :pointmax 9603
+      :fsize 9907
+      :lastmodtime '(17185 22334 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("PI" . ((number "3.14" 71 . 75)))
+          )
+)
+    (semanticdb-table "123.cpp"
+      :major-mode 'c++-mode
+      :tags nil
+      :file "123.cpp"
+      :pointmax 37377
+      :fsize 37376
+      :lastmodtime '(17370 44656 0 0)
+      :unmatched-syntax nil))
+  :file "!home!hesam!Videos!Program Written by Me!CPP Project!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

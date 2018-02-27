@@ -1,0 +1,90 @@
+;; Object Program Written by Me/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "Program Written by Me/"
+  :tables
+  (list
+    (semanticdb-table "magic2.cpp"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("iostream" include (:system-flag t) nil [2 21])
+            ("cstdlib" include (:system-flag t) nil [22 40])
+            ("iomanip" include (:system-flag t) nil [41 59])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [100 120])
+            ("main" function (:type "int") nil [122 5579]))          
+      :file "magic2.cpp"
+      :pointmax 5581
+      :fsize 5580
+      :lastmodtime '(23155 45500 892554 456000)
+      :unmatched-syntax nil)
+    (semanticdb-table "MYCLOCK.CPP"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("graphics.h" include nil nil [1 22])
+            ("conio.h" include nil nil [23 41])
+            ("math.h" include nil nil [42 59])
+            ("dos.h" include nil nil [60 76])
+            ("khat" function
+               (:prototype-flag t
+                :type "void")
+                nil [77 89])
+            ("start" function
+               (:prototype-flag t
+                :type "void")
+                nil [90 103])
+            ("khandan" function
+               (:prototype-flag t
+                :type "void")
+                nil [104 119])
+            ("rasm" function
+               (:prototype-flag t
+                :type "void")
+                nil [120 132])
+            ("clear" function
+               (:prototype-flag t
+                :type "void")
+                nil [133 146])
+            ("sx" variable (:type "int") nil [148 170])
+            ("sy" variable (:type "int") nil [148 170])
+            ("mx" variable (:type "int") nil [148 170])
+            ("my" variable (:type "int") nil [148 170])
+            ("hx" variable (:type "int") nil [148 170])
+            ("hy" variable (:type "int") nil [148 170])
+            ("driver" variable (:type "int") nil [171 187])
+            ("mode" variable (:type "int") nil [171 187])
+            ("t1" variable (:type ("time" type
+                 (:prototype t
+                  :type "struct")
+                  nil nil)) nil [188 206])
+            ("t2" variable (:type ("time" type
+                 (:prototype t
+                  :type "struct")
+                  nil nil)) nil [188 206])
+            ("main" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [266 271]))                  
+                :type "int")
+                nil [257 524])
+            ("khat" function (:type "void") nil [575 909])
+            ("start" function (:type "void") nil [965 2119])
+            ("khandan" function (:type "void") nil [2188 2736])
+            ("rasm" function (:type "void") nil [2809 3222])
+            ("clear" function (:type "void") nil [3295 3681]))          
+      :file "MYCLOCK.CPP"
+      :pointmax 3681
+      :fsize 3868
+      :lastmodtime '(17509 4096 0 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "project.cpp"
+      :major-mode 'c++-mode
+      :tags nil
+      :file "project.cpp"
+      :pointmax 1132
+      :fsize 1191
+      :lastmodtime '(17373 18510 0 0)
+      :unmatched-syntax nil))
+  :file "!home!hesam!Videos!Program Written by Me!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")
